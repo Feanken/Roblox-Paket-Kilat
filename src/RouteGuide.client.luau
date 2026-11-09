@@ -20,7 +20,7 @@ button.TextColor3=Color3.fromRGB(246,237,211) button.BackgroundColor3=Color3.fro
 local corner=Instance.new("UICorner") corner.CornerRadius=UDim.new(0,9) corner.Parent=button
 Theme.ToolbarButton(button)
 local function toggle() enabled=not enabled end
-bind(button.Activated,toggle)
+bind(button.Activated,function()toggle()ui:SetAttribute("MobileMenuOpen18",false)end)
 CAS:BindAction("PKSafeRoute",function(_,action)
  if UIS:GetFocusedTextBox() then return Enum.ContextActionResult.Pass end
  if action==Enum.UserInputState.Begin then toggle() end
@@ -31,7 +31,7 @@ local function flat(v) return Vector3.new(v.X,0,v.Z) end
 local function refresh()
  Theme.ToolbarLayout(ui)
  button.Text=UIS.TouchEnabled and (enabled and "Rute: ON" or "Rute: OFF") or (enabled and "Rute [G]" or "Rute OFF [G]")
- button.Visible=state.profileReady==true and not ui.Shop.Visible and not ui:GetAttribute('JobBoardOpen17')
+ button.Visible=state.profileReady==true and not ui.Shop.Visible and not ui:GetAttribute('JobBoardOpen17')and(not Theme.IsMobile(ui)or ui:GetAttribute("MobileMenuOpen18")==true)
  button:SetAttribute("RouteEnabled",enabled)
  local char=p.Character local root=char and char:FindFirstChild("HumanoidRootPart") local hum=char and char:FindFirstChildOfClass("Humanoid")
  local returning=state.status=="Idle" and state.lastResult~=nil
@@ -39,9 +39,10 @@ local function refresh()
  local offsets=id and routes[id]
  hide()
  if not enabled or not state.profileReady or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')or state.outOfBounds or not root or not hum or hum.Health<=0 or not offsets or not state.depotPosition then return end
+ local basis=state.routeBasis or CFrame.identity
  local points={}
- if returning then for i=#offsets,1,-1 do table.insert(points,state.depotPosition+offsets[i]) end
- else for _,point in ipairs(offsets) do table.insert(points,state.depotPosition+point) end end
+ if returning then for i=#offsets,1,-1 do table.insert(points,state.depotPosition+basis:VectorToWorldSpace(offsets[i])) end
+ else for _,point in ipairs(offsets) do table.insert(points,state.depotPosition+basis:VectorToWorldSpace(point)) end end
  local best,bestSegment,bestT=math.huge,nil,0
  for i=1,#points-1 do
   local a,b=flat(points[i]),flat(points[i+1]) local delta=b-a

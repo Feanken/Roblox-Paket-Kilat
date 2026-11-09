@@ -1,6 +1,8 @@
 -- Cosmetic residents on fixed pedestrian loops; no physics, rewards or remotes.
 local world=workspace:WaitForChild('PaketKilat')local map=world:WaitForChild('Map')
-local y=map:WaitForChild('Surface15'):GetAttribute('SurfaceY')
+map:WaitForChild('Surface15')
+local depot,basis
+ game.ReplicatedStorage:WaitForChild('PaketKilat').Remotes.StateChanged.OnClientEvent:Connect(function(s)depot=s.depotPosition basis=s.routeBasis or CFrame.identity end)
 local folder=Instance.new('Folder')folder.Name='PaketKilatLocalResidents15'folder.Parent=workspace
 local residents={}
 local function create(name,shirt,path,offset)
@@ -23,11 +25,13 @@ create('PengunjungPasar',Color3.fromRGB(88,155,144),{Vector3.new(14,0,128),Vecto
 local elapsed=0
 game:GetService('RunService').Heartbeat:Connect(function(dt)
  elapsed+=dt if elapsed<.05 then return end elapsed=0
+ if not depot then return end
  local t=workspace:GetServerTimeNow()
  for _,r in ipairs(residents)do
   local distance=(t*3+r.offset)%r.length local a,b
   for i=1,#r.path do a=r.path[i]b=r.path[i%#r.path+1]local len=(b-a).Magnitude if distance<=len then break end distance-=len end
-  local pos=a+(b-a).Unit*distance local cf=CFrame.lookAt(pos+Vector3.new(0,y,0),pos+Vector3.new(0,y,0)+(b-a).Unit)
+  local pos=a+(b-a).Unit*distance local at=depot+basis:VectorToWorldSpace(pos-Vector3.new(0,0,-6))
+  local cf=CFrame.lookAt(at,at+basis:VectorToWorldSpace((b-a).Unit))
   local swing=math.sin(t*7+r.offset)*.45 local p=r.parts
   p.Torso.CFrame=cf*CFrame.new(0,2.55,0)p.Head.CFrame=cf*CFrame.new(0,3.96,0)
   p.LeftLeg.CFrame=cf*CFrame.new(-.4,1.7,0)*CFrame.Angles(swing,0,0)*CFrame.new(0,-.85,0)

@@ -15,10 +15,21 @@ function T.ToolbarButton(b)
  b.BackgroundColor3=T.Cream b.TextColor3=T.Ink b.BorderSizePixel=0 b.TextSize=12 b.Font=Enum.Font.GothamBold
  round(b,12) border(b,T.Line)
 end
+function T.IsMobile(ui)
+ return game:GetService("UserInputService").TouchEnabled and (ui.AbsoluteSize.X<1000 or ui.AbsoluteSize.Y<600)
+end
 function T.ToolbarLayout(ui)
- local y=ui.AbsoluteSize.Y<500 and 12 or 20
+ local mobile=T.IsMobile(ui)
+ local open=ui:GetAttribute("MobileMenuOpen18")==true
+ local blocked=ui.Shop.Visible or ui:GetAttribute("JobBoardOpen17")==true
  for i,name in ipairs({"RouteToggle","HelpToggle","ShopToggle"})do
-  local b=ui:FindFirstChild(name) if b then b.Size=UDim2.fromOffset(84,44) b.Position=UDim2.new(1,-282+(i-1)*92,0,y)end
+  local b=ui:FindFirstChild(name)
+  if b then
+   b.Size=UDim2.fromOffset(mobile and 204 or 84,44)
+   b.Position=mobile and UDim2.new(1,-228,0,66+(i-1)*48)or UDim2.new(1,-282+(i-1)*92,0,ui.AbsoluteSize.Y<500 and 12 or 20)
+   if name~="RouteToggle"then b.Visible=not mobile or open and not blocked end
+   if mobile then b.ZIndex=4 end
+  end
  end
 end
 function T.Action(b,enabled,secondary)
@@ -44,12 +55,35 @@ function T.Layout(ui,manual)
  ui.Guide.Size=UDim2.fromOffset(math.min(compact and 370 or 430,math.max(260,ui.AbsoluteSize.X-290)),guideHeight)
  ui.Guide.Close.Position=UDim2.new(1,-52,0,(guideHeight-44)/2)
  ui.Guide.FPS.Position=UDim2.new(1,-106,0,(guideHeight-44)/2)
+ local mobile=T.IsMobile(ui)
+ card.Hint.Visible=not mobile
+ local divider=card:FindFirstChild("Divider")if divider then divider.Visible=not mobile end
+ local pill=card:FindFirstChild("CoinBadge")
+ if mobile then
+  card.Size=UDim2.fromOffset(238,84)card.Position=UDim2.fromOffset(12,8)
+  card.Title.Position=UDim2.fromOffset(10,8)card.Title.Size=UDim2.fromOffset(110,16)card.Title.TextSize=10
+  card.Coins.Position=UDim2.new(1,-95,0,5)card.Coins.Size=UDim2.fromOffset(82,22)card.Coins.TextSize=12
+  if pill then pill.Size=UDim2.fromOffset(88,22)pill.Position=UDim2.new(1,-98,0,5)end
+  card.Destination.Position=UDim2.fromOffset(10,31)card.Destination.Size=UDim2.new(1,-20,0,20)card.Destination.TextSize=14
+  card.ConditionText.Position=UDim2.fromOffset(10,52)card.ConditionText.Size=UDim2.new(1,-20,0,18)card.ConditionText.TextSize=10
+  card.ConditionTrack.Position=UDim2.fromOffset(10,75)card.ConditionTrack.Size=UDim2.new(1,-20,0,3)
+  ui.StorageStatus.Position=UDim2.fromOffset(12,96)
+  ui.Actions.AnchorPoint=Vector2.new(1,0)ui.Actions.Position=UDim2.new(1,-12,0,96)ui.Actions.Size=UDim2.fromOffset(152,96)
+  ui.Actions.Primary.Size=UDim2.fromOffset(152,44)ui.Actions.Secondary.Size=UDim2.fromOffset(152,44)ui.Actions.Secondary.Position=UDim2.fromOffset(0,52)
+ else
+  card.Title.TextSize=11 card.Coins.TextSize=14 card.ConditionText.TextSize=11
+  card.ConditionText.Size=UDim2.new(1,-28,0,20)card.ConditionTrack.Size=UDim2.new(1,-28,0,4)
+  if pill then pill.Size=UDim2.fromOffset(94,25)pill.Position=UDim2.new(1,-105,0,10)end
+  ui.Actions.AnchorPoint=Vector2.new(1,.5)ui.Actions.Position=UDim2.new(1,-16,.47,0)ui.Actions.Size=UDim2.fromOffset(152,108)
+  ui.Actions.Primary.Size=UDim2.fromOffset(152,48)ui.Actions.Secondary.Size=UDim2.fromOffset(152,48)ui.Actions.Secondary.Position=UDim2.fromOffset(0,58)
+ end
  T.ToolbarLayout(ui)
  local backdrop=ui:FindFirstChild("ShopBackdrop")local camera=workspace.CurrentCamera
  if backdrop and camera then backdrop.Position=UDim2.fromOffset(-ui.AbsolutePosition.X,-ui.AbsolutePosition.Y)backdrop.Size=UDim2.fromOffset(camera.ViewportSize.X,camera.ViewportSize.Y)end
 end
 function T.Storage(t,state)
  local errorState=state.profileReady==false and state.profileStatus~="Loading" or state.saveStatus=="RetryPending"
+ t:SetAttribute("Alert18",errorState or state.profileStatus=="Loading")
  t.BackgroundTransparency=0.05 t.BackgroundColor3=errorState and Color3.fromRGB(255,231,221)or T.Cream
  round(t,7)
  t.TextColor3=errorState and Color3.fromRGB(155,55,40)or T.Muted t.TextSize=10 t.TextXAlignment=Enum.TextXAlignment.Center

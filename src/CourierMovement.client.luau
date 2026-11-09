@@ -34,18 +34,38 @@ local function render()
  local m=state.movement local alive=p.Character and p.Character:FindFirstChildOfClass("Humanoid")and p.Character.Humanoid.Health>0
  local celebration=ui:FindFirstChild("DeliveryCelebration")
  local notice=ui:FindFirstChild("PackageNotice")
- local blocked=not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
+ local mobile=Theme.IsMobile(ui)
+ local mobilePanel=mobile and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")or ui.Guide.Visible)
+ local blocked=mobilePanel or not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
  if (blocked or m and m.exhausted) and wants then send(false)end
  b.Visible=not blocked
- local width=math.min(352,math.max(300,ui.AbsoluteSize.X-300))
- hud.Size=UDim2.fromOffset(width,56)
- for _,element in ipairs({stamina,grip,staminaTrack,gripTrack})do element.Size=UDim2.fromOffset(width-110,element.Size.Y.Offset)end
- hud.Visible=not blocked and (not notice or not notice.Visible)
+ if mobile then
+  local carrying=state.status=="Carrying"
+  b.Parent=ui b.Size=UDim2.fromOffset(100,44)b.Position=UDim2.new(1,-270,1,-56)
+  hud.AnchorPoint=Vector2.new(0,0)hud.Size=UDim2.fromOffset(carrying and 238 or 118,32)
+  hud.Position=UDim2.fromOffset(12,ui.StorageStatus:GetAttribute("Alert18")and 124 or 100)
+  stamina.Position=UDim2.fromOffset(8,2)grip.Position=UDim2.fromOffset(126,2)
+  staminaTrack.Position=UDim2.fromOffset(8,23)gripTrack.Position=UDim2.fromOffset(126,23)
+  for _,element in ipairs({stamina,grip})do element.Size=UDim2.fromOffset(104,16)element.TextSize=10 end
+  for _,element in ipairs({staminaTrack,gripTrack})do element.Size=UDim2.fromOffset(104,3)end
+  grip.Visible=carrying gripTrack.Visible=carrying
+  hud.Visible=not blocked and(not notice or not notice.Visible)and(carrying or wants or m and m.stamina<99)
+ else
+  b.Parent=hud b.Size=UDim2.fromOffset(84,44)b.Position=UDim2.new(1,-92,0,6)
+  local width=math.min(352,math.max(300,ui.AbsoluteSize.X-300))
+  hud.AnchorPoint=Vector2.new(.5,1)hud.Position=UDim2.new(.5,0,1,-76)hud.Size=UDim2.fromOffset(width,56)
+  stamina.Position=UDim2.fromOffset(9,3)grip.Position=UDim2.fromOffset(9,29)
+  staminaTrack.Position=UDim2.fromOffset(9,18)gripTrack.Position=UDim2.fromOffset(9,44)
+  for _,element in ipairs({stamina,grip,staminaTrack,gripTrack})do element.Size=UDim2.fromOffset(width-110,element:IsA('TextLabel')and 16 or 4)end
+  stamina.TextSize=11 grip.TextSize=11 grip.Visible=true gripTrack.Visible=true
+  hud.Visible=not blocked and(not notice or not notice.Visible)
+ end
  if not m then return end
  b.Text=m.exhausted and "Istirahat" or wants and "Sprint: ON" or UIS.TouchEnabled and "Sprint" or "Sprint [Shift]"
  b.TextSize=UIS.TouchEnabled and 12 or 10
  stamina.Text=string.format("STAMINA %d%s",m.stamina,m.exhausted and " · pulihkan dulu"or "")
  grip.Text=state.status=="Carrying"and string.format("GENGGAMAN %d · %s",m.grip,state.packageType=="Rapuh"and "RAPUH"or "paket biasa")or "GENGGAMAN · pulih"
+ if mobile then stamina.Text="Lari "..m.stamina grip.Text="Pegang "..m.grip end
  staminaFill.Size=UDim2.fromScale(m.stamina/100,1)gripFill.Size=UDim2.fromScale(m.grip/100,1)
  gripFill.BackgroundColor3=m.grip<=25 and Color3.fromRGB(255,130,81)or Color3.fromRGB(255,207,91)
 end

@@ -14,12 +14,17 @@ local goal=label('Goal',27,28,12,theme.Ink)
 local progress=label('Progress',61,16,10,theme.Muted)
 local track=Instance.new('Frame')track.Name='Track'track.Position=UDim2.new(0,12,1,-9)track.Size=UDim2.new(1,-24,0,3)track.BackgroundColor3=theme.Line track.BorderSizePixel=0 track.Parent=frame
 local fill=track:Clone()fill.Name='Fill'fill.Position=UDim2.fromOffset(0,0)fill.Size=UDim2.fromScale(0,1)fill.BackgroundColor3=theme.Gold fill.Parent=track
+local close=Instance.new('TextButton')close.Name='Close18'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-48,0,2)close.Text='×'close.Parent=frame theme.ToolbarButton(close)close.TextSize=21
+close.Activated:Connect(function()root:SetAttribute('MobileTargetOpen18',false)end)
 local state
 local function render()
  local compact=root.AbsoluteSize.Y<500
+ local mobile=theme.IsMobile(root)
  frame.Size=UDim2.fromOffset(compact and 180 or 300,90)frame.Position=UDim2.new(.5,0,0,compact and 12 or 20)
+ if mobile then frame.AnchorPoint=Vector2.new(.5,.5)frame.Size=UDim2.fromOffset(300,100)frame.Position=UDim2.new(.5,0,0,math.max(146,root.AbsoluteSize.Y/2))else frame.AnchorPoint=Vector2.new(.5,0)end
+ close.Visible=mobile title.Size=UDim2.new(1,mobile and -60 or -24,0,15)goal.Size=UDim2.new(1,mobile and -60 or -24,0,28)
  local toast=root:FindFirstChild('DeliveryCelebration')
- frame.Visible=state~=nil and not root.Shop.Visible and not root:GetAttribute('JobBoardOpen17')and not(toast and toast.Visible)
+ frame.Visible=state~=nil and(not mobile or root:GetAttribute('MobileTargetOpen18')==true)and not root.Shop.Visible and not root:GetAttribute('JobBoardOpen17')and not(toast and toast.Visible)
  if not state then return end
  title.Text=state.complete and 'TARGET SESI · SELESAI'or string.format('TARGET SESI %d/%d',state.index,state.count)
  goal.Text=state.description

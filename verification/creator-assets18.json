@@ -1,0 +1,366 @@
+{
+  "searches": [
+    {
+      "scope": "creator_store",
+      "nextSteps": [
+        "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+        "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+        "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+        "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+      ],
+      "resultCount": 3,
+      "query": "low poly fruit basket",
+      "status": "success",
+      "searchSources": [
+        "creator_store"
+      ],
+      "context": {
+        "userId": "4737266825",
+        "isPublished": false
+      },
+      "results": [
+        {
+          "description": "Fruit Model",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/12831453",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=12831453&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "12831453",
+          "name": "Fruit Model",
+          "priceCents": 0,
+          "creatorName": "posthxc",
+          "source": "creator_store"
+        },
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/8548121",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=8548121&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "8548121",
+          "name": "one of the best parashute ever!",
+          "priceCents": 0,
+          "creatorName": "jkla11",
+          "source": "creator_store"
+        },
+        {
+          "description": "This is a mesh of Fruits.",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/19248084",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=19248084&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "19248084",
+          "name": "Fruits Mesh",
+          "priceCents": 0,
+          "creatorName": "Beliar",
+          "source": "creator_store"
+        }
+      ]
+    },
+    {
+      "scope": "creator_store",
+      "nextSteps": [
+        "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+        "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+        "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+        "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+      ],
+      "resultCount": 3,
+      "query": "low poly bread",
+      "status": "success",
+      "searchSources": [
+        "creator_store"
+      ],
+      "context": {
+        "userId": "4737266825",
+        "isPublished": false
+      },
+      "results": [
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/14375985405",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=14375985405&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "14375985405",
+          "name": "Low-Poly Bread Loaf",
+          "priceCents": 0,
+          "creatorName": "heresiarh",
+          "source": "creator_store"
+        },
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/92824100724821",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=92824100724821&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "92824100724821",
+          "name": "🍞 Low Poly Bread Tasty Food Bakery Baked Goods",
+          "priceCents": 0,
+          "creatorName": "HawkRoStormyooCooki3",
+          "source": "creator_store"
+        },
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/84441384901956",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=84441384901956&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "84441384901956",
+          "name": "🍞 Low Poly Bread Slice Food Bakery Baked Goods",
+          "priceCents": 0,
+          "creatorName": "FrostgrNeon8rGhost",
+          "source": "creator_store"
+        }
+      ]
+    },
+    {
+      "scope": "creator_store",
+      "nextSteps": [
+        "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+        "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+        "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+        "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+      ],
+      "resultCount": 3,
+      "query": "low poly vegetables crate",
+      "status": "success",
+      "searchSources": [
+        "creator_store"
+      ],
+      "context": {
+        "userId": "4737266825",
+        "isPublished": false
+      },
+      "results": [
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/4563688216",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=4563688216&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "4563688216",
+          "name": "Fruit basket",
+          "priceCents": 0,
+          "creatorName": "SirWilliamHowe",
+          "source": "creator_store"
+        },
+        {
+          "description": "I added food in the food basket\n238 parts, 60 meshes, 51 unions, about 36 x 8.9 x 36 studs. No scripts.\n\nfood, basket, food shelf, food stand, food table, foods, food box, food mesh, food tray, food store, food basket, food pack, restaurant, cooking, grocery basket, food display, food item, food model, food decor, food decoration, kitchen food, market food, shop food, food props pack, restaurant prop, food counter, grocery, food mesh pack",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/93578788484136",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=93578788484136&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "93578788484136",
+          "name": "I Added Food in the Basket Pack Shelf Stand Table",
+          "priceCents": 0,
+          "creatorName": "Steelrun3150",
+          "source": "creator_store"
+        },
+        {
+          "description": "cagette de fruit\n30 parts, 5 meshes, about 8.9 x 5.8 x 8.7 studs. No scripts.\n\ncage, blox fruit, blox fruits, fruit shop, fruit stand, cages, fruit basket, fruit box, crate, basket, storage, market, food crate, farm, farm crate, grocery, produce, orchard, box",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/100398742284940",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=100398742284940&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "100398742284940",
+          "name": "Cagette De Fruit Basket Crate Blox Shop Stand Box",
+          "priceCents": 0,
+          "creatorName": "Ixfe1700",
+          "source": "creator_store"
+        }
+      ]
+    },
+    {
+      "scope": "creator_store",
+      "nextSteps": [
+        "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+        "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+        "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+        "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+      ],
+      "resultCount": 3,
+      "query": "low poly carrot",
+      "status": "success",
+      "searchSources": [
+        "creator_store"
+      ],
+      "context": {
+        "userId": "4737266825",
+        "isPublished": false
+      },
+      "results": [
+        {
+          "description": "weat",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/130930708215878",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=130930708215878&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "130930708215878",
+          "name": "\\Carrot gear",
+          "priceCents": 0,
+          "creatorName": "KRUBWORLD",
+          "source": "creator_store"
+        },
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/110291264469370",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=110291264469370&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "110291264469370",
+          "name": "🥕 Carrot Gear Wheel Turn Rotate Orange Farm",
+          "priceCents": 0,
+          "creatorName": "Grace_926PrismDawn80",
+          "source": "creator_store"
+        },
+        {
+          "description": "[THIS IS NOT OFFICAL}\n\nA Recreation of A Fully grown Carrot from Grow A Garden!",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/80121378677251",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=80121378677251&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "80121378677251",
+          "name": "[🥕] Grow A Garden Carrot Plant",
+          "priceCents": 0,
+          "creatorName": "lego_manmarshall",
+          "source": "creator_store"
+        }
+      ]
+    },
+    {
+      "availableFacets": [
+        "outdoor",
+        "umbrella",
+        "bench",
+        "bbq",
+        "grass",
+        "checkered cloth",
+        "park",
+        "food",
+        "summer"
+      ],
+      "scope": "creator_store",
+      "nextSteps": [
+        "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+        "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+        "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+        "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+      ],
+      "resultCount": 3,
+      "query": "wooden picnic table mesh",
+      "status": "success",
+      "searchSources": [
+        "creator_store"
+      ],
+      "context": {
+        "userId": "4737266825",
+        "isPublished": false
+      },
+      "results": [
+        {
+          "description": "Picnic Table Mesh\n5 parts, 1 mesh, 4 seats, about 9 x 3.6 x 8 studs. No scripts.\n\ntable, seat, picnic, table and chairs, picnic table, seats, tables, table mesh, table with chairs, picnic tables, wooden table, outdoor table, park table",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/134197909796660",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=134197909796660&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "134197909796660",
+          "name": "Picnic Table Mesh Seat Bench Wooden Chairs Seats",
+          "priceCents": 0,
+          "creatorName": "Content Deleted - 158552482",
+          "source": "creator_store"
+        },
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/130912405674735",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=130912405674735&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "130912405674735",
+          "name": "🧺 Picnic Table Mesh Wooden Outdoor Park Food",
+          "priceCents": 0,
+          "creatorName": "Xx_Kayl33MysticG0ld3",
+          "source": "creator_store"
+        },
+        {
+          "description": "",
+          "creatorStoreUrl": "https://create.roblox.com/store/asset/95223704410198",
+          "assetType": "Model",
+          "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=95223704410198&returnPolicy=PlaceHolder&size=150x150&format=Png",
+          "isFree": true,
+          "assetId": "95223704410198",
+          "name": "🧺 Picnic Bench Table Food Park Outdoor Set",
+          "priceCents": 0,
+          "creatorName": "Xz_Byt3St0rmBGCryptJ",
+          "source": "creator_store"
+        }
+      ]
+    }
+  ],
+  "rawStructures": [
+    {
+      "name": "Low-Poly Bread Loaf",
+      "classes": {
+        "UnionOperation": 2,
+        "Weld": 1,
+        "Model": 1
+      }
+    },
+    {
+      "name": "Cagette De Fruit Basket Crate Blox Shop Stand Box",
+      "classes": {
+        "UIPadding": 92,
+        "Part": 27,
+        "MeshPart": 3,
+        "SpecialMesh": 2,
+        "Folder": 2,
+        "InputContext": 2,
+        "UIScale": 74,
+        "TextButton": 12,
+        "UIStroke": 100,
+        "Sound": 2,
+        "ImageLabel": 88,
+        "Camera": 1,
+        "LocalScript": 2,
+        "Script": 2,
+        "RemoteFunction": 2,
+        "UICorner": 92,
+        "TextLabel": 86,
+        "UIListLayout": 76,
+        "ScrollingFrame": 4,
+        "CanvasGroup": 4,
+        "InputAction": 18,
+        "ScreenGui": 2,
+        "Model": 1,
+        "TextBox": 2,
+        "Frame": 112,
+        "UISizeConstraint": 2,
+        "InputBinding": 40
+      }
+    },
+    {
+      "name": "Fruit Model",
+      "classes": {
+        "Part": 1,
+        "SpecialMesh": 1,
+        "StringValue": 1
+      }
+    },
+    {
+      "name": "Grow A Garden Carrot Plant",
+      "classes": {
+        "Part": 6,
+        "Weld": 11,
+        "Model": 1
+      }
+    },
+    {
+      "name": "Fruit basket",
+      "classes": {
+        "Part": 29,
+        "UnionOperation": 1,
+        "Model": 2
+      }
+    }
+  ]
+}

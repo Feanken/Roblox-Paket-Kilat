@@ -1,0 +1,1149 @@
+{
+  "revision": "CompactPhone18/GeometryFeet18/DistinctStalls18",
+  "date": "2026-11-09",
+  "studioId": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "mobile": {
+    "predicate": "TouchEnabled and (root width<1000 or height<600)",
+    "defaultCard": [
+      238,
+      84
+    ],
+    "toolbar": "One Menu button; route/help/shop/target on disclosure panel",
+    "meter": "238x32 carrying;118x32 while tired idle; hidden when idle and full",
+    "sprint": [
+      100,
+      44
+    ],
+    "normalStorageHidden": true,
+    "autoGuideHidden": true,
+    "criticalErrors": "temporary notice and storage error retained",
+    "worldSigns": "pickup only Idle; recovery only Dropped; shop sign hidden on phone",
+    "iPhoneCarrying": {
+      "sprint": "480, 267",
+      "meter": "238, 32",
+      "overflow": [],
+      "root": "750, 323",
+      "status": "Carrying",
+      "condition": "Biasa · 100/100 · cap 0/2",
+      "labels": [
+        {
+          "text": "TOKO TAS · B",
+          "path": "Workspace.PaketKilat.Map.Depot.ShopPoint.BillboardGui"
+        },
+        {
+          "text": "AMBIL PESANAN",
+          "path": "Workspace.PaketKilat.Map.Depot.PickupPoint.Sign"
+        },
+        {
+          "text": "PULIHKAN PAKET",
+          "path": "Workspace.PaketKilat.Map.RecoveryPoint.Sign"
+        }
+      ]
+    },
+    "secondDevice": {
+      "id": "samsung_galaxy_a06",
+      "name": "Samsung Galaxy A06"
+    },
+    "secondLayout": {
+      "menuFits": true,
+      "menuBottom": 262,
+      "root": "705, 280",
+      "cardFits": true,
+      "actionsHidden": true,
+      "targetFits": true
+    },
+    "desktop": {
+      "root": "1350, 863",
+      "challenge": true,
+      "menuHidden": true,
+      "card": "300, 152"
+    },
+    "pointerTests": {
+      "method": "Desktop pointer with temporary mobile-layout override; override removed before Stop.",
+      "menuOpen": true,
+      "targetOpenClose": true,
+      "helpOpenClose": true,
+      "routeAndShop": "Later pointer attempts inconclusive; not claimed as passed physical touch tests."
+    }
+  },
+  "ground": {
+    "checked": 67,
+    "moved": [
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1640,
+        "afterGap": -0.015,
+        "name": "GardenTree1",
+        "review": false,
+        "offsetY": -0.10044921875,
+        "beforeGap": 0.08544921875,
+        "hits": 554
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1640,
+        "afterGap": -0.015,
+        "name": "GardenTree2",
+        "review": false,
+        "offsetY": -0.1019140625,
+        "beforeGap": 0.0869140625,
+        "hits": 700
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1600,
+        "afterGap": -0.015,
+        "name": "GardenTree3",
+        "review": false,
+        "offsetY": -0.1019140625,
+        "beforeGap": 0.0869140625,
+        "hits": 643
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1640,
+        "afterGap": -0.015,
+        "name": "GardenTree4",
+        "review": false,
+        "offsetY": -0.0960546875,
+        "beforeGap": 0.0810546875,
+        "hits": 567
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1640,
+        "afterGap": -0.015,
+        "name": "GardenTree5",
+        "review": false,
+        "offsetY": -0.09947265625,
+        "beforeGap": 0.08447265625,
+        "hits": 909
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 697,
+        "afterGap": -0.015,
+        "name": "DepotBench",
+        "review": false,
+        "offsetY": -0.095078125,
+        "beforeGap": 0.080078125,
+        "hits": 523
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 160,
+        "afterGap": -0.015,
+        "name": "DepotFence1",
+        "review": false,
+        "offsetY": -0.09458984375,
+        "beforeGap": 0.07958984375,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 160,
+        "afterGap": -0.015,
+        "name": "DepotFence2",
+        "review": false,
+        "offsetY": -0.09458984375,
+        "beforeGap": 0.07958984375,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 160,
+        "afterGap": -0.015,
+        "name": "DepotFence3",
+        "review": false,
+        "offsetY": -0.09458984375,
+        "beforeGap": 0.07958984375,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1476,
+        "afterGap": -0.015000000000000013,
+        "name": "ParkPicnic",
+        "review": false,
+        "offsetY": -0.91001953125,
+        "beforeGap": 0.89501953125,
+        "hits": 503
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1440,
+        "afterGap": -0.015000000000000013,
+        "name": "GardenPicnic",
+        "review": false,
+        "offsetY": -0.91001953125,
+        "beforeGap": 0.89501953125,
+        "hits": 533
+      }
+    ],
+    "finalAdditionalMoves": 0,
+    "review": [],
+    "fullFinal": [
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1640,
+        "afterGap": -0.01513671875,
+        "name": "GardenTree1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 554
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1600,
+        "afterGap": -0.01513671875,
+        "name": "GardenTree2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 700
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1600,
+        "afterGap": -0.015625,
+        "name": "GardenTree3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.015625,
+        "hits": 643
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1640,
+        "afterGap": -0.015625,
+        "name": "GardenTree4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.015625,
+        "hits": 567
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 1640,
+        "afterGap": -0.01513671875,
+        "name": "GardenTree5",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 909
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 697,
+        "afterGap": -0.01513671875,
+        "name": "DepotBench",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 523
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 160,
+        "afterGap": -0.01513671875,
+        "name": "DepotFence1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 160,
+        "afterGap": -0.01513671875,
+        "name": "DepotFence2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "CreatorStore07",
+        "samples": 160,
+        "afterGap": -0.01513671875,
+        "name": "DepotFence3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 1476,
+        "afterGap": -0.00048828125,
+        "name": "StreetLamp1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.00048828125,
+        "hits": 294
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 1476,
+        "afterGap": 0,
+        "name": "StreetLamp2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 294
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 1476,
+        "afterGap": 0,
+        "name": "StreetLamp3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 294
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 1476,
+        "afterGap": 0,
+        "name": "StreetLamp4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 294
+      },
+      {
+        "planterException": true,
+        "group": "Landscape09",
+        "samples": 484,
+        "afterGap": 1.31982421875,
+        "name": "PottedShrub1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.31982421875,
+        "hits": 146
+      },
+      {
+        "planterException": true,
+        "group": "Landscape09",
+        "samples": 340,
+        "afterGap": 1.3203125,
+        "name": "PottedShrub2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.3203125,
+        "hits": 145
+      },
+      {
+        "planterException": true,
+        "group": "Landscape09",
+        "samples": 440,
+        "afterGap": 1.31982421875,
+        "name": "PottedShrub3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.31982421875,
+        "hits": 149
+      },
+      {
+        "planterException": true,
+        "group": "Landscape09",
+        "samples": 675,
+        "afterGap": 1.169921875,
+        "name": "PottedShrub4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.169921875,
+        "hits": 229
+      },
+      {
+        "planterException": true,
+        "group": "Landscape09",
+        "samples": 572,
+        "afterGap": 1.169921875,
+        "name": "PottedShrub5",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.169921875,
+        "hits": 227
+      },
+      {
+        "planterException": true,
+        "group": "Landscape09",
+        "samples": 756,
+        "afterGap": 1.169921875,
+        "name": "PottedShrub6",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.169921875,
+        "hits": 228
+      },
+      {
+        "planterException": true,
+        "group": "Landscape09",
+        "samples": 414,
+        "afterGap": 1.17041015625,
+        "name": "PottedShrub7",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.17041015625,
+        "hits": 228
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 396,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub1_1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 191
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 575,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub1_2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 191
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 625,
+        "afterGap": 0.0009765625,
+        "name": "GardenShrub2_1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0009765625,
+        "hits": 190
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 460,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub2_2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 193
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 336,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub3_1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 193
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 650,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub3_2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 192
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 625,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub4_1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 194
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 357,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub4_2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 191
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 437,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub5_1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 192
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 625,
+        "afterGap": 0.00048828125,
+        "name": "GardenShrub5_2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 186
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 289,
+        "afterGap": 0.00390625,
+        "name": "TreeRocks1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00390625,
+        "hits": 90
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 256,
+        "afterGap": 0.00048828125,
+        "name": "TreeRocks2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 90
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 196,
+        "afterGap": 0.001953125,
+        "name": "TreeRocks3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.001953125,
+        "hits": 88
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 289,
+        "afterGap": 0.0029296875,
+        "name": "TreeRocks4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0029296875,
+        "hits": 89
+      },
+      {
+        "planterException": false,
+        "group": "Landscape09",
+        "samples": 225,
+        "afterGap": 0.00146484375,
+        "name": "TreeRocks5",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00146484375,
+        "hits": 88
+      },
+      {
+        "planterException": false,
+        "group": "DepotParcels10",
+        "samples": 165,
+        "afterGap": 0,
+        "name": "ParcelDisplay1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 155
+      },
+      {
+        "planterException": false,
+        "group": "DepotParcels10",
+        "samples": 165,
+        "afterGap": 0,
+        "name": "ParcelDisplay2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 155
+      },
+      {
+        "planterException": true,
+        "group": "DepotParcels10",
+        "samples": 165,
+        "afterGap": 1.39990234375,
+        "name": "ParcelDisplay3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.39990234375,
+        "hits": 150
+      },
+      {
+        "planterException": true,
+        "group": "DepotParcels10",
+        "samples": 165,
+        "afterGap": 1.39990234375,
+        "name": "ParcelDisplay4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 1.39990234375,
+        "hits": 150
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1189,
+        "afterGap": 0.0009765625,
+        "name": "MarketFoodCart",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0009765625,
+        "hits": 1110
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1189,
+        "afterGap": 0.00048828125,
+        "name": "ParkFoodCart",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 1110
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1476,
+        "afterGap": -0.01513671875,
+        "name": "ParkPicnic",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 503
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1440,
+        "afterGap": -0.01513671875,
+        "name": "GardenPicnic",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": -0.01513671875,
+        "hits": 533
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 624,
+        "afterGap": 0,
+        "name": "Bench1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 496
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 624,
+        "afterGap": 0,
+        "name": "Bench2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 496
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 624,
+        "afterGap": 0,
+        "name": "Bench3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 496
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 624,
+        "afterGap": 0,
+        "name": "Bench4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 497
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.0048828125,
+        "name": "ShadeTree1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0048828125,
+        "hits": 554
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.0068359375,
+        "name": "ShadeTree2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0068359375,
+        "hits": 700
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.00830078125,
+        "name": "ShadeTree3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00830078125,
+        "hits": 643
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.00048828125,
+        "name": "ShadeTree4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00048828125,
+        "hits": 567
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.00439453125,
+        "name": "ShadeTree5",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00439453125,
+        "hits": 909
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.00341796875,
+        "name": "ShadeTree6",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00341796875,
+        "hits": 542
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.00341796875,
+        "name": "ShadeTree7",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00341796875,
+        "hits": 772
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.0029296875,
+        "name": "ShadeTree8",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0029296875,
+        "hits": 599
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.00390625,
+        "name": "ShadeTree9",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00390625,
+        "hits": 592
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.00146484375,
+        "name": "ShadeTree10",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00146484375,
+        "hits": 794
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1600,
+        "afterGap": 0.00146484375,
+        "name": "ShadeTree11",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00146484375,
+        "hits": 542
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.0068359375,
+        "name": "ShadeTree12",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0068359375,
+        "hits": 880
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.0029296875,
+        "name": "ShadeTree13",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0029296875,
+        "hits": 566
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.0009765625,
+        "name": "ShadeTree14",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.0009765625,
+        "hits": 633
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.005859375,
+        "name": "ShadeTree15",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.005859375,
+        "hits": 711
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 1640,
+        "afterGap": 0.00244140625,
+        "name": "ShadeTree16",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0.00244140625,
+        "hits": 548
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 160,
+        "afterGap": 0,
+        "name": "GardenFence1",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 160,
+        "afterGap": 0,
+        "name": "GardenFence2",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 78
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 164,
+        "afterGap": 0,
+        "name": "GardenFence3",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 70
+      },
+      {
+        "planterException": false,
+        "group": "CityDecor15",
+        "samples": 164,
+        "afterGap": 0,
+        "name": "GardenFence4",
+        "review": false,
+        "offsetY": 0,
+        "beforeGap": 0,
+        "hits": 70
+      }
+    ]
+  },
+  "market": {
+    "goodsSupport": [
+      {
+        "stall": "Bread",
+        "name": "Bread1",
+        "gap": -1.7881393432617188e-7
+      },
+      {
+        "stall": "Bread",
+        "name": "Bread2",
+        "gap": -1.7881393432617188e-7
+      },
+      {
+        "stall": "Bread",
+        "name": "Bread3",
+        "gap": -1.7881393432617188e-7
+      },
+      {
+        "stall": "Bread",
+        "name": "Bread4",
+        "gap": -1.7881393432617188e-7
+      },
+      {
+        "stall": "Vegetables",
+        "name": "Carrot1",
+        "gap": 0.00011056119092245353
+      },
+      {
+        "stall": "Vegetables",
+        "name": "Carrot2",
+        "gap": 0.00011056119092245353
+      },
+      {
+        "stall": "Vegetables",
+        "name": "Carrot3",
+        "gap": 0.00011056119092245353
+      },
+      {
+        "stall": "Vegetables",
+        "name": "Carrot4",
+        "gap": 0.00011056119092245353
+      },
+      {
+        "stall": "Vegetables",
+        "name": "Carrot5",
+        "gap": 0.00011056119092245353
+      },
+      {
+        "stall": "Vegetables",
+        "name": "Carrot6",
+        "gap": 0.00011056119092245353
+      },
+      {
+        "stall": "Fruit",
+        "name": "FruitBasket",
+        "gap": -0.00005865097773494199
+      },
+      {
+        "stall": "Fruit",
+        "name": "Fruit1",
+        "gap": -0.00019550919569155667
+      },
+      {
+        "stall": "Fruit",
+        "name": "Fruit2",
+        "gap": -0.00019550919569155667
+      },
+      {
+        "stall": "Fruit",
+        "name": "Fruit3",
+        "gap": -0.00019550919569155667
+      },
+      {
+        "stall": "Fruit",
+        "name": "Fruit4",
+        "gap": -0.00019550919569155667
+      }
+    ],
+    "goodsParts": 78,
+    "preload": {
+      "Success": 17
+    },
+    "stackGaps": [
+      -0.00009912252426147461,
+      -0.00009912252426147461
+    ],
+    "labels": [
+      "ROTI HANGAT",
+      "SAYUR SEGAR",
+      "BUAH SEGAR"
+    ],
+    "goodsScripts": 0
+  },
+  "goodsGeometry": [
+    {
+      "name": "Bread1",
+      "geometryGap": 0
+    },
+    {
+      "name": "Bread2",
+      "geometryGap": 0
+    },
+    {
+      "name": "Bread3",
+      "geometryGap": 0
+    },
+    {
+      "name": "Bread4",
+      "geometryGap": 0
+    },
+    {
+      "name": "Carrot1",
+      "geometryGap": 0
+    },
+    {
+      "name": "Carrot2",
+      "geometryGap": 0
+    },
+    {
+      "name": "Carrot3",
+      "geometryGap": 0
+    },
+    {
+      "name": "Carrot4",
+      "geometryGap": 0
+    },
+    {
+      "name": "Carrot5",
+      "geometryGap": 0
+    },
+    {
+      "name": "Carrot6",
+      "geometryGap": 0
+    },
+    {
+      "name": "FruitBasket",
+      "geometryGap": 0
+    },
+    {
+      "name": "Fruit1",
+      "geometryGap": 0
+    },
+    {
+      "name": "Fruit2",
+      "geometryGap": 0
+    },
+    {
+      "name": "Fruit3",
+      "geometryGap": 0
+    },
+    {
+      "name": "Fruit4",
+      "geometryGap": 0
+    }
+  ],
+  "route": {
+    "routeDots": 16,
+    "residents": 2,
+    "missingFloor": 0
+  },
+  "orientation": {
+    "houseRigidDeltaChecks": [
+      {
+        "name": "Depot",
+        "error": 0
+      },
+      {
+        "name": "Rumah01",
+        "error": 0.0000152587890625
+      },
+      {
+        "name": "Rumah02",
+        "error": 0.0000152587890625
+      },
+      {
+        "name": "Rumah03",
+        "error": 0.000244140625
+      },
+      {
+        "name": "Rumah04",
+        "error": 0.0000152587890625
+      },
+      {
+        "name": "Rumah05",
+        "error": 0.0000152587890625
+      }
+    ],
+    "stackSupport": [
+      {
+        "gap": -0.00009930133819580078,
+        "horizontal": 0
+      },
+      {
+        "gap": -0.00009930133819580078,
+        "horizontal": 0
+      }
+    ],
+    "depotPad": "7.99975586, 4477, 130, -1.00000012, 0, 0, 0, 1.00000012, 0, 0, 0, -1"
+  },
+  "final": {
+    "mode": "Edit",
+    "device": "default",
+    "guiEnabled": true,
+    "activePackages": 0,
+    "reviewFolderRemoved": true
+  },
+  "limitations": [
+    "Phone emulator mouse activation did not reliably target widgets; no physical touch claim.",
+    "One carrying harness assumed phone while simulator was default; discarded. Fresh iPhone run passed.",
+    "Map-wide rigid rotation appeared after backup; current orientation preserved. Blind backup restore would undo that change.",
+    "No physical mobile performance or multiplayer profiling."
+  ],
+  "backup": "ServerStorage.PaketKilat_PreMobileMarket18 plus backups/main_game.before-mobilemarket18.20261109.rbxl"
+}

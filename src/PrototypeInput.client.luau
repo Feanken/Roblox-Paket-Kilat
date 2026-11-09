@@ -128,11 +128,12 @@ local function render()
  guide.FPS.Visible=guideManual or perfShowing
  guide.Hint.Size=UDim2.new(1,(guideManual or perfShowing) and -124 or -70,1,-12)
  guide.Size=UDim2.fromOffset(math.min(C.Onboarding.Width,math.max(260,w-290)),C.Onboarding.Height)
- guide.Visible=not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not guideDismissed and onboarding.stage~="Complete")
+ guide.Visible=not(Theme.IsMobile(ui)and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")))and not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not Theme.IsMobile(ui)and not guideDismissed and onboarding.stage~="Complete")
  local guideStage=state.status=="Dropped" and "Dropped" or onboarding.stage
  guide.Hint.Text=perfShowing and (ui:GetAttribute("PerfText") or "Mengukur FPS...") or (C.Onboarding[guideStage] or C.Onboarding.FindDepot)
 	Theme.Layout(ui,guideManual or perfShowing)
 	card.Coins.Text=state.profileReady and string.format("%d koin",state.coins) or "— koin"
+ if Theme.IsMobile(ui)then card.Coins.TextSize=#card.Coins.Text>11 and 10 or 12 end
  ui.StorageStatus.Size=UDim2.fromOffset(card.Size.X.Offset,20)
  if not state.profileReady then
   ui.StorageStatus.Text=state.profileStatus=="Loading" and "Memuat profil. Mohon tunggu..." or "Profil gagal dimuat · coba masuk ulang."
@@ -169,7 +170,11 @@ local function render()
 		card.Destination.Text=state.destinationName or C.DestinationName
 		card.ConditionText.Text=string.format("%s · %d/100 · Rekor %s",state.packageType,condition,bestText(state.currentBestTime))
 	end
-	if os.clock()<feedbackUntil then card.Hint.Text=feedback
+	if Theme.IsMobile(ui)and state.status~="Idle"then
+  local b=state.routeBonus
+  card.ConditionText.Text=string.format("%s · %d/100%s",state.packageType or "Paket",condition,b and string.format(" · cap %d/%d",b.count,b.limit)or "")
+ end
+ if os.clock()<feedbackUntil then card.Hint.Text=feedback
 	elseif state.status=="Idle" and last then
 		local record=not last.recordEligible and "Tanpa rekor: paket dipulihkan"
 			or (last.newRecord and ("REKOR BARU: "..bestText(last.bestTime)) or ("Terbaik: "..bestText(last.bestTime)))
@@ -194,7 +199,8 @@ local function render()
 		local remaining=math.max(0,C.RecoveryCooldown-(workspace:GetServerTimeNow()-(state.lastRecoveryAt or -100)))
 		button(actions.Secondary,"Recover",remaining>0 and string.format("Pulihkan (%d)",math.ceil(remaining)) or C.Labels.Recover,remaining<=0 and aliveRoot()~=nil,"R")
 	end
-	local dropped=state.status=="Dropped" and ownPackage() or nil
+	actions.Primary.Visible=not Theme.IsMobile(ui)or state.status~="Idle"or near(state.depotPosition)
+ local dropped=state.status=="Dropped" and ownPackage() or nil
 	local markerTarget=state.status=="Idle" and state.depotPosition
 		or (dropped and not state.outOfBounds and dropped.Position or state.destinationPosition)
 	label.Enabled=synced and state.profileReady==true and markerTarget~=nil
@@ -216,13 +222,14 @@ local function activate(b)
 	end
 end
 ui.HelpToggle.Activated:Connect(function()
+ ui:SetAttribute("MobileMenuOpen18",false)ui:SetAttribute("MobileTargetOpen18",false)
  guideManual=true guideDismissed=false
  render()
 end)
 guide.Close.Activated:Connect(function()
  guideDismissed=true guideManual=false ui:SetAttribute("PerfShowing",false) render()
 end)
-ui.ShopToggle.Activated:Connect(function() shopOpen=not shopOpen render() end)
+ui.ShopToggle.Activated:Connect(function()ui:SetAttribute("MobileMenuOpen18",false)shopOpen=not shopOpen render() end)
 shop.Close.Activated:Connect(function() shopOpen=false render() end)
 CAS:BindAction("PKShop",function(_,input)
  if input==Enum.UserInputState.Begin then shopOpen=not shopOpen render() end
@@ -262,7 +269,9 @@ RS.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot,code)
 	if code=="Start" or code=="Pickup" then cue("Pickup")
 	elseif code=="Impact" or code=="Slip" or code=="Barrier" or code=="GripLost" then cue("Impact")
 	elseif code=="Delivered" then cue("Delivered") end
-	if messages[code] then feedback,feedbackUntil = messages[code],os.clock()+3
+	local mobileErrors={TooFar=true,WrongDestination=true,NotOwnerOrStale=true,OrderActive=true,InvalidState=true,NotAlive=true,ProfileUnavailable=true,InsufficientCoins=true,NotOwned=true,OfferExpired=true,InvalidArguments=true}
+ if mobileErrors[code]then ui:SetAttribute("MobileNoticeText18",messages[code]or "Aksi belum tersedia.")ui:SetAttribute("MobileNoticeUntil18",os.clock()+3)end
+ if messages[code] then feedback,feedbackUntil = messages[code],os.clock()+3
 	elseif code == "Delivered" then feedbackUntil=0 end
 	render()
 end)

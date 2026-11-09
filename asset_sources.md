@@ -1,5 +1,20 @@
 # Paket Kilat! — Sumber aset T15
 
+## MobileMarket18 — 9 November 2026
+
+Semua sumber berikut muncul sebagai isFree=true/priceCents0 pada pencarian Creator Store MCP. Tidak ada pembelian. Link/creator adalah metadata saat review.
+
+| Aset | Creator | Tautan | Pemakaian |
+| --- | --- | --- | --- |
+| Low-Poly Bread Loaf | heresiarh | [14375985405](https://create.roblox.com/store/asset/14375985405) |2Union, Weld dibuang;4loaf pada ROTI HANGAT |
+| Grow A Garden Carrot Plant | lego_manmarshall | [80121378677251](https://create.roblox.com/store/asset/80121378677251) |6Part,11Weld dibuang;6wortel mendatar pada SAYUR SEGAR; penamaan vendor tidak ditampilkan dalam game |
+| Fruit basket | SirWilliamHowe | [4563688216](https://create.roblox.com/store/asset/4563688216) |30Part;1peti pada BUAH SEGAR |
+| Fruit Model | posthxc | [12831453](https://create.roblox.com/store/asset/12831453) |1Part+SpecialMesh; StringValue dibuang,4display buah |
+
+Ditolak: [100398742284940](https://create.roblox.com/store/asset/100398742284940), Ixfe1700, Cagette De Fruit Basket Crate Blox Shop Stand Box. Hasil impor berisi4Script/LocalScript,2RemoteFunction,ScreenGui dan banyak GUI, meskipun deskripsi pencarian menyebut tanpa script. Tidak dipakai; reviewfolder dibuang. Kandidat lain yang tidak dipilih tidak diimpor.
+
+Library bersih ServerStorage/PaketKilat_MarketAssets18, penempatan Map/MarketGoods18.15model/78Parts anchored/noncollision,0script vendor.17callback preloadSuccess; seluruh15model diuji kontak geometri pada countertop. Source CleanMarketAssets18.luau/MarketGoods18.luau dan bukti verification/creator-assets18.json. Metadata gratis/audit struktur tidak menetapkan hak IP pihak lain atau menjamin performa HP.
+
 ## City15 — 9 November 2026
 
 Search Creator Store MCP priceFilter=free mengembalikan isFree=true/priceCents=0 untuk dua aset baru. Tidak ada pembelian.

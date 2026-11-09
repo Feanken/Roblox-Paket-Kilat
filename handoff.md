@@ -1,4 +1,34 @@
-# Pembaruan TERBARU — Jobs17: pilihan pesanan di depot (9 November 2026)
+# Pembaruan TERBARU — MobileMarket18 (9 November 2026)
+
+Permintaan: HUD ponsel lebih ringan, cek aset melayang, bedakan isi lapak memakai aset gratis. Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. Revisi CompactPhone18/GeometryFeet18/DistinctStalls18.
+
+## UI ponsel
+
+UITheme12.IsMobile memakai TouchEnabled dan ukuran viewport. Kartu238x84 berisi tujuan/saldo/kondisi/cap; Hint dan status simpan normal disembunyikan, error/loading dan notice aksi tetap tersedia. Satu Menu membuka rute/petunjuk/toko/target sesi. AutoGuide/target tidak muncul otomatis di ponsel; tombol× untuk menutup target, petunjuk manual tersedia. Menu/target/petunjuk tidak bertumpuk. Meter238x32 saat membawa,118x32 saat stamina terpakai tanpa paket, tersembunyi saat idle penuh. Sprint100x44 terpisah dari meter di bawah kanan-tengah, jauh dari joystick/jump. Actions44px di kanan dan tersembunyi ketika target dibaca. Label dunia toko disembunyikan hanya pada mobile; pickup/pemulihan mengikuti status. Desktop tetap300x152/toolbar lama/target terlihat; Menu baru tersembunyi.
+
+Source baru MobileShell18.client.luau (StarterPlayerScripts.PaketKilatMobileShell18). Diubah: UITheme12, PrototypeInput.client, DeliveryFeedback.client, CourierMovement.client, RouteGuide.client, ChallengeTracker16.client. Pasang moduletema baru sebelum controllers yang memakai IsMobile. Source akhir sudah disinkronkan.
+
+Uji iPhone17Pro750x323: card238x84, meter(12,100)/238x32, sprint(480,267)/100x44, teks kondisi/cap muat, target/guide/status normal tersembunyi. GalaxyA06705x280: menu bawah262 di dalam viewport, teks target muat, actions tersembunyi ketika target dibaca. Jarak panel target diberi batas agar tidak berimpitan dengan kartu di layar pendek. Desktop1350x863: card300x152, target visible, Menu hidden. Pointer desktop dengan override IsMobile sementara memverifikasi Menu,Target×,Petunjuk×; override dihapus sebelumStop. Pointer emulator tidak andal; percobaan Route/Toko terakhir tidak dihitung sebagai lulus touch. Tidak mengklaim uji HP fisik/performa/multiplayer. Fresh console hanya Bootstrap ready.
+
+## Pijakan dan pasar
+
+GroundProps18.luau memeriksa67model prop dari CreatorStore07/Landscape09/DepotParcels10/CityDecor15 menggunakan sampling raycast geometri dari bawah.11prop diturunkan, termasuk dua meja sekitar.91stud yang boundingbox-nya terlihat grounded tetapi kaki sebenarnya melayang. Audit ulang0koreksi tambahan/0reviewflag. Foliage dalam pot dan kardus lapisan atas adalah pengecualian dukungan; kardus diverifikasi kembali berada tepat di atas model bawah (gap≈-.0001,XZ0). Jangan meratakan semua objek ke tanah, karena tanaman/kardus sengaja bertumpu pada objek lain.
+
+Pasar: ROTI HANGAT(4loaf),SAYUR SEGAR(6wortel mendatar),BUAH SEGAR(1peti+4displaybuah).15model/78Parts/0vendorScript,17preloadSuccess;15raycast kontak geometri tepatcountertop. Library ServerStorage.PaketKilat_MarketAssets18 dari4sumber gratis di asset_sources.md. Aset peti100398742284940 ditolak karena scripts/GUI/remotes; reviewfolder dibuang. Migrasi CleanMarketAssets18.luau (setelah insert kandidat bernama asli ke CreatorReview18) kemudian MarketGoods18.luau. Produk kotak lama disembunyikan. Tidak menambah ekonomi jual beli pasar.
+
+## Orientasi map dan backup
+
+Map-wide180°rotation/translation muncul antara backup awal dan pengecekan berikutnya; orientasi terbaru dipertahankan. DepotPad kini≈(8,4477,130), basisYaw180. Penempatan barang mengikuti CFrame countertop aktual. Snapshot DeliveryService menambahkan routeBasis dari rotasi DepotPad; RouteGuide dan CityLife15.client mentransformasikan offset lokal memakai basis tersebut.16dot rute mempunyai lantai pada pemeriksaan client. Enam rumah/depot sesuai rigid delta dari backup dengan error maksimum.000245stud; perbandingan equality world pivot terhadap backup akanfalse karena seluruhmap berpindah, bukan bukti rumah digeser individual.
+
+Backup ServerStorage.PaketKilat_PreMobileMarket18 berisi Map/GUI/Scripts; tambahan DeliveryService/CityLife juga dicadangkan sebelum diubah. **Backup Map mendahului rotasi global: jangan restore mentah di atas map terbaru tanpa menjaga rigid transform.** Jika rollback UI, pulihkan source lama dan hapus MobileShell18. Backup disk backups/main_game.before-mobilemarket18.20261109.rbxl dan handoff.before-mobilemarket18.md. Folder test runtime tidak dipersistenkan; akhirEdit/default/HUDaktif/0paket/reviewdihapus.
+
+Bukti verification/mobilemarket18-audit.json, creator-assets18.json, mobile18-carrying.jpg, market18-categories.jpg, props18-picnic.jpg, saved-mobilemarket18.json dan source-save-mobilemarket18.json. Source dan migrasi lengkap ada di src.
+
+**Place sudah disimpan sebagian selama pengerjaan**, kini447995byte/2026-11-09T04:21:21.802Z. Marker GeometryFeet18/DepotOffers17 ada, tetapi CompactPhone18/DistinctStalls18 dan mayoritas source final belum ada. Simpan sekali lagi lewat File > Save to File dari sesi aktif sebelum menutup Studio agar seluruh koreksi terakhir ikut masuk. Source/dokumen/bukti di disk sudah disimpan; itu terpisah dari save place.
+
+---
+
+# Arsip — Jobs17: pilihan pesanan di depot (9 November 2026)
 
 Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, world.JobRevision=DepotOffers17. Primary/E dekat depot kini membuka papan3kartu: Reguler(Biasa/tujuan jadwal/bonus0), Rapuh(Rapuh/tujuan bergilir/maks8), LintasKota(Biasa/Rumah04atau05/maks10). Bonus floor(jobBonus*kondisi/InitialCondition), disatukan ke ledger hadiah sebelum pemeriksaan batas/commit target sesi. Tidak mengubah map/aset/skema profil. Reward awal perlu balance manusia.
 

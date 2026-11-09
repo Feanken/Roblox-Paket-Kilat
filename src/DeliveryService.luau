@@ -27,6 +27,7 @@ function Delivery.Snapshot(player)
  snapshot.routeBonus=require(script.Parent.CityBonus13).Snapshot(Delivery.orders[player.UserId])
  if T then snapshot.onboarding=T:Snapshot(player) end
 	snapshot.depotPosition = W.Map.Depot.PickupPoint.Position
+ snapshot.routeBasis=W.Map.DepotPad.CFrame.Rotation
 	snapshot.recoveryPosition = W.Map.RecoveryPoint.Position
 	local nextAssignment=E.PeekAssignment(player)
 	local nextRoute=C.Routes[nextAssignment.DestinationId]

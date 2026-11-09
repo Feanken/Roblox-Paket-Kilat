@@ -54,8 +54,8 @@ local function refresh()
  local shopOpen=ui.Shop.Visible or boardOpen
  toast.Visible=os.clock()<expires and not shopOpen
  ui.TopCard.Visible=not toast.Visible and not shopOpen
- ui.StorageStatus.Visible=not toast.Visible and not shopOpen
- ui.Actions.Visible=not shopOpen and not toast.Visible
+ ui.StorageStatus.Visible=not toast.Visible and not shopOpen and(not Theme.IsMobile(ui)or ui.StorageStatus:GetAttribute("Alert18")==true)
+ ui.Actions.Visible=not shopOpen and not toast.Visible and(not Theme.IsMobile(ui)or not ui:GetAttribute("MobileTargetOpen18"))
  local backdrop=ui:FindFirstChild("ShopBackdrop")if backdrop then backdrop.Visible=ui.Shop.Visible end
  impact.Visible=os.clock()<noticeExpires and not shopOpen
  local p=ownPackage()

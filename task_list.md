@@ -274,3 +274,16 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] J17-H: desktop dan emulator750x323 semua teks muat, menu620x280; source/audit/screenshot/handoff tersimpan; akhirEdit/default/HUDaktif/0paket.
 - [ ] J17-I: simpan revisi DepotOffers17 ke main_game.rbxl dari sesi aktif; marker belum ada di disk.
 - [ ] J17-J: uji jalan penuh/HPsentuh/multiplayer/performa, balance bonus dan penerimaan pekerjaanLintasKota terkontrol.
+
+## MobileMarket18 — tiga perbaikan permintaan pemilik
+
+- [x] M18-A: backup Map/GUI/source dan file sebelum perubahan; simpan struktur kandidat aset.
+- [x] M18-B: layout phone238x84/Menu/meter kecil/Sprint terpisah; target dan petunjuk melalui disclosure, error tetap tersedia.
+- [x] M18-C: emulator iPhone750x323 dan GalaxyA06705x280, teks/menu muat; desktop300x152 tetap, tombol Menu tersembunyi.
+- [x] M18-D: pointer desktop dengan override runtime memverifikasi Menu/Target/Petunjuk; override dihapus. Touch fisik belum diklaim.
+- [x] M18-E:67prop diperiksa geometri;11diturunkan, dua meja≈.91stud; audit ulang0koreksi tambahan, dukungan kardus bertumpuk diverifikasi XZ/Y.
+- [x] M18-F:3kategori pasar,4sumbergratis,15display/78Parts/0vendorScript;15kontak geometri tepatcountertop,17preloadSuccess.
+- [x] M18-G: maprotasi terbaru diikuti oleh barang/rute/warga;16dot mempunyai lantai; susunan rumah sesuai transformasi kaku dengan galat<.001stud.
+- [x] M18-H: source/audit/screenshot/handoff disimpan; akhirEdit/default/HUDaktif/0paket/reviewfolderdihapus.
+- [ ] M18-I: simpan ulang sesi Studio; file447995byte baru mencakup sebagianM18 dan belum memuat source/market final.
+- [ ] M18-J: uji HP fisik/touch, semua kontrol menu, performa dan multiplayer; percobaan pointer Route/Toko belum menjadi bukti touch.
