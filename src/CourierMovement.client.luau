@@ -3,6 +3,7 @@ local CAS=game:GetService("ContextActionService") local RunService=game:GetServi
 local p=Players.LocalPlayer local shared=game.ReplicatedStorage:WaitForChild("PaketKilat")
 local Theme=require(shared.Shared.UITheme12)
 local intent=shared.Remotes:WaitForChild("MovementIntent") local ui=p:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
+local lowWarned=false local warnOrder
 local state={} local wants=false local connections={}
 local function bind(event,fn)local c=event:Connect(fn)table.insert(connections,c)end
 local function send(value)wants=value intent:FireServer(value)end
@@ -61,10 +62,18 @@ local function render()
   hud.Visible=not blocked and(not notice or not notice.Visible)
  end
  if not m then return end
+ if warnOrder~=state.orderId then warnOrder=state.orderId lowWarned=false end
+ if m.grip>=50 then lowWarned=false end
+ if state.status=='Carrying'and m.grip<=25 and not lowWarned then
+  lowWarned=true
+  ui:SetAttribute('MobileNoticeText18','Genggaman menipis. Lepas sprint agar pulih.')
+  ui:SetAttribute('MobileNoticeUntil18',os.clock()+3)
+ end
  b.Text=m.exhausted and "Istirahat" or wants and "Sprint: ON" or UIS.TouchEnabled and "Sprint" or "Sprint [Shift]"
  b.TextSize=UIS.TouchEnabled and 12 or 10
  stamina.Text=string.format("STAMINA %d%s",m.stamina,m.exhausted and " · pulihkan dulu"or "")
  grip.Text=state.status=="Carrying"and string.format("GENGGAMAN %d · %s",m.grip,state.packageType=="Rapuh"and "RAPUH"or "paket biasa")or "GENGGAMAN · pulih"
+ if state.status=='Carrying'and m.grip<=25 then grip.Text='PELANKAN · genggaman '..m.grip end
  if mobile then stamina.Text="Lari "..m.stamina grip.Text="Pegang "..m.grip end
  staminaFill.Size=UDim2.fromScale(m.stamina/100,1)gripFill.Size=UDim2.fromScale(m.grip/100,1)
  gripFill.BackgroundColor3=m.grip<=25 and Color3.fromRGB(255,130,81)or Color3.fromRGB(255,207,91)

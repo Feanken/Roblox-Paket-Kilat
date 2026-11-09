@@ -37,9 +37,9 @@ for _,spec in {
 	for _,v in old:GetDescendants()do if v:IsA('BillboardGui')then v.Enabled=false end end
 	local at=basis:PointToObjectSpace(body.Position)
 	local board=Instance.new('Part')board.Name='CourtyardSign'board.Size=Vector3.new(body.Size.X-1,2.3,.35)
-	board.CFrame=basis*CFrame.new(at.X,9.1,at.Z+body.Size.Z/2+.35)*CFrame.Angles(0,math.pi,0)
+	board.CFrame=basis*CFrame.new(at.X,9.1,at.Z+body.Size.Z/2+.35)
 	board.Color=old.Roof.Color board.Material=Enum.Material.SmoothPlastic board.Anchored=true board.CanCollide=false board.CanTouch=false board.CanQuery=false board.Parent=folder
-	local g=Instance.new('SurfaceGui')g.Face=Enum.NormalId.Front g.SizingMode=Enum.SurfaceGuiSizingMode.PixelsPerStud g.PixelsPerStud=35 g.Parent=board
+	local g=Instance.new('SurfaceGui')g.Face=Enum.NormalId.Back g.SizingMode=Enum.SurfaceGuiSizingMode.PixelsPerStud g.PixelsPerStud=35 g.MaxDistance=180 g.ZOffset=1 g.Parent=board
 	local title=Instance.new('TextLabel')title.Size=UDim2.fromScale(1,.62)title.BackgroundTransparency=1 title.Font=Enum.Font.GothamBold title.Text=spec[2]title.TextScaled=true title.TextColor3=Color3.fromRGB(239,229,207)title.Parent=g
 	local sub=title:Clone()sub.Position=UDim2.fromScale(0,.63)sub.Size=UDim2.fromScale(1,.3)sub.Font=Enum.Font.GothamMedium sub.Text=spec[3]sub.Parent=g
 end

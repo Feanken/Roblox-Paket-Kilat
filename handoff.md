@@ -1,4 +1,53 @@
-# Pembaruan TERBARU — Quality22: penilaian dan pelanggan (9 November 2026)
+# Pembaruan TERBARU — City23: pusat kota dan ruang warga (9 November 2026)
+
+Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. CityRevision=LivedInTown23. Fokus permintaan pemilik: tampilan kota. Lima blok polos sekarang memiliki jendela tiga sisi, storefront jalan, papan nama fisik di dua frontage, kanopi bergaris, cornice/parapet dan tank bundar. Roti Kampung/Wisma Kilat/Bengkel Sepeda/Buku & Cerita/Balai Warga memakai aksen atap berbeda. Label Billboard lama lima gedung dinonaktifkan. Rumah, depot dan marker pengantaran tidak dipindah. Tidak menambah interior atau sistem membeli di gedung.
+
+## Ruang kota
+
+Plaza pasar: air mancur kecil, dua bangku, tanaman dan papan Alun-Alun Kilat. Taman depan: pergola meneduhi meja piknik yang sudah ada. Barat: pojok baca berisi lemari buku tertutup dan dua bangku. Jalur tepi kota terhubung taman, dengan tiga bangku, dua lampu, railing, planter di luar jalur. Dua jalur taman samping menghubungkan area yang kosong. Semua furnitur dekoratif statis. Tidak mengubah voxel Terrain, sky/lighting, gameplay script, ekonomi atau schema profil.
+
+Dua zebra cross pada localx47/-90 melintasi jalanz28. Pembatas bekas kanalz35 awalnya menghalangi crossing;4panel lama disembunyikan dan8segmen pengganti menyisakan celah10stud,2post di celah disembunyikan. Collider di luar celah dipertahankan. Boxclearance di crossing/taman/coastalwalk tidak mengenai dekor baru. Kanopi jalan dinaikkan kelocalY7.4; avatar uji headTop6.078 vs canopyCenter7.400. Minimum bidang bawah≈7.04, lantai1. Papan depan berpusatY8.6, jendela atas mulai11.8. Dua planter coastal dipindah keluar paving, ke(35,-16.5)/(94,-16.5).
+
+## Aset, source dan pemasangan
+
+Air mancur gratis CreatorStore13782728612/ComputerLider123. Raw candidate memiliki1Script Credits,23MeshPart/8Part serta particle/beam/weld. Whitelist render mempertahankan17MeshPart/3SurfaceAppearance, menolak semua code/effect/anchor tak terlihat/lapisan air berlebihan, air menjadiSmoothPlastic. Library ServerStorage.PaketKilat_CreatorAssets23.Fountain, SourceAssetId13782728612. Kandidat lain15758791593/BolletjeH berisi177Part/Union tidak dipakai. Seluruhfolder CreatorReview23 dibuang sebelum Play. Reuse clean library07(ParkBench),09(StreetLamp/GardenBush). Metadata/tautan di asset_sources.md dan verification/creator-assets23.json.
+
+Migrasi Edit kanonik di src, urutan:
+1. Jika library23 belum ada, insert kandidat bernama Better Low Poly Fountain ke ServerStorage.PaketKilat_CreatorReview23, lalu CleanCityAssets23.luau.
+2. CitySurfaces23.luau: potong tile rumput lama menjadi jalur;19diganti70,total144.
+3. CityFacades23.luau: membuat Map.City23 dan detail lima gedung; source final sudah mencakup clearance kanopi.
+4. CitySpaces23.luau: plaza/pergola/coast/planter/paint; source final sudah memindahkan planter keluar jalur.
+5. CityAccess23.luau: celah pembatas/papan courtyard. FaceBack dengan rotasi basis, MaxDistance180/ZOffset1; koreksi ini membuat tulisan terlihat.
+6. CityReading23.luau: pojok baca.
+7. Hapus folder review kandidat; HUD tetap enabled.
+
+Jangan jalankan ulang migrasi yang sudah terpasang; masing-masing memiliki guard. Semua ini migrasi statis, bukan Script runtime baru. Folder City23 akhir659Part termasuk8segmen pembatas pengganti. Surface15 total144tile. PapanSurfaceGUI dibatasi180stud pada fasad/courtyard/pojok baca. Bagian dekorasi noncollision/query/touch kecuali segmen pembatas yang mewarisi collider lama.
+
+## Backup dan rollback
+
+ServerStorage.PaketKilat_PreCity23.Map memiliki27anak map praedit, Lighting9objek dan attribute properti lighting. Pencadangan map dilakukan per anak dengan yield. Disk backups/main_game.before-city23.20261109.rbxl dan handoff.before-city23.md. **Binary backup mendahului Relay21/Quality22; untuk rollback City23 saja gunakan backup Map, bukan mengganti seluruh place dengan binary lama.** Source gameplay tetap pada versi Quality22.
+
+Rollback selektif: hapus City23, pulihkan Surface15 dari backup; pulihkan warnaRoof/propertiRoofTank/Billboard lima gedung City13; pulihkan properti panel/post Polish05 yang disembunyikan. Marker CityRevision di rootworld dihapus. Library23 opsional dipertahankan atau dihapus setelah tidak digunakan. Backup Map utuh boleh mengganti map hanya bila tidak ada edit map lain sesudah snapshot. Jaga transformasi terbaru bila pemilik memutar map lagi.
+
+## Verifikasi
+
+Floor audit: total144,area50759.999917 (282×180=50760),0pasangan overlap dengan toleransi.01stud. Extent float bbox memberi area50760.0522; perbedaan≈.0523 berasal dari transformasi float lama, bukan slab baru. Tidak mengklaim uji pixel semua batas. Sepuluh marker (5tujuan,DepotPad,Spawn,Recovery,Pickup,Shop) bergeser0. Sumber gameplay/client Economy/Delivery/Tuning/Feedback/Customers22 dibandingkan identik dengan disk; tidak diedit.
+
+Grounding16modelSpaces via grid raycast dari bawah:0reviewflag, fountainGap.002441stud, bench/lamp0, foliage≈-.000039 pada soil pot. DuaReadingBench diuji terpisah624samplemasing-masing/gap0. Primitive pergola/cabinet/planter memakai dasar di lantai1 dan tumpuan geometris.75preloadSuccess/0failure, tidak ada Lua/remotes/audio/particle di City23.
+
+Play via MCP character_navigation speed1: crossing timur dua titik dan entry bawah kanopi berhasil/health100; crossing barat berhasil/health100; parkconnection dan coastalwalk berhasil/health100. Titik awal dipindah fixture, bukan pengujian manusia seluruh kota. Percobaan delivery pertama memindah karakter tepat di atas PickupPoint lama yang collidable dan PathBlocked; finish assertion itu dikecualikan. Swept box menemukan PickupPoint lama saja, tidak ada City23 dalam jalur tersebut. Retry dari halaman/apronlocal(0,4,2): pickup sah,3waypoint rute asli semuaSuccess, tibaCarrying/health100/orderId cocok, pengantaranDelivered/kondisi100/47koin/3bintang/Relaytrue. GameId0/StudioMemory; semua koin uji hilang ketikaStop. Console retry hanyaBootstrapready.
+
+Papan courtyard awal blank pada kamera review; rotasi basis+FaceBack/180/ZOffset1 diuji visual dan source diperbarui. Screenshot akhir verification/city23-overview.jpg,city23-street.jpg,city23-plaza.jpg. Park/pergola dan pojok baca juga diperiksa melalui capture. Satu query pembanding source memakai sintaks table salah, retry read-only lulus. Tidak ada error game yang tersisa pada Play terakhir.
+
+Akhir Edit/Stop, HUDaktif, camera/FOV Edit dikembalikan ke snapshot awal,0paket, tanpa TemporaryCity23/reviewfolder. BackupMap27anak terverifikasi. Belum profiling HP fisik, multiplayer, semua rute manusia atau avatar skala ekstrem.659Part tambahan perlu dinilai pada perangkat target; belum ada klaim FPS tertentu.
+
+Bukti verification/city23-audit.json,creator-assets23.json,saved-city23.json dan3gambar. Source/dokumen sudah di disk.
+
+**Simpan File > Save to File sebelum menutup Studio.** main_game.rbxl masih395960byte/2026-11-09T06:56:02.345Z, hanya Gear20/Nav19 yang sudah masuk. NeighborRelay21/CustomerRatings22/LivedInTown23 belum ada pada binary; ketiganya ada di sesi Studio aktif.
+
+---
+
+# Arsip — Quality22: penilaian dan pelanggan (9 November 2026)
 
 Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. FeedbackRevision=CustomerRatings22. Pengantaran kini dinilai3bintang ISTIMEWA(kondisi≥95/tanpaRecover/dalamTarget),2bintang RAPI(kondisi≥80/tanpaRecover),atau1bintang TUNTAS. Target memakai target depot atau jalur relay sesuai order. Tidak menambah/mengurangi koin di luar rumus lama, mengubah rekor, atau menambah field profil. Rangkaian rapi dan terbaik sesi memberi umpan balik setelah pengantaran;5pelanggan dekoratif bereaksi di depan rumah.
 

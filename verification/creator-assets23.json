@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-09",
+  "selection": {
+    "assetId": "13782728612",
+    "name": "Better Low Poly Fountain",
+    "creator": "ComputerLider123",
+    "url": "https://create.roblox.com/store/asset/13782728612",
+    "scope": "creator_store",
+    "priceFilter": "free",
+    "isFree": true,
+    "priceCents": 0,
+    "partsRetained": 17,
+    "surfaceAppearances": 3,
+    "scriptsRetained": 0
+  },
+  "notUsed": {
+    "assetId": "15758791593",
+    "creator": "BolletjeH",
+    "isFree": true,
+    "priceCents": 0,
+    "reason": "177Part/Union candidate unnecessary for small decorative landmark"
+  },
+  "reusedExistingLibraries": [
+    "PaketKilat_CreatorAssets07.ParkBench",
+    "PaketKilat_CreatorAssets09.StreetLamp",
+    "PaketKilat_CreatorAssets09.GardenBush"
+  ],
+  "newExternalPurchases": 0
+}

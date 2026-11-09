@@ -2,6 +2,7 @@
 local Challenges=require(script.Parent.SessionChallenges16)
 local Offers=require(script.Parent.JobOffers17)
 local Tuning=require(script.Parent.MovementTuning)
+local Contracts=require(script.Parent.Contracts24)
 local Gear=require(script.Parent.Gear20)
 local Rating=require(script.Parent.DeliveryRating22)
 local E={sessions={}}
@@ -11,7 +12,7 @@ function E.Init(config,data) C,Data=config,data end
 function E.Join(player)
  local profile=Data:Get(player.UserId)
  if not profile then return false end
- E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New(),gearTuning=Tuning.Get(),qualityRun=Rating.New(),ratingTuning=Tuning.Get()}
+ E.sessions[player.UserId]={profile=profile,history={},creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New(),gearTuning=Tuning.Get(),qualityRun=Rating.New(),ratingTuning=Tuning.Get()}
  return true
 end
 function E.Has(player) return E.sessions[player.UserId]~=nil and Data:Ready(player.UserId) end
@@ -57,8 +58,10 @@ function E.Snapshot(player)
   out.challenge=Challenges.Snapshot(s.challenge)
   out.gear=E.GearQuote(player)
   out.qualityRun=table.clone(s.qualityRun)
+  out.recentDeliveries={}
+  for _,v in s.history do table.insert(out.recentDeliveries,table.clone(v))end
   out.jobOffers={}
-  for _,offer in ipairs(E.PeekOffers(player))do table.insert(out.jobOffers,{id=offer.id,name=offer.name,description=offer.description,destinationName=C.Routes[offer.DestinationId].Name,destinationId=offer.DestinationId,packageType=offer.PackageType,jobBonus=offer.JobBonus})end
+  for _,offer in ipairs(E.PeekOffers(player))do table.insert(out.jobOffers,{id=offer.id,name=offer.name,description=offer.description,destinationName=C.Routes[offer.DestinationId].Name,destinationId=offer.DestinationId,packageType=offer.PackageType,jobBonus=offer.Contract and offer.Contract.reward or offer.JobBonus,contract=offer.Contract and table.clone(offer.Contract)})end
   out.lastResult=copy(s.lastResult) out.bestTimes=table.clone(p.bestTimes)
   out.ownedCosmetics=table.clone(p.ownedCosmetics) out.equippedCosmetic=p.equippedCosmetic
  end
@@ -110,6 +113,10 @@ function E.Award(player,order,now)
 	}
 	result.jobBonus=math.floor((order.jobBonus or 0)*condition/C.InitialCondition)
  result.jobName=order.jobName or 'Reguler' result.total+=result.jobBonus
+ local stamps=require(script.Parent.CityBonus13).Snapshot(order)
+ result.contractBonus,result.contractSucceeded=Contracts.Evaluate(order.contract,result,stamps and stamps.count or 0)
+ result.contractKind=order.contract and order.contract.kind
+ result.total+=result.contractBonus
  local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
  result.challengeBonus=challengeBonus result.challengeName=challengeName result.total+=challengeBonus
  result.rating=Rating.Evaluate(result,order.targetSeconds or route.TargetSeconds,s.ratingTuning)
@@ -125,6 +132,8 @@ function E.Award(player,order,now)
 	p.deliveryCount+=1
 	if newRecord then p.bestTimes[key]=duration end
 	result.bestTime=p.bestTimes[key]
+ table.insert(s.history,1,{destinationName=result.destinationName,total=result.total,stars=result.rating.stars,duration=result.duration,contractBonus=result.contractBonus})
+ if #s.history>5 then table.remove(s.history)end
 	s.lastResult=result
  Data:Dirty(player.UserId)
 	return true,copy(result)

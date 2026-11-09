@@ -190,7 +190,15 @@ local function render()
   local b=state.routeBonus
   card.ConditionText.Text=string.format("%s · %d/100%s",state.isRelay and 'Titipan' or state.packageType or "Paket",condition,b and string.format(" · cap %d/%d",b.count,b.limit)or "")
  end
+ if state.status=='Carrying'and state.contract then
+  local c=state.contract local elapsed=workspace:GetServerTimeNow()-(state.startedAt or 0)
+  local text=c.kind=='priority'and string.format('Prioritas · %ds · kondisi ≥%d',math.max(0,math.ceil(c.seconds-elapsed)),c.condition)or c.kind=='perfect'and 'Paket mulus · jaga kondisi100'or string.format('Cap %d/%d · kondisi ≥%d',state.routeBonus and state.routeBonus.count or 0,c.stamps,c.condition)
+  if Theme.IsMobile(ui)then card.ConditionText.Text=string.format('%d/100 · %s',condition,text)card.ConditionText.TextSize=9 end
+ end
  if os.clock()<feedbackUntil then card.Hint.Text=feedback
+ elseif state.status=='Carrying'and state.contract then
+  local c=state.contract
+  card.Hint.Text=string.format('KONTRAK · bonus +%d jika berhasil\n%s',c.reward,c.kind=='priority'and string.format('Kondisi ≥%d, ≤%ddtk, tanpa pulih.',c.condition,c.seconds)or c.kind=='perfect'and 'Kondisi100, tanpa pulih.'or string.format('%d cap, kondisi ≥%d, tanpa pulih.',c.stamps,c.condition))
 	elseif relay then card.Hint.Text='Pelanggan punya titipan ke rumah lain. Opsional: satu perjalanan lagi, tanpa kembali ke depot.'
 	elseif state.status=="Idle" and last then
 		local record=last.recordReason=='RelayRoute' and 'Titipan selesai · rekor depot tetap' or not last.recordEligible and "Tanpa rekor: paket dipulihkan"
@@ -256,6 +264,7 @@ end)
 ui.ShopToggle.Activated:Connect(function()ui:SetAttribute("MobileMenuOpen18",false)shopOpen=not shopOpen render() end)
 shop.Close.Activated:Connect(function() shopOpen=false render() end)
 CAS:BindAction("PKShop",function(_,input)
+ if UIS:GetFocusedTextBox()then return Enum.ContextActionResult.Pass end
  if input==Enum.UserInputState.Begin then shopOpen=not shopOpen render() end
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.B)
@@ -269,14 +278,17 @@ end
 actions.Primary.Activated:Connect(function() activate(actions.Primary) end)
 actions.Secondary.Activated:Connect(function() activate(actions.Secondary) end)
 CAS:BindAction("PKInteract",function(_,s)
+ if UIS:GetFocusedTextBox()then return Enum.ContextActionResult.Pass end
 	if s == Enum.UserInputState.Begin then activate(actions.Primary) end
 	return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.E)
 CAS:BindAction("PKDrop",function(_,s)
+ if UIS:GetFocusedTextBox()then return Enum.ContextActionResult.Pass end
 	if s == Enum.UserInputState.Begin and (state.status == "Carrying" or currentRelay()) then activate(actions.Secondary) end
 	return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.Q)
 CAS:BindAction("PKRecover",function(_,s)
+ if UIS:GetFocusedTextBox()then return Enum.ContextActionResult.Pass end
 	if s == Enum.UserInputState.Begin and state.status == "Dropped" then activate(actions.Secondary) end
 	return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.R)

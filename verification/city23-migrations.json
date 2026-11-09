@@ -1,0 +1,26 @@
+{
+  "CleanCityAssets23.luau": {
+    "bytes": 1188,
+    "sha256": "895837444de53c5477fc52a96976d082e42cfa5792d54fe7fd6f7ab13fbc8ef2"
+  },
+  "CitySurfaces23.luau": {
+    "bytes": 2186,
+    "sha256": "2c72b9f06e2d58106b6b825bbfb4712e6a7c032ea1c3f62e76755625f0b4fceb"
+  },
+  "CityFacades23.luau": {
+    "bytes": 5688,
+    "sha256": "5bc74dd54263eed3cf49dd34f97010c558d0533493f687f75c00964393f05560"
+  },
+  "CitySpaces23.luau": {
+    "bytes": 6801,
+    "sha256": "e9bee0e105d30095a54917d08ed9bc83e3752c2fa9474556573ca11351532fb1"
+  },
+  "CityAccess23.luau": {
+    "bytes": 2887,
+    "sha256": "c1e78257552c0d997bf2eae02f7e555b23bfb40c78c1033c51faafba9d32e26e"
+  },
+  "CityReading23.luau": {
+    "bytes": 2698,
+    "sha256": "96d2154ca952e9f7724772065b9dc96df1560eb57d403aafad5c2e4d8ddd4adf"
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "stage": "City23",
+  "date": "2026-11-09",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "checks": {
+    "c23result:CitySurfaces23.luau": {
+      "created": 70,
+      "replaced": 19,
+      "tiles": 144
+    },
+    "c23result:CitySpaces23.luau": {
+      "models": 16,
+      "children": 83,
+      "audit": {
+        "1": {
+          "gapAfter": 0.00244140625,
+          "name": "PlazaFountain",
+          "review": false,
+          "shift": 0,
+          "samples": 1480,
+          "gapBefore": 0.00244140625,
+          "hits": 1043
+        },
+        "2": {
+          "gapAfter": 0,
+          "name": "PlazaBenchWest",
+          "review": false,
+          "shift": 0,
+          "samples": 680,
+          "gapBefore": 0,
+          "hits": 523
+        },
+        "3": {
+          "gapAfter": 0,
+          "name": "PlazaBenchEast",
+          "review": false,
+          "shift": 0,
+          "samples": 680,
+          "gapBefore": 0,
+          "hits": 529
+        },
+        "4": {
+          "gapAfter": 0,
+          "name": "CoastBench1",
+          "review": false,
+          "shift": 0,
+          "samples": 680,
+          "gapBefore": 0,
+          "hits": 523
+        },
+        "5": {
+          "gapAfter": 0,
+          "name": "CoastBench2",
+          "review": false,
+          "shift": 0,
+          "samples": 680,
+          "gapBefore": 0,
+          "hits": 523
+        },
+        "6": {
+          "gapAfter": 0,
+          "name": "CoastBench3",
+          "review": false,
+          "shift": 0,
+          "samples": 680,
+          "gapBefore": 0,
+          "hits": 523
+        },
+        "7": {
+          "gapAfter": 0,
+          "name": "CoastLamp1",
+          "review": false,
+          "shift": 0,
+          "samples": 369,
+          "gapBefore": 0,
+          "hits": 250
+        },
+        "8": {
+          "gapAfter": 0,
+          "name": "CoastLamp2",
+          "review": false,
+          "shift": 0,
+          "samples": 369,
+          "gapBefore": 0,
+          "hits": 250
+        },
+        "9": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage1",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        },
+        "10": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage2",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        },
+        "11": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage3",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        },
+        "12": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage4",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        },
+        "13": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage5",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        },
+        "14": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage6",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        },
+        "15": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage7",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        },
+        "16": {
+          "gapAfter": -0.00003906250003637979,
+          "name": "PlanterFoliage8",
+          "review": false,
+          "shift": 0,
+          "samples": 667,
+          "gapBefore": -0.00003906250003637979,
+          "hits": 401
+        }
+      }
+    },
+    "c23access": {
+      "retiredPanels": 4,
+      "hiddenPosts": 2,
+      "segments": 8
+    },
+    "c23staticAudit": {
+      "bboxArea": 50760.052185058594,
+      "bounds": {
+        "1": -138.00025939941406,
+        "2": 144.00003051757812,
+        "3": -24,
+        "4": 156
+      },
+      "tiles": 144,
+      "markerShifts": {
+        "Rumah05": 0,
+        "Rumah01": 0,
+        "Rumah02": 0,
+        "RecoveryPoint": 0,
+        "DepotPad": 0,
+        "PrototypeSpawn": 0,
+        "Pickup": 0,
+        "Rumah04": 0,
+        "Shop": 0,
+        "Rumah03": 0
+      },
+      "parts": 631,
+      "overlapPairs": 0,
+      "unexpectedRuntimeInstances": 0,
+      "area": 50759.99991687387
+    },
+    "c23crossingsAudit": {
+      "1": {
+        "blocks": [],
+        "crossing": 47
+      },
+      "2": {
+        "blocks": [],
+        "crossing": -90
+      }
+    },
+    "c23walkEast": {
+      "canopyCenter": 7.400390625,
+      "at": "46.9999885559082, 3.97021484375, 41.74858856201172",
+      "headTop": 6.077762603759766,
+      "health": 100
+    },
+    "c23walkWest": {
+      "at": "-89.3695068359375, 3.970703125, 39.596473693847656",
+      "health": 100
+    },
+    "c23walkCoast": {
+      "at": "0.7278666496276855, 3.97021484375, -18.68157958984375",
+      "health": 100
+    },
+    "c23preload": {
+      "success": 75,
+      "failed": []
+    },
+    "c23readingGround": {
+      "1": {
+        "samples": 624,
+        "name": "ReadingBench1",
+        "gap": 0
+      },
+      "2": {
+        "samples": 624,
+        "name": "ReadingBench2",
+        "gap": 0
+      }
+    },
+    "c23clearanceAudit": {
+      "1": {
+        "at": "47, 3.799999952316284, 35",
+        "hits": []
+      },
+      "2": {
+        "at": "-90, 3.799999952316284, 35",
+        "hits": []
+      },
+      "3": {
+        "at": "47, 3.799999952316284, -15",
+        "hits": []
+      },
+      "4": {
+        "at": "30, 3.799999952316284, -19",
+        "hits": []
+      },
+      "5": {
+        "at": "80, 3.799999952316284, -19",
+        "hits": []
+      }
+    },
+    "c23finalGeometry": {
+      "revision": "LivedInTown23",
+      "reviewAbsent": true,
+      "changedGoals": [],
+      "libraryParts": 20,
+      "parts": 659
+    },
+    "c23apronWalk": {
+      "health": 100,
+      "order": "b59d2f98-3ae2-45c3-9702-e60e92668bc6",
+      "expected": "b59d2f98-3ae2-45c3-9702-e60e92668bc6",
+      "status": "Carrying",
+      "primary": "Antar paket [E]"
+    },
+    "c23deliveryFinal": {
+      "result": {
+        "ok": true,
+        "total": 47,
+        "storage": "StudioMemory",
+        "code": "Delivered",
+        "relay": true,
+        "condition": 100,
+        "stars": 3
+      }
+    },
+    "c23consoleFinal": "[PaketKilat] Bootstrap ready — T21; onboarding + LocalOnly analytics in Studio",
+    "c23end": {
+      "backup": 27,
+      "temporary": [],
+      "review": false,
+      "hud": true,
+      "parts": 0
+    },
+    "logicSources": [
+      {
+        "matches": true,
+        "file": "EconomyService.luau"
+      },
+      {
+        "matches": true,
+        "file": "DeliveryService.luau"
+      },
+      {
+        "matches": true,
+        "file": "MovementTuning.luau"
+      },
+      {
+        "matches": true,
+        "file": "DeliveryFeedback.client.luau"
+      },
+      {
+        "matches": true,
+        "file": "Customers22.client.luau"
+      }
+    ],
+    "finalState": {
+      "backup": 27,
+      "revision": "LivedInTown23",
+      "tiles": 144,
+      "device": "default",
+      "packages": 0,
+      "unanchored": 0,
+      "scripts": 0,
+      "reviewAbsent": true,
+      "hud": true,
+      "colliders": 4,
+      "parts": 659
+    }
+  },
+  "limitations": [
+    "Static city migration; no new gameplay source, profile schema, cloud config, audio or transaction system.",
+    "Play tests use MCP character_navigation speed_multiplier1 after fixture teleports to each starting point. Not a human or physical phone performance test.",
+    "Initial delivery fixture placed character directly over the collidable original PickupPoint and navigation returned Path Blocked; that run and the finish assertion were excluded. Swept-volume inspection found only original PickupPoint, no City23 geometry. Clear apron retry completed actual delivery.",
+    "Surface rectangle overlap test uses.01stud tolerance; overall bound-area delta~.0523 square studs is due to existing float transforms. Surface area sum50759.9999 matches intended282x180 area.",
+    "Ground mesh checks use raycasts against engine query geometry.16 Spaces models passed, fountaingap.00244stud;2 ReadingBenches gap0. Planter foliage intentionally rests on soil.",
+    "659 new decorative Parts including eight replacement parapet segments. No measured physical-mobile performance, multiplayer, or all-routes-human verification.",
+    "Fountain imported from free Creator Store result, render whitelist retained17Parts/3SurfaceAppearances; no vendor scripts, beams, particles, lights, welds, camera or remotes.",
+    "Alternate fountain15758791593 had177Parts and was not used. Review candidates removed before Play.",
+    "Courtyard sign orientation/render was corrected after initial blank-board screenshot; final screenshot shows readable names.",
+    "One source-comparison tool call had Lua table syntax error; retried read-only comparison passed for five gameplay/client sources.",
+    "Final stop removes all runtime fixture scripts and earned test coins. Place binary save is separate from workspace source/artifact files."
+  ]
+}

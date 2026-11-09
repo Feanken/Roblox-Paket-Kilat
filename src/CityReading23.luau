@@ -22,7 +22,7 @@ end end
 local glass=piece('WeatherCover',Vector3.new(4.6,2.8,.08),0,3.75,-.94,Color3.fromRGB(174,209,205))glass.Transparency=.78 glass.CastShadow=false
 piece('CabinetRoof',Vector3.new(5.6,.25,2.6),0,5.4,0,wood)
 local board=piece('ReadingSign',Vector3.new(5.2,.85,.2),0,5.7,-1,Color3.fromRGB(47,103,103))
-local gui=Instance.new('SurfaceGui')gui.Face=Enum.NormalId.Front gui.SizingMode=Enum.SurfaceGuiSizingMode.PixelsPerStud gui.PixelsPerStud=40 gui.Parent=board
+local gui=Instance.new('SurfaceGui')gui.Face=Enum.NormalId.Front gui.SizingMode=Enum.SurfaceGuiSizingMode.PixelsPerStud gui.PixelsPerStud=40 gui.MaxDistance=180 gui.ZOffset=1 gui.Parent=board
 local label=Instance.new('TextLabel')label.Size=UDim2.fromScale(1,1)label.BackgroundTransparency=1 label.Text='POJOK BACA'label.TextScaled=true label.Font=Enum.Font.GothamBold label.TextColor3=cream label.Parent=gui
 for i,p in {{-88,82,0},{-72,82,0}}do
 	local m=game.ServerStorage.PaketKilat_CreatorAssets07.ParkBench:Clone()m.Name='ReadingBench'..i

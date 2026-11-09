@@ -17,7 +17,7 @@ local function window(parent,cf)
 	local mullion=part(parent,"WindowMullion",Vector3.new(.1,3.3,.09),Vector3.zero,cream)mullion.CFrame=cf*CFrame.new(0,0,-.23)
 end
 local function sign(board,title,subtitle,face)
-	local gui=Instance.new("SurfaceGui")gui.Face=face or Enum.NormalId.Front gui.SizingMode=Enum.SurfaceGuiSizingMode.PixelsPerStud gui.PixelsPerStud=35 gui.Parent=board
+	local gui=Instance.new("SurfaceGui")gui.Face=face or Enum.NormalId.Front gui.SizingMode=Enum.SurfaceGuiSizingMode.PixelsPerStud gui.PixelsPerStud=35 gui.MaxDistance=180 gui.ZOffset=1 gui.Parent=board
 	local l=Instance.new("TextLabel")l.Size=UDim2.fromScale(1,.62)l.BackgroundTransparency=1 l.Font=Enum.Font.GothamBold l.Text=title l.TextScaled=true l.TextColor3=cream l.Parent=gui
 	local s=l:Clone()s.Position=UDim2.fromScale(0,.63)s.Size=UDim2.fromScale(1,.3)s.Font=Enum.Font.GothamMedium s.Text=subtitle s.Parent=gui
 end

@@ -97,3 +97,9 @@ Semua sumber berikut diperiksa ulang dengan search_asset(scope=creator_store, pr
 | Cardboard Box | NickiBreeki | [12084344112](https://create.roblox.com/store/asset/12084344112) | 4kardusdekoratif;1mesh percopy;1Camera asal dihapus |
 
 Librarybersih ServerStorage/PaketKilat_CreatorAssets09/10. Clone Map/Landscape09/DepotParcels10 statis/noncollision tanpa script. Source LandscapeAssets09.luau dan DepotParcels10.luau. Audit struktur/metadatafree tidak menetapkan hakIPseluruhtekstur pihaklain atau menjamin performaHP. Geometry/texture preloadSuccess; bukti creator-assets10.json/polish10-audit.json. Harga/ketersediaan dapatberubah.
+
+## City23 — 9 November 2026
+
+Pencarian MCP memakai scope creator_store, priceFilter free. Aset terpilih [Better Low Poly Fountain](https://create.roblox.com/store/asset/13782728612), creator ComputerLider123, mengembalikan isFree=true/priceCents0. Tidak ada pembelian. Salinan di ServerStorage.PaketKilat_CreatorAssets23.Fountain memakai whitelist render:17MeshPart/3SurfaceAppearance, tanpa Script Credits asal, particle/beam/attachment/weld atau lapisan Glass/Neon air yang berlebihan.17bagian dipakai statis pada plaza; warna/material air disederhanakan. Source CleanCityAssets23.luau; metadata verification/creator-assets23.json. Kandidat [Low Poly Fountain](https://create.roblox.com/store/asset/15758791593), BolletjeH, gratis saat diperiksa tetapi177Part/Union, tidak dipakai dan folder review dihapus.
+
+Bangku/lampu/semak memakai kembali template bersih dari library07/09 yang sudah ada, sesuai tabel sumber sebelumnya. Tidak mengunduh ulang atau membeli salinan baru. Fasad, pergola, pagar, planter, zebra cross dan lemari pojok baca dibuat dari primitive/font bawaan. Aset kota baru tercatat75preloadSuccess/0failure saat Play; ini bukan pengukuran performa HP fisik.

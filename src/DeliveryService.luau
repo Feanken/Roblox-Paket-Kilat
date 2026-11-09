@@ -48,7 +48,7 @@ function Delivery.Snapshot(player)
 	snapshot.destinationPosition=point and point.Position
 	local o = Delivery.orders[player.UserId]
 	if o then
-		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus","isRelay","sourceId"}) do snapshot[key] = o[key] end
+		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus","isRelay","sourceId","contract"}) do snapshot[key] = o[key] end
 		snapshot.destinationName=C.Routes[o.destinationId].Name
   snapshot.packagePosition=o.package and o.package.Parent and o.package.Position or nil
 		local point=destinationPoint(o.destinationId)
@@ -156,7 +156,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			condition = C.InitialCondition, startedAt = workspace:GetServerTimeNow(),
 			rewardProcessed = false, completionLocked = false, recoveryCount = 0,
 			lastRecoveryAt = -1, lastRecoveryClock = -math.huge, lastDamageAt = -math.huge,
-			outOfBounds = false, player = player, jobName=assignment.name or 'Reguler',jobBonus=assignment.JobBonus or 0,
+			outOfBounds = false, player = player, jobName=assignment.name or 'Reguler',jobBonus=assignment.JobBonus or 0,contract=assignment.Contract and table.clone(assignment.Contract),
 		}
   if relay then o.isRelay=true o.sourceId=relay.sourceId o.targetSeconds=relay.targetSeconds end
 		Delivery.orders[player.UserId] = o

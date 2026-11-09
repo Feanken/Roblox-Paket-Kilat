@@ -343,3 +343,17 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Q22-I: finalfreshStudioMemory coins0/delivery0/Grip0/current0/best0, consoleBootstrap saja, Edit/default/0paket/tanpa fixture; source/audit/gambar/handoff tersimpan.
 - [ ] Q22-J: File > Save to File; binary395960byte belum memuat Relay21 maupun CustomerRatings22.
 - [ ] Q22-K: uji HP touch fisik, semua orientasi/perangkat, multiplayer/performa, balance penilaian dan playtest manusia; phone×belum terverifikasi sebagai aksi yang ditargetkan.
+
+## City23 — penataan kota
+
+- [x] C23-A: backup Map27anak dan Lighting9objek ke ServerStorage; backup binary/handoff sebelum migrasi.
+- [x] C23-B: lima fasad, storefront dua arah, kanopi dengan clearance, trim/jendela/atap/tangki berbeda; label gedung lama tidak lagi terpotong.
+- [x] C23-C: air mancur CreatorStore gratis13782728612, whitelist render17Part/3SurfaceAppearance/0script; kandidat177Part tidak dipakai.
+- [x] C23-D: plaza pasar/bangku/tanaman, pergola taman, pojok baca, jalur tepi kota dan jalur taman samping.
+- [x] C23-E: split19tile→70tile, total144/luas50760,0pasangan overlap dalam toleransi.01stud; posisi10marker penting tidak bergeser.
+- [x] C23-F: dua zebra cross memiliki celah pembatas10stud; bbox clearance tanpa penghalang, kedua penyeberangan ditempuh via tool speed1.
+- [x] C23-G:16model grounding tanpa reviewflag,2bangku baca gap0,75preloadSuccess/0failure; jalur tepi kota dan clearance kanopi diuji saat Play.
+- [x] C23-H: rute depot-apron→Rumah01 ditempuh dan diantar100/47koin/3bintang/tawaranRelay; console clean. Fixture pertama dari markerPickup yang collidable dikecualikan.
+- [x] C23-I:5source gameplay/client cocok dengan disk, akhirEdit/HUDaktif/0paket/tanpa fixture/reviewfolder; source migrasi/audit/gambar/handoff tersimpan.
+- [ ] C23-J: File > Save to File; binary395960byte masih sebelum Relay21/Quality22/City23.
+- [ ] C23-K: profiling HP fisik/multiplayer, semua rute manusia dan interaksi avatar berukuran ekstrem; belum diuji.

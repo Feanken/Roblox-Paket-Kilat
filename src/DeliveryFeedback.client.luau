@@ -115,8 +115,9 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    local rating=result.rating
    stars.Text=rating and (string.rep('★',rating.stars)..string.rep('☆',3-rating.stars)..' · '..rating.name)or 'PAKET TERKIRIM'
    ratingHint.Text=rating and rating.stars==3 and 'Paket utuh dan tiba tepat waktu.'or rating and rating.stars==2 and(not rating.onTime and 'Paket aman. Coba tiba lebih cepat.'or 'Paket aman. Jaga kondisinya lebih tinggi.')or result.recoveryCount>0 and 'Coba antar tanpa memulihkan paket.'or 'Paket terkirim. Kurangi benturan.'
+   if result.contractKind then ratingHint.Text=result.contractSucceeded and ('Kontrak berhasil · bonus +'..result.contractBonus)or 'Kontrak belum terpenuhi · paket tetap dibayar.'end
    streak.Text=string.format('Rapi beruntun %d · terbaik sesi %d',result.cleanStreak or 0,result.bestCleanStreak or 0)
-   detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\nPos %d · Kerja %d · Target %d',result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0,result.jobBonus or 0,result.challengeBonus or 0)
+   detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\nPos %d · Kerja %d · Target %d · Kontrak %d',result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0,result.jobBonus or 0,result.challengeBonus or 0,result.contractBonus or 0)
    if (result.challengeBonus or 0)>0 then
     title.Text="TARGET TERCAPAI!"
    end

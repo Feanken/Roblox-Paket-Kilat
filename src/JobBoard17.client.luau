@@ -13,6 +13,10 @@ end
 local title=text(board,'Title',16,12,400,24,20)title.Text='Pilih pesanan'
 local info=text(board,'Info',16,42,500,24,11)info.Font=Enum.Font.GothamMedium
 local close=Instance.new('TextButton')close.Name='Close'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-52,0,8)close.Text='×'close.ZIndex=12 close.Parent=board theme.ToolbarButton(close)close.TextSize=21
+local tab=0
+local tabs={}
+for i,label in {'Biasa','Kontrak','Riwayat'}do local b=Instance.new('TextButton');b.Name='Tab24_'..i;b.Text=label;b.ZIndex=12;b.TextSize=11;b.Parent=board;theme.ToolbarButton(b);b.Activated:Connect(function()tab=i-1 end);tabs[i]=b end
+local history=text(board,'History24',16,78,588,176,12);history.Font=Enum.Font.GothamMedium;history.TextYAlignment=Enum.TextYAlignment.Top
 local rows={}
 for i=1,3 do
  local card=Instance.new('Frame')card.Name='Offer'..i card.BackgroundColor3=theme.Soft card.BorderSizePixel=0 card.ZIndex=11 card.Parent=board
@@ -23,7 +27,7 @@ for i=1,3 do
  local button=Instance.new('TextButton')button.Name='Accept'button.Text='Ambil pesanan'button.Size=UDim2.new(1,-24,0,44)button.Position=UDim2.fromOffset(12,132)button.ZIndex=12 button.TextSize=12 button.Parent=card
  rows[i]={frame=card,name=name,dest=dest,detail=detail,button=button}
  button.Activated:Connect(function()
-  local offer=state.jobOffers and state.jobOffers[i]
+  local offer=state.jobOffers and state.jobOffers[tab*3+i]
   if offer and button.Active and os.clock()>=pendingUntil then pendingUntil=os.clock()+1 shared.Remotes.ActionRequest:FireServer('AcceptJob',offer.id)end
  end)
 end
@@ -34,14 +38,23 @@ local function render()
  board.Visible=open backdrop.Visible=open
  local camera=workspace.CurrentCamera if camera then backdrop.Position=UDim2.fromOffset(-root.AbsolutePosition.X,-root.AbsolutePosition.Y)backdrop.Size=UDim2.fromOffset(camera.ViewportSize.X,camera.ViewportSize.Y)end
  local width=math.min(620,root.AbsoluteSize.X-24)local column=(width-40)/3
- board.Size=UDim2.fromOffset(width,280)info.Size=UDim2.fromOffset(width-32,24)title.Size=UDim2.fromOffset(width-80,24)
+ board.Size=UDim2.fromOffset(width,280)info.Size=UDim2.fromOffset(width-32,24)title.Size=UDim2.fromOffset(width-340,24)
+ title.Text='Pesanan kurir'
+ info.Position=UDim2.fromOffset(16,54)info.Size=UDim2.fromOffset(width-32,18)
+ for i,b in tabs do b.Position=UDim2.fromOffset(width-318+(i-1)*86,6);b.Size=UDim2.fromOffset(82,44);theme.Action(b,true,tab~=i-1)end
+ history.Size=UDim2.fromOffset(width-32,176);history.Visible=tab==2
+ local lines={}
+ for i,v in state.recentDeliveries or {}do table.insert(lines,string.format('%d. %s  ·  %d★  ·  +%d koin\n',i,v.destinationName,v.stars,v.total))end
+ history.Text=#lines>0 and table.concat(lines,'\n')or 'Belum ada pengantaran. Ambil pesanan pertamamu.'
  local char=player.Character local hum=char and char:FindFirstChildOfClass('Humanoid')local r=char and char:FindFirstChild('HumanoidRootPart')
  local near=r and state.depotPosition and(r.Position-state.depotPosition).Magnitude<=config.ActionDistance
  info.Text=os.clock()<noticeUntil and notice or near and 'Pilih tujuan. Bonus pekerjaan bergantung kondisi paket.'or 'Dekati depot untuk mengambil pesanan.'
+ if tab==1 and os.clock()>=noticeUntil then info.Text=near and 'Bonus kontrak hanya dibayar jika semua syarat terpenuhi.'or 'Dekati depot untuk mengambil kontrak.'elseif tab==2 then info.Text='Lima pengantaran terakhir · sesi ini saja'end
  for i,row in ipairs(rows)do
+  row.frame.Visible=tab~=2
   row.frame.Position=UDim2.fromOffset(12+(i-1)*(column+8),76)row.frame.Size=UDim2.fromOffset(column,188)
   for _,l in ipairs({row.name,row.dest,row.detail})do l.Size=UDim2.fromOffset(column-24,l.Size.Y.Offset)end
-  local offer=state.jobOffers and state.jobOffers[i]
+  local offer=state.jobOffers and state.jobOffers[tab*3+i]
   row.name.Text=offer and offer.name or 'Memuat...'
   row.dest.Text=offer and offer.destinationName or ''
   row.detail.Text=offer and string.format('%s · bonus maks. +%d\n%s',offer.packageType,offer.jobBonus,offer.description)or ''
