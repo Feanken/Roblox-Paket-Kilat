@@ -8,7 +8,7 @@ local function get(player)
 end
 function M.Snapshot(player)
  local s=get(player)
- return {stamina=math.floor(s.stamina+.5),grip=math.floor(s.grip+.5),sprinting=s.sprinting,exhausted=s.exhausted,available=E~=nil and E.Has(player)}
+ return {stamina=math.floor(s.stamina+.5),grip=math.floor(s.grip+.5),sprinting=s.sprinting,exhausted=s.exhausted,gripLevel=s.gripLevel or 0,gripMultiplier=s.gripMultiplier or 1,available=E~=nil and E.Has(player)}
 end
 function M.Intent(player,...)
  local wants=...
@@ -30,10 +30,11 @@ local function tickPlayer(player,dt)
  end
  if hum~=s.hum then
   s.hum=hum s.baseSpeed=hum.WalkSpeed s.stamina=100 s.grip=100 s.exhausted=false s.wants=false s.lease=0 s.tuning=T.Get()
+  local gear=E.GearQuote(player)s.gripLevel=gear.level s.gripMultiplier=gear.multiplier
  end
  if not E.Has(player) then s.wants=false s.sprinting=false hum.WalkSpeed=s.baseSpeed return end
  local o=D.orders[player.UserId]
- if o and o.orderId~=s.orderId then s.orderId=o.orderId s.grip=100 s.tuning=T.Get() end
+ if o and o.orderId~=s.orderId then s.orderId=o.orderId s.grip=100 s.tuning=T.Get()local gear=E.GearQuote(player)s.gripLevel=gear.level s.gripMultiplier=gear.multiplier end
  if s.stamina>=s.tuning.RestartAt then s.exhausted=false end
  local sprint=s.wants and os.clock()<s.lease and not s.exhausted
  local moving=Vector3.new(root.AssemblyLinearVelocity.X,0,root.AssemblyLinearVelocity.Z).Magnitude>2
@@ -43,7 +44,7 @@ local function tickPlayer(player,dt)
  else s.stamina=math.min(100,s.stamina+s.tuning.StaminaRegen*dt) end
  if sprint and moving and o and o.status=="Carrying" and not o.outOfBounds then
   local drain=o.packageType=="Rapuh" and s.tuning.FragileGripDrain or s.tuning.GripDrain
-  s.grip=math.max(0,s.grip-drain*dt)
+  s.grip=math.max(0,s.grip-drain*(s.gripMultiplier or 1)*dt)
   if s.grip<=0 and D.Impact(o,"GripLost")then s.grip=40 sprint=false s.wants=false s.lease=0 end
  else s.grip=math.min(100,s.grip+s.tuning.GripRegen*dt) end
  s.sprinting=sprint hum.WalkSpeed=s.baseSpeed*(sprint and s.tuning.SprintMultiplier or 1)

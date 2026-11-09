@@ -1,4 +1,34 @@
-# Pembaruan TERBARU — Navigation19: kompas dan batas map (9 November 2026)
+# Pembaruan TERBARU — Gear20: progres peralatan (9 November 2026)
+
+Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, ProgressionRevision=GripGear20. Tujuan: memberi alasan menabung hasil antar paket. Toko kini memiliki tab Tas dan Peralatan. Sarung tangan tiga level berharga80/140/220 (total440), mengurangi drain genggaman sprint10/20/30%; kecepatan, stamina dan regenerasi tetap. Efek dikunci ketika pesanan berikut dimulai. Visual glove cokelat/teal/emas, massless/noncollision, pada tangan R15 atau lengan R6. Tidak ada aset baru dari luar atau perubahan map.
+
+## Source dan pemasangan
+
+Baru server ModuleScript Gear20 dari src/Gear20.luau dan LocalScript PaketKilatGearShop20 dari src/GearShop20.client.luau. Diubah ProfileSchema, EconomyService, MovementTuning, CourierMovement, CosmeticService, DeliveryService dan PaketKilatInput (src/PrototypeInput.client.luau). Semua source final sudah disinkronkan ke disk. src/UpgradeShop20.luau mereproduksi label TOKO KURIR · B, judul Perlengkapan kurir dan attribute revisi di Edit. Controller runtime membangun tab/panel, jadi tidak perlu menyalin GUI hasil Play. Tidak ada fixture yang dipertahankan.
+
+Harga/bonus berasal dari MovementTuning fallback dan PK_GripUpgradePrice1/2/3 serta PK_GripUpgradeReduction. Quote dikunci di sesi EconomyService. Default pengurangan 10% per level, rentang konfigurasi 5–15% per level (nilai numerik 0.05–0.15); multiplier level3 default 0.7. Harga integer hasil floor, bounded0..1000. Client tidak menentukan harga: BuyGrip mengirim string level saat ini, server memeriksa arity/format, profil, hidup, jarak ShopPoint aktual dan tidak ada pesanan aktif. Level lama ditolak UpgradeChanged; maksimum ditolak UpgradeMaxed. Pembelian koin/level tanpa yield, lalu Data:Dirty dan kosmetik dipasang ulang.
+
+## Profil dan rollback
+
+ProfileSchema versi2 menambah upgrades={Grip=0}, level integer0..3, menolak key upgrade lain. Migrasi schema0/1 mempertahankan koin/tas aktif/kepemilikan/pengantaran/rekor dan mengawali Grip0; raw tidak dimutasi. Envelope tetap1. Progres mengikuti DataService profil sebelumnya. Seluruh pengujian sesi ini GameId0/StudioMemory; belum ada uji published DataStore save/rejoin atau perubahan data produksi.
+
+Backup ServerStorage.PaketKilat_PreGear20 memuat enam module server, Input/Movement client, GUI dan shop billboard sebelumnya; disk backups/main_game.before-gear20.20261109.rbxl serta handoff.before-gear20.md. Untuk rollback lokal pulihkan source/GUI/label konsisten dan hapus GearShop20/Gear20. **Reader lama schema1 akan menolak profil yang sudah disimpan schema2.** Jika nanti dipublikasikan, siapkan rollback yang tetap membaca schema2; jangan menganggap restore kode lama cukup. Backup place391011byte mendahului Navigation19 juga.
+
+## Bukti pengujian
+
+Pengujian module terisolasi: schema0/1 menjaga data lama, level invalid/unknown key ditolak, harga tidak cukup ditolak, replay level lama tidak memotong ulang, batas level3, round-trip schema2 dan tiga dirty writes. Runtime aktual pembelian level1: coins1000→920, glove level1, replay UpgradeChanged tanpa potongan tambahan. BuyGrip ketika Carrying ditolak OrderActive, saldo920; pesanan baru memakai multiplier.9.
+
+Pada uji level3, max quote30%/.7 dan glovelevel3. Sprint terkontrol selama2.181detik aktif pada pesanan sama memberi grip100→80; perkiraan21.38 vs aktual20 dalam toleransi3 akibat tick/pembulatan. Percobaan sprint pertama tidak konklusif dan tidak dihitung. Uji respawn mempertahankan level3/multiplier.7/glovelevel3. Pembelian tier2/3 juga diuji terisolasi; jangan menyimpulkan saldo906 runtime sebagai audit potongan tier2/3, karena ada aktivitas game bersamaan. Seluruh currency fixture dibatasi StudioMemory. Fresh Play berikutnya coins0/Grip0, tidak ada currency/upgrade uji yang tersimpan ke Edit.
+
+GalaxyA06 LandscapeSensor/CoreUISafeInsets, Root705x280: shop620x272 di(42.5,4), semua teks Gear muat. Screenshot verification/gear20-phone.jpg memakai fixture sementara shopOpen=true untuk pemeriksaan layout; dikembalikan kefalse sebelum sinkron. Input pointer Menu/Toko pada emulator tidak konklusif, belum menjadi bukti alur touch. Empat baris tas diperiksa teksnya; fresh desktop1350x863 kemudian memverifikasi modal awal tertutup, klik ShopToggle aktual membuka toko, semua empat label/tombol muat. Screenshot desktop level1 memakai currency uji. Salah nama Label pada harness bag menghasilkan error alat saja, tidak mengubah source; fresh console terakhir hanya Bootstrap ready.
+
+Bukti lengkap verification/gear20-audit.json, gear20-phone.jpg, gear20-desktop.jpg, saved-gear20.json. Akhir Studio Edit/Stop, simulator default, HUDaktif, tidak ada TemporaryGear20 scripts. Belum diuji HP fisik, multiplayer/performa, R6 playtest, balance harga atau migrasi/rejoin DataStore published.
+
+**Wajib simpan sekali lagi dengan File > Save to File pada sesi aktif sebelum ditutup.** Pemeriksaan file main_game.rbxl masih391011byte/2026-11-09T04:50:47.566Z: CompactPhone18 ada, CourierCompass19/GripGear20/GripUpgradeReduction belum ada. Source, dokumen dan gambar sudah tersimpan di workspace; perubahan place ada di Studio aktif dan belum masuk binary ini.
+
+---
+
+# Arsip — Navigation19: kompas dan batas map (9 November 2026)
 
 Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. NavigationRevision=CourierCompass19. Tidak menambah panel HUD atau mengubah geometri map. Header TopCard kini berisi panah relatif kamera dan jarak; T.Layout mencadangkan slot20px lewat attributeNavigationHeader19. Saat rute aktif memakai waypoint ketiga, jika tidak ada memakai tujuan langsung. Jarak rute mencakup panjang jalur tersisa dan jarak bergabung kembali ke jalur. Ready mengikuti C.ActionDistance3D,✓hijau dan teks Pilih pesanan/Ambil ulang/Siap diantar. Tombol Primary mobile hanya muncul ketika bisa dipakai; Secondary naik ke slot kosong. Desktop Primary tetap ada. Dekat rumah berlabel Antar paket.
 

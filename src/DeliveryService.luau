@@ -92,13 +92,19 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 	if type(action) ~= "string" or #action > 16
 		or (orderId ~= nil and (type(orderId) ~= "string" or #orderId > 64))
 		or (destinationId ~= nil and (type(destinationId) ~= "string" or #destinationId > 64)) then return false, "InvalidArguments" end
-	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true, AcceptJob=true}
+	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true, AcceptJob=true, BuyGrip=true}
 	if not allowed[action] then return false, "UnknownAction" end
 	if (action=="Start" or action=="Sync") and orderId~=nil then return false,"InvalidArguments" end
 	if (action == "Deliver" and type(destinationId) ~= "string") or (action ~= "Deliver" and destinationId ~= nil) then return false, "InvalidArguments" end
 	if action == "Sync" then Delivery.Publish(player, "Sync"); return true, "Sync" end
 	if not E.Has(player) then return false,"ProfileUnavailable" end
  if not root(player) then return false, "NotAlive" end
+ if action=='BuyGrip'then
+  if arity and arity~=2 then return false,'InvalidArguments'end
+  if Delivery.orders[player.UserId]then return false,'OrderActive'end
+  if not near(player,W.Map.Depot.ShopPoint.Position)then return false,'TooFar'end
+  local ok,code=E.BuyGrip(player,orderId)if ok then K.Apply(player)Delivery.Publish(player,code)end return ok,code
+ end
  if action=="BuyCosmetic" or action=="EquipCosmetic" then
   if not orderId then return false,"InvalidArguments" end
   if not near(player,W.Map.Depot.ShopPoint.Position) then return false,"TooFar" end

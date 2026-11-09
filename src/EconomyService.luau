@@ -2,6 +2,7 @@
 local Challenges=require(script.Parent.SessionChallenges16)
 local Offers=require(script.Parent.JobOffers17)
 local Tuning=require(script.Parent.MovementTuning)
+local Gear=require(script.Parent.Gear20)
 local E={sessions={}}
 local C,Data
 local function copy(value) return value and table.clone(value) or nil end
@@ -9,10 +10,21 @@ function E.Init(config,data) C,Data=config,data end
 function E.Join(player)
  local profile=Data:Get(player.UserId)
  if not profile then return false end
- E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New()}
+ E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New(),gearTuning=Tuning.Get()}
  return true
 end
 function E.Has(player) return E.sessions[player.UserId]~=nil and Data:Ready(player.UserId) end
+function E.GearQuote(player)
+ local s=E.sessions[player.UserId]return Gear.Quote(s and s.profile.upgrades.Grip or 0,s and s.gearTuning or Tuning.Get())
+end
+function E.BuyGrip(player,expected)
+ if not E.Has(player)then return false,'ProfileUnavailable'end
+ if type(expected)~='string'or not expected:match('^[0-3]$')then return false,'InvalidArguments'end
+ local q=E.GearQuote(player)if tostring(q.level)~=expected then return false,'UpgradeChanged'end
+ if q.maxed then return false,'UpgradeMaxed'end
+ local p=E.sessions[player.UserId].profile if p.coins<q.nextPrice then return false,'InsufficientCoins'end
+ p.coins-=q.nextPrice p.upgrades.Grip=q.level+1 Data:Dirty(player.UserId)return true,'GripUpgraded'
+end
 function E.PeekAssignment(player)
 	local s=E.sessions[player.UserId]
 	return table.clone(C.OrderSchedule[s and s.nextOrderIndex or 1])
@@ -42,6 +54,7 @@ function E.Snapshot(player)
   local p=s.profile
   out.coins=p.coins out.deliveryCount=p.deliveryCount
   out.challenge=Challenges.Snapshot(s.challenge)
+  out.gear=E.GearQuote(player)
   out.jobOffers={}
   for _,offer in ipairs(E.PeekOffers(player))do table.insert(out.jobOffers,{id=offer.id,name=offer.name,description=offer.description,destinationName=C.Routes[offer.DestinationId].Name,destinationId=offer.DestinationId,packageType=offer.PackageType,jobBonus=offer.JobBonus})end
   out.lastResult=copy(s.lastResult) out.bestTimes=table.clone(p.bestTimes)

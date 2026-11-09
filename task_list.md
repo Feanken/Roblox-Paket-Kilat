@@ -300,3 +300,18 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] N19-H: source/audit/screenshot/handoff tersimpan; akhirEdit/default/HUDaktif/0paket.
 - [ ] N19-I: simpan CourierCompass19 ke main_game.rbxl dari Studio aktif; file yang diperiksa belum memuat marker revisi ini.
 - [ ] N19-J: uji rute berjalan penuh/HP fisik/multiplayer/performa dan kondisi map yang jalannya dipindah individual.
+
+## Gear20 — progres peralatan kurir
+
+- [x] G20-A: backup place/source sebelum edit; pertahankan map, aset, serta mekanik pengantaran sebelumnya.
+- [x] G20-B: sarung tangan tiga level 80/140/220, drain genggaman -10/-20/-30%; quote server dan tuning terkunci per sesi.
+- [x] G20-C: pembelian di depot ketika Idle; validasi saldo/level/argumen/max, token level lama menolak pembelian ganda.
+- [x] G20-D: ProfileSchema2 dan migrasi 0/1; pengujian terisolasi mempertahankan data lama, menolak upgrade invalid, round-trip level3.
+- [x] G20-E: pembelian aktual level1 memotong 80 sekali, glove terpasang, pembelian ketika membawa paket ditolak.
+- [x] G20-F: efek level3 terukur pada sprint terkontrol (drain20, perkiraan21.38 dengan pembulatan/timing); level/glove bertahan saat respawn.
+- [x] G20-G: tab toko Tas/Peralatan, HP Galaxy705x280 muat via fixture modal terbuka; desktop pointer membuka toko, empat baris tas muat.
+- [x] G20-H: fresh StudioMemory kembali coins0/Grip0, source final sinkron, fixture dihapus, Edit/default/HUDaktif, console fresh Bootstrap saja.
+- [x] G20-I: audit/screenshot/migrasi label/design/handoff tersimpan di workspace.
+- [ ] G20-J: File > Save to File dari Studio aktif; file391011byte masih belum memiliki GripGear20 maupun Navigation19.
+- [ ] G20-K: uji published DataStore migrasi/save/rejoin dan rencana rollback kompatibel schema2 sebelum deploy.
+- [ ] G20-L: HP touch fisik, multiplayer/performa, avatar R6 dan balance harga; pointer menu emulator belum membuktikan alur mobile.

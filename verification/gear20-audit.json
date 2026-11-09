@@ -1,0 +1,253 @@
+{
+  "stage": "Gear20",
+  "date": "2026-11-09",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "checks": {
+    "g20environment": {
+      "profileReady": true,
+      "placeId": 0,
+      "storage": "StudioMemory",
+      "gameId": 0
+    },
+    "g20isolated": {
+      "schema1Preserved": true,
+      "invalidLevelsRejected": true,
+      "multiplier": 0.7,
+      "maxLevel": 3,
+      "roundTripLevel": 3,
+      "dirtyWrites": 3,
+      "poorBalanceRejected": true,
+      "schema0Preserved": true,
+      "purchaseReplayRejected": true
+    },
+    "g20actualpurchase": {
+      "gloves": true,
+      "codes": [
+        "Sync",
+        "UpgradeChanged"
+      ],
+      "gear": {
+        "reductionPercent": 10,
+        "maxLevel": 3,
+        "maxed": false,
+        "nextReductionPercent": 20,
+        "level": 1,
+        "multiplier": 0.9,
+        "nextPrice": 140
+      },
+      "gloveLevel": 1,
+      "coins": 920
+    },
+    "g20orderlock": {
+      "movement": {
+        "gripMultiplier": 0.9,
+        "exhausted": false,
+        "sprinting": false,
+        "available": true,
+        "stamina": 100,
+        "gripLevel": 1,
+        "grip": 100
+      },
+      "codes": [
+        "Sync",
+        "Start",
+        "OrderActive"
+      ],
+      "status": "Carrying",
+      "gear": {
+        "reductionPercent": 10,
+        "maxLevel": 3,
+        "maxed": false,
+        "nextReductionPercent": 20,
+        "level": 1,
+        "multiplier": 0.9,
+        "nextPrice": 140
+      },
+      "coins": 920
+    },
+    "g20controlledmovement": {
+      "Before": 100,
+      "Interrupted": false,
+      "After": 80,
+      "ActiveSeconds": 2.1813882999995258,
+      "ExpectedNetDrain": 21.377605339995352,
+      "ActualNetDrain": 20,
+      "Multiplier": 0.7,
+      "InactiveSeconds": 0
+    },
+    "g20maxpurchase": {
+      "gear": {
+        "reductionPercent": 30,
+        "maxLevel": 3,
+        "nextReductionPercent": 30,
+        "level": 3,
+        "multiplier": 0.7,
+        "maxed": true
+      },
+      "codes": [
+        "UpgradeChanged",
+        "UpgradeChanged",
+        "UpgradeMaxed",
+        "InvalidArguments"
+      ],
+      "leftLevel": 3,
+      "coins": 906
+    },
+    "g20respawntest": {
+      "gearLevel": 3,
+      "health": 100,
+      "gloveLevel": 3,
+      "multiplier": 0.7,
+      "movementLevel": 3
+    },
+    "g20freshreset": {
+      "gearLevel": 0,
+      "storage": "StudioMemory",
+      "coins": 0
+    },
+    "g20phoneFinal": {
+      "shopVisible": true,
+      "bad": [],
+      "position": "42.5, 4",
+      "root": "705, 280",
+      "level": "Level 0/3 · standar",
+      "buy": "Kurang 80",
+      "size": "620, 272"
+    },
+    "g20bagtest": {
+      "1": {
+        "visible": true,
+        "name": "TasStandar",
+        "bottom": 124,
+        "buttonFits": true,
+        "labelFits": true
+      },
+      "2": {
+        "visible": true,
+        "name": "TasMerah",
+        "bottom": 172,
+        "buttonFits": true,
+        "labelFits": true
+      },
+      "3": {
+        "visible": true,
+        "name": "TasBiru",
+        "bottom": 220,
+        "buttonFits": true,
+        "labelFits": true
+      },
+      "4": {
+        "visible": true,
+        "name": "TasHijau",
+        "bottom": 268,
+        "buttonFits": true,
+        "labelFits": true
+      }
+    },
+    "g20freshConsole": "[PaketKilat] Bootstrap ready — T21; onboarding + LocalOnly analytics in Studio",
+    "g20end": {
+      "device": "default",
+      "temporary": [],
+      "revision": "GripGear20",
+      "hud": true
+    },
+    "g20desktopFinal": {
+      "root": "1350, 863",
+      "rows": {
+        "1": {
+          "visible": true,
+          "name": "TasStandar",
+          "texts": {
+            "1": {
+              "fits": true,
+              "name": "Name",
+              "text": "Tas standar · 0"
+            },
+            "2": {
+              "fits": true,
+              "name": "Action",
+              "text": "Dipakai"
+            }
+          }
+        },
+        "2": {
+          "visible": true,
+          "name": "TasMerah",
+          "texts": {
+            "1": {
+              "fits": true,
+              "name": "Name",
+              "text": "Tas merah · 50"
+            },
+            "2": {
+              "fits": true,
+              "name": "Action",
+              "text": "Beli 50"
+            }
+          }
+        },
+        "3": {
+          "visible": true,
+          "name": "TasBiru",
+          "texts": {
+            "1": {
+              "fits": true,
+              "name": "Name",
+              "text": "Tas biru · 75"
+            },
+            "2": {
+              "fits": true,
+              "name": "Action",
+              "text": "Beli 75"
+            }
+          }
+        },
+        "4": {
+          "visible": true,
+          "name": "TasHijau",
+          "texts": {
+            "1": {
+              "fits": true,
+              "name": "Name",
+              "text": "Tas hijau · 100"
+            },
+            "2": {
+              "fits": true,
+              "name": "Action",
+              "text": "Beli 100"
+            }
+          }
+        }
+      },
+      "shopVisible": true,
+      "size": "620, 272"
+    },
+    "g20lastConsole": "[PaketKilat] Bootstrap ready — T21; onboarding + LocalOnly analytics in Studio",
+    "finalState": {
+      "gearShopEnabled": true,
+      "temporary": [],
+      "shopStartsClosed": true,
+      "hud": true,
+      "device": "default",
+      "gear20Module": true,
+      "packages": {
+        "1": {
+          "name": "ActivePackages",
+          "count": 0
+        }
+      },
+      "fixtureOpenAbsent": true
+    }
+  },
+  "limitations": [
+    "Only local GameId=0 StudioMemory tested; no published DataStore/rejoin/multi-server migration verification.",
+    "Phone shop screenshot used temporary initial shopOpen=true fixture, restored before source sync. Emulator pointer Menu/Shop activation was inconclusive, not counted.",
+    "Bag row text fits inspected with modal hidden; not a successful phone interaction test.",
+    "First sprint harness was inconclusive and excluded; controlled second test at level3 uses rounded meter with tolerance3.",
+    "Temporary test coins are not permanent; fresh play coins0/Grip0.",
+    "No physical phone, multiplayer, performance, R6 avatar playtest or economy balance claim.",
+    "Production schema2 requires compatible rollback; old schema1 reader rejects new saved profiles.",
+    "Console read before final bag harness has Bootstrap only; a later Label-name assertion was a harness error, no game source changed.",
+    "Final desktop fresh test verified shop starts closed and actual pointer opens bag shop, all four row labels/actions fit; fresh final console Bootstrap only."
+  ]
+}

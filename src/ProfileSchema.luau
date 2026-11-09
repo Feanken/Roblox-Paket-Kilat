@@ -6,7 +6,7 @@ function S.Copy(v)
 	local t={} for k,x in pairs(v) do t[k]=S.Copy(x) end return t
 end
 function S.Default()
-	return {schemaVersion=1,coins=0,deliveryCount=0,ownedCosmetics={TasStandar=true},equippedCosmetic="TasStandar",bestTimes={}}
+	return {schemaVersion=2,coins=0,deliveryCount=0,ownedCosmetics={TasStandar=true},equippedCosmetic="TasStandar",bestTimes={},upgrades={Grip=0}}
 end
 function S.Validate(raw,C)
 	if type(raw)~="table" then return nil,"InvalidProfile" end
@@ -20,7 +20,10 @@ function S.Validate(raw,C)
 		p.equippedCosmetic=p.equippedCosmetic or "TasStandar"
 		p.bestTimes=p.bestTimes or {}
 	end
-	if p.schemaVersion~=1 then return nil,"UnsupportedSchema" end
+	if p.schemaVersion==1 then p.schemaVersion=2 p.upgrades={Grip=0}end
+ if p.schemaVersion~=2 then return nil,"UnsupportedSchema" end
+ if type(p.upgrades)~="table"or not integer(p.upgrades.Grip)or p.upgrades.Grip>3 then return nil,"InvalidUpgrades"end
+ for id in pairs(p.upgrades)do if id~="Grip"then return nil,"UnknownUpgrade"end end
 	if not integer(p.coins) or not integer(p.deliveryCount) then return nil,"InvalidCounters" end
 	if type(p.ownedCosmetics)~="table" or type(p.bestTimes)~="table" then return nil,"InvalidCollections" end
 	local owned={} for id,v in pairs(p.ownedCosmetics) do
@@ -35,7 +38,7 @@ function S.Validate(raw,C)
 		if not C.Routes[goal] or not C.PackageTypes[kind] or not finite(seconds) or seconds<=0 then return nil,"InvalidRecord" end
 		count+=1 if count>10 then return nil,"TooManyRecords" end best[key]=seconds
 	end
-	return {schemaVersion=1,coins=p.coins,deliveryCount=p.deliveryCount,ownedCosmetics=owned,equippedCosmetic=p.equippedCosmetic,bestTimes=best}
+	return {schemaVersion=2,coins=p.coins,deliveryCount=p.deliveryCount,ownedCosmetics=owned,equippedCosmetic=p.equippedCosmetic,bestTimes=best,upgrades={Grip=p.upgrades.Grip}}
 end
 function S.Decode(raw,C)
 	if raw==nil then return S.Default(),0 end

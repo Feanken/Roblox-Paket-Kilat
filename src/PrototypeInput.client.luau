@@ -48,6 +48,9 @@ local messages = {
  UnknownCosmetic="Tas tidak dikenal.",
  Purchased="Tas dibeli. Tekan Pakai untuk mengenakannya.",
  Equipped="Tas dipakai.",
+ GripUpgraded="Sarung tangan ditingkatkan! Efek pada pesanan berikutnya.",
+ UpgradeChanged="Level berubah. Periksa peningkatan berikutnya.",
+ UpgradeMaxed="Sarung tangan sudah maksimal.",
 	CompletionLocked = "Pesanan sedang diselesaikan.",
 }
 local marker = Instance.new("Part")
@@ -146,9 +149,9 @@ local function render()
  end
  Theme.Storage(ui.StorageStatus,state)
  shop.Visible=shopOpen
- shop.Size=UDim2.fromOffset(math.min(430,w-28),300)
- ui.ShopToggle.Text=UIS.TouchEnabled and "Toko tas" or "Toko [B]"
- shop.Info.Text=os.clock()<feedbackUntil and feedback or "Beli/pakai dekat depot. Tas tidak menambah kecepatan."
+ shop.Size=UDim2.fromOffset(math.min(620,w-24),272)
+ ui.ShopToggle.Text=UIS.TouchEnabled and "Toko" or "Toko [B]"
+ shop.Info.Text=os.clock()<feedbackUntil and feedback or(ui:GetAttribute("ShopTab20")=="gear"and "Upgrade dengan koin. Beli saat tidak membawa paket."or "Beli/pakai tas dekat depot. Pilih warna favoritmu.")
  for _,id in ipairs(C.CosmeticOrder) do
   local b=shop[id].Action
   local owned=state.ownedCosmetics and state.ownedCosmetics[id]
@@ -271,7 +274,7 @@ RS.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot,code)
 	if code=="Start" or code=="Pickup" then cue("Pickup")
 	elseif code=="Impact" or code=="Slip" or code=="Barrier" or code=="GripLost" then cue("Impact")
 	elseif code=="Delivered" then cue("Delivered") end
-	local mobileErrors={TooFar=true,WrongDestination=true,NotOwnerOrStale=true,OrderActive=true,InvalidState=true,NotAlive=true,ProfileUnavailable=true,InsufficientCoins=true,NotOwned=true,OfferExpired=true,InvalidArguments=true}
+	local mobileErrors={TooFar=true,WrongDestination=true,NotOwnerOrStale=true,OrderActive=true,InvalidState=true,NotAlive=true,ProfileUnavailable=true,InsufficientCoins=true,NotOwned=true,OfferExpired=true,InvalidArguments=true,UpgradeChanged=true,UpgradeMaxed=true}
  if mobileErrors[code]then ui:SetAttribute("MobileNoticeText18",messages[code]or "Aksi belum tersedia.")ui:SetAttribute("MobileNoticeUntil18",os.clock()+3)end
  if messages[code] then feedback,feedbackUntil = messages[code],os.clock()+3
 	elseif code == "Delivered" then feedbackUntil=0 end
