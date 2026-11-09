@@ -226,3 +226,14 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] C13-G: source/build migrasi, audit, screenshot dan handoff disimpan; akhir Edit/default/HUD aktif/0 paket.
 - [ ] C13-H: simpan revisi CityChoices13 ke main_game.rbxl; file yang diperiksa baru mencakup UI12/M11.
 - [ ] C13-I: uji berjalan penuh, kenyamanan ramp dan pilihan bonus oleh pemain; HP sentuh/multiplayer/performa/balance.
+
+## Ground14 — rapikan seluruh tapak kota
+
+- [x] G14-A: inspeksi ketinggian/footprint Parts dan backup Map/place sebelum perubahan.
+- [x] G14-B: tanah/rumput kontinu, hapus tampilan batas plot lama, air berada di perimeter; tanpa voxel Terrain writes.
+- [x] G14-C: paving/sidewalk seragam, sambungan rumah/taman, pindahkan planter dari ramp dan sidewalk dari tiang jembatan.
+- [x] G14-D:3036 sampel final tanpa celah lantai, pivot keenam bangunan tetap; Humanoid berjalan18stud dengan sisa jarak.90/health100.
+- [x] G14-E: startup tanpa error runtime dan pickupCarrying/profileReady; akhirEdit/HUDaktif/0paket.
+- [x] G14-F: migrasi source, audit, screenshot dan handoff disimpan.
+- [ ] G14-G: simpan sesi Studio ke main_game.rbxl; marker Ground14/ContinuousDistrict14 belum ada di disk.
+- [ ] G14-H: penilaian visual pemilik dan uji berjalan semua rute/HP fisik.

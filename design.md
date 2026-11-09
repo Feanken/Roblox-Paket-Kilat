@@ -292,8 +292,16 @@ Implementasi akhir: panel meter 352x56, toolbar dan tombol sprint 84x44. Status 
 
 ## City13 — pilihan perjalanan dan variasi ruang kota
 
+Ground14 kemudian menyatukan seluruh tapak daratan; platform terpisah di atas air bukan lagi desain akhir lingkungan.
+
 Masalah: loop pengantaran terlalu banyak berjalan tanpa keputusan; lingkungan terdiri dari rumah terpisah dan jalan datar. Tambahkan pilihan opsional, tanpa mewajibkan perjalanan lebih panjang untuk menyelesaikan pesanan.
 
 Lima pos cap berada di jalur kota; pemain yang membawa paket dapat mengambil maksimal dua pos berbeda per pesanan. Default enam koin per cap, dibayarkan hanya pada pengantaran sukses melalui ledger ekonomi yang sama. Pemain memilih langsung mengantar demi bonus waktu atau mengambil cap untuk bonus pos. Drop/pickup tidak membuat pesanan baru atau mereset cap. Tidak ada remote untuk meminta bonus; server memeriksa profil, karakter hidup, status Carrying, jarak, dan ID pos. Snapshot hanya mengirim salinan visited/count/limit/total. Nilai PK_CityStampReward, PK_CityStampLimit, PK_CityStampRadius mengikuti adapter ConfigService server yang sudah ada, dengan fallback lokal dan batas nilai; reward/limit dibulatkan ke integer per pesanan.
 
 Kota mendapat dua blok fondasi, plaza pasar, lima bangunan fasad dengan tinggi berbeda, tiga kios, planter, landmark jam, serta jembatan pejalan kaki dengan ramp dan pos bonus di atasnya. Seluruh geometri baru berada di Map.City13, tanpa menulis Terrain atau memindahkan rumah pemilik. Jalan di bawah jembatan tetap terbuka; ramp terhubung ke blok baru. Bangunan berupa fasad, belum memiliki interior/NPC. Angka reward dan kepadatan kota perlu diuji pemain; tidak dianggap sudah membuktikan retensi atau pendapatan.
+
+## Ground14 — daratan dan pertemuan permukaan
+
+Ganti tampilan pulau-pulau platform yang terputus dengan satu tapak daratan kontinu. Ground14 berisi tanah dasar dan rumput berukuran282x180, batas x[-136,146], z[-24,156]. Permukaan rumput4477.75 berada.25stud di bawah jalan/floor4478, sehingga tidak menimpa aspal atau interior. Lima HousePad rumput lama disembunyikan dan collider/shadow dimatikan; lantainya digantikan rumput kontinu, bukan dihapus. Posisi rumah/tujuan/depot dipertahankan. Air dan bed diperluas ke perimeter luar, bukan sela antarbangunan. Native Terrain voxels tidak disentuh; lingkungan ini menggunakan Parts.
+
+Tiga lantai blok City13 dan trotoar/jalur pintu menggunakan Pavement senada. Tambah sambungan rumah ke sidewalk, dua trotoar panjang, jalur sisi jalan tengah serta lintasan taman. Jalur barat digeser dari tiang jembatan. Planter/hedge yang berada di bawah ramp dipindah8stud ke arahZ. Migrasi satu kali src/UnifyGround14.luau menolak Ground14 yang sudah ada. Semua perubahan dapat dipulihkan dari backup Map sebelum migrasi.

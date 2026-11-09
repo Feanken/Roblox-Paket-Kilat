@@ -1,4 +1,18 @@
-# Pembaruan TERBARU — City13: pilihan rute dan kota bertingkat (9 November 2026)
+# Pembaruan TERBARU — Ground14: tapak daratan menyatu (9 November 2026)
+
+Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, GroundRevision=ContinuousDistrict14. Keluhan pemilik berupa celah air/platform kota dan tepi halaman yang terputus. Lingkungan aktual tersusun dari Parts, sehingga perbaikan menggunakan geometri Part presisi; tidak menghapus/mengisi native Terrain voxels.
+
+Map.Ground14 berisi14Parts: inti tanah dan rumput kontinu282x180 (x[-136,146],z[-24,156]), trotoar dan sambungan rumah/taman. Top rumput4477.75, jalan/floor4478. Lima HousePad Grass lama dibuat Transparency1/CanCollidefalse/CastShadowfalse agar batas kotak lama hilang; objeknya tetap ada, ditopang permukaan kontinu baru. Tiga blok EastBlock/WestBlock/MarketPlaza kini Pavement, sidewalk/doorstep senada. Air dan bed diperlebar334x234 di perimeter. Planter dan hedge x9/-39 dipindah8stud arahZ keluar ramp. WestCityWalk x-35 berada di samping tiang jembatan. Tidak ada source gameplay atau posisi rumah yang diubah.
+
+Source migrasi Edit sekali src/UnifyGround14.luau; jalankan setelah City13, assert menolak duplikasi. Backup lengkap Map di ServerStorage.PaketKilat_PreGround14.Map; file backups/main_game.before-ground14.20261109.rbxl dan handoff.before-ground14.md. Restore seluruh Map hanya bila memang ingin rollback karena akan menimpa suntingan map sesudah backup.
+
+Final3036 sampel grid floor tanpa celah dalam area kota; enam pivot Depot/Rumah01–05 sama dengan sebelum migrasi. Humanoid.MoveTo menempuh jalur baru dari(-70,110) ke(-70,128), sisa jarakXZ.898stud/health100 setelah2detik; ini bukan uji semua rute. Pickup dari depot menggunakan fixture posisi, statusCarrying/profileReadytrue. Console final hanya Bootstrap ready. AkhirEdit/Stop, HUDaktif,0paket. Bukti verification/ground14-audit.json, ground14-overview.jpg, ground14-close.jpg.
+
+File main_game.rbxl pada pemeriksaan akhir masih312252byte/2026-11-09T02:25:56.039Z, belum memiliki marker City13 atau Ground14. **File > Save to File dari sesi aktif masih diperlukan sebelum menutup Studio.** Source dan screenshot sudah di disk. Bukti verification/saved-ground14.json. Perlu playtest manusia semua rute serta penilaian visual pemilik; tidak ada klaim touch/performa/multiplayer dari pemeriksaan ini.
+
+---
+
+# Arsip — City13: pilihan rute dan kota bertingkat (9 November 2026)
 
 Sesi aktif tetap57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. World.CityRevision=CityChoices13. Lima pos opsional, default dua cap berbeda per pesanan dan enam koin/cap. Server CityBonus13 memeriksa karakter hidup/profil/Carrying/jarak pada interval.2detik; visited disimpan pada objek pesanan, snapshot menyalin data. Saldo tidak berubah saat mengumpulkan cap. EconomyService memasukkan routeBonus ke total sebelum batas ekonomi dan ledger kredit lama; replay tetap ditolak. Drop/pickup mempertahankan cap. Tuning baru PK_CityStampReward/Limit/Radius menggunakan MovementTuning/ConfigService yang ada; reward/limit integer. Cloud override belum diuji.
 

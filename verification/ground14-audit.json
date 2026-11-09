@@ -1,0 +1,46 @@
+{
+  "revision": "ContinuousDistrict14",
+  "studioId": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "groundType": "Anchored Part ground, exact level; native Terrain voxels untouched",
+  "changes": {
+    "newParts": 14,
+    "continuousGroundTop": 4477.75,
+    "existingRoadTop": 4478,
+    "hiddenOldGrassPads": 5,
+    "water": "Extended perimeter surface and bed",
+    "paving": "City13 blocks, sidewalks, doorstep paths unified",
+    "rampPlanters": "Moved 8 studs along Z",
+    "westWalk": "Offset away from bridge support"
+  },
+  "finalTests": {
+    "hud": true,
+    "missing": 0,
+    "samples": 3036,
+    "packages": 0,
+    "anchors": {
+      "Rumah02": "-100, 4482.5, -0.25, 1, 0, 0, 0, 1, 0, 0, 0, 1",
+      "Rumah05": "-100, 4485.25, 110.75, 1, 0, 0, 0, 1, 0, 0, 0, 1",
+      "Rumah04": "110, 4482.5, 110.75, 1, 0, 0, 0, 1, 0, 0, 0, 1",
+      "Rumah01": "104, 4483.5, -4.5, 1, 0, 0, 0, 1, 0, 0, 0, 1",
+      "Depot": "0, 4482.75, -8.25, 1, 0, 0, 0, 1, 0, 0, 0, 1",
+      "Rumah03": "-3, 4482.5, 110.75, 1, 0, 0, 0, 1, 0, 0, 0, 1"
+    }
+  },
+  "anchorsUnchanged": true,
+  "walk": {
+    "distanceXZ": 0.89837646484375,
+    "health": 100,
+    "position": "-70.00003051757812, 4480.982421875, 127.10162353515625"
+  },
+  "pickup": {
+    "profileReady": true,
+    "status": "Carrying"
+  },
+  "runtimeConsoleErrors": 0,
+  "backup": "ServerStorage.PaketKilat_PreGround14.Map + backups/main_game.before-ground14.20261109.rbxl",
+  "source": "src/UnifyGround14.luau",
+  "limitations": [
+    "Walking check is one 18-stud path with Humanoid.MoveTo, not all routes or mobile touch.",
+    "Saved place verification separate in saved-ground14.json; source writes do not save the Studio place."
+  ]
+}
