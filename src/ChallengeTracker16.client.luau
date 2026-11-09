@@ -19,7 +19,7 @@ local function render()
  local compact=root.AbsoluteSize.Y<500
  frame.Size=UDim2.fromOffset(compact and 180 or 300,90)frame.Position=UDim2.new(.5,0,0,compact and 12 or 20)
  local toast=root:FindFirstChild('DeliveryCelebration')
- frame.Visible=state~=nil and not root.Shop.Visible and not(toast and toast.Visible)
+ frame.Visible=state~=nil and not root.Shop.Visible and not root:GetAttribute('JobBoardOpen17')and not(toast and toast.Visible)
  if not state then return end
  title.Text=state.complete and 'TARGET SESI · SELESAI'or string.format('TARGET SESI %d/%d',state.index,state.count)
  goal.Text=state.description

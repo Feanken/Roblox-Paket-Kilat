@@ -1,0 +1,120 @@
+{
+  "revision": "DepotOffers17",
+  "studioId": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "date": "2026-11-09",
+  "feature": {
+    "regular": "Biasa, default schedule destination, no job bonus",
+    "fragile": "Rapuh, rotated destination, max8 coins",
+    "long": "Biasa, Rumah04/05, max10 coins",
+    "bonus": "floor(server offer bonus * condition/InitialCondition)",
+    "offers": "Cached per session offerRevision; old IDs expire on assignment advance",
+    "entry": "Primary/E at depot opens board; selecting card uses AcceptJob(id); legacy Start remains supported"
+  },
+  "sources": {
+    "DeliveryService": "DeliveryService.luau",
+    "EconomyService": "EconomyService.luau",
+    "MovementTuning": "MovementTuning.luau",
+    "JobOffers17": "JobOffers17.luau",
+    "PaketKilatInput": "PrototypeInput.client.luau",
+    "PaketKilatFeedback": "DeliveryFeedback.client.luau",
+    "PaketKilatMovement": "CourierMovement.client.luau",
+    "PaketKilatRouteGuide": "RouteGuide.client.luau",
+    "PaketKilatChallengeTracker16": "ChallengeTracker16.client.luau",
+    "PaketKilatJobBoard17": "JobBoard17.client.luau"
+  },
+  "pureOfferSets": {
+    "freshOfferSets": 10,
+    "passed": true
+  },
+  "desktop": {
+    "entryE": true,
+    "mouseAcceptedFragile": true,
+    "allBoardTextFits": true,
+    "hudMetersTargetHidden": true
+  },
+  "accepted": {
+    "jobBonus": 8,
+    "jobName": "Rapuh",
+    "codes": [
+      "Sync",
+      "Movement",
+      "OrderActive",
+      "Movement"
+    ],
+    "status": "Carrying",
+    "destination": "Rumah02",
+    "boardClosed": true,
+    "packageType": "Rapuh"
+  },
+  "delivery": {
+    "status": "Idle",
+    "detailFits": true,
+    "result": {
+      "jobName": "Rapuh",
+      "orderId": "559e945b-2778-4d37-a867-dd9528eb6ffb",
+      "condition": 100,
+      "jobBonus": 8,
+      "completedAt": 1794195496.474685,
+      "destinationId": "Rumah02",
+      "conditionBonus": 15,
+      "recoveryCount": 0,
+      "total": 55,
+      "packageType": "Rapuh",
+      "destinationName": "Rumah Pak Budi",
+      "timeBonus": 7,
+      "duration": 11.23202395439148,
+      "routeBonus": 0,
+      "newRecord": true,
+      "bestTime": 11.23202395439148,
+      "recordEligible": true,
+      "baseReward": 25,
+      "challengeBonus": 0
+    },
+    "replayUnchanged": true
+  },
+  "farRejection": {
+    "status": "Idle",
+    "tooFar": true,
+    "codes": [
+      "TooFar"
+    ]
+  },
+  "invalidPayloads": {
+    "status": "Idle",
+    "invalid": true,
+    "expired": true,
+    "codes": [
+      "OfferExpired",
+      "InvalidArguments",
+      "InvalidArguments"
+    ]
+  },
+  "isolatedEconomy": {
+    "condition80Bonus": 6,
+    "replayRejected": true,
+    "economyLimitAtomic": true
+  },
+  "phone": {
+    "bad": [],
+    "board": "620, 280",
+    "root": "750, 323",
+    "primary": "Pilih pesanan",
+    "open": true
+  },
+  "final": {
+    "mode": "Edit",
+    "device": "default",
+    "guiEnabled": true,
+    "activePackages": 0,
+    "runtimeConsoleErrors": 0
+  },
+  "limitations": [
+    "Depot/destination setup used teleport fixtures, not a full walked lap.",
+    "Phone test opens board by local attribute as layout fixture; no pure touch/physical phone test.",
+    "One extra long-offer attempt encountered an already-completed order and was not counted as controlled acceptance testing.",
+    "An Edit pure check saw a cached pre-edit module; fresh Server check of all10 offer sets passed.",
+    "Cloud ConfigService overrides and multiplayer/performance not tested."
+  ],
+  "backup": "ServerStorage.PaketKilat_PreJobs17 and backups/main_game.before-jobs17.20261109.rbxl",
+  "savedPlaceEvidence": "verification/saved-jobs17.json"
+}

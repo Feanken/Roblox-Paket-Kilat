@@ -50,12 +50,13 @@ local function refresh()
  -- Keep transient notices below the upper HUD on short landscape screens.
  impact.Position=UDim2.new(.5,0,0,math.min(216,height*.59))
  impact.Size=UDim2.fromOffset(math.min(310,width-32),36)
- local shopOpen=ui.Shop.Visible
+ local boardOpen=ui:GetAttribute('JobBoardOpen17')==true
+ local shopOpen=ui.Shop.Visible or boardOpen
  toast.Visible=os.clock()<expires and not shopOpen
  ui.TopCard.Visible=not toast.Visible and not shopOpen
  ui.StorageStatus.Visible=not toast.Visible and not shopOpen
  ui.Actions.Visible=not shopOpen and not toast.Visible
- local backdrop=ui:FindFirstChild("ShopBackdrop")if backdrop then backdrop.Visible=shopOpen end
+ local backdrop=ui:FindFirstChild("ShopBackdrop")if backdrop then backdrop.Visible=ui.Shop.Visible end
  impact.Visible=os.clock()<noticeExpires and not shopOpen
  local p=ownPackage()
  if p then
@@ -94,13 +95,14 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    title.Text=result.newRecord and "REKOR BARU!" or "PAKET SAMPAI!"
    reward.Text=string.format("+%d KOIN",result.total)
    detail.Text=string.format("Dasar %d + Kondisi %d + Waktu %d + Pos %d",result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0)
+   if (result.jobBonus or 0)>0 then detail.Text..=string.format(" + Kerja %d",result.jobBonus)end
    if (result.challengeBonus or 0)>0 then
     detail.Text..=string.format(" + Target %d",result.challengeBonus)
     title.Text="TARGET TERCAPAI!"
    end
    detail.TextWrapped=true
    detail.TextSize=11
-   nextStep.Text=snapshot.nextOrder and ("Berikut: "..snapshot.nextOrder.destinationName.." · ke depot") or "Kembali ke depot untuk pesanan berikutnya"
+   nextStep.Text="Kembali ke depot · pilih pesanan berikutnya"
    if tween then tween:Cancel() end
    scale.Scale=.88 tween=TweenService:Create(scale,TweenInfo.new(.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=1}) tween:Play()
   end

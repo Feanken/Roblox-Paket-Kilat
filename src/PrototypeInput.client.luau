@@ -24,6 +24,7 @@ local messages = {
 	OrderActive = "Selesaikan pesanan yang sedang aktif.",
 	InvalidState = "Aksi belum tersedia untuk paket ini.",
 	RecoveryCooldown = "Pemulihan masih menunggu jeda.",
+ OfferExpired = "Daftar pesanan diperbarui. Pilih ulang di depot.",
 	NotAlive = "Menunggu muncul kembali di depot...",
 	Respawned = "Siap! Ambil pesanan di depot.",
 	Cancelled = "Pesanan dibatalkan. Saldo tetap.",
@@ -127,7 +128,7 @@ local function render()
  guide.FPS.Visible=guideManual or perfShowing
  guide.Hint.Size=UDim2.new(1,(guideManual or perfShowing) and -124 or -70,1,-12)
  guide.Size=UDim2.fromOffset(math.min(C.Onboarding.Width,math.max(260,w-290)),C.Onboarding.Height)
- guide.Visible=not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not guideDismissed and onboarding.stage~="Complete")
+ guide.Visible=not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not guideDismissed and onboarding.stage~="Complete")
  local guideStage=state.status=="Dropped" and "Dropped" or onboarding.stage
  guide.Hint.Text=perfShowing and (ui:GetAttribute("PerfText") or "Mengukur FPS...") or (C.Onboarding[guideStage] or C.Onboarding.FindDepot)
 	Theme.Layout(ui,guideManual or perfShowing)
@@ -161,9 +162,9 @@ local function render()
 	card.ConditionTrack.Fill.Size=UDim2.fromScale(math.clamp(condition/100,0,1),1)
 	card.ConditionTrack.Fill.BackgroundColor3=condition>40 and Color3.fromRGB(57,151,127) or Color3.fromRGB(213,126,54)
 	if state.status=="Idle" then
-		card.Destination.Text=last and ("Selesai · "..last.destinationName) or ("Berikut · "..(nextOrder and nextOrder.destinationName or C.DestinationName))
+		card.Destination.Text=last and ("Selesai · "..last.destinationName) or "Pilih pesanan di depot"
 		card.ConditionText.Text=last and string.format("%s · %d/100 · %.1f dtk",last.packageType,last.condition,last.duration)
-			or string.format("%s · Rekor %s",nextOrder and nextOrder.packageType or C.PackageType,bestText(nextOrder and nextOrder.bestTime))
+			or "3 pilihan · pilih risiko dan tujuan"
 	else
 		card.Destination.Text=state.destinationName or C.DestinationName
 		card.ConditionText.Text=string.format("%s · %d/100 · Rekor %s",state.packageType,condition,bestText(state.currentBestTime))
@@ -182,7 +183,7 @@ local function render()
 	else card.Hint.Text="Lima rumah, dua jenis paket. Ambil di depot." end
 	actions.Secondary.Visible=state.status~="Idle" and synced and state.profileReady and not shopOpen
 	if not synced or not state.profileReady or shopOpen then button(actions.Primary,"",shopOpen and "Toko dibuka" or "Memuat profil...",false)
-	elseif state.status=="Idle" then button(actions.Primary,"Start",near(state.depotPosition) and C.Labels.Start or "Ke depot",near(state.depotPosition),"E")
+	elseif state.status=="Idle" then button(actions.Primary,"Start",near(state.depotPosition) and "Pilih pesanan" or "Ke depot",near(state.depotPosition),"E")
 	elseif state.status=="Carrying" then
 		button(actions.Primary,"Deliver",near(state.destinationPosition) and C.Labels.Deliver or "Ke rumah",near(state.destinationPosition),"E")
 		button(actions.Secondary,"Drop",C.Labels.Drop,aliveRoot()~=nil,"Q")
@@ -210,6 +211,7 @@ end
 local function activate(b)
 	if not shopOpen and state.profileReady and b:GetAttribute("ActionEnabled") then
 		local action=b:GetAttribute("Action")
+  if action=="Start"then ui:SetAttribute("JobBoardOpen17",not ui:GetAttribute("JobBoardOpen17"))return end
 		RS.Remotes.ActionRequest:FireServer(action,state.orderId,action=="Deliver" and state.destinationId or nil)
 	end
 end

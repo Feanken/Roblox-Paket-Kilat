@@ -34,7 +34,7 @@ local function render()
  local m=state.movement local alive=p.Character and p.Character:FindFirstChildOfClass("Humanoid")and p.Character.Humanoid.Health>0
  local celebration=ui:FindFirstChild("DeliveryCelebration")
  local notice=ui:FindFirstChild("PackageNotice")
- local blocked=not m or not m.available or not alive or ui.Shop.Visible or (celebration and celebration.Visible)
+ local blocked=not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
  if (blocked or m and m.exhausted) and wants then send(false)end
  b.Visible=not blocked
  local width=math.min(352,math.max(300,ui.AbsoluteSize.X-300))

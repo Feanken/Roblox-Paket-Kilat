@@ -31,14 +31,14 @@ local function flat(v) return Vector3.new(v.X,0,v.Z) end
 local function refresh()
  Theme.ToolbarLayout(ui)
  button.Text=UIS.TouchEnabled and (enabled and "Rute: ON" or "Rute: OFF") or (enabled and "Rute [G]" or "Rute OFF [G]")
- button.Visible=state.profileReady==true and not ui.Shop.Visible
+ button.Visible=state.profileReady==true and not ui.Shop.Visible and not ui:GetAttribute('JobBoardOpen17')
  button:SetAttribute("RouteEnabled",enabled)
  local char=p.Character local root=char and char:FindFirstChild("HumanoidRootPart") local hum=char and char:FindFirstChildOfClass("Humanoid")
  local returning=state.status=="Idle" and state.lastResult~=nil
  local id=state.status=="Carrying" and state.destinationId or returning and state.lastResult.destinationId
  local offsets=id and routes[id]
  hide()
- if not enabled or not state.profileReady or ui.Shop.Visible or state.outOfBounds or not root or not hum or hum.Health<=0 or not offsets or not state.depotPosition then return end
+ if not enabled or not state.profileReady or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')or state.outOfBounds or not root or not hum or hum.Health<=0 or not offsets or not state.depotPosition then return end
  local points={}
  if returning then for i=#offsets,1,-1 do table.insert(points,state.depotPosition+offsets[i]) end
  else for _,point in ipairs(offsets) do table.insert(points,state.depotPosition+point) end end

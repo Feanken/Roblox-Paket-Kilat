@@ -261,3 +261,16 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] M16-G: source/audit/screenshot/handoff disimpan; akhirEdit/default/HUDaktif/0paket.
 - [ ] M16-H: simpan SessionTargets16 ke file main_game.rbxl dari Studio aktif; marker belum ada pada file disk.
 - [ ] M16-I: playtest manusia/HP, balance reward; integrasi pengantaran tahap2/3 dan ConfigService published belum diuji.
+
+## Jobs17 — papan pilihan pesanan
+
+- [x] J17-A: backup8source/place dan spesifikasi alur pilihan di depot.
+- [x] J17-B: tiga tawaran server, cache/revisi monoton, AcceptJob tervalidasi, bonus pekerjaan sesuai kondisi di ledger.
+- [x] J17-C: menuReguler/Rapuh/LintasKota, primary/E, hide HUD/rute/sprint/target, penutupan otomatis dan rincian bonus hasil.
+- [x] J17-D:10set tawaran valid pada modulefresh; RegulerBiasa, RapuhRapuh, tujuan jauh04/05, revisi berbeda.
+- [x] J17-E: E membuka, mouse memilih Rapuh/Rumah02/bonus8; pengantaran55termasuk8, replay saldo tetap.
+- [x] J17-F: jauhTooFar, aktifOrderActive, tawaranlamaOfferExpired, extraarg/tableInvalidArguments; profil tetapIdle pada penolakan.
+- [x] J17-G: ekonomi terisolasi kondisi80→bonus6, replay ditolak, EconomyLimit tidak mengubah progres target; folder test dibuang.
+- [x] J17-H: desktop dan emulator750x323 semua teks muat, menu620x280; source/audit/screenshot/handoff tersimpan; akhirEdit/default/HUDaktif/0paket.
+- [ ] J17-I: simpan revisi DepotOffers17 ke main_game.rbxl dari sesi aktif; marker belum ada di disk.
+- [ ] J17-J: uji jalan penuh/HPsentuh/multiplayer/performa, balance bonus dan penerimaan pekerjaanLintasKota terkontrol.

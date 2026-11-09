@@ -37,7 +37,7 @@ function Delivery.Snapshot(player)
 	snapshot.destinationPosition=point and point.Position
 	local o = Delivery.orders[player.UserId]
 	if o then
-		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds"}) do snapshot[key] = o[key] end
+		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus"}) do snapshot[key] = o[key] end
 		snapshot.destinationName=C.Routes[o.destinationId].Name
 		local point=destinationPoint(o.destinationId)
 		snapshot.destinationPosition=point and point.Position
@@ -90,7 +90,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 	if type(action) ~= "string" or #action > 16
 		or (orderId ~= nil and (type(orderId) ~= "string" or #orderId > 64))
 		or (destinationId ~= nil and (type(destinationId) ~= "string" or #destinationId > 64)) then return false, "InvalidArguments" end
-	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true}
+	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true, AcceptJob=true}
 	if not allowed[action] then return false, "UnknownAction" end
 	if (action=="Start" or action=="Sync") and orderId~=nil then return false,"InvalidArguments" end
 	if (action == "Deliver" and type(destinationId) ~= "string") or (action ~= "Deliver" and destinationId ~= nil) then return false, "InvalidArguments" end
@@ -107,17 +107,18 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
  end
  if action == "Deliver" then return Delivery.Complete(player, orderId, destinationId) end
 	local o = Delivery.orders[player.UserId]
-	if action == "Start" then
+	if action == "Start" or action=="AcceptJob" then
 		if o then return false, "OrderActive" end
 		if not near(player, W.Map.Depot.PickupPoint.Position) then return false, "TooFar" end
 		local assignment=E.PeekAssignment(player)
+  if action=='AcceptJob'then assignment=E.ResolveOffer(player,orderId)if not assignment then return false,'OfferExpired'end end
 		o = {
 			orderId = HttpService:GenerateGUID(false), ownerUserId = player.UserId,
 			packageType = assignment.PackageType, destinationId = assignment.DestinationId, status = "Carrying",
 			condition = C.InitialCondition, startedAt = workspace:GetServerTimeNow(),
 			rewardProcessed = false, completionLocked = false, recoveryCount = 0,
 			lastRecoveryAt = -1, lastRecoveryClock = -math.huge, lastDamageAt = -math.huge,
-			outOfBounds = false, player = player,
+			outOfBounds = false, player = player, jobName=assignment.name or 'Reguler',jobBonus=assignment.JobBonus or 0,
 		}
 		Delivery.orders[player.UserId] = o
 		P.Create(o)
@@ -155,7 +156,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			end
 		end
 	end
-	Delivery.Publish(player, action)
+	Delivery.Publish(player, action=='AcceptJob'and 'Start'or action)
 	return true, action
 end
 function Delivery.Impact(o, cause)

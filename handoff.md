@@ -1,4 +1,22 @@
-# Pembaruan TERBARU — Challenge16: target per sesi (9 November 2026)
+# Pembaruan TERBARU — Jobs17: pilihan pesanan di depot (9 November 2026)
+
+Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, world.JobRevision=DepotOffers17. Primary/E dekat depot kini membuka papan3kartu: Reguler(Biasa/tujuan jadwal/bonus0), Rapuh(Rapuh/tujuan bergilir/maks8), LintasKota(Biasa/Rumah04atau05/maks10). Bonus floor(jobBonus*kondisi/InitialCondition), disatukan ke ledger hadiah sebelum pemeriksaan batas/commit target sesi. Tidak mengubah map/aset/skema profil. Reward awal perlu balance manusia.
+
+Baru: serverModule JobOffers17 dari src/JobOffers17.luau dan LocalScript PaketKilatJobBoard17 dari src/JobBoard17.client.luau. E.PeekOffers menyimpan cache per offerRevision; AdvanceAssignment menaikkan revisi monoton dan membuang cache. Client hanya AcceptJob(id); server memeriksa argumen/profil/alive/jarakdepot/orderaktif/revisi. Client tidak menentukan bonus/destinasi. Config PK_JobFragileBonus/PK_JobLongBonus default8/10,bounds0..20, terkunci saat cache tawaran dibuat. Start lama tetap didukung dengan jadwal asli/bonus0. Saat AcceptJob sukses, Publish memakai codeStart agar feedback/onboarding lama bekerja.
+
+Berubah10source total: DeliveryService,EconomyService,MovementTuning,JobOffers17,PrototypeInput.client,DeliveryFeedback.client,CourierMovement.client,RouteGuide.client,ChallengeTracker16.client,JobBoard17.client. Install modulebaru sebelum EconomyService; pertahankan dependencyChallenge16/City13. Menu menyembunyikan HUD/meter/rute/guide/target; sprint intent dilepas, toko menutup papan, sukses menerima menutup otomatis.×atauE menutup. Header Idle dan instruksi hasil tidak lagi menjanjikan satu pesanan berikutnya.
+
+Uji terkontrol: E membuka papan, mouse memilih kartuRapuh -> Carrying/Rumah02/Rapuh/bonus8, papan tertutup. Pengantaranfixture55=25+15+7waktu+8kerja; replay tidak menambahkoin. AcceptJob saataktifOrderActive, dari jauhTooFar, IDlamaOfferExpired, extraarg/tableInvalidArguments; penolakan tetapIdle.10set builderfresh diperiksa. Ekonomi clone terisolasi: kondisi80 bonus6, replay ditolak; EconomyLimit tidak mengubah state/progres target. FolderJobs17IsolatedCheck dihapus.
+
+Satu percobaan tambahanLintasKota mendapati order sudah selesai saat harness membaca package; hasil tersebut bukan uji penerimaan terkontrol dan tidak dihitung lulus. Satu assertion Edit memakai cache module sebelum edit; modulefresh pada Server mengonfirmasi RegulerBiasa untuk10set. Fresh final console hanyaBootstrapready. Teleportfixture bukan uji jalan penuh. EmulatoriPhone17Pro landscape750x323 membuka menu melalui attributefixture: menu620x280, semua label/TextFits, bukan uji touchfisik. Desktop entry/mouse telah diuji. Input distance client memakai C.ActionDistance yang sama dengan server.
+
+Source final tersinkron ke disk. Backup8source di ServerStorage.PaketKilat_PreJobs17, backups/main_game.before-jobs17.20261109.rbxl dan handoff.before-jobs17.md. Bukti verification/jobs17-audit.json, jobs17-desktop.jpg, jobs17-phone.jpg. AkhirEdit/default simulator/HUDaktif/0paket.
+
+**Perlu File > Save to File sebelum menutup Studio:** main_game.rbxl disk masih312252byte/2026-11-09T02:25:56.039Z, marker DepotOffers17/JobOffers17/SessionTargets16/SingleSurface15 belum ada. verification/saved-jobs17.json menyimpan buktinya. Source/dokumen/screenshot di disk bukan menyimpan place.
+
+---
+
+# Arsip — Challenge16: target per sesi (9 November 2026)
 
 Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, world.ChallengeRevision=SessionTargets16. Permintaan random dipilih sebagai perbaikan arah permainan: Kurir Rapi (2pengantaran kondisi≥90/recovery0,+20), Jelajah Kota (1pengantaran routeBonus>0/recovery0,+25), Spesialis Rapuh (1Rapuh kondisi≥80/recovery0,+30). Target berurutan; satu pengantaran hanya untuk target aktif. Progres tidak turun karena gagal memenuhi syarat, tetap saat respawn, mulai ulang ketika keluar/sesi baru. Setelah target3 selesai tidak ada bonus lagi. Ini bukan target harian/persisten; koin tetap mengikuti profil lama.
 

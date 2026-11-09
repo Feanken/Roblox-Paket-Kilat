@@ -1,5 +1,7 @@
 -- Persistent validated profile references; order ledger remains session-only.
 local Challenges=require(script.Parent.SessionChallenges16)
+local Offers=require(script.Parent.JobOffers17)
+local Tuning=require(script.Parent.MovementTuning)
 local E={sessions={}}
 local C,Data
 local function copy(value) return value and table.clone(value) or nil end
@@ -7,7 +9,7 @@ function E.Init(config,data) C,Data=config,data end
 function E.Join(player)
  local profile=Data:Get(player.UserId)
  if not profile then return false end
- E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,challenge=Challenges.New()}
+ E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New()}
  return true
 end
 function E.Has(player) return E.sessions[player.UserId]~=nil and Data:Ready(player.UserId) end
@@ -15,9 +17,18 @@ function E.PeekAssignment(player)
 	local s=E.sessions[player.UserId]
 	return table.clone(C.OrderSchedule[s and s.nextOrderIndex or 1])
 end
+function E.PeekOffers(player)
+ local s=E.sessions[player.UserId]if not s then return {}end
+ if not s.offers then s.offers=Offers.Build(C,s.nextOrderIndex,s.offerRevision,Tuning.Get())end
+ return s.offers
+end
+function E.ResolveOffer(player,id)
+ for _,offer in ipairs(E.PeekOffers(player))do if offer.id==id then return offer end end
+end
 function E.AdvanceAssignment(player)
 	local s=E.sessions[player.UserId]
 	s.nextOrderIndex=s.nextOrderIndex%#C.OrderSchedule+1
+ s.offerRevision+=1 s.offers=nil
 end
 function E.GetBest(player,destinationId,packageType)
 	local s=E.sessions[player.UserId]
@@ -31,6 +42,8 @@ function E.Snapshot(player)
   local p=s.profile
   out.coins=p.coins out.deliveryCount=p.deliveryCount
   out.challenge=Challenges.Snapshot(s.challenge)
+  out.jobOffers={}
+  for _,offer in ipairs(E.PeekOffers(player))do table.insert(out.jobOffers,{id=offer.id,name=offer.name,description=offer.description,destinationName=C.Routes[offer.DestinationId].Name,destinationId=offer.DestinationId,packageType=offer.PackageType,jobBonus=offer.JobBonus})end
   out.lastResult=copy(s.lastResult) out.bestTimes=table.clone(p.bestTimes)
   out.ownedCosmetics=table.clone(p.ownedCosmetics) out.equippedCosmetic=p.equippedCosmetic
  end
@@ -79,7 +92,9 @@ function E.Award(player,order,now)
 		recordEligible=eligible,recordReason=not eligible and "Recovered" or nil,
 		previousBest=previous,newRecord=newRecord,
 	}
-	local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
+	result.jobBonus=math.floor((order.jobBonus or 0)*condition/C.InitialCondition)
+ result.jobName=order.jobName or 'Reguler' result.total+=result.jobBonus
+ local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
  result.challengeBonus=challengeBonus result.challengeName=challengeName result.total+=challengeBonus
  -- Tidak ada yield: kunci kredit, koin, rekor, dan hasil bersifat satu transisi.
 	if p.coins+result.total>1000000000 or p.deliveryCount>=1000000000 then return false,"EconomyLimit" end
