@@ -1,4 +1,22 @@
-# Pembaruan TERBARU — Ground14: tapak daratan menyatu (9 November 2026)
+# Pembaruan TERBARU — City15: permukaan tunggal dan aset taman/pasar (9 November 2026)
+
+Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. Keluhan pemilik benar: uji G14 hanya memeriksa lantai hilang, tidak memeriksa overlap. Ada aspal legacy saling bertumpuk dan beberapa walk/terrace lama masih terlihat. Surface15 mengganti51permukaan lama (disembunyikan/colliderfalse/shadowfalse) dengan94patch persegi yang tidak bertumpuk. Prioritas aspal>paving>rumput, lantai depotTiles tetap. Seluruh top ground4478 dan paving pasar kontinu x2..98/z38..137; seam rumput sempit ditutup. Inti tanah Ground14 tetap menopang bagian bawah. Terrain voxel tidak diubah. Nama/posisi anchors rumah/depot/hadiah tidak berubah.
+
+Membangun ulang: setelah Ground14, jalankan src/SurfacePartition15.luau satu kali; assert menolak duplikasi. Script membagi semua tepi persegi, menggabungkan patch satu jenis, membulatkan koordinat2desimal, lalu mematikan lapisan lama. Surface15 memiliki attribute SurfaceY untuk client streaming. Ini menggantikan pendekatan menambah lapisan di atas geometri yang tumpang tindih.
+
+CityDecor15: dua gerobak gratis5362266328 (HxHTester), dua meja piknik5256845941 (taate), ditambah16BroadleafTree/4ParkBench/4WoodFence dari clean library P07. Total28model/208Parts,0script/0collider, semua anchored dan bottom tepat di ground; preload166Success. Librarybaru ServerStorage.PaketKilat_CreatorAssets15. Pohon kandidat74446384811689 ditolak karena Script/ModuleScript/Camera/AlignPosition; seluruh review folder dihapus sebelumPlay. Rebuild: insert dua aset baru di ServerStorage.CreatorReview15 dengan nama asli, jalankan CleanCreatorAssets15.luau lalu DecorateCity15.luau. Metadata/link di asset_sources.md dan bukti pencarian di verification/creator-assets15.json.
+
+StarterPlayerScripts.PaketKilatCityLife15 dari src/CityLife15.client.luau membuat dua warga primitive lokal berjalan di taman/pasar. Tidak memiliki physics/remote/reward, tidak menghalangi pemain. Update20Hz, speed3. Bug startup awal akibat DepotPad belum streaming ditemukan dan diperbaiki dengan attributeSurfaceY pada folder. Uji fresh: dua warga muncul dan perpindahan3.046stud/1detik, console hanya Bootstrap ready. Bukan NPC quest/interaksi dan bukan karakter vendor.
+
+Verifikasi final:0pasangan Surface15 saling overlap (toleransi.002),3036sampel lantai tanpa celah, pivot enam bangunan tetap. Humanoid.MoveTo melewati22stud persimpangan, sisa.695/health100. PickupCarrying/profileReadytrue. Bukan uji semua rute, HP fisik/performa atau multiplayer. Screenshot overview/park/market/junction dan audit di verification/city15-*. AkhirEdit/Stop, HUDaktif,0paket. Sourcegameplay server tidak diubah.
+
+Backup Map ServerStorage.PaketKilat_PreCity15.Map, backups/main_game.before-city15.20261109.rbxl dan handoff.before-city15.md. Untuk rollback warga, hapus/disable LocalScript baru, lalu pulihkan Map hanya jika tidak ada suntingan pemilik sesudah backup.
+
+**Perlu File > Save to File sebelum menutup Studio:** file disk masih312252byte/2026-11-09T02:25:56.039Z, marker City13/Ground14/SingleSurface15/CreatorCity15 belum ada. Source dan bukti sudah di disk. verification/saved-city15.json memisahkan status place dari source. Jangan menutup sesi aktif sebelum disimpan.
+
+---
+
+# Arsip — Ground14: tapak daratan menyatu (9 November 2026)
 
 Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, GroundRevision=ContinuousDistrict14. Keluhan pemilik berupa celah air/platform kota dan tepi halaman yang terputus. Lingkungan aktual tersusun dari Parts, sehingga perbaikan menggunakan geometri Part presisi; tidak menghapus/mengisi native Terrain voxels.
 

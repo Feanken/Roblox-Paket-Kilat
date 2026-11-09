@@ -237,3 +237,15 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] G14-F: migrasi source, audit, screenshot dan handoff disimpan.
 - [ ] G14-G: simpan sesi Studio ke main_game.rbxl; marker Ground14/ContinuousDistrict14 belum ada di disk.
 - [ ] G14-H: penilaian visual pemilik dan uji berjalan semua rute/HP fisik.
+
+## City15 — hapus tumpukan lantai, isi taman dan pasar
+
+- [x] C15-A: backup Map/place; identifikasi lapisan lama dan persimpangan aspal bertumpuk.
+- [x] C15-B:94patch Surface15,51permukaan lama disembunyikan; prioritas aspal/paving/rumput, sambungan pasar ditutup paving.
+- [x] C15-C:0pasangan patch saling overlap;3036sampel lantai tanpa celah, pivot rumah tetap.
+- [x] C15-D: cari aset gratis; audit gerobak/meja, tolak pohon berscript;28model/208Parts dekor bersih dan bertumpu lantai.
+- [x] C15-E: dua warga lokal berjalan; startup streaming diperbaiki, gerak3.05stud/detik teramati, tanpa error final.
+- [x] C15-F: Humanoid melewati persimpangan22stud, sisa.70/health100; pickupCarrying/profileReady.
+- [x] C15-G: source, metadata aset, screenshot, audit/handoff disimpan; akhirEdit/HUDaktif/0paket.
+- [ ] C15-H: simpan .rbxl dari sesi aktif; marker SingleSurface15/CreatorCity15 belum ada di file disk.
+- [ ] C15-I: playtest semua rute, HP sentuh/performa/multiplayer dan penilaian visual pemilik.

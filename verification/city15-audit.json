@@ -1,0 +1,54 @@
+{
+  "revision": "SingleSurface15/CreatorCity15",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "date": "2026-11-09",
+  "surfaces": {
+    "retired": 51,
+    "overlapPairs": [],
+    "patches": 94,
+    "assets": {
+      "unanchored": 0,
+      "code": 0,
+      "supportErrors": [],
+      "colliders": 0,
+      "parts": 208
+    }
+  },
+  "final": {
+    "hud": true,
+    "anchorsUnchanged": true,
+    "missing": 0,
+    "samples": 3036,
+    "packages": 0
+  },
+  "walk": {
+    "distanceXZ": 0.6952896118164062,
+    "health": 100
+  },
+  "residents": {
+    "spawned": true,
+    "count": 2,
+    "distance": 3.0457763671875
+  },
+  "assetPreload": {
+    "Success": 166
+  },
+  "pickup": {
+    "status": "Carrying",
+    "profileReady": true
+  },
+  "freshRuntimeErrors": 0,
+  "initialIssue": "CityLife15 read DepotPad before client streaming; fixed by reading replicated Surface15.SurfaceY. Final fresh startup passed.",
+  "limitations": [
+    "No physical mobile, multiplayer or performance profiling.",
+    "Walk test covers the reported junction only, not all routes.",
+    "Decorative residents are local visuals and do not offer quests or rewards."
+  ],
+  "savedPlaceEvidence": "verification/saved-city15.json",
+  "sourceFiles": [
+    "src/SurfacePartition15.luau",
+    "src/CleanCreatorAssets15.luau",
+    "src/DecorateCity15.luau",
+    "src/CityLife15.client.luau"
+  ]
+}

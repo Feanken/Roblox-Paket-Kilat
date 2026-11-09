@@ -302,6 +302,8 @@ Kota mendapat dua blok fondasi, plaza pasar, lima bangunan fasad dengan tinggi b
 
 ## Ground14 — daratan dan pertemuan permukaan
 
+City15 menggantikan lapisan permukaan Ground14/legacy dengan partisi permukaan tunggal agar tidak ada z-fighting pada persimpangan dan jalur lama.
+
 Ganti tampilan pulau-pulau platform yang terputus dengan satu tapak daratan kontinu. Ground14 berisi tanah dasar dan rumput berukuran282x180, batas x[-136,146], z[-24,156]. Permukaan rumput4477.75 berada.25stud di bawah jalan/floor4478, sehingga tidak menimpa aspal atau interior. Lima HousePad rumput lama disembunyikan dan collider/shadow dimatikan; lantainya digantikan rumput kontinu, bukan dihapus. Posisi rumah/tujuan/depot dipertahankan. Air dan bed diperluas ke perimeter luar, bukan sela antarbangunan. Native Terrain voxels tidak disentuh; lingkungan ini menggunakan Parts.
 
 Tiga lantai blok City13 dan trotoar/jalur pintu menggunakan Pavement senada. Tambah sambungan rumah ke sidewalk, dua trotoar panjang, jalur sisi jalan tengah serta lintasan taman. Jalur barat digeser dari tiang jembatan. Planter/hedge yang berada di bawah ramp dipindah8stud ke arahZ. Migrasi satu kali src/UnifyGround14.luau menolak Ground14 yang sudah ada. Semua perubahan dapat dipulihkan dari backup Map sebelum migrasi.

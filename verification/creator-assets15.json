@@ -1,0 +1,185 @@
+[
+  {
+    "scope": "creator_store",
+    "nextSteps": [
+      "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+      "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+      "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+      "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+    ],
+    "resultCount": 3,
+    "query": "low poly food cart",
+    "status": "success",
+    "searchSources": [
+      "creator_store"
+    ],
+    "context": {
+      "userId": "4737266825",
+      "isPublished": false
+    },
+    "results": [
+      {
+        "description": "",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/125986101553387",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=125986101553387&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "125986101553387",
+        "name": "🍔 Le Burger Fast Food Restaurant Diner Rp",
+        "priceCents": 0,
+        "creatorName": "Zer0Knight57",
+        "source": "creator_store"
+      },
+      {
+        "description": "Intended to be used with a character.",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/2749045568",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=2749045568&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "2749045568",
+        "name": "EMS morph",
+        "priceCents": 0,
+        "creatorName": "Hermit_king",
+        "source": "creator_store"
+      },
+      {
+        "description": "",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/5362266328",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=5362266328&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "5362266328",
+        "name": "food cart for hunter project",
+        "priceCents": 0,
+        "creatorName": "HxHTester",
+        "source": "creator_store"
+      }
+    ]
+  },
+  {
+    "availableFacets": [
+      "outdoor",
+      "wooden",
+      "umbrella",
+      "bench",
+      "bbq",
+      "grass",
+      "checkered cloth",
+      "park",
+      "food",
+      "summer"
+    ],
+    "scope": "creator_store",
+    "nextSteps": [
+      "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+      "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+      "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+      "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+    ],
+    "resultCount": 3,
+    "query": "low poly picnic table",
+    "status": "success",
+    "searchSources": [
+      "creator_store"
+    ],
+    "context": {
+      "userId": "4737266825",
+      "isPublished": false
+    },
+    "results": [
+      {
+        "description": "Low Poly Picnic Table FREE!!! Grass Scenery Tree \n\nV4 Version 4 Updated by nevergiveupdude9 today\n\nUpgrade your experience with Low Poly Picnic Table FREE!!! Grass Scenery Tree  model created by nevergiveupdude9\n\nLow Poly Picnic Table FREE!!! Grass Scenery Tree ",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/128789205211365",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=128789205211365&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "128789205211365",
+        "name": "Low Poly Picnic Table FREE!!! Grass Scenery Tree ",
+        "priceCents": 0,
+        "creatorName": "cxt_g",
+        "source": "creator_store"
+      },
+      {
+        "description": "",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/4829480839",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=4829480839&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "4829480839",
+        "name": "Low Poly Picnic Table FREE!!!",
+        "priceCents": 0,
+        "creatorName": "cocajola3",
+        "source": "creator_store"
+      },
+      {
+        "description": "Simple yet detailed picnic table",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/5256845941",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=5256845941&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "5256845941",
+        "name": "Simple low poly picnic table",
+        "priceCents": 0,
+        "creatorName": "taate",
+        "source": "creator_store"
+      }
+    ]
+  },
+  {
+    "scope": "creator_store",
+    "nextSteps": [
+      "Review the results and choose the best asset for the user's request. Prefer inventory results (source='inventory') as these are already owned and always insertable.",
+      "For free/owned assets: call insert_asset with assetId, assetType, and assetName from the chosen result to insert it.",
+      "For paid assets (isFree=false): show the user the creatorStoreUrl link and priceLabel so they can purchase it. Do not attempt to insert paid assets — they will fail.",
+      "Some Creator Store assets may be restricted or moderated and fail to insert. If insert_asset fails, try the next result from the list rather than retrying the same asset."
+    ],
+    "resultCount": 3,
+    "query": "low poly park tree",
+    "status": "success",
+    "searchSources": [
+      "creator_store"
+    ],
+    "context": {
+      "userId": "4737266825",
+      "isPublished": false
+    },
+    "results": [
+      {
+        "description": "",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/74446384811689",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=74446384811689&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "74446384811689",
+        "name": "Low-Poly Tree. Stylized Tree Decor Park",
+        "priceCents": 0,
+        "creatorName": "ViperUoNovatoRaven11",
+        "source": "creator_store"
+      },
+      {
+        "description": "",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/102422777427952",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=102422777427952&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "102422777427952",
+        "name": "Low-Poly Tree. Forest Tree Park Branch Map",
+        "priceCents": 0,
+        "creatorName": "ByteStormfNCrimson7N",
+        "source": "creator_store"
+      },
+      {
+        "description": "",
+        "creatorStoreUrl": "https://create.roblox.com/store/asset/107377796448617",
+        "assetType": "Model",
+        "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=107377796448617&returnPolicy=PlaceHolder&size=150x150&format=Png",
+        "isFree": true,
+        "assetId": "107377796448617",
+        "name": "Low-Poly Tree. Park Outdoor Tree Scenery Leaves",
+        "priceCents": 0,
+        "creatorName": "Drag0nRyCrims0ns1850",
+        "source": "creator_store"
+      }
+    ]
+  }
+]

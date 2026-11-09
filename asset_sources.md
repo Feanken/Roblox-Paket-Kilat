@@ -1,5 +1,18 @@
 # Paket Kilat! — Sumber aset T15
 
+## City15 — 9 November 2026
+
+Search Creator Store MCP priceFilter=free mengembalikan isFree=true/priceCents=0 untuk dua aset baru. Tidak ada pembelian.
+
+| Aset | Creator | Tautan | Pemakaian |
+| --- | --- | --- | --- |
+| food cart for hunter project | HxHTester | [5362266328](https://create.roblox.com/store/asset/5362266328) | Dua gerobak,26Parts/copy, tinggi7.2 |
+| Simple low poly picnic table | taate | [5256845941](https://create.roblox.com/store/asset/5256845941) | Dua meja,50Parts/copy, tinggi4.4; Camera asal tidak disertakan |
+
+Ditolak: Low-Poly Tree. Stylized Tree Decor Park [74446384811689](https://create.roblox.com/store/asset/74446384811689), ViperUoNovatoRaven11; berisi Script, ModuleScript, Camera, AlignPosition. Tidak dijalankan. Review folder dihapus sebelum Play. Pohon pengganti memakai template BroadleafTree yang sudah bersih dari P07 (Abishpc/4893246329),16copy; ParkBench4copy dan WoodFence4copy juga dari library P07 yang tercatat di bawah.
+
+Clean library ServerStorage.PaketKilat_CreatorAssets15, penempatan Map.CityDecor15. Total28model/208Parts,0script/0collider/semua anchored, semua bounding-box bottom tepat pada ground.166 callback preloadSuccess. Sumber src/CleanCreatorAssets15.luau dan DecorateCity15.luau. Dua warga bergerak adalah primitive lokal dari CityLife15.client.luau, bukan model vendor. Audit struktur tidak menetapkan hak IP pihak lain atau menjamin performa HP; gratis merupakan kondisi saat pencarian.
+
 Tambahan T21: panel Petunjuk dan diagnostik FPS memakai GUI/teks/font bawaan Roblox yang disusun lewat kode proyek. Tidak ada aset gambar/model/audio baru, impor, pembelian atau unggahan.
 
 Tambahan T18 (7 November 2026): empat warna tas dan petak toko dibuat dari Part, WeldConstraint, teks/font serta warna engine melalui `CosmeticService.luau` dan `UpgradeStoreUI.luau`. Visual buatan kode proyek, tanpa aset, mesh, gambar, audio atau lisensi pihak ketiga baru. Tidak ada unggahan, pembelian, atau Robux.
