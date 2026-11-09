@@ -72,7 +72,8 @@ function E.Award(player,order,now)
 		orderId=order.orderId,destinationId=order.destinationId,destinationName=route.Name,packageType=order.packageType,
 		duration=duration,condition=condition,recoveryCount=order.recoveryCount,
 		baseReward=C.BaseReward,conditionBonus=conditionBonus,timeBonus=timeBonus,
-		total=C.BaseReward+conditionBonus+timeBonus,completedAt=now,
+		routeBonus=require(script.Parent.CityBonus13).Reward(order),
+  total=C.BaseReward+conditionBonus+timeBonus+require(script.Parent.CityBonus13).Reward(order),completedAt=now,
 		recordEligible=eligible,recordReason=not eligible and "Recovered" or nil,
 		previousBest=previous,newRecord=newRecord,
 	}

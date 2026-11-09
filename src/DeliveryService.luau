@@ -24,6 +24,7 @@ function Delivery.Snapshot(player)
 	local snapshot = E.Snapshot(player)
 	snapshot.status = "Idle"
  snapshot.movement=Movement.Snapshot(player)
+ snapshot.routeBonus=require(script.Parent.CityBonus13).Snapshot(Delivery.orders[player.UserId])
  if T then snapshot.onboarding=T:Snapshot(player) end
 	snapshot.depotPosition = W.Map.Depot.PickupPoint.Position
 	snapshot.recoveryPosition = W.Map.RecoveryPoint.Position

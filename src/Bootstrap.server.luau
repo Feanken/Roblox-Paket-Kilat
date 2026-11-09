@@ -41,6 +41,7 @@ end)
 -- Prompt lama disimpan, tetapi seluruh input sekarang melalui HUD/keyboard.
 W.Map.Depot.PickupPoint.StartPrompt.Enabled = false
 require(script.Parent.CourierMovement).Start(D,E,RS.Remotes.MovementIntent)
+require(script.Parent.CityBonus13).Start(D,E,W)
 L.Start(D, E, W, C,Data,K,T)
 task.spawn(function() while task.wait(1) do Data:Tick() end end)
 game:BindToClose(function() T:Close() end)

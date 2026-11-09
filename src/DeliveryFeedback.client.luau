@@ -93,7 +93,8 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    shownOrder=key expires=os.clock()+4.5 noticeExpires=0
    title.Text=result.newRecord and "REKOR BARU!" or "PAKET SAMPAI!"
    reward.Text=string.format("+%d KOIN",result.total)
-   detail.Text=string.format("Dasar %d  +  Kondisi %d  +  Waktu %d",result.baseReward,result.conditionBonus,result.timeBonus)
+   detail.Text=string.format("Dasar %d + Kondisi %d + Waktu %d + Pos %d",result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0)
+   detail.TextSize=11
    nextStep.Text=snapshot.nextOrder and ("Berikut: "..snapshot.nextOrder.destinationName.." · ke depot") or "Kembali ke depot untuk pesanan berikutnya"
    if tween then tween:Cancel() end
    scale.Scale=.88 tween=TweenService:Create(scale,TweenInfo.new(.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=1}) tween:Play()

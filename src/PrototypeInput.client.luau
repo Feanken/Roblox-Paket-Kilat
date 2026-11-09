@@ -29,6 +29,7 @@ local messages = {
 	Cancelled = "Pesanan dibatalkan. Saldo tetap.",
 	Impact = "Paket terbentur! Dekati paket atau pulihkan.",
  GripLost = "Genggaman habis! Ambil paket, lalu kurangi sprint.",
+ CityStamp = "Cap bonus didapat! Koin dibayar saat paket sampai.",
 	OutOfBounds = "Paket jatuh. Pulihkan untuk kembali ke depot.",
 	Recover = "Pulih (-20). Ambil ulang; perjalanan tanpa rekor.",
 	Drop = "Paket dilepas. Dekati untuk mengambil ulang.",
@@ -172,7 +173,10 @@ local function render()
 		local record=not last.recordEligible and "Tanpa rekor: paket dipulihkan"
 			or (last.newRecord and ("REKOR BARU: "..bestText(last.bestTime)) or ("Terbaik: "..bestText(last.bestTime)))
 		card.Hint.Text=string.format("+%d koin · %s",last.total,record)
-	elseif state.status=="Carrying" then
+	elseif state.status=="Carrying" and state.routeBonus then
+  local b=state.routeBonus
+  card.Hint.Text=string.format("Pos bonus %d/%d · +%d koin\n%s",b.count,b.limit,b.total,b.count>=b.limit and "Cap lengkap! Antar paketmu."or "Opsional: lewati penanda emas di jalan.")
+ elseif state.status=="Carrying" then
 		card.Hint.Text=state.packageType=="Rapuh" and "RAPUH: benturan lebih merusak. Jaga paket!" or "Sprint lebih cepat; jaga meter genggaman paket."
 	elseif state.status=="Dropped" then card.Hint.Text="Ambil ulang, atau pulihkan (-20; tanpa rekor)."
 	else card.Hint.Text="Lima rumah, dua jenis paket. Ambil di depot." end

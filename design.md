@@ -284,6 +284,16 @@ Konfigurasi server terpusat dengan fallback lokal; experience published boleh me
 
 ## UI12 — sistem tampilan seragam
 
+Lihat bagian City13 di akhir dokumen untuk penambahan pilihan rute dan variasi kota setelah UI12.
+
 Tema krem/inkteal/gold: kartu tujuan terang, saldo badge, hierarki nama tujuan lebihbesar, status simpan sebagai catatan kecil tetapada; tombol aksi utama gold dan sekunder terang. Toolbar3tombol44px konsisten. Panelmeter gelap dengan barlebihjelas, petunjuk terang, toko dan hasil mengikuti tema. Shared/UITheme12 mengelola token/style/layout, empatcontroller input/feedback/movement/route memakainya agar aturan lama tidak menimpa desain. Tetap pertahankan namaobjek, callbacks, remote dan state sumber; jangan mengubah harga, stamina/grip atau hadiah. Desktopcard300x152, phone260x136 (adaptif pada lebarkecil). Status/failure tetap terbaca; fokus pada viewport750x323 landscape dan desktop. Teks/hitarea/interaksi/openclose/panelhasil/resize diperiksa sebelum selesai. Tidak menambah asset gambar eksternal.
 
 Implementasi akhir: panel meter 352x56, toolbar dan tombol sprint 84x44. Status penyimpanan memakai latar krem agar tetap terbaca di atas dunia permainan. Saat toko terbuka, latar diredupkan, kartu tujuan/aksi/meter/petunjuk disembunyikan, dan tombol tutup tetap dapat diklik. Saat hasil pengantaran tampil, kartu tujuan/aksi disembunyikan sementara. Latar toko mengikuti ukuran viewport dan mempertahankan safe area bawaan ScreenGui. Warna penanda tujuan serta animasi garis kartu menggunakan token tema yang sama.
+
+## City13 — pilihan perjalanan dan variasi ruang kota
+
+Masalah: loop pengantaran terlalu banyak berjalan tanpa keputusan; lingkungan terdiri dari rumah terpisah dan jalan datar. Tambahkan pilihan opsional, tanpa mewajibkan perjalanan lebih panjang untuk menyelesaikan pesanan.
+
+Lima pos cap berada di jalur kota; pemain yang membawa paket dapat mengambil maksimal dua pos berbeda per pesanan. Default enam koin per cap, dibayarkan hanya pada pengantaran sukses melalui ledger ekonomi yang sama. Pemain memilih langsung mengantar demi bonus waktu atau mengambil cap untuk bonus pos. Drop/pickup tidak membuat pesanan baru atau mereset cap. Tidak ada remote untuk meminta bonus; server memeriksa profil, karakter hidup, status Carrying, jarak, dan ID pos. Snapshot hanya mengirim salinan visited/count/limit/total. Nilai PK_CityStampReward, PK_CityStampLimit, PK_CityStampRadius mengikuti adapter ConfigService server yang sudah ada, dengan fallback lokal dan batas nilai; reward/limit dibulatkan ke integer per pesanan.
+
+Kota mendapat dua blok fondasi, plaza pasar, lima bangunan fasad dengan tinggi berbeda, tiga kios, planter, landmark jam, serta jembatan pejalan kaki dengan ramp dan pos bonus di atasnya. Seluruh geometri baru berada di Map.City13, tanpa menulis Terrain atau memindahkan rumah pemilik. Jalan di bawah jembatan tetap terbuka; ramp terhubung ke blok baru. Bangunan berupa fasad, belum memiliki interior/NPC. Angka reward dan kepadatan kota perlu diuji pemain; tidak dianggap sudah membuktikan retensi atau pendapatan.

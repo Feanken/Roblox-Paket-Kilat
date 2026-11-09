@@ -214,3 +214,15 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] UI12-F: sinkronkan 5 source, simpan screenshot/audit/handoff; akhir Studio Edit, device default, HUD aktif, 0 paket.
 - [ ] UI12-G: simpan sesi Studio ke main_game.rbxl; marker CourierUI12/UITheme12 belum ada pada file disk yang diperiksa.
 - [ ] UI12-H: penilaian pemilik dan uji sentuh pada HP fisik; emulator serta input remote fixture belum menggantikan uji ini.
+
+## City13 — pilihan rute dan kota bertingkat
+
+- [x] C13-A: inspeksi/backup sesi terbaru, source, serta file place sebelum mutasi.
+- [x] C13-B: lima pos bonus server, dua cap berbeda per pesanan, enam koin per cap, kredit hanya saat pengantaran.
+- [x] C13-C: snapshot/HUD/cap lokal/rincian hadiah; tuning melalui adapter ConfigService yang ada.
+- [x] C13-D: blok kota, lima fasad bertingkat, tiga kios, plaza/jam/planter, jembatan dan ramp tanpa perubahan Terrain/posisi rumah.
+- [x] C13-E: fixture 0→1→2 cap, duplicate/pos ketiga tetap2, saldo0 sebelum antar; pembayaran54 termasuk bonus12, replay tidak menambah saldo.
+- [x] C13-F: sampel lantai ramp tersambung; emulator750x323 teks bonus/hasil muat, cap lokal berubah; startup final tanpa error runtime.
+- [x] C13-G: source/build migrasi, audit, screenshot dan handoff disimpan; akhir Edit/default/HUD aktif/0 paket.
+- [ ] C13-H: simpan revisi CityChoices13 ke main_game.rbxl; file yang diperiksa baru mencakup UI12/M11.
+- [ ] C13-I: uji berjalan penuh, kenyamanan ramp dan pilihan bonus oleh pemain; HP sentuh/multiplayer/performa/balance.

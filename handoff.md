@@ -1,4 +1,18 @@
-# Pembaruan TERBARU — UI12: tampilan HUD dan toko (9 November 2026)
+# Pembaruan TERBARU — City13: pilihan rute dan kota bertingkat (9 November 2026)
+
+Sesi aktif tetap57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. World.CityRevision=CityChoices13. Lima pos opsional, default dua cap berbeda per pesanan dan enam koin/cap. Server CityBonus13 memeriksa karakter hidup/profil/Carrying/jarak pada interval.2detik; visited disimpan pada objek pesanan, snapshot menyalin data. Saldo tidak berubah saat mengumpulkan cap. EconomyService memasukkan routeBonus ke total sebelum batas ekonomi dan ledger kredit lama; replay tetap ditolak. Drop/pickup mempertahankan cap. Tuning baru PK_CityStampReward/Limit/Radius menggunakan MovementTuning/ConfigService yang ada; reward/limit integer. Cloud override belum diuji.
+
+Map.City13 menampung blok/fondasi/plaza, lima fasad toko/rumah susun/kantor dengan tinggi20–34stud, tiga kios, planter, jam landmark, dan jembatan+dua ramp. Pos3 di atas jembatan. Tidak menulis voxel Terrain atau mengubah posisi rumah lama. Jalan utama tetap di bawah jembatan. Bangunan hanya fasad; tidak memiliki interior/NPC. BuildCity13.luau adalah migrasi Edit sekali; assert menolak duplikasi. Module CityBonus13 harus terpasang dan geometri City13 dibangun sebelum memasang Bootstrap yang memerlukannya.
+
+Source berubah: DeliveryService, EconomyService, MovementTuning, Bootstrap, PrototypeInput.client, DeliveryFeedback.client. Baru: CityBonus13.luau, CityBonus13.client.luau (StarterPlayerScripts.PaketKilatCityBonus13), BuildCity13.luau. Callback client hanya menampilkan cap lokal dan tidak mengirim reward. Backup source sebelum mutasi di ServerStorage.PaketKilat_PreCity13; file backup backups/main_game.before-city13.20261109.rbxl. Seluruh source final disinkronkan ke disk.
+
+Verifikasi: fresh fixture cap0→1→2, saldo tetap0; kembali ke pos lama dan pos ketiga tetap2/12. Pengantaran final54=25dasar+15kondisi+2waktu+12pos; replay saldo tetap. Pada emulator750x323, Hint dan detail hasil TextFits=true, label pos berubah CAP TERKUMPUL. Sampel ramp38 titik tidak kehilangan lantai. Ini menggunakan teleport fixture dan remote normal, bukan klaim sudah berjalan penuh atau touch fisik. Percobaan awal harness require sebelum siap dan teleport menyebabkan paket terlepas; bukan hasil lulus, fresh run final lulus. Console final hanya Bootstrap ready. Bukti verification/city13-audit.json, city13-world.jpg, city13-phone.jpg.
+
+Akhir Edit/Stop, simulator default, HUD aktif,0paket. File disk sekarang312252byte/2026-11-09T02:25:56.039Z: UI12 dan SprintGrip11 sudah ada (lebih baru dari pemeriksaan arsip UI12), tetapi CityChoices13/CityBonus13 belum ada. **Pemilik perlu File > Save to File untuk menyimpan City13 sebelum menutup Studio.** Bukti verification/saved-city13.json. Playtest manusia diperlukan untuk menilai apakah bonus terasa sepadan dan ramp nyaman. Prioritas berikutnya bila loop ini masih kurang menarik: variasi pesanan/kontrak dan progres unlock, berdasarkan feedback pemain, bukan memperbanyak dekorasi saja.
+
+---
+
+# Arsip — UI12: tampilan HUD dan toko (9 November 2026)
 
 Revisi aktif `CourierUI12` di sesi Studio `57631be1-2a04-4ce1-8cc1-77570cda5f16`, main_game.rbxl. Tema krem, hijau gelap, dan kuning diterapkan pada kartu tujuan, badge koin, toolbar, tombol aksi, meter sprint/genggaman, petunjuk, toko, penanda tujuan, dan panel hadiah. Tidak mengubah terrain/map pemilik atau logika server/ekonomi.
 

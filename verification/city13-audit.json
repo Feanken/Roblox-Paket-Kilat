@@ -1,0 +1,61 @@
+{
+  "revision": "CityChoices13",
+  "date": "2026-11-09",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "changes": [
+    "5 optional stamp stations; max2 per active order, default6 coins each",
+    "Server proximity collection while alive/carrying; payout via existing locked delivery ledger",
+    "5 facade buildings (20/34/25/24/31 studs), market stalls, planters, clock landmark, pedestrian bridge with ramps",
+    "All additions under Map.City13; no terrain writes or existing house moves"
+  ],
+  "checks": {
+    "freshRunStampCounts": [
+      0,
+      1,
+      2
+    ],
+    "coinsBeforeDelivery": 0,
+    "duplicateAndThirdStationRemain": 2,
+    "bridgeFloorSamples": 38,
+    "bridgeFloorMissing": 0,
+    "phoneRoot": [
+      750,
+      323
+    ],
+    "phoneHintFits": true,
+    "phoneResultDetailFits": true,
+    "localStationLabel": "CAP TERKUMPUL",
+    "finalRuntimeConsole": "Bootstrap ready only",
+    "final": "Edit; default simulator; HUD enabled; 0 active packages"
+  },
+  "reward": {
+    "status": "Idle",
+    "detailFits": true,
+    "result": {
+      "recoveryCount": 0,
+      "total": 54,
+      "duration": 34.74847888946533,
+      "baseReward": 25,
+      "packageType": "Biasa",
+      "orderId": "18fe9d2b-6064-4b4c-a543-8138d362ed56",
+      "condition": 100,
+      "timeBonus": 2,
+      "newRecord": true,
+      "completedAt": 1794191978.782337,
+      "bestTime": 34.74847888946533,
+      "destinationName": "Rumah Bu Sari",
+      "recordEligible": true,
+      "destinationId": "Rumah01",
+      "conditionBonus": 15,
+      "routeBonus": 12
+    },
+    "replayUnchanged": true
+  },
+  "limitations": [
+    "Automated depot/station/destination positions were server teleport fixtures; not a full walked lap or physical touch test.",
+    "Earlier fixture runs encountered uninitialized require state and a dropped package during teleport; fresh final run via normal client remotes passed.",
+    "New buildings are facade scenery; no interiors/NPC simulation.",
+    "Balance values are provisional; published ConfigService PK_CityStamp* overrides not cloud-tested."
+  ],
+  "backup": "backups/main_game.before-city13.20261109.rbxl + ServerStorage.PaketKilat_PreCity13"
+}
