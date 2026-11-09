@@ -1,0 +1,131 @@
+{
+  "stage": "Status25",
+  "userRequestNumber": 23,
+  "checks": {
+    "s25tests": {
+      "live": {
+        "schema": 2,
+        "history": 5,
+        "cases": [
+          {
+            "bonus": 14,
+            "total": 63,
+            "reason": "Syarat terpenuhi",
+            "code": "ready"
+          },
+          {
+            "bonus": 0,
+            "total": 60,
+            "reason": "Waktu target terlewat",
+            "code": "late"
+          },
+          {
+            "bonus": 0,
+            "total": 48,
+            "reason": "Kondisi di bawah 95",
+            "code": "condition"
+          },
+          {
+            "bonus": 0,
+            "total": 49,
+            "reason": "Paket sudah dipulihkan",
+            "code": "recovered"
+          },
+          {
+            "bonus": 0,
+            "total": 80,
+            "reason": "Cap belum cukup",
+            "code": "stamps"
+          }
+        ],
+        "replayNoCredit": true
+      },
+      "rules": {
+        "comparisons": 504,
+        "invalidRejected": true,
+        "unchangedPayout": true
+      }
+    },
+    "s25desktopHistory": {
+      "visible": true,
+      "fits": true,
+      "text": "1. Rumah Pak Agus · 3★ · +80 koin\nPemburu cap · 100/100 · 0.3s · Cap belum cukup\n2. Rumah Pak Agus · 1★ · +49 koin\nPrioritas · 100/100 · 0.2s · Paket sudah dipulihkan\n3. Rumah Bu Rina · 2★ · +48 koin\nPrioritas · 94/100 · 0.3s · Kondisi di bawah 95\n4. Rumah Pak Budi · 2★ · +60 koin\nPrioritas · 100/100 · 46.2s · Waktu target terlewat\n5. Rumah Bu Sari · 3★ · +63 koin\nPrioritas · 100/100 · 0.2s · Syarat terpenuhi"
+    },
+    "s25phoneHistory": {
+      "visible": true,
+      "historyVisible": true,
+      "fits": true,
+      "root": "705, 280",
+      "historySize": "588, 176"
+    },
+    "s25liveUI": {
+      "status": "Carrying",
+      "text": "100/100 · Gugur: lewat waktu",
+      "fits": true,
+      "hint": "KONTRAK GUGUR · Waktu target terlewat\nPengantaran tetap dibayar. Lanjutkan ke tujuan."
+    },
+    "s25failedDelivery": {
+      "hintFits": true,
+      "result": {
+        "bonus": 0,
+        "total": 40,
+        "base": 25,
+        "reason": "Waktu target terlewat"
+      },
+      "hint": "Kontrak: Waktu target terlewat"
+    },
+    "s25fresh": {
+      "offers": 6,
+      "history": 0,
+      "storage": "StudioMemory",
+      "coins": 0
+    },
+    "s25freshConsole": "[PaketKilat] Bootstrap ready — T21; onboarding + LocalOnly analytics in Studio",
+    "s25end": {
+      "backup": 5,
+      "hud": true,
+      "device": "default",
+      "temporary": [],
+      "packages": 0,
+      "defaultTab": true
+    },
+    "finalSources": [
+      {
+        "1": {
+          "matches": true,
+          "file": "ContractStatus25.luau"
+        },
+        "2": {
+          "matches": true,
+          "file": "Contracts24.luau"
+        },
+        "3": {
+          "matches": true,
+          "file": "EconomyService.luau"
+        }
+      },
+      {
+        "1": {
+          "matches": true,
+          "file": "PrototypeInput.client.luau"
+        },
+        "2": {
+          "matches": true,
+          "file": "DeliveryFeedback.client.luau"
+        },
+        "3": {
+          "matches": true,
+          "file": "JobBoard17.client.luau"
+        }
+      }
+    ]
+  },
+  "limits": [
+    "Local StudioMemory only; no publication, external players or production data changes.",
+    "504 finite-input comparisons cover three existing contract kinds; not an exhaustive proof for arbitrary malformed tables.",
+    "Live cases use character teleports, forced elapsed time/condition/recovery/stamp fields; not five full human journeys.",
+    "Phone history used temporary initial tab2 fixture to inspect layout; restored defaulttab0 before fresh verification.",
+    "Desktop native history click passed. Physical phone touch, multiplayer and performance not tested.",
+    "Rewards and balance unchanged. History remains five entries per session; schema2 unchanged."
+  ]
+}

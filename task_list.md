@@ -374,3 +374,15 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] B24-12: fresh coins0/history0/gear0/offers6, consoleBootstrap saja, backup8source, Edit/default/HUDaktif/0paket/tanpa fixture.
 - [ ] B24-13: simpan SpecialContracts24 ke main_game.rbxl; save442913byte belum memuatnya.
 - [ ] B24-14: penilaian pemilik/balance dan input HP fisik. Publikasi/uji pemain luar ditunda sesuai arahan pemilik.
+
+## Status25 — permintaan Make It Better #23
+
+- [x] S25-A: backup lima source sebelum edit; binary/handoff dan ServerStorage5source tersedia.
+- [x] S25-B: evaluator status shared dan server bonus konsisten;504kombinasi memberi payout sama dengan aturan sebelumnya.
+- [x] S25-C: HUD membedakan gugur vs cap belum cukup; hasil dan riwayat menampilkan alasan yang spesifik.
+- [x] S25-D: lima kasus live fixture menghasilkan ready/late/condition/recovered/stamps; replay tanpa kredit/history tambahan.
+- [x] S25-E: riwayat5pesanan muat di desktop/phone705x280; status aktif dan hint hasil muat; tab default dikembalikan0.
+- [x] S25-F: kontrak terlambat tetap dapat diantar, total40/base25/bonus0; freshcoins0/history0/offers6, consoleBootstrap saja.
+- [x] S25-G: source/dokumen/audit/screenshot tersimpan; Edit/default/HUDaktif/0paket/tanpa fixture, backup5source.
+- [ ] S25-H: File > Save to File untuk ClearStatus25; save442913byte masih belum memuat Contracts24/Status25.
+- [ ] S25-I: penilaian pemilik dan HP touch fisik; publikasi/pemain luar tetap ditunda.

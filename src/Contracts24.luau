@@ -1,5 +1,6 @@
 -- Server-owned conditional bonuses, frozen with each accepted offer.
 local M={}
+local Status=require(game.ReplicatedStorage.PaketKilat.Shared.ContractStatus25)
 function M.Build(C,index,revision,t)
  local destination=C.OrderSchedule[index].DestinationId
  local excellent=math.max(t.RatingCleanCondition,t.RatingExcellentCondition)
@@ -11,11 +12,8 @@ function M.Build(C,index,revision,t)
  }
 end
 function M.Evaluate(contract,result,stamps)
- if not contract then return 0,nil end
- local ok=result.recoveryCount==0 and result.condition>=contract.condition
- if contract.kind=='priority'then ok=ok and result.duration<=contract.seconds
- elseif contract.kind=='explore'then ok=ok and stamps>=contract.stamps
- elseif contract.kind~='perfect'then ok=false end
- return ok and contract.reward or 0,ok
+ local status=Status.Get(contract,{condition=result.condition,duration=result.duration,recoveryCount=result.recoveryCount,stamps=stamps})
+ if not status then return 0,nil,nil end
+ return status.eligible and contract.reward or 0,status.eligible,status
 end
 return M

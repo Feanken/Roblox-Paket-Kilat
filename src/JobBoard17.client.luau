@@ -16,7 +16,7 @@ local close=Instance.new('TextButton')close.Name='Close'close.Size=UDim2.fromOff
 local tab=0
 local tabs={}
 for i,label in {'Biasa','Kontrak','Riwayat'}do local b=Instance.new('TextButton');b.Name='Tab24_'..i;b.Text=label;b.ZIndex=12;b.TextSize=11;b.Parent=board;theme.ToolbarButton(b);b.Activated:Connect(function()tab=i-1 end);tabs[i]=b end
-local history=text(board,'History24',16,78,588,176,12);history.Font=Enum.Font.GothamMedium;history.TextYAlignment=Enum.TextYAlignment.Top
+local history=text(board,'History24',16,78,588,176,12);history.Font=Enum.Font.GothamMedium;history.TextSize=11;history.TextYAlignment=Enum.TextYAlignment.Top
 local rows={}
 for i=1,3 do
  local card=Instance.new('Frame')card.Name='Offer'..i card.BackgroundColor3=theme.Soft card.BorderSizePixel=0 card.ZIndex=11 card.Parent=board
@@ -44,7 +44,7 @@ local function render()
  for i,b in tabs do b.Position=UDim2.fromOffset(width-318+(i-1)*86,6);b.Size=UDim2.fromOffset(82,44);theme.Action(b,true,tab~=i-1)end
  history.Size=UDim2.fromOffset(width-32,176);history.Visible=tab==2
  local lines={}
- for i,v in state.recentDeliveries or {}do table.insert(lines,string.format('%d. %s  ·  %d★  ·  +%d koin\n',i,v.destinationName,v.stars,v.total))end
+ for i,v in state.recentDeliveries or {}do table.insert(lines,string.format('%d. %s · %d★ · +%d koin\n%s · %d/100 · %.1fs · %s',i,v.destinationName,v.stars,v.total,v.jobName or 'Pesanan',v.condition or 0,v.duration or 0,v.contractReason or 'Tanpa kontrak'))end
  history.Text=#lines>0 and table.concat(lines,'\n')or 'Belum ada pengantaran. Ambil pesanan pertamamu.'
  local char=player.Character local hum=char and char:FindFirstChildOfClass('Humanoid')local r=char and char:FindFirstChild('HumanoidRootPart')
  local near=r and state.depotPosition and(r.Position-state.depotPosition).Magnitude<=config.ActionDistance

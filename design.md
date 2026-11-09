@@ -393,3 +393,9 @@ Papan tetap tiga kartu per halaman620x280. Tiga tawaran lama dipertahankan, tiga
 Gagal kontrak tidak membatalkan pengantaran atau mengambil saldo. Bonus kontrak nol, komponen hadiah lama tetap dihitung. Bonus dimasukkan ke total sebelum guard ekonomi dan commit ledger/rangkaian/target/riwayat. Replay dan overflow tidak menambah uang atau riwayat. Kontrak memakai target rute yang sama dengan penilaian; bukan remote klaim hadiah baru.
 
 Snapshot menambah recentDeliveries(max5:tujuan,total,bintang,durasi,bonus kontrak). Riwayat hanya sesi, tidak menambah field profil schema2. HP memakai baris kondisi yang sudah ada untuk target ringkas; desktop memakai Hint. Peringatan genggaman muncul sekali ketika ≤25, diaktifkan lagi setelah pulih≥50 atau pesanan baru. Tidak menambah HUD permanen. Ini paket pengembangan internal; tidak mencakup publikasi atau uji pemain luar.
+
+## Status25 — status kontrak yang dapat dipahami
+
+Permintaan Make It Better ke-23 menurut hitungan pemilik. Module shared ContractStatus25 menghitung status yang sama untuk HUD dan evaluator bonus server, tanpa memberi client kewenangan membayar hadiah. Urutan alasan utama: dipulihkan, kondisi kurang, terlambat, cap belum cukup; jika seluruh syarat terpenuhi status ready. Recovery/kondisi/waktu yang gagal ditandai gugur, sedangkan cap kurang masih dapat dilengkapi selama perjalanan. Unknown contract atau input angka nonfinite ditolak untuk bonus. Status ready tetap memerlukan pengantaran sah di server.
+
+HUD HP memakai baris kondisi lama untuk status pendek dengan warna peringatan ketika gugur. Desktop menjelaskan bahwa pengantaran tetap dibayar. Hasil dan riwayat memuat alasan utama. Lima baris riwayat sekarang masing-masing dua baris: tujuan/bintang/koin dan pekerjaan/kondisi/durasi/alasan kontrak. Tidak menambah panel permanen, harga, hadiah atau field profil persisten.

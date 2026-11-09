@@ -1,4 +1,42 @@
-# Pembaruan TERBARU — Contracts24: sepuluh perbaikan internal
+# Pembaruan TERBARU — Status25: umpan balik kontrak (Make It Better #23)
+
+Nomor permintaan pemilik23, kode iterasi internalStatus25 setelahContracts24. Fokus: kontrak yang sudah gagal tidak lagi terlihat seperti target yang masih bisa dikejar. Harga, hadiah dan kota tetap. Tidak ada publikasi/pemain luar.
+
+Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, ContractFeedbackRevision=ClearStatus25.
+
+## Perubahan
+
+Baru sharedModule ReplicatedStorage.PaketKilat.Shared.ContractStatus25 dari src/ContractStatus25.luau. Diubah5source: Contracts24,EconomyService,PrototypeInput.client,DeliveryFeedback.client,JobBoard17.client. Pasang helper shared sebelum server/client yang memakainya. Evaluator bonus sekarang mengambil status helper yang sama dengan HUD. Client hanya menampilkan; award tetap di server/ledger lama.
+
+Status: ready,late,condition,recovered,stamps,invalid. Prioritas alasan: recovery→condition→time→stamps. Gugur dipakai untuk recovery/condition/time; kekurangan cap masih progres aktif. Unknown/nonfinite status tidak memenuhi bonus. Tidak mengubah kriteria bonus; 504kombinasi finite cocok dengan aturan lama. Status ready bukan pembayaran otomatis.
+
+HUDHP baris lama kini menampilkan misalnya “100/100 · Gugur: lewat waktu”; warna peringatan direset ketika bukan kontrak. DesktopHint menerangkan pengantaran tetap dibayar. Result.ratingHint dan history menampilkan alasan. History5item masing-masing2baris (tujuan/bintang/koin;job/kondisi/durasi/alasan),font11 agar muat. Profil tetap schema2, metadata baru hanya result/history sesi.
+
+## Backup/rollback
+
+backups/status25-sources/ dan ServerStorage.PaketKilat_PreStatus25 berisi5source praedit. Binary backups/main_game.before-status25.20261109.rbxl serta handoff.before-status25.md. Binary masih sebelumContracts24, maka rollback Status25 saja memakai5snapshot source, bukan binary. Stop, pulihkan5source lalu hapus helper shared dan attribute ContractFeedbackRevision. JobRevision=SpecialContracts24 sebelumnya dipertahankan.
+
+## Pengujian
+
+GameId0/StudioMemory.504kombinasi:3kontrak ×7kondisi ×4durasi ×2recover ×3jumlahcap; eligible/payout/status wrapper cocok dengan baseline lama. Unknownkind ditolak, noContract tetapnil. Lima pengantaran fixture memakai teleport dan pengaturan elapsed/condition/recovery/cap:
+- ready→bonus14,total63;
+- late→bonus0,total60;
+- condition→bonus0,total48;
+- recovered→bonus0,total49;
+- stamps→bonus0,total80.
+Total menyertakan bonus sesi/cap lama; tidak dianggap hadiah dasar tetap. Replay tidak menambah saldo atau history, history5, schema2.
+
+Desktop native tabRiwayat menampilkan seluruh10baris/TextFits. PhoneGalaxyA06 Root705x280 history588x176 jugaFits. Untuk memeriksa history pada emulator digunakan temporary initialtab2, karena native pointerHP belum menjadi bukti touch; setelahStop source final dikembalikan tab0. Lima kasus helper/live diulang pada sesi phone tanpa error. Tidak mengklaim perjalanan manusia atau Recover action fisik pada kasus yang memakai recoveryCount fixture.
+
+Uji prioritas aktif yang sengaja dibuat terlambat: HUDCarrying “Gugur: lewat waktu”,Fits; kemudian Deliver berhasil,total40/base25/bonus0, hint “Kontrak: Waktu target terlewat”,Fits. Fresh terakhir coins0/history0/offers6/StudioMemory; consoleBootstrap saja. AkhirEdit/default/HUDenabled/0paket/tanpaTemporaryStatus25,backup5source. Tidak mengubah data published atau menambah remote. Belum HP fisik/multiplayer/performa atau playtest manusia.
+
+Bukti verification/status25-audit.json,status25-history-phone.jpg,status25-active-phone.jpg,saved-status25.json. Source,design,tasklist tersimpan.
+
+**Simpan File > Save to File sebelum menutup Studio.** File442913byte/2026-11-09T08:23:14.646Z sudah memuat City23, tetapi SpecialContracts24/ClearStatus25 belum ada; keduanya masih pada sesi Studio aktif.
+
+---
+
+# Arsip — Contracts24: sepuluh perbaikan internal
 
 Permintaan pemilik: pengembangan besar sampai puas; publikasi dan uji pemain luar ditunda. Paket ini mencakup sepuluh perubahan pada kontrak/feedback/kenyamanan, bukan klaim semua sepuluh tahap roadmap (termasuk sepeda) selesai atau kualitas terukur naik10kali.
 

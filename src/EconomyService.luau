@@ -114,7 +114,7 @@ function E.Award(player,order,now)
 	result.jobBonus=math.floor((order.jobBonus or 0)*condition/C.InitialCondition)
  result.jobName=order.jobName or 'Reguler' result.total+=result.jobBonus
  local stamps=require(script.Parent.CityBonus13).Snapshot(order)
- result.contractBonus,result.contractSucceeded=Contracts.Evaluate(order.contract,result,stamps and stamps.count or 0)
+ result.contractBonus,result.contractSucceeded,result.contractStatus=Contracts.Evaluate(order.contract,result,stamps and stamps.count or 0)
  result.contractKind=order.contract and order.contract.kind
  result.total+=result.contractBonus
  local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
@@ -132,7 +132,7 @@ function E.Award(player,order,now)
 	p.deliveryCount+=1
 	if newRecord then p.bestTimes[key]=duration end
 	result.bestTime=p.bestTimes[key]
- table.insert(s.history,1,{destinationName=result.destinationName,total=result.total,stars=result.rating.stars,duration=result.duration,contractBonus=result.contractBonus})
+ table.insert(s.history,1,{destinationName=result.destinationName,total=result.total,stars=result.rating.stars,duration=result.duration,condition=result.condition,jobName=result.jobName,contractBonus=result.contractBonus,contractReason=result.contractStatus and result.contractStatus.reason})
  if #s.history>5 then table.remove(s.history)end
 	s.lastResult=result
  Data:Dirty(player.UserId)

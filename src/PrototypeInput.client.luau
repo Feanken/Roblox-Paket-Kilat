@@ -8,6 +8,7 @@ local player = Players.LocalPlayer
 local RS = game:GetService("ReplicatedStorage"):WaitForChild("PaketKilat")
 local C = require(RS.Shared.Config)
 local Theme = require(RS.Shared.UITheme12)
+local ContractStatus=require(RS.Shared.ContractStatus25)
 local ui = player:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
 local card, actions = ui.TopCard, ui.Actions
 local state, synced = {status = "Idle", profileReady=false}, false
@@ -190,15 +191,20 @@ local function render()
   local b=state.routeBonus
   card.ConditionText.Text=string.format("%s · %d/100%s",state.isRelay and 'Titipan' or state.packageType or "Paket",condition,b and string.format(" · cap %d/%d",b.count,b.limit)or "")
  end
+ card.ConditionText.TextColor3=Theme.Muted
+ local contractStatus
  if state.status=='Carrying'and state.contract then
-  local c=state.contract local elapsed=workspace:GetServerTimeNow()-(state.startedAt or 0)
-  local text=c.kind=='priority'and string.format('Prioritas · %ds · kondisi ≥%d',math.max(0,math.ceil(c.seconds-elapsed)),c.condition)or c.kind=='perfect'and 'Paket mulus · jaga kondisi100'or string.format('Cap %d/%d · kondisi ≥%d',state.routeBonus and state.routeBonus.count or 0,c.stamps,c.condition)
-  if Theme.IsMobile(ui)then card.ConditionText.Text=string.format('%d/100 · %s',condition,text)card.ConditionText.TextSize=9 end
+  contractStatus=ContractStatus.Get(state.contract,{condition=condition,duration=math.max(0,workspace:GetServerTimeNow()-(state.startedAt or 0)),recoveryCount=state.recoveryCount or 0,stamps=state.routeBonus and state.routeBonus.count or 0})
+  if Theme.IsMobile(ui)and contractStatus then
+   card.ConditionText.Text=string.format('%d/100 · %s',condition,contractStatus.short)card.ConditionText.TextSize=9
+   card.ConditionText.TextColor3=contractStatus.irreversible and Color3.fromRGB(177,85,48)or Theme.Ink
+  end
  end
  if os.clock()<feedbackUntil then card.Hint.Text=feedback
- elseif state.status=='Carrying'and state.contract then
-  local c=state.contract
-  card.Hint.Text=string.format('KONTRAK · bonus +%d jika berhasil\n%s',c.reward,c.kind=='priority'and string.format('Kondisi ≥%d, ≤%ddtk, tanpa pulih.',c.condition,c.seconds)or c.kind=='perfect'and 'Kondisi100, tanpa pulih.'or string.format('%d cap, kondisi ≥%d, tanpa pulih.',c.stamps,c.condition))
+ elseif contractStatus then
+  card.Hint.Text=contractStatus.irreversible and ('KONTRAK GUGUR · '..contractStatus.reason..'\nPengantaran tetap dibayar. Lanjutkan ke tujuan.')
+   or string.format('KONTRAK · bonus +%d saat diantar\n%s',state.contract.reward,contractStatus.short)
+
 	elseif relay then card.Hint.Text='Pelanggan punya titipan ke rumah lain. Opsional: satu perjalanan lagi, tanpa kembali ke depot.'
 	elseif state.status=="Idle" and last then
 		local record=last.recordReason=='RelayRoute' and 'Titipan selesai · rekor depot tetap' or not last.recordEligible and "Tanpa rekor: paket dipulihkan"
