@@ -1,0 +1,149 @@
+{
+  "revision": "CourierCompass19",
+  "date": "2026-11-09",
+  "studioId": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "changes": [
+    "Compass and remaining distance reuse card header; next waypoint when route dots enabled, direct target otherwise.",
+    "Ready tick within server ActionDistance; phone only shows actionable primary and repositions secondary.",
+    "Dropped packagePosition server fallback, no phantom destination marker.",
+    "PackageService and Recover bounds use DepotPad local CFrame coordinates after map rotation."
+  ],
+  "bounds": {
+    "outsideStillRejected": true,
+    "destinations": [
+      {
+        "id": "Rumah01",
+        "localPosition": "98.00001525878906, 1.1499024629592896, 3",
+        "inside": true
+      },
+      {
+        "id": "Rumah02",
+        "localPosition": "-102.00001525878906, 1.1499024629592896, 3",
+        "inside": true
+      },
+      {
+        "id": "Rumah03",
+        "localPosition": "-4.999756336212158, 1.1499024629592896, 114",
+        "inside": true
+      },
+      {
+        "id": "Rumah04",
+        "localPosition": "108.00001525878906, 1.1499024629592896, 114",
+        "inside": true
+      },
+      {
+        "id": "Rumah05",
+        "localPosition": "-102.00001525878906, 1.1499024629592896, 114",
+        "inside": true
+      }
+    ]
+  },
+  "ready": {
+    "status": "Idle",
+    "mode": "ready",
+    "title": "Pilih pesanan",
+    "arrow": "✓"
+  },
+  "route": {
+    "distance": 302,
+    "title": "302 stud",
+    "mode": "route"
+  },
+  "cameraBearings": [
+    {
+      "mode": "direct",
+      "bearing": 0.00007915735706616123,
+      "turn": 0
+    },
+    {
+      "mode": "direct",
+      "bearing": 90.00008548993618,
+      "turn": 90
+    },
+    {
+      "mode": "direct",
+      "bearing": -179.9999145100638,
+      "turn": 180
+    },
+    {
+      "mode": "direct",
+      "bearing": -89.99992084266043,
+      "turn": -90
+    }
+  ],
+  "farDestination": {
+    "status": "Carrying",
+    "position": "-100.00004577636719, 4481.271484375, 14.500007629394531",
+    "outOfBounds": false
+  },
+  "arrival": {
+    "button": "Antar paket [E]",
+    "mode": "ready",
+    "title": "Siap diantar",
+    "arrow": "✓"
+  },
+  "delivery": {
+    "status": "Idle",
+    "result": {
+      "jobName": "Lintas Kota",
+      "orderId": "e63816bb-e360-46e2-b4fc-80ca79f36ed9",
+      "condition": 100,
+      "jobBonus": 10,
+      "completedAt": 1794200293.152134,
+      "destinationId": "Rumah04",
+      "conditionBonus": 15,
+      "recoveryCount": 0,
+      "total": 56,
+      "packageType": "Biasa",
+      "destinationName": "Rumah Pak Agus",
+      "timeBonus": 6,
+      "duration": 21.782636880874634,
+      "routeBonus": 0,
+      "newRecord": true,
+      "bestTime": 21.782636880874634,
+      "recordEligible": true,
+      "baseReward": 25,
+      "challengeBonus": 0
+    }
+  },
+  "missingLocalPackage": {
+    "title": "25 stud",
+    "arrow": true,
+    "target": "paket",
+    "distance": 25,
+    "mode": "direct"
+  },
+  "outOfBounds": {
+    "mode": "recover",
+    "title": "Pulihkan paket",
+    "arrowHidden": true
+  },
+  "recovery": {
+    "recoveryCount": 1,
+    "status": "Dropped",
+    "positionShiftXZ": 0,
+    "condition": 80,
+    "outOfBounds": false
+  },
+  "phone": {
+    "title": "302 stud",
+    "titleFits": true,
+    "root": "750, 323",
+    "mode": "route",
+    "secondaryPosition": "{0, 0}, {0, 0}",
+    "primaryHidden": true
+  },
+  "final": {
+    "mode": "Edit",
+    "device": "default",
+    "hud": true,
+    "packages": 0
+  },
+  "limitations": [
+    "Positions used server teleport fixtures; no full walking lap or physical mobile touch test.",
+    "Screenshot camera briefly controlled for framing; restored. Studio tool camera-reset notice is informational.",
+    "Initial existing order was already Dropped before clean test; those results discarded. Fresh tests passed after bounds correction.",
+    "No multiplayer/performance or real DataStore testing."
+  ],
+  "backup": "ServerStorage.PaketKilat_PreNavigation19 plus backups/main_game.before-navigation19.20261109.rbxl"
+}

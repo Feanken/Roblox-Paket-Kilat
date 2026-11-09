@@ -273,7 +273,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] J17-G: ekonomi terisolasi kondisi80→bonus6, replay ditolak, EconomyLimit tidak mengubah progres target; folder test dibuang.
 - [x] J17-H: desktop dan emulator750x323 semua teks muat, menu620x280; source/audit/screenshot/handoff tersimpan; akhirEdit/default/HUDaktif/0paket.
 - [ ] J17-I: simpan revisi DepotOffers17 ke main_game.rbxl dari sesi aktif; marker belum ada di disk.
-- [ ] J17-J: uji jalan penuh/HPsentuh/multiplayer/performa, balance bonus dan penerimaan pekerjaanLintasKota terkontrol.
+- [ ] J17-J: uji jalan penuh/HPsentuh/multiplayer/performa dan balance bonus; penerimaanLintasKota terkontrol diverifikasi pada N19.
 
 ## MobileMarket18 — tiga perbaikan permintaan pemilik
 
@@ -287,3 +287,16 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] M18-H: source/audit/screenshot/handoff disimpan; akhirEdit/default/HUDaktif/0paket/reviewfolderdihapus.
 - [ ] M18-I: simpan ulang sesi Studio; file447995byte baru mencakup sebagianM18 dan belum memuat source/market final.
 - [ ] M18-J: uji HP fisik/touch, semua kontrol menu, performa dan multiplayer; percobaan pointer Route/Toko belum menjadi bukti touch.
+
+## Navigation19 — arahan dan batas map
+
+- [x] N19-A: backup5source/place sebelum edit; satu LocalScript navigasi baru.
+- [x] N19-B: kompas/jarak pada header, lookahead rute, indikator siap, fallback posisi server untuk paket yang tidak tampil lokal.
+- [x] N19-C: mobile hanya menampilkan Primary yang bisa dipakai; Secondary mengisi slot kosong; tanpa panel baru.
+- [x] N19-D: PackageService/Recover memakai koordinat lokal DepotPad, lima tujuan valid dan titik di luar tetap outOfBounds.
+- [x] N19-E: bearing kamera0/90/180/-90 sesuai; rute302stud, ready✓ di depot/tujuan; title mobile muat.
+- [x] N19-F: LintasKota Rumah04 tetapCarrying/outOfBoundsfalse dan diantar100/56koin; fixture bukan perjalanan berjalan penuh.
+- [x] N19-G: paket dihilangkan sementara dari client tetap ditunjuk25stud; outOfBounds memintaRecover tanpa panah; Recover dari distrik sah tidak teleport, kondisi80/recovery1.
+- [x] N19-H: source/audit/screenshot/handoff tersimpan; akhirEdit/default/HUDaktif/0paket.
+- [ ] N19-I: simpan CourierCompass19 ke main_game.rbxl dari Studio aktif; file yang diperiksa belum memuat marker revisi ini.
+- [ ] N19-J: uji rute berjalan penuh/HP fisik/multiplayer/performa dan kondisi map yang jalannya dipindah individual.

@@ -40,6 +40,7 @@ function Delivery.Snapshot(player)
 	if o then
 		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus"}) do snapshot[key] = o[key] end
 		snapshot.destinationName=C.Routes[o.destinationId].Name
+  snapshot.packagePosition=o.package and o.package.Parent and o.package.Position or nil
 		local point=destinationPoint(o.destinationId)
 		snapshot.destinationPosition=point and point.Position
 		snapshot.currentBestTime=E.GetBest(player,o.destinationId,o.packageType)
@@ -149,7 +150,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			P.Recover(o)
    if T then T:Recovered(player,o) end
 			local r = root(player)
-			local relative = r.Position - W.Map.DepotPad.Position
+			local relative = W.Map.DepotPad.CFrame:PointToObjectSpace(r.Position)
 			local lo, hi = C.BoundsMin, C.BoundsMax
 			if relative.Y < 0 or relative.X < lo.X or relative.X > hi.X or relative.Z < lo.Z or relative.Z > hi.Z or relative.Y > hi.Y then
 				player.Character:PivotTo(W.Map.PrototypeSpawn.CFrame + C.RecoveryPlayerOffset)

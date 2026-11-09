@@ -89,7 +89,7 @@ function P.Start()
 		for _,o in pairs(D.orders) do
 			local p = o.package
 			if not p or not p.Parent or o.outOfBounds then continue end
-			local pos = p.Position - W.Map.DepotPad.Position
+			local pos = W.Map.DepotPad.CFrame:PointToObjectSpace(p.Position)
 			local lo, hi = C.BoundsMin, C.BoundsMax
 			if pos.X < lo.X or pos.Y < lo.Y or pos.Z < lo.Z or pos.X > hi.X or pos.Y > hi.Y or pos.Z > hi.Z then
 				D.OutOfBounds(o)

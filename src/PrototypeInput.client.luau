@@ -190,7 +190,7 @@ local function render()
 	if not synced or not state.profileReady or shopOpen then button(actions.Primary,"",shopOpen and "Toko dibuka" or "Memuat profil...",false)
 	elseif state.status=="Idle" then button(actions.Primary,"Start",near(state.depotPosition) and "Pilih pesanan" or "Ke depot",near(state.depotPosition),"E")
 	elseif state.status=="Carrying" then
-		button(actions.Primary,"Deliver",near(state.destinationPosition) and C.Labels.Deliver or "Ke rumah",near(state.destinationPosition),"E")
+		button(actions.Primary,"Deliver",near(state.destinationPosition) and "Antar paket" or "Ke rumah",near(state.destinationPosition),"E")
 		button(actions.Secondary,"Drop",C.Labels.Drop,aliveRoot()~=nil,"Q")
 	elseif state.status=="Dropped" then
 		local p=ownPackage()
@@ -199,10 +199,12 @@ local function render()
 		local remaining=math.max(0,C.RecoveryCooldown-(workspace:GetServerTimeNow()-(state.lastRecoveryAt or -100)))
 		button(actions.Secondary,"Recover",remaining>0 and string.format("Pulihkan (%d)",math.ceil(remaining)) or C.Labels.Recover,remaining<=0 and aliveRoot()~=nil,"R")
 	end
-	actions.Primary.Visible=not Theme.IsMobile(ui)or state.status~="Idle"or near(state.depotPosition)
+	actions.Primary.Visible=not Theme.IsMobile(ui)or actions.Primary:GetAttribute("ActionEnabled")==true
+ if Theme.IsMobile(ui)then actions.Secondary.Position=UDim2.fromOffset(0,actions.Primary.Visible and 52 or 0)end
  local dropped=state.status=="Dropped" and ownPackage() or nil
 	local markerTarget=state.status=="Idle" and state.depotPosition
-		or (dropped and not state.outOfBounds and dropped.Position or state.destinationPosition)
+		or (state.status=="Dropped"and not state.outOfBounds and(dropped and dropped.Position or state.packagePosition))
+  or (state.status=="Carrying"and state.destinationPosition)
 	label.Enabled=synced and state.profileReady==true and markerTarget~=nil
 		and not shopOpen and not state.outOfBounds
 		and (state.status~="Idle" or not near(state.depotPosition))

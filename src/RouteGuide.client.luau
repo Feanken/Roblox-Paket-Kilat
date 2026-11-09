@@ -12,6 +12,7 @@ local dots={}
 for i=1,16 do
  local d=Instance.new("Part") d.Name="RouteDot" d.Shape=Enum.PartType.Cylinder d.Size=Vector3.new(.08,.85,.85)
  d.Anchored=true d.CanCollide=false d.CanQuery=false d.CanTouch=false d.CastShadow=false
+ d:SetAttribute("RouteStep19",i)
  d.Material=Enum.Material.Neon d.Color=Color3.fromRGB(255,205,88) d.Transparency=1 d.Archivable=false d.Parent=folder dots[i]=d
 end
 local button=Instance.new("TextButton") button.Name="RouteToggle" button.Size=UDim2.fromOffset(84,44)
@@ -26,7 +27,7 @@ CAS:BindAction("PKSafeRoute",function(_,action)
  if action==Enum.UserInputState.Begin then toggle() end
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.G)
-local function hide() for _,dot in ipairs(dots) do dot.Transparency=1 end folder:SetAttribute("VisibleDots",0) end
+local function hide() for _,dot in ipairs(dots) do dot.Transparency=1 end folder:SetAttribute("VisibleDots",0)folder:SetAttribute("RemainingDistance19",nil) end
 local function flat(v) return Vector3.new(v.X,0,v.Z) end
 local function refresh()
  Theme.ToolbarLayout(ui)
@@ -54,6 +55,9 @@ local function refresh()
  end
  if not bestSegment or best>30 then return end
  local cursor=points[bestSegment]:Lerp(points[bestSegment+1],bestT)
+ local remaining=best+(points[bestSegment+1]-cursor).Magnitude
+ for i=bestSegment+1,#points-1 do remaining+=(points[i+1]-points[i]).Magnitude end
+ folder:SetAttribute('RemainingDistance19',remaining)
  local segment=bestSegment local count=0
  for _,dot in ipairs(dots) do
   local step=5

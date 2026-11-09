@@ -77,6 +77,7 @@ function T.Layout(ui,manual)
   ui.Actions.AnchorPoint=Vector2.new(1,.5)ui.Actions.Position=UDim2.new(1,-16,.47,0)ui.Actions.Size=UDim2.fromOffset(152,108)
   ui.Actions.Primary.Size=UDim2.fromOffset(152,48)ui.Actions.Secondary.Size=UDim2.fromOffset(152,48)ui.Actions.Secondary.Position=UDim2.fromOffset(0,58)
  end
+ if ui:GetAttribute("NavigationHeader19")then card.Title.Position=UDim2.fromOffset(mobile and 36 or 40,mobile and 8 or 13)card.Title.Size=UDim2.new(1,mobile and -146 or -152,0,18)end
  T.ToolbarLayout(ui)
  local backdrop=ui:FindFirstChild("ShopBackdrop")local camera=workspace.CurrentCamera
  if backdrop and camera then backdrop.Position=UDim2.fromOffset(-ui.AbsolutePosition.X,-ui.AbsolutePosition.Y)backdrop.Size=UDim2.fromOffset(camera.ViewportSize.X,camera.ViewportSize.Y)end

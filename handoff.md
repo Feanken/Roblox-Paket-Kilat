@@ -1,4 +1,30 @@
-# Pembaruan TERBARU — MobileMarket18 (9 November 2026)
+# Pembaruan TERBARU — Navigation19: kompas dan batas map (9 November 2026)
+
+Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. NavigationRevision=CourierCompass19. Tidak menambah panel HUD atau mengubah geometri map. Header TopCard kini berisi panah relatif kamera dan jarak; T.Layout mencadangkan slot20px lewat attributeNavigationHeader19. Saat rute aktif memakai waypoint ketiga, jika tidak ada memakai tujuan langsung. Jarak rute mencakup panjang jalur tersisa dan jarak bergabung kembali ke jalur. Ready mengikuti C.ActionDistance3D,✓hijau dan teks Pilih pesanan/Ambil ulang/Siap diantar. Tombol Primary mobile hanya muncul ketika bisa dipakai; Secondary naik ke slot kosong. Desktop Primary tetap ada. Dekat rumah berlabel Antar paket.
+
+Baru StarterPlayerScripts.PaketKilatNavigation19 dari CourierNavigation19.client.luau. Diubah: UITheme12, PrototypeInput.client, RouteGuide.client, DeliveryService, PackageService. Semua source final sinkron di disk. UITheme harus menyediakan slot sebelum navigator diaktifkan; Guide memberikan RouteStep19 pada dots dan RemainingDistance19. Tidak ada remote baru; LocalScript hanya meminta Sync dan membaca snapshot/posisi/camera. Kamera screenshot sempat diatur dan dikembalikan; notice tool resetCamera bukan error game.
+
+Snapshot active order menambah packagePosition. Fallback client tetap menunjuk paket sendiri ketika Part tidak tersedia lokal. Marker lama tidak lagi memalsukan lokasi paket di rumah tujuan ketika Dropped. OutOfBounds menampilkan Pulihkan paket dengan panah tersembunyi.
+
+## Perbaikan batas yang penting
+
+Saat map berotasi180°, PackageService memakai p.Position-DepotPad.Position untuk bounds dan D.Recover memakai pola sama. Akibatnya Rumah03–05 yang masih di kota dapat dianggap keluar batas, dan pemulihan dari distrik sah dapat memindahkan pemain ke spawn. Kedua lokasi kini memakai DepotPad.CFrame:PointToObjectSpace, batas konfigurasi tetap. Tidak mengubah harga/hadiah/damage/stamina. Snapshot routeBasis dari M18 dipertahankan.
+
+## Verifikasi
+
+Fresh depot Idle menjadi ready/Pilih pesanan/✓. Pengambilan LintasKota Rumah04 berhasil. Fixture di jalan menunjukkan modeRoute/jarak302; G menonaktifkan rute dan camera berputar0/90/180/-90 menghasilkan bearing≈0.00008/90.00009/-179.99991/-89.99992. Lima titik rumah masuk batas lokal, titik20stud di luar bounds tetap ditolak.
+
+Fixture karakter di Rumah04 menunggu.8detik: paket tetapCarrying/outOfBoundsfalse. Indikator siap dan Antar paket aktif; pengantaran100/56koin (25+15+6waktu+10kerja). Ini pengantaran terkontrol untuk J17, bukan klaim telah berjalan penuh. Uji dropped package: Part dilepas sementara dari parent hanya di client lalu dipulihkan; indikator tetap modeDirect/targetpaket/25stud melalui snapshot. Pemindahan package ke luar bounds benar menghasilkan outOfBounds. UIrecover tanpa panah. Recover saat pemain berada di Rumah04 tidak memindahkan karakter(XZshift0), kondisi80/recovery1/outOfBoundsfalse.
+
+Emulator iPhone750x323: header302stud muat, Primary tersembunyi ketika jauh, Secondary posisi0,0; tidak ada panel baru. Pemeriksaan fisik touch/performa/multiplayer belum dilakukan. Paket awal yang sudahDropped sebelum fresh test dibuang sebagai hasil harness; fresh tests setelah koreksi batas lulus. Console akhir Bootstrapready, plus notice pengembalian camera dari tool, tanpa script error.
+
+Backup ServerStorage.PaketKilat_PreNavigation19 berisi UITheme12,DeliveryService,Input,RouteGuide,PackageService; disk backups/main_game.before-navigation19.20261109.rbxl dan handoff.before-navigation19.md. Rollback navigator dengan menghapus/disable script baru dan memulihkan sumber terkait secara konsisten. AkhirEdit/Stop, simulator default, HUDaktif,0paket. Bukti verification/navigation19-audit.json dan navigation19-phone.jpg.
+
+**Simpan sekali lagi lewat File > Save to File sebelum menutup Studio.** File terakhir391011byte/2026-11-09T04:50:47.566Z sudah memiliki CompactPhone18/DistinctStalls18, tetapi CourierCompass19/NavigationHeader19 belum ada. Bukti verification/saved-navigation19.json. Source/dokumen/screenshot sudah di disk, terpisah dari save place.
+
+---
+
+# Arsip — MobileMarket18 (9 November 2026)
 
 Permintaan: HUD ponsel lebih ringan, cek aset melayang, bedakan isi lapak memakai aset gratis. Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. Revisi CompactPhone18/GeometryFeet18/DistinctStalls18.
 
