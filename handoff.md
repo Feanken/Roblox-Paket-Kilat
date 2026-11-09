@@ -1,4 +1,20 @@
-# Pembaruan TERBARU — City15: permukaan tunggal dan aset taman/pasar (9 November 2026)
+# Pembaruan TERBARU — Challenge16: target per sesi (9 November 2026)
+
+Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, world.ChallengeRevision=SessionTargets16. Permintaan random dipilih sebagai perbaikan arah permainan: Kurir Rapi (2pengantaran kondisi≥90/recovery0,+20), Jelajah Kota (1pengantaran routeBonus>0/recovery0,+25), Spesialis Rapuh (1Rapuh kondisi≥80/recovery0,+30). Target berurutan; satu pengantaran hanya untuk target aktif. Progres tidak turun karena gagal memenuhi syarat, tetap saat respawn, mulai ulang ketika keluar/sesi baru. Setelah target3 selesai tidak ada bonus lagi. Ini bukan target harian/persisten; koin tetap mengikuti profil lama.
+
+Baru: server SessionChallenges16 dari src/SessionChallenges16.luau dan StarterPlayerScripts.PaketKilatChallengeTracker16 dari src/ChallengeTracker16.client.luau. Berubah: EconomyService, MovementTuning, PaketKilatFeedback. Pasang module sebelum EconomyService yang memerlukannya. Challenges.Preview mengembalikan clone state/bonus/nama tanpa mutasi aktif, EconomyService memasukkan bonus ke result.total sebelum batas ekonomi lalu commit state bersama ledger; replay ditolak sebelum progres/bonus. Tidak ada remote tambahan. Snapshot mengirim target/progres/hadiah hanya ketika profil siap. MovementTuning fallback dan PK_Challenge* memakai adapter ConfigService lama, nilai sesi dikunci saat Join; cloud belum diuji/published.
+
+HUD SessionChallenge16 desktop300x90 topcenter, phone180x90; disembunyikan saat toko/hasil. Detail hasil menambahkan Target20 dan title TARGET TERCAPAI. Tidak mengubah map/aset/hazard/sprint.
+
+Verifikasi: pure progression memeriksa recovery/kondisi tidak lolos, preview tidak mengubah state lama, tahap1→2→3→complete dengan reward20/25/30,total75, complete berikutnya0. Integrasi dua pengantaran via remote normal dengan fixture posisi depot/tujuan: pertama kondisi100/progres1/2/48koin/bonus0; kedua Rapuh100/progresberikut/68koin/bonus20, replay keduanya saldo tetap. Ini bukan uji jalan penuh; tahap2/3 integrasi pengantaran belum dilakukan, hanya progression logic. Emulator750x323: tracker(285,12)/180x90, seluruh teks muat, tidak bertabrakan dengan kartu/toolbar; sesi baru0/2. Toko menyembunyikan tracker. Console final hanya Bootstrap ready.
+
+Source final kelima script/module sudah sinkron di disk. Backup ServerStorage.PaketKilat_PreChallenge16 (EconomyService,MovementTuning,Feedback), backups/main_game.before-challenge16.20261109.rbxl, handoff.before-challenge16.md. Bukti verification/challenge16-audit.json dan challenge16-{desktop,reward,phone}.jpg. AkhirEdit/Stop, simulator default, HUDaktif,0paket.
+
+**Simpan lewat File > Save to File sebelum menutup Studio.** File disk yang diperiksa masih312252byte/2026-11-09T02:25:56.039Z; marker SessionTargets16/SessionChallenges16/SingleSurface15 belum ada. verification/saved-challenge16.json merekam status ini. Source/bukti di disk bukan penyimpanan place.
+
+---
+
+# Arsip — City15: permukaan tunggal dan aset taman/pasar (9 November 2026)
 
 Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. Keluhan pemilik benar: uji G14 hanya memeriksa lantai hilang, tidak memeriksa overlap. Ada aspal legacy saling bertumpuk dan beberapa walk/terrace lama masih terlihat. Surface15 mengganti51permukaan lama (disembunyikan/colliderfalse/shadowfalse) dengan94patch persegi yang tidak bertumpuk. Prioritas aspal>paving>rumput, lantai depotTiles tetap. Seluruh top ground4478 dan paving pasar kontinu x2..98/z38..137; seam rumput sempit ditutup. Inti tanah Ground14 tetap menopang bagian bawah. Terrain voxel tidak diubah. Nama/posisi anchors rumah/depot/hadiah tidak berubah.
 

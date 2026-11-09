@@ -304,6 +304,16 @@ Kota mendapat dua blok fondasi, plaza pasar, lima bangunan fasad dengan tinggi b
 
 City15 menggantikan lapisan permukaan Ground14/legacy dengan partisi permukaan tunggal agar tidak ada z-fighting pada persimpangan dan jalur lama.
 
+
+
 Ganti tampilan pulau-pulau platform yang terputus dengan satu tapak daratan kontinu. Ground14 berisi tanah dasar dan rumput berukuran282x180, batas x[-136,146], z[-24,156]. Permukaan rumput4477.75 berada.25stud di bawah jalan/floor4478, sehingga tidak menimpa aspal atau interior. Lima HousePad rumput lama disembunyikan dan collider/shadow dimatikan; lantainya digantikan rumput kontinu, bukan dihapus. Posisi rumah/tujuan/depot dipertahankan. Air dan bed diperluas ke perimeter luar, bukan sela antarbangunan. Native Terrain voxels tidak disentuh; lingkungan ini menggunakan Parts.
 
 Tiga lantai blok City13 dan trotoar/jalur pintu menggunakan Pavement senada. Tambah sambungan rumah ke sidewalk, dua trotoar panjang, jalur sisi jalan tengah serta lintasan taman. Jalur barat digeser dari tiang jembatan. Planter/hedge yang berada di bawah ramp dipindah8stud ke arahZ. Migrasi satu kali src/UnifyGround14.luau menolak Ground14 yang sudah ada. Semua perubahan dapat dipulihkan dari backup Map sebelum migrasi.
+
+## Challenge16 — tiga target per sesi
+
+Tujuan: memberi arah permainan setelah onboarding. Tiga target berurutan: Kurir Rapi (dua pengantaran kondisi≥90 tanpa Recover, hadiah20), Jelajah Kota (satu pengantaran dengan cap bonus tanpa Recover, hadiah25), Spesialis Rapuh (satu paket Rapuh kondisi≥80 tanpa Recover, hadiah30). Pengantaran yang menyelesaikan target hanya dihitung untuk target aktif itu; tidak menyelesaikan beberapa target sekaligus. Pengantaran yang tidak memenuhi syarat tidak mengurangi progres.
+
+Progres disimpan pada sesi EconomyService, bertahan ketika respawn dan direset ketika keluar/server baru. Bonus koin ditambahkan ke hasil pengantaran lewat ledger lama; tidak ada tombol/remote klaim baru. Preview menghitung state baru tanpa memutasi state aktif; commit dilakukan setelah pemeriksaan batas ekonomi dan satu kali per order. Setelah seluruh target selesai, bonus target berikutnya nol. Koin mengikuti mode penyimpanan profil yang sudah ada; target ini bukan target harian atau progres persisten.
+
+MovementTuning menyediakan fallback dan opsi PK_ChallengeCleanCount/CleanCondition/FragileCondition/CleanReward/ExploreReward/FragileReward dari ConfigService. Nilai dikunci saat sesi dibuat, reward/count integer dan dibatasi. HUD target menampilkan progres/hadiah, tersembunyi saat toko/hasil terbuka, desktop300x90 dan landscape pendek180x90. Hasil pengantaran menampilkan TARGET TERCAPAI dan rincian bonus. Tidak mengubah map/aset atau membuat konfigurasi cloud baru.

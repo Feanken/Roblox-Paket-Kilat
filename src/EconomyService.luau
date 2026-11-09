@@ -1,4 +1,5 @@
 -- Persistent validated profile references; order ledger remains session-only.
+local Challenges=require(script.Parent.SessionChallenges16)
 local E={sessions={}}
 local C,Data
 local function copy(value) return value and table.clone(value) or nil end
@@ -6,7 +7,7 @@ function E.Init(config,data) C,Data=config,data end
 function E.Join(player)
  local profile=Data:Get(player.UserId)
  if not profile then return false end
- E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1}
+ E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,challenge=Challenges.New()}
  return true
 end
 function E.Has(player) return E.sessions[player.UserId]~=nil and Data:Ready(player.UserId) end
@@ -29,6 +30,7 @@ function E.Snapshot(player)
  if s and out.profileReady then
   local p=s.profile
   out.coins=p.coins out.deliveryCount=p.deliveryCount
+  out.challenge=Challenges.Snapshot(s.challenge)
   out.lastResult=copy(s.lastResult) out.bestTimes=table.clone(p.bestTimes)
   out.ownedCosmetics=table.clone(p.ownedCosmetics) out.equippedCosmetic=p.equippedCosmetic
  end
@@ -77,8 +79,11 @@ function E.Award(player,order,now)
 		recordEligible=eligible,recordReason=not eligible and "Recovered" or nil,
 		previousBest=previous,newRecord=newRecord,
 	}
-	-- Tidak ada yield: kunci kredit, koin, rekor, dan hasil bersifat satu transisi.
+	local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
+ result.challengeBonus=challengeBonus result.challengeName=challengeName result.total+=challengeBonus
+ -- Tidak ada yield: kunci kredit, koin, rekor, dan hasil bersifat satu transisi.
 	if p.coins+result.total>1000000000 or p.deliveryCount>=1000000000 then return false,"EconomyLimit" end
+ s.challenge=nextChallenge
  order.rewardProcessed=true
 	s.creditedOrders[order.orderId]=true
 	p.coins+=result.total

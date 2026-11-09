@@ -94,6 +94,11 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    title.Text=result.newRecord and "REKOR BARU!" or "PAKET SAMPAI!"
    reward.Text=string.format("+%d KOIN",result.total)
    detail.Text=string.format("Dasar %d + Kondisi %d + Waktu %d + Pos %d",result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0)
+   if (result.challengeBonus or 0)>0 then
+    detail.Text..=string.format(" + Target %d",result.challengeBonus)
+    title.Text="TARGET TERCAPAI!"
+   end
+   detail.TextWrapped=true
    detail.TextSize=11
    nextStep.Text=snapshot.nextOrder and ("Berikut: "..snapshot.nextOrder.destinationName.." · ke depot") or "Kembali ke depot untuk pesanan berikutnya"
    if tween then tween:Cancel() end

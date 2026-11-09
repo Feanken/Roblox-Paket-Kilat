@@ -1,0 +1,120 @@
+{
+  "revision": "SessionTargets16",
+  "studioId": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "date": "2026-11-09",
+  "scope": "Session-only challenge progress; coins use existing validated delivery ledger. No map changes.",
+  "steps": [
+    {
+      "name": "Kurir Rapi",
+      "goal": "2 deliveries condition >=90 without recovery",
+      "reward": 20
+    },
+    {
+      "name": "Jelajah Kota",
+      "goal": "1 delivery with any route stamp bonus and no recovery",
+      "reward": 25
+    },
+    {
+      "name": "Spesialis Rapuh",
+      "goal": "1 fragile delivery condition >=80 and no recovery",
+      "reward": 30
+    }
+  ],
+  "pureChecks": {
+    "totalChallengeReward": 75,
+    "pureChecksPassed": true
+  },
+  "firstDelivery": {
+    "challenge": {
+      "count": 3,
+      "name": "Kurir Rapi",
+      "index": 1,
+      "progress": 1,
+      "target": 2,
+      "description": "Antar 2 paket kondisi ≥90",
+      "complete": false,
+      "reward": 20
+    },
+    "result": {
+      "challengeBonus": 0,
+      "orderId": "1ee32c0d-65ef-4d59-b0a6-e2e502d7d099",
+      "routeBonus": 0,
+      "completedAt": 1794194811.202515,
+      "recordEligible": true,
+      "conditionBonus": 15,
+      "recoveryCount": 0,
+      "total": 48,
+      "packageType": "Biasa",
+      "destinationName": "Rumah Bu Sari",
+      "timeBonus": 8,
+      "duration": 7.182499885559082,
+      "condition": 100,
+      "newRecord": true,
+      "bestTime": 7.182499885559082,
+      "baseReward": 25,
+      "destinationId": "Rumah01"
+    },
+    "replayUnchanged": true
+  },
+  "secondDelivery": {
+    "challenge": {
+      "count": 3,
+      "name": "Jelajah Kota",
+      "index": 2,
+      "progress": 0,
+      "target": 1,
+      "description": "Antar paket dengan cap bonus",
+      "complete": false,
+      "reward": 25
+    },
+    "result": {
+      "challengeBonus": 20,
+      "orderId": "726907a9-27ab-4159-9c52-4822c81004da",
+      "routeBonus": 0,
+      "completedAt": 1794194824.819051,
+      "recordEligible": true,
+      "conditionBonus": 15,
+      "recoveryCount": 0,
+      "total": 68,
+      "packageType": "Rapuh",
+      "destinationName": "Rumah Pak Budi",
+      "timeBonus": 8,
+      "challengeName": "Kurir Rapi",
+      "duration": 7.215924978256226,
+      "condition": 100,
+      "newRecord": true,
+      "bestTime": 7.215924978256226,
+      "baseReward": 25,
+      "destinationId": "Rumah02"
+    },
+    "replayUnchanged": true
+  },
+  "phone": {
+    "progressFits": true,
+    "root": "750, 323",
+    "clearOfCard": true,
+    "clearOfToolbar": true,
+    "goal": "Antar 2 paket kondisi ≥90",
+    "position": "285, 12",
+    "progress": "0/2 selesai · hadiah +20",
+    "titleFits": true,
+    "goalFits": true,
+    "size": "180, 90"
+  },
+  "shopHidesTracker": true,
+  "newSessionResetsProgress": true,
+  "finalRuntimeErrors": 0,
+  "final": {
+    "mode": "Edit",
+    "device": "default",
+    "hud": true,
+    "packages": 0
+  },
+  "limitations": [
+    "Delivery integration used depot/destination teleport fixtures, not full walking laps.",
+    "Stages2/3 exercised through pure progression checks; actual delivery integration exercised stage1 completion.",
+    "No physical touch, multiplayer, performance or published ConfigService override test.",
+    "Progress resets on leaving server; challenge bonus coins follow existing profile storage mode."
+  ],
+  "backup": "ServerStorage.PaketKilat_PreChallenge16 + backups/main_game.before-challenge16.20261109.rbxl"
+}

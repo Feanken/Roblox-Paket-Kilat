@@ -249,3 +249,15 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] C15-G: source, metadata aset, screenshot, audit/handoff disimpan; akhirEdit/HUDaktif/0paket.
 - [ ] C15-H: simpan .rbxl dari sesi aktif; marker SingleSurface15/CreatorCity15 belum ada di file disk.
 - [ ] C15-I: playtest semua rute, HP sentuh/performa/multiplayer dan penilaian visual pemilik.
+
+## Challenge16 — target sesi
+
+- [x] M16-A: backup source dan place, spesifikasi target sesi/reward/reset.
+- [x] M16-B: module progres server murni, integrasi snapshot dan ledger; tidak ada remote klaim baru.
+- [x] M16-C: HUD progres desktop/HP dan rincian bonus hasil, hide saat toko/hasil.
+- [x] M16-D: logic tiga target, kriteria gagal/Recover, preview tidak memutasi, reward20/25/30, complete tidak memberi bonus lagi.
+- [x] M16-E: dua pengantaran fixture: progres1/2 lalu target2; hadiah48 lalu68 termasuk bonus20, replay tetap.
+- [x] M16-F: emulator750x323 teks muat, bebas dari kartu/toolbar; sesi baru0/2; startup final tanpa error.
+- [x] M16-G: source/audit/screenshot/handoff disimpan; akhirEdit/default/HUDaktif/0paket.
+- [ ] M16-H: simpan SessionTargets16 ke file main_game.rbxl dari Studio aktif; marker belum ada pada file disk.
+- [ ] M16-I: playtest manusia/HP, balance reward; integrasi pengantaran tahap2/3 dan ConfigService published belum diuji.

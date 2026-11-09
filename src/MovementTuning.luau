@@ -1,9 +1,9 @@
 -- Server-only balance defaults. Published experiences may override through ConfigService.
 local T={}
 local defaults={SprintMultiplier=1.4,StaminaDrain=18,StaminaRegen=16,RestartAt=20,
- GripDrain=14,FragileGripDrain=22,GripRegen=10,IntentLease=1.2,IntentInterval=.12,CityStampReward=6,CityStampLimit=2,CityStampRadius=6}
+ GripDrain=14,FragileGripDrain=22,GripRegen=10,IntentLease=1.2,IntentInterval=.12,CityStampReward=6,CityStampLimit=2,CityStampRadius=6,ChallengeCleanCount=2,ChallengeCleanCondition=90,ChallengeFragileCondition=80,ChallengeCleanReward=20,ChallengeExploreReward=25,ChallengeFragileReward=30}
 local bounds={SprintMultiplier={1,1.8},StaminaDrain={1,60},StaminaRegen={1,60},RestartAt={5,80},
- GripDrain={1,60},FragileGripDrain={1,80},GripRegen={1,60},IntentLease={.8,2},IntentInterval={.05,.3},CityStampReward={0,10},CityStampLimit={1,2},CityStampRadius={3,8}}
+ GripDrain={1,60},FragileGripDrain={1,80},GripRegen={1,60},IntentLease={.8,2},IntentInterval={.05,.3},CityStampReward={0,10},CityStampLimit={1,2},CityStampRadius={3,8},ChallengeCleanCount={1,5},ChallengeCleanCondition={50,100},ChallengeFragileCondition={50,100},ChallengeCleanReward={0,50},ChallengeExploreReward={0,50},ChallengeFragileReward={0,50}}
 local values=table.clone(defaults)
 function T.Get()return table.clone(values)end
 function T.Start()
