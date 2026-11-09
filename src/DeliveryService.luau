@@ -222,7 +222,7 @@ function Delivery.Cancel(player, code)
  if T then T:Cancelled(player) end
 	if H then H.Clear(player) end
 	local o = Delivery.orders[player.UserId]
-	if o then P.Destroy(o); Delivery.orders[player.UserId] = nil end
+	if o then E.InterruptRun(player); P.Destroy(o); Delivery.orders[player.UserId] = nil end
 	Delivery.requests[player.UserId] = nil
 	Delivery.Publish(player, code or "Cancelled")
 end

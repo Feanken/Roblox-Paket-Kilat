@@ -329,3 +329,17 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] R21-I: fresh StudioMemory coins0/deliveries0/Grip0/noOffer, console fresh Bootstrap saja; source/audit/screenshot/handoff disimpan.
 - [ ] R21-J: File > Save to File untuk NeighborRelay21; file395960byte telah memuat Navigation19/Gear20, belum Relay21.
 - [ ] R21-K: playtest manusia/balance target waktu/harga, rute lain penuh, HP touch fisik, multiplayer dan performa; belum diverifikasi.
+
+## Quality22 — hasil pengantaran dan pelanggan
+
+- [x] Q22-A: backup4source aktif/place/handoff sebelum edit; salinan rollback ServerStorage4source diverifikasi saat akhir.
+- [x] Q22-B: penilaian server3/2/1bintang, target waktu sesuai rute, tuning terkunci per sesi; rumus koin/rekor/schema2 tetap.
+- [x] Q22-C: rangkaian rapi/terbaik sesi, commit bersama ledger; replay/batas ekonomi tidak memutasi rangkaian.
+- [x] Q22-D: pengujian terisolasi6kasus penilaian, preview murni, batas9999, formula hadiah lama, dirtyWrites3 untuk3award.
+- [x] Q22-E: runtime3bintang→2bintang(titipan)→1bintang(Drop/Recover/Pickup/Deliver), rangkaian1→2→0, terbaik2 dan replay tanpa kredit.
+- [x] Q22-F: cancelIdle menjaga rangkaian; cancelActive mereset current dan menjaga best; tidak ada field rangkaian di profil.
+- [x] Q22-G:5pelanggan/56Part, lantai aktual dan tanpa collision; kaki semua terukur≈.0298stud di atas permukaan, animasi/bubble mengikuti hasil sah.
+- [x] Q22-H: panel330x212 muat pada Galaxy705x280, semua teks muat; actualdesktop×menutup hasil dan memperlihatkan bubble; replay UI tidak mengulang reaksi.
+- [x] Q22-I: finalfreshStudioMemory coins0/delivery0/Grip0/current0/best0, consoleBootstrap saja, Edit/default/0paket/tanpa fixture; source/audit/gambar/handoff tersimpan.
+- [ ] Q22-J: File > Save to File; binary395960byte belum memuat Relay21 maupun CustomerRatings22.
+- [ ] Q22-K: uji HP touch fisik, semua orientasi/perangkat, multiplayer/performa, balance penilaian dan playtest manusia; phone×belum terverifikasi sebagai aksi yang ditargetkan.

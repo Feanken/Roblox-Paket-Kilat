@@ -1,4 +1,44 @@
-# Pembaruan TERBARU — Relay21: titipan antar rumah (9 November 2026)
+# Pembaruan TERBARU — Quality22: penilaian dan pelanggan (9 November 2026)
+
+Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. FeedbackRevision=CustomerRatings22. Pengantaran kini dinilai3bintang ISTIMEWA(kondisi≥95/tanpaRecover/dalamTarget),2bintang RAPI(kondisi≥80/tanpaRecover),atau1bintang TUNTAS. Target memakai target depot atau jalur relay sesuai order. Tidak menambah/mengurangi koin di luar rumus lama, mengubah rekor, atau menambah field profil. Rangkaian rapi dan terbaik sesi memberi umpan balik setelah pengantaran;5pelanggan dekoratif bereaksi di depan rumah.
+
+## Source dan rollback
+
+Baru server ModuleScript DeliveryRating22 dari src/DeliveryRating22.luau dan LocalScript PaketKilatCustomers22 dari src/Customers22.client.luau. Diubah EconomyService, MovementTuning, DeliveryService dan PaketKilatFeedback(src/DeliveryFeedback.client.luau). Keenam source sudah dibandingkan identik dengan file disk. src/UpgradeQuality22.luau mereproduksi marker revisi. Pasang module rating sebelum menjalankan EconomyService; Customers22 memakai Config/UITheme12/GUI/map yang sudah ada.
+
+Backup sumber praedit di backups/quality22-sources/ dan ServerStorage.PaketKilat_PreQuality22(4source). Backup binary/handoff: backups/main_game.before-quality22.20261109.rbxl dan handoff.before-quality22.md. Binary masih versi tersimpan sebelum Relay21; untuk rollback hanya Quality22, utamakan4source praedit yang aktif. Stop Play, pulihkan keempat source dan hapus DeliveryRating22/PaketKilatCustomers22/marker FeedbackRevision; GUI hasil dan pelanggan dibangun runtime sehingga hilang saat Stop. Profil tetap schema2.
+
+## Aturan kualitas dan ekonomi
+
+Module rating bersifat murni. Ambang melalui PK_RatingCleanCondition80(bounds50..95) dan PK_RatingExcellentCondition95(bounds80..100), dikunci pada EconomyService.Join. Ambang excellent memakai max(clean,excellent). Snapshot menambah qualityRun{current,best}; result menambah rating{stars,name,clean,onTime},cleanStreak,bestCleanStreak. Nilai hanya session state dan reset pada server/sesi baru. Pengantaran2/3bintang menaikkan current(max9999),1bintang meresetnya; best dipertahankan. Delivery.Cancel mereset current hanya jika ada order aktif, tanpa menghukum idle. Grade/rangkaian dipreview sebelum guard ekonomi dan dikomit bersama ledger; replay/overflow tidak mengubahnya. Tidak ada remote baru atau hadiah bintang.
+
+Panel hasil330x212 tampil5detik, memiliki×44px, bintang/petunjuk/koin berhitung/rincian2baris/rangkaian/best/aksi berikut. Tetap memakai panel sementara yang lama; tidak ada HUD permanen tambahan. Controller feedback lama menangani sembunyi HUD/aksi, dan movement controller lama menyembunyikan meter/Sprint saat hasil tampil.
+
+## Pelanggan
+
+Lima model lokal, total56Part:3model12Part dan2model10Part. Warna baju sesuai rumah, rambut dengan sanggul untuk Bu Sari/Rina/Dewi. Part anchored,noncollision,nonquery,nontouch. Penempatan mencari dari6offset samping DestinationPoint aktual, raycast lantai normalY>.9/selisihheight<1.5 dan overlap ruang badan bebas collider. Kaki diberi jarak.03stud; tidak menempatkan NPC di atas pot/fence yang menghalangi. Jika tidak menemukan lantai yang sah, model tetap disembunyikan dan mencoba lagi. Mengikuti CFrame titik rumah jika map berpindah.
+
+Jarak>65stud menyembunyikan Part; pose hanya diperbarui saat dekat pada20Hz, bukan Humanoid/pathfinding. Pelanggan menghadap pemain, melambaikan tangan12detik setelah Delivered baru, mengucapkan respons sesuai grade dan menyebut tawaran titipan jika ada. Bubble220x64 hanya ketika dekat40stud, tertutup selama hasil/toko/papan terbuka, tanpa nameplate permanen. Guard orderId mencegah reaksi ulang dari replay/Sync. Tidak memiliki kemampuan transaksi atau pengaruh fisika. Model dekoratif buatan sendiri, tanpa aset vendor atau script eksternal.
+
+## Verifikasi
+
+GameId0/StudioMemory saja. Module terisolasi clone+mockData:6kasus penilaian (100/20s→3;95/45s→3;94/1s→2;80/99s→2;79/1s→1;100/Recover→1), preview tidak memutasi, cap9999, replayAlreadyRewarded tanpa dirty tambahan, overflowEconomyLimit tanpa commit.3award→3dirty. Semua total sama dengan jumlah komponen rumus lama. Interrupt current2/best4→0/4.
+
+Runtime aktual melalui normal Script sementara: regular fixture grade3/streak1/+49; relay fixture grade2/streak2/+58 dan recordReasonRelayRoute tetap. Percobaan relay pertama kadaluwarsa selama QA; retry membuat tawaran Relay21.Make server khusus uji, bukan klaim tawaran alami masih berlaku. Grade2 memakai condition90/durasi lewat target yang diatur fixture. Kasus ketiga menggunakan transisi Drop/Recover/Pickup/Deliver sungguhan dengan teleport posisi antar langkah: kondisi80/Recover1 menghasilkan1bintang/current0/best2/+46; replayNotOwnerOrStale tidak membayar ulang. Bukan bukti perjalanan manusia penuh.
+
+Pelanggan5lokasi diperiksa dengan kunjungan posisi client: groundedtrue, visibletrue, collision/query/touch0; kaki≈.029805stud di atas lantai seluruhnya. Pada source final jumlahPart56. PhoneGalaxyA06 LandscapeSensor/CoreUISafeInsets,Root705x280: hasil330x212 pada(187.5,28.4),bawah240.4; seluruh teks muat, screenshot quality22-phone.jpg. Dialog Bu Sari juga TextFits. Duplikasi publishDelivered server untuk order sama ditambahSync: reactionCount tetap1 dan hasil tidak tampil ulang. Ini simulasi replay UI dari server uji, bukan client dapat memberikan hasil.
+
+Percobaan×HP melihat dismissedOrder berbeda dari order target dan reactionCount tambahan saat permainan berjalan; tidak dihitung sebagai validasi tombol HP yang ditargetkan. Fresh desktop terkontrol: pointer×berhasil, dismissedOrder persisdialogueOrder, hasilhidden, wavingtrue/bubbletrue/dialogueFits. Screenshot NPC pertama kameranya berada di dalam rumah sehingga tidak dipakai; exterior quality22-customer.jpg disimpan. Screenshot desktop grade2 disimpan quality22-desktop.jpg.
+
+Cancel integration memakai fixture current2/best4 saja tanpa koin: cancelIdle menjaga2, cancelActive→0/4, profile schema2 valid/tidak ada qualityRun. Fresh terakhir coins0/delivery0/Grip0/current0/best0/Idle,5pelanggan56Part, consoleBootstrapready saja. Seluruh fixture runtime hilang saatStop. AkhirEdit/default/HUDaktif/0paket, backup4source diverifikasi. Belum diuji HP fisik/touch, multiplayer/performa, balance grade, publishedDataStore atau semua rute berjalan manusia.
+
+Bukti verification/quality22-audit.json,quality22-phone.jpg,quality22-desktop.jpg,quality22-customer.jpg,saved-quality22.json. Tidak ada publikasi, perubahan cloud config, schema baru atau data pemain produksi.
+
+**Simpan sekali lagi lewat File > Save to File sebelum menutup Studio.** Binary terakhir395960byte/2026-11-09T06:56:02.345Z memuat Gear20/Navigation19 tetapi NeighborRelay21 dan CustomerRatings22 belum ada. Dua pembaruan itu ada di Studio aktif; source/dokumen/bukti sudah di disk.
+
+---
+
+# Arsip — Relay21: titipan antar rumah (9 November 2026)
 
 Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. DeliveryFlowRevision=NeighborRelay21. Memperbaiki perjalanan kosong yang berulang: setelah pesanan depot selesai, pelanggan menawarkan satu titipan Biasa ke rumah lain. Ambil di titik rumah sumber, atau Lewati dan kembali ke depot. Tawaran default60detik dengan countdown/bar emas pada kartu lama. E/tombolAmbil menerima, Q/tombolLewati menolak. Tanpa panel HUD permanen baru. Setelah titipan selesai tidak ada titipan berikutnya; maksimal satu lanjutan per pesanan depot.
 

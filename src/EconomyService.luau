@@ -3,6 +3,7 @@ local Challenges=require(script.Parent.SessionChallenges16)
 local Offers=require(script.Parent.JobOffers17)
 local Tuning=require(script.Parent.MovementTuning)
 local Gear=require(script.Parent.Gear20)
+local Rating=require(script.Parent.DeliveryRating22)
 local E={sessions={}}
 local C,Data
 local function copy(value) return value and table.clone(value) or nil end
@@ -10,7 +11,7 @@ function E.Init(config,data) C,Data=config,data end
 function E.Join(player)
  local profile=Data:Get(player.UserId)
  if not profile then return false end
- E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New(),gearTuning=Tuning.Get()}
+ E.sessions[player.UserId]={profile=profile,creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New(),gearTuning=Tuning.Get(),qualityRun=Rating.New(),ratingTuning=Tuning.Get()}
  return true
 end
 function E.Has(player) return E.sessions[player.UserId]~=nil and Data:Ready(player.UserId) end
@@ -55,6 +56,7 @@ function E.Snapshot(player)
   out.coins=p.coins out.deliveryCount=p.deliveryCount
   out.challenge=Challenges.Snapshot(s.challenge)
   out.gear=E.GearQuote(player)
+  out.qualityRun=table.clone(s.qualityRun)
   out.jobOffers={}
   for _,offer in ipairs(E.PeekOffers(player))do table.insert(out.jobOffers,{id=offer.id,name=offer.name,description=offer.description,destinationName=C.Routes[offer.DestinationId].Name,destinationId=offer.DestinationId,packageType=offer.PackageType,jobBonus=offer.JobBonus})end
   out.lastResult=copy(s.lastResult) out.bestTimes=table.clone(p.bestTimes)
@@ -110,9 +112,13 @@ function E.Award(player,order,now)
  result.jobName=order.jobName or 'Reguler' result.total+=result.jobBonus
  local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
  result.challengeBonus=challengeBonus result.challengeName=challengeName result.total+=challengeBonus
+ result.rating=Rating.Evaluate(result,order.targetSeconds or route.TargetSeconds,s.ratingTuning)
+ local nextRun=Rating.Advance(s.qualityRun,result.rating)
+ result.cleanStreak=nextRun.current result.bestCleanStreak=nextRun.best
  -- Tidak ada yield: kunci kredit, koin, rekor, dan hasil bersifat satu transisi.
 	if p.coins+result.total>1000000000 or p.deliveryCount>=1000000000 then return false,"EconomyLimit" end
  s.challenge=nextChallenge
+ s.qualityRun=nextRun
  order.rewardProcessed=true
 	s.creditedOrders[order.orderId]=true
 	p.coins+=result.total
@@ -124,4 +130,8 @@ function E.Award(player,order,now)
 	return true,copy(result)
 end
 function E.Leave(player) E.sessions[player.UserId]=nil end
+function E.InterruptRun(player)
+ local s=E.sessions[player.UserId]
+ if s then s.qualityRun={current=0,best=s.qualityRun.best} end
+end
 return E

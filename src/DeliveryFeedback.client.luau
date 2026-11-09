@@ -15,7 +15,7 @@ local function text(parent,name,size,pos,value,fontSize)
  t.Text=value t.TextColor3=Color3.fromRGB(247,239,217) t.Font=Enum.Font.GothamBold t.TextSize=fontSize t.Parent=parent return t
 end
 local toast=Instance.new("Frame") toast.Name="DeliveryCelebration" toast.AnchorPoint=Vector2.new(.5,.5)
-toast.Position=UDim2.fromScale(.5,.48) toast.Size=UDim2.fromOffset(330,148)
+toast.Position=UDim2.fromScale(.5,.48) toast.Size=UDim2.fromOffset(330,212)
 toast.BackgroundColor3=Color3.fromRGB(25,76,73) toast.BorderSizePixel=0 toast.Visible=false toast.ZIndex=20 toast.Active=false toast.Parent=ui
 local corner=Instance.new("UICorner") corner.CornerRadius=UDim.new(0,16) corner.Parent=toast
 local stroke=Instance.new("UIStroke") stroke.Color=Color3.fromRGB(241,198,99) stroke.Thickness=2 stroke.Parent=toast
@@ -24,8 +24,17 @@ local title=text(toast,"Title",UDim2.new(1,-24,0,24),UDim2.fromOffset(12,12),"PA
 local reward=text(toast,"Reward",UDim2.new(1,-24,0,44),UDim2.fromOffset(12,38),"",32)
 local detail=text(toast,"Detail",UDim2.new(1,-24,0,24),UDim2.fromOffset(12,82),"",13)
 local nextStep=text(toast,"Next",UDim2.new(1,-24,0,26),UDim2.fromOffset(12,111),"",12)
-for _,t in ipairs({title,reward,detail,nextStep}) do t.ZIndex=21 end
+local stars=text(toast,'Rating22',UDim2.new(1,-24,0,20),UDim2.fromOffset(12,32),'',18)
+local ratingHint=text(toast,'RatingHint22',UDim2.new(1,-24,0,14),UDim2.fromOffset(12,54),'',10)
+local streak=text(toast,'Streak22',UDim2.new(1,-24,0,20),UDim2.fromOffset(12,145),'',11)
+for _,t in ipairs({title,reward,detail,nextStep,stars,streak,ratingHint}) do t.ZIndex=21 t.TextWrapped=true end
 Theme.Result(toast)
+title.Size=UDim2.new(1,-76,0,20)
+reward.Position=UDim2.fromOffset(12,72)reward.Size=UDim2.new(1,-24,0,34)reward.TextSize=32
+detail.Position=UDim2.fromOffset(12,110)detail.Size=UDim2.new(1,-24,0,30)detail.TextSize=11
+nextStep.Position=UDim2.fromOffset(12,174)nextStep.Size=UDim2.new(1,-24,0,26)
+stars.TextColor3=Theme.Ink streak.TextColor3=Theme.Muted ratingHint.TextColor3=Theme.Muted
+local close=Instance.new('TextButton')close.Name='Close22'close.Text='×'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-48,0,4)close.ZIndex=22 close.Parent=toast Theme.ToolbarButton(close)close.TextSize=22
 local impact=Instance.new("TextLabel") impact.Name="PackageNotice" impact.AnchorPoint=Vector2.new(.5,0)
 impact.Position=UDim2.fromScale(.5,.06) impact.Size=UDim2.fromOffset(310,36) impact.Visible=false
 impact.BackgroundColor3=Color3.fromRGB(106,52,42) impact.TextColor3=Color3.fromRGB(255,234,201)
@@ -37,6 +46,7 @@ highlight.DepthMode=Enum.HighlightDepthMode.Occluded highlight.FillTransparency=
 highlight.OutlineTransparency=.1 highlight.FillColor=Color3.fromRGB(255,208,96)
 highlight.OutlineColor=Color3.fromRGB(255,208,96) highlight.Parent=workspace
 local expires,noticeExpires=0,0
+local countFrom,countTotal=0,0
 local tween
 local function ownPackage()
  local world=workspace:FindFirstChild("PaketKilat")
@@ -47,7 +57,8 @@ local function ownPackage()
 end
 local function refresh()
  local width,height=ui.AbsoluteSize.X,ui.AbsoluteSize.Y
- toast.Size=UDim2.fromOffset(math.min(330,math.max(260,width-40)),148)
+ toast.Size=UDim2.fromOffset(math.min(330,math.max(260,width-40)),212)
+ if countTotal>0 then reward.Text=string.format('+%d KOIN',math.floor(countTotal*math.clamp((os.clock()-countFrom)/.65,0,1)))end
  -- Keep transient notices below the upper HUD on short landscape screens.
  impact.Position=UDim2.new(.5,0,0,math.min(216,height*.59))
  impact.Size=UDim2.fromOffset(math.min(310,width-32),36)
@@ -98,13 +109,15 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
   -- Delivered uses the server order ID/result. Replay failures never trigger this branch.
   local key=result.orderId or snapshot.orderId or (tostring(result.destinationName)..":"..tostring(result.duration)..":"..tostring(snapshot.deliveryCount))
   if key~=shownOrder then
-   shownOrder=key expires=os.clock()+4.5 noticeExpires=0
+   shownOrder=key expires=os.clock()+5 noticeExpires=0
    title.Text=result.newRecord and "REKOR BARU!" or "PAKET SAMPAI!"
-   reward.Text=string.format("+%d KOIN",result.total)
-   detail.Text=string.format("Dasar %d + Kondisi %d + Waktu %d + Pos %d",result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0)
-   if (result.jobBonus or 0)>0 then detail.Text..=string.format(" + Kerja %d",result.jobBonus)end
+   countFrom=os.clock()countTotal=result.total reward.Text='+0 KOIN'
+   local rating=result.rating
+   stars.Text=rating and (string.rep('★',rating.stars)..string.rep('☆',3-rating.stars)..' · '..rating.name)or 'PAKET TERKIRIM'
+   ratingHint.Text=rating and rating.stars==3 and 'Paket utuh dan tiba tepat waktu.'or rating and rating.stars==2 and(not rating.onTime and 'Paket aman. Coba tiba lebih cepat.'or 'Paket aman. Jaga kondisinya lebih tinggi.')or result.recoveryCount>0 and 'Coba antar tanpa memulihkan paket.'or 'Paket terkirim. Kurangi benturan.'
+   streak.Text=string.format('Rapi beruntun %d · terbaik sesi %d',result.cleanStreak or 0,result.bestCleanStreak or 0)
+   detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\nPos %d · Kerja %d · Target %d',result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0,result.jobBonus or 0,result.challengeBonus or 0)
    if (result.challengeBonus or 0)>0 then
-    detail.Text..=string.format(" + Target %d",result.challengeBonus)
     title.Text="TARGET TERCAPAI!"
    end
    detail.TextWrapped=true
@@ -123,6 +136,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
  end
  refresh()
 end)
+connect(close.Activated,function()toast:SetAttribute('DismissedOrder22',shownOrder)expires=0 refresh()end)
 local elapsed=0
 connect(RunService.Heartbeat,function(dt) elapsed+=dt if elapsed>=.1 then elapsed=0 refresh() end end)
 connect(player.CharacterAdded,function() expires=0 noticeExpires=0 highlight.Enabled=false end)

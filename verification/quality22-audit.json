@@ -1,0 +1,292 @@
+{
+  "stage": "Quality22",
+  "date": "2026-11-09",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "checks": {
+    "q22isolated": {
+      "Isolated": {
+        "economyLimitNoCommit": true,
+        "previewNoMutation": true,
+        "replayRejected": true,
+        "legacyRewardFormula": true,
+        "streakCap": 9999,
+        "ratingCases": 6,
+        "dirtyWrites": 3,
+        "interruptBestPreserved": true
+      }
+    },
+    "q22npcInitial": {
+      "1": {
+        "floor": "Workspace.PaketKilat.Map.HousePad",
+        "id": "Rumah01",
+        "grounded": true,
+        "collision": 0,
+        "parts": 10
+      },
+      "2": {
+        "floor": "Workspace.PaketKilat.Map.Rumah02.HousePad2",
+        "id": "Rumah02",
+        "grounded": true,
+        "collision": 0,
+        "parts": 10
+      },
+      "3": {
+        "floor": "Workspace.PaketKilat.Map.Rumah03.HousePad3",
+        "id": "Rumah03",
+        "grounded": true,
+        "collision": 0,
+        "parts": 10
+      },
+      "4": {
+        "floor": "Workspace.PaketKilat.Map.Rumah04.HousePad4",
+        "id": "Rumah04",
+        "grounded": true,
+        "collision": 0,
+        "parts": 10
+      },
+      "5": {
+        "floor": "Workspace.PaketKilat.Map.Rumah05.HousePad5",
+        "id": "Rumah05",
+        "grounded": true,
+        "collision": 0,
+        "parts": 10
+      }
+    },
+    "q22desktopUI": {
+      "streak": "Rapi beruntun 1 · terbaik sesi 1",
+      "bubble": false,
+      "hint": "Paket utuh dan tiba tepat waktu.",
+      "bad": [],
+      "reaction": 3,
+      "visible": true,
+      "waving": true,
+      "rating": "★★★ · ISTIMEWA",
+      "reward": "+49 KOIN",
+      "size": "330, 212"
+    },
+    "q22gradeBUI": {
+      "visible": true,
+      "rating": "★★☆ · RAPI",
+      "streak": "Rapi beruntun 2 · terbaik sesi 2"
+    },
+    "q22gradeCUI": {
+      "streak": "Rapi beruntun 0 · terbaik sesi 2",
+      "bad": [],
+      "rating": "★☆☆ · TUNTAS",
+      "visible": true,
+      "hint": "Coba antar tanpa memulihkan paket."
+    },
+    "q22liveResults": {
+      "LiveA": {
+        "streak": 1,
+        "total": 49,
+        "rating": {
+          "stars": 3,
+          "onTime": true,
+          "name": "ISTIMEWA",
+          "clean": true
+        },
+        "destination": "Rumah01",
+        "relay": true,
+        "orderId": "0760b18a-5e85-4a02-96dd-c44b7ae52167",
+        "best": 1,
+        "coins": 49
+      },
+      "LiveC": {
+        "streak": 0,
+        "total": 46,
+        "orderId": "9a67b7b8-d135-4844-a9a9-51d0a8ee3723",
+        "condition": 80,
+        "stars": 1,
+        "noReplayCredit": true,
+        "recovery": 1,
+        "destination": "Rumah02",
+        "best": 2,
+        "replayCode": "NotOwnerOrStale"
+      },
+      "Isolated": {
+        "economyLimitNoCommit": true,
+        "previewNoMutation": true,
+        "replayRejected": true,
+        "legacyRewardFormula": true,
+        "streakCap": 9999,
+        "ratingCases": 6,
+        "dirtyWrites": 3,
+        "interruptBestPreserved": true
+      },
+      "LiveB": {
+        "stars": 2,
+        "total": 58,
+        "recordReason": "RelayRoute",
+        "destination": "Rumah02",
+        "streak": 2,
+        "orderId": "cde66d31-bd90-4342-9fd5-9ff94bdabb3c",
+        "best": 2,
+        "isRelay": true
+      },
+      "ErrorB": "ServerScriptService.TemporaryQuality22LiveB:4: relay expired before next test"
+    },
+    "q22feetAudit": {
+      "1": {
+        "visible": true,
+        "gap": 0.029804675579071044,
+        "id": "Rumah01",
+        "grounded": true,
+        "collision": 0,
+        "parts": 12
+      },
+      "2": {
+        "visible": true,
+        "gap": 0.029804675579071044,
+        "id": "Rumah02",
+        "grounded": true,
+        "collision": 0,
+        "parts": 10
+      },
+      "3": {
+        "visible": true,
+        "gap": 0.029804675579071044,
+        "id": "Rumah03",
+        "grounded": true,
+        "collision": 0,
+        "parts": 12
+      },
+      "4": {
+        "visible": true,
+        "gap": 0.029804675579071044,
+        "id": "Rumah04",
+        "grounded": true,
+        "collision": 0,
+        "parts": 10
+      },
+      "5": {
+        "visible": true,
+        "gap": 0.029804675579071044,
+        "id": "Rumah05",
+        "grounded": true,
+        "collision": 0,
+        "parts": 12
+      }
+    },
+    "q22phoneUI": {
+      "bottom": 240.39999389648438,
+      "root": "705, 280",
+      "dialogue": "Bu Sari:\nRapi dan cepat. Terima kasih! Ada titipan lagi.",
+      "bad": [],
+      "position": "187.5, 28.3999939",
+      "fresh": {
+        "grip": 0,
+        "current": 0,
+        "best": 0,
+        "coins": 0
+      },
+      "dialogueFits": true,
+      "reactionCount": 1,
+      "size": "330, 212"
+    },
+    "q22uiReplay": {
+      "reactionCount": 1,
+      "toast": false
+    },
+    "q22phoneClose": {
+      "visible": false,
+      "dismissed": "76b4a1f1-8292-4591-b0cd-4025a0a7d631",
+      "expected": "261b3ec8-ed37-48a3-99ef-0b060a2b418d",
+      "dialogueFits": true,
+      "waving": false,
+      "reactionCount": 2,
+      "bubble": false
+    },
+    "q22desktopClose": {
+      "dialogueOrder": "df8cae4e-10c3-4443-ba67-37dbb9abd101",
+      "dialogue": "Bu Sari:\nRapi dan cepat. Terima kasih! Ada titipan lagi.",
+      "dismissed": "df8cae4e-10c3-4443-ba67-37dbb9abd101",
+      "dialogueFits": true,
+      "waving": true,
+      "resultVisible": false,
+      "bubble": true
+    },
+    "q22cancel": {
+      "result": {
+        "bestPreserved": true,
+        "activeResets": true,
+        "profileSchema": 2,
+        "coins": 0,
+        "noPersistedRun": true,
+        "idlePreserves": true
+      }
+    },
+    "q22finalFresh": {
+      "fresh": {
+        "current": 0,
+        "storage": "StudioMemory",
+        "deliveries": 0,
+        "status": "Idle",
+        "grip": 0,
+        "best": 0,
+        "coins": 0
+      },
+      "parts": 56,
+      "customers": 5
+    },
+    "q22finalConsole": "[PaketKilat] Bootstrap ready — T21; onboarding + LocalOnly analytics in Studio",
+    "finalSources": [
+      {
+        "1": {
+          "file": "EconomyService.luau",
+          "class": "ModuleScript",
+          "matches": true
+        },
+        "2": {
+          "file": "MovementTuning.luau",
+          "class": "ModuleScript",
+          "matches": true
+        }
+      },
+      {
+        "1": {
+          "file": "DeliveryService.luau",
+          "class": "ModuleScript",
+          "matches": true
+        },
+        "2": {
+          "file": "DeliveryFeedback.client.luau",
+          "class": "LocalScript",
+          "matches": true
+        }
+      },
+      {
+        "1": {
+          "file": "DeliveryRating22.luau",
+          "class": "ModuleScript",
+          "matches": true
+        },
+        "2": {
+          "file": "Customers22.client.luau",
+          "class": "LocalScript",
+          "matches": true
+        }
+      }
+    ],
+    "end": {
+      "backup": 4,
+      "temporary": [],
+      "device": "default",
+      "hud": true,
+      "packages": 0,
+      "revision": "CustomerRatings22"
+    }
+  },
+  "limitations": [
+    "Only GameId=0 StudioMemory tested. No real DataStore, publication, physical phone, multiplayer, or performance profile.",
+    "Live grade cases used teleport fixtures; grade2 additionally set condition90 and an elapsed time beyond the target, not a human walking test.",
+    "First grade2 relay acceptance fixture expired during QA and failed. Retry used a new server-side Relay21.Make fixture and exercised actual AcceptRelay/Complete logic.",
+    "Phone close attempt observed a different dismissed order ID and extra customer reaction count during concurrent play; it is not a validated phone close action. Controlled fresh desktop close matched order IDs and passed.",
+    "UI replay simulation used duplicate server Delivered publishes for the same result to verify client guards; not a real client-granted reward.",
+    "Isolated transaction tests cloned modules into a temporary folder with mock Data; actual cancellation test seeded only in-memory streak2/best4, no coins.",
+    "One initial screenshot was captured before delivery completed and excluded. First custom NPC camera position was inside the house and excluded; exterior screenshot retained.",
+    "NPCs are local cosmetic models,56Parts total, cull beyond65stud, animate at20Hz near player; no measured device performance claim.",
+    "Clean streak and best are session-only; profile schema2 unchanged. Existing published persistence path was not modified.",
+    "Fresh final Play reset coins0/deliveries0/Grip0/streak0/best0; temporary scripts removed by Stop."
+  ]
+}
