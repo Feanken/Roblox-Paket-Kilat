@@ -1,0 +1,89 @@
+{
+  "trials": [
+    {
+      "hasEffect": true,
+      "packageType": "Biasa",
+      "hazard": "Puddle",
+      "condition": 90,
+      "velocity": "-16.00714111328125, 0, 0.001459549879655242"
+    },
+    {
+      "hasEffect": true,
+      "motionSpeed": 13.270773531564217,
+      "packageType": "Biasa",
+      "hazard": "MovingBarrier",
+      "condition": 90
+    },
+    {
+      "packageType": "Biasa",
+      "hazard": "NarrowPlankSideFall",
+      "held": true,
+      "status": "Dropped"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Puddle validated damage Biasa",
+      "pass": true
+    },
+    {
+      "name": "Puddle has planar slide Biasa",
+      "pass": true
+    },
+    {
+      "name": "Puddle no repeated damage Biasa",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 1",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 1",
+      "pass": true
+    },
+    {
+      "name": "Slide objects removed Biasa",
+      "pass": true
+    },
+    {
+      "name": "Swept moving barrier hit Biasa",
+      "pass": true
+    },
+    {
+      "name": "Barrier applies bounded push Biasa",
+      "pass": true
+    },
+    {
+      "name": "Push expires Biasa",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 2",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 2",
+      "pass": true
+    },
+    {
+      "name": "Plank failure remains recoverable Biasa",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 3",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 3",
+      "pass": true
+    },
+    {
+      "name": "Fallen player returned to depot Biasa",
+      "pass": true
+    }
+  ],
+  "mode": "Studio Play / physics runtime / one real client",
+  "error": "ServerScriptService.Stage3PhysicsChecks:14: Physics timeout",
+  "pass": false
+}

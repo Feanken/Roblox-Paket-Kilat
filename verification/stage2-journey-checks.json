@@ -1,0 +1,51 @@
+{
+  "initialCoins": 144,
+  "rounds": [
+    {
+      "recoveryCount": 0,
+      "total": 47,
+      "duration": 20.832287073135376,
+      "condition": 100,
+      "timeBonus": 7,
+      "completedAt": 1793985270.598081,
+      "balance": 191,
+      "destinationName": "Rumah Bu Sari",
+      "baseReward": 25,
+      "destinationId": "Rumah01",
+      "conditionBonus": 15,
+      "orderId": "2013b582-a944-4d53-bac1-3da8e432db60"
+    },
+    {
+      "recoveryCount": 1,
+      "total": 40,
+      "duration": 58.81610608100891,
+      "condition": 80,
+      "timeBonus": 3,
+      "completedAt": 1793985365.395502,
+      "balance": 231,
+      "destinationName": "Rumah Bu Sari",
+      "baseReward": 25,
+      "destinationId": "Rumah01",
+      "conditionBonus": 12,
+      "orderId": "fda93aba-b9e4-41a4-82ca-fca6f9ae9017"
+    },
+    {
+      "recoveryCount": 0,
+      "total": 46,
+      "duration": 30.76575803756714,
+      "condition": 100,
+      "timeBonus": 6,
+      "completedAt": 1793985447.424006,
+      "balance": 277,
+      "destinationName": "Rumah Bu Sari",
+      "baseReward": 25,
+      "destinationId": "Rumah01",
+      "conditionBonus": 15,
+      "orderId": "02b83807-fabc-42cd-87c1-e3abef56a4e7"
+    }
+  ],
+  "maxCarryError": 0.00000762939453125,
+  "mode": "Desktop; actual E/Q/R tool input; Humanoid MoveTo route",
+  "pass": true,
+  "finalCoins": 277
+}

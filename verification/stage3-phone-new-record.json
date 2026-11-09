@@ -1,0 +1,84 @@
+{
+  "touch": true,
+  "elements": [
+    {
+      "bounds": {
+        "y": 12,
+        "x": 14,
+        "w": 315,
+        "h": 156
+      },
+      "name": "TopCard",
+      "within": true
+    },
+    {
+      "text": "Ke depot",
+      "bounds": {
+        "y": 97.80999755859375,
+        "x": 582,
+        "w": 152,
+        "h": 48
+      },
+      "name": "Primary",
+      "within": true
+    },
+    {
+      "text": "PAKET KILAT!",
+      "name": "Title",
+      "textFits": true
+    },
+    {
+      "text": "46 koin",
+      "name": "Coins",
+      "textFits": true
+    },
+    {
+      "text": "Selesai · Rumah Pak Agus",
+      "name": "Destination",
+      "textFits": true
+    },
+    {
+      "text": "Rapuh · 100/100 · 22.4 dtk",
+      "name": "ConditionText",
+      "textFits": true
+    },
+    {
+      "text": "+46: dasar 25 · kondisi 15 · waktu 6\nREKOR BARU: 22.4 dtk",
+      "name": "Hint",
+      "textFits": true
+    }
+  ],
+  "pass": true,
+  "coreControls": [
+    {
+      "visible": true,
+      "bounds": {
+        "y": 233,
+        "x": 655,
+        "w": 70,
+        "h": 70
+      },
+      "name": "JumpButton"
+    },
+    {
+      "visible": true,
+      "bounds": {
+        "y": 107.66667175292969,
+        "x": -100,
+        "w": 400,
+        "h": 315.3333435058594
+      },
+      "name": "DynamicThumbstickFrame"
+    }
+  ],
+  "rootSize": "750, 323",
+  "state": {
+    "Status": "Idle",
+    "LastCode": "Delivered",
+    "Coins": 46
+  },
+  "viewport": "750, 381",
+  "orientation": "Enum.ScreenOrientation.LandscapeSensor",
+  "screenInsets": "Enum.ScreenInsets.CoreUISafeInsets",
+  "guiInset": "0, 58"
+}

@@ -1,0 +1,40 @@
+{
+  "trials": [
+    {
+      "height": 0.1,
+      "condition": 100,
+      "maxSpeed": 7.357500076293945,
+      "outOfBounds": false
+    },
+    {
+      "height": 1,
+      "condition": 100,
+      "maxSpeed": 20.437501907348633,
+      "outOfBounds": false
+    },
+    {
+      "height": 2,
+      "condition": 100,
+      "maxSpeed": 26.977502822875977,
+      "outOfBounds": false
+    },
+    {
+      "height": 6,
+      "condition": 100,
+      "maxSpeed": 46.597503662109375,
+      "outOfBounds": false
+    },
+    {
+      "height": 12,
+      "condition": 90,
+      "maxSpeed": 69.48750305175781,
+      "outOfBounds": false
+    }
+  ],
+  "carriedFall": {
+    "status": "Dropped",
+    "maxFall": 62.13002395629883,
+    "condition": 90
+  },
+  "threshold": 55
+}

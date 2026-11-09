@@ -1,0 +1,24 @@
+{
+  "previous": 22.416329860687256,
+  "pass": true,
+  "scenario": "Recovered",
+  "result": {
+    "orderId": "ca51bdd3-a06c-47a0-965b-f7818b246929",
+    "condition": 80,
+    "completedAt": 1793990577.201954,
+    "previousBest": 22.416329860687256,
+    "destinationId": "Rumah04",
+    "conditionBonus": 12,
+    "recoveryCount": 1,
+    "total": 46,
+    "packageType": "Rapuh",
+    "destinationName": "Rumah Pak Agus",
+    "timeBonus": 9,
+    "bestTime": 22.416329860687256,
+    "newRecord": false,
+    "duration": 5.416566848754883,
+    "recordReason": "Recovered",
+    "baseReward": 25,
+    "recordEligible": false
+  }
+}

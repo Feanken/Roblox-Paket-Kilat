@@ -1,0 +1,70 @@
+{
+  "stage": "Polish10",
+  "date": "2026-11-09",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "restored": "P09 absent in reopened file; recovered on current owner map",
+  "sources": [
+    {
+      "id": "3302675003",
+      "name": "Low Poly Street Lamp",
+      "creator": "FredrikAustra",
+      "url": "https://create.roblox.com/store/asset/3302675003",
+      "freeAtReview": true,
+      "copies": 4
+    },
+    {
+      "id": "7191673673",
+      "name": "Low Poly Bush",
+      "creator": "ChickenNuggets2go",
+      "url": "https://create.roblox.com/store/asset/7191673673",
+      "freeAtReview": true,
+      "copies": 17
+    },
+    {
+      "id": "14603612772",
+      "name": "Low Poly Rocks",
+      "creator": "neervu",
+      "url": "https://create.roblox.com/store/asset/14603612772",
+      "freeAtReview": true,
+      "copies": 5
+    },
+    {
+      "id": "12084344112",
+      "name": "Cardboard Box",
+      "creator": "NickiBreeki",
+      "url": "https://create.roblox.com/store/asset/12084344112",
+      "freeAtReview": true,
+      "copies": 4,
+      "removedCamera": 1
+    }
+  ],
+  "audit": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"lights\":4,\"activePackages\":0,\"houseMaxDelta\":0,\"scripts\":0,\"anchorMaxDelta\":0,\"unsafe\":0,\"cameras\":0,\"parts\":46}"
+      }
+    ],
+    "isError": false
+  },
+  "interactions": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"replayRejected\":true,\"fixture\":true,\"returnGuide\":true,\"condition\":100,\"reward\":48}"
+      }
+    ],
+    "isError": false
+  },
+  "routeSamples": 599,
+  "unsupported": 0,
+  "notes": [
+    "46 active decorative parts, zero scripts/cameras/collision; four lights bounded .8 brightness/14 range/no shadows",
+    "Source camera in box asset removed",
+    "Owner houses unchanged; roads adjusted only central corridor connection, removed bypass not restored",
+    "Walking test failed; interaction checks used server setup placement and are not full-route tests",
+    "Previous config pointed to removed bypass: 120 unsupported samples; new config uses central road, not guaranteed obstacle-free",
+    "P09 prior interrupted final save recovered; no Terrain writes",
+    "Local main_game.rbxl save still unconfirmed"
+  ]
+}

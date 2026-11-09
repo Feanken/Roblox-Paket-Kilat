@@ -1,0 +1,107 @@
+{
+  "destinations": [
+    {
+      "id": "Rumah01",
+      "path": "Workspace.PaketKilat.Map.Rumah01.DestinationPoint",
+      "position": "100, 1046.1500244140625, 3"
+    }
+  ],
+  "hazards": [
+    {
+      "class": "Part",
+      "path": "Workspace.PaketKilat.Map.NarrowPlank"
+    }
+  ],
+  "mapY": 1045,
+  "placeId": 0,
+  "worldChildren": [
+    {
+      "name": "Camera",
+      "class": "Camera"
+    },
+    {
+      "name": "Baseplate",
+      "class": "Part"
+    },
+    {
+      "name": "Terrain",
+      "class": "Terrain"
+    },
+    {
+      "name": "PaketKilat",
+      "class": "Folder"
+    },
+    {
+      "name": "OriginalContent",
+      "class": "Folder"
+    }
+  ],
+  "activePackages": 0,
+  "sounds": [],
+  "scripts": [
+    {
+      "path": "StarterPlayer.StarterPlayerScripts.PaketKilatInput",
+      "file": "PrototypeInput.client.luau",
+      "match": true
+    },
+    {
+      "path": "ReplicatedStorage.PaketKilat.Shared.Config",
+      "file": "Config.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.DeliveryService",
+      "file": "DeliveryService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.PackageService",
+      "file": "PackageService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.Bootstrap",
+      "file": "Bootstrap.server.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.EconomyService",
+      "file": "EconomyService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.PlayerLifecycle",
+      "file": "PlayerLifecycle.luau",
+      "match": true
+    }
+  ],
+  "name": "main_game.rbxl",
+  "gameId": 0,
+  "hasWorld": true,
+  "remotes": [
+    {
+      "name": "ActionRequest",
+      "class": "RemoteEvent"
+    },
+    {
+      "name": "StateChanged",
+      "class": "RemoteEvent"
+    }
+  ],
+  "originalSpawn": true,
+  "gui": [
+    {
+      "name": "PaketKilatUI",
+      "resetOnSpawn": false
+    }
+  ],
+  "dateWIB": "2026-11-07",
+  "mode": "Edit",
+  "ownerPlaytestReceived": false,
+  "ownerResponse": "belum mencoba",
+  "ownerResponseDateWIB": "2026-11-07",
+  "scopeRequested": "T11-T15",
+  "contentExpansionStarted": false,
+  "newGameplayTestsRun": false,
+  "savedFileSha256": "5A1B0C24A707BF2FBDE574D966E9AB59936070F1DA25760292967FE154628276"
+}

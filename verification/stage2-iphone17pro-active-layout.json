@@ -1,0 +1,96 @@
+{
+  "touch": true,
+  "elements": [
+    {
+      "bounds": {
+        "y": 12,
+        "x": 14,
+        "w": 315,
+        "h": 156
+      },
+      "name": "TopCard",
+      "within": true
+    },
+    {
+      "text": "Ke rumah",
+      "bounds": {
+        "y": 97.80999755859375,
+        "x": 582,
+        "w": 152,
+        "h": 48
+      },
+      "name": "Primary",
+      "within": true
+    },
+    {
+      "text": "Lepas",
+      "bounds": {
+        "y": 155.80999755859375,
+        "x": 582,
+        "w": 152,
+        "h": 48
+      },
+      "name": "Secondary",
+      "within": true
+    },
+    {
+      "text": "PAKET KILAT!",
+      "name": "Title",
+      "textFits": true
+    },
+    {
+      "text": "0 koin",
+      "name": "Coins",
+      "textFits": true
+    },
+    {
+      "text": "Tujuan · Rumah Bu Sari",
+      "name": "Destination",
+      "textFits": true
+    },
+    {
+      "text": "Kondisi 80/100",
+      "name": "ConditionText",
+      "textFits": true
+    },
+    {
+      "text": "Jaga paket. Antar di petak depan rumah.",
+      "name": "Hint",
+      "textFits": true
+    }
+  ],
+  "pass": true,
+  "coreControls": [
+    {
+      "visible": true,
+      "bounds": {
+        "y": 233,
+        "x": 655,
+        "w": 70,
+        "h": 70
+      },
+      "name": "JumpButton"
+    },
+    {
+      "visible": true,
+      "bounds": {
+        "y": 107.66667175292969,
+        "x": -100,
+        "w": 400,
+        "h": 315.3333435058594
+      },
+      "name": "DynamicThumbstickFrame"
+    }
+  ],
+  "rootSize": "750, 323",
+  "state": {
+    "Status": "Carrying",
+    "LastCode": "Pickup",
+    "OrderId": "6d4d763f-f0ae-4dea-bf05-6fda2533ea21",
+    "Coins": 0
+  },
+  "viewport": "750, 381",
+  "orientation": "Enum.ScreenOrientation.LandscapeSensor",
+  "screenInsets": "Enum.ScreenInsets.CoreUISafeInsets",
+  "guiInset": "0, 58"
+}

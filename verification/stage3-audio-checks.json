@@ -1,0 +1,29 @@
+{
+  "sounds": [
+    {
+      "name": "Pickup",
+      "endedCount": 36,
+      "soundId": "rbxasset://sounds/action_get_up.mp3",
+      "length": 0.5746938775510204,
+      "playCount": 46,
+      "loaded": true
+    },
+    {
+      "name": "Delivered",
+      "endedCount": 17,
+      "soundId": "rbxasset://sounds/volume_slider.ogg",
+      "length": 0.8454166666666667,
+      "playCount": 17,
+      "loaded": true
+    },
+    {
+      "name": "Impact",
+      "endedCount": 23,
+      "soundId": "rbxasset://sounds/action_jump_land.mp3",
+      "length": 0.2612244897959184,
+      "playCount": 23,
+      "loaded": true
+    }
+  ],
+  "pass": true
+}

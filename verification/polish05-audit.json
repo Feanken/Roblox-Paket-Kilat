@@ -1,0 +1,46 @@
+{
+  "revision": "Polish05",
+  "studio": "4b3a852b-e2ec-4605-bb2e-8f7d2137b568",
+  "audit": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"revision\":\"Polish05\",\"hudEnabled\":true,\"supportedFoundations\":23,\"unchangedDestinations\":5,\"activePackages\":0}"
+      }
+    ],
+    "isError": false
+  },
+  "routes12": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"1\":{\"replayRejected\":true,\"destination\":\"Rumah01\",\"condition\":100,\"reward\":47},\"2\":{\"replayRejected\":true,\"destination\":\"Rumah02\",\"condition\":100,\"reward\":47}}"
+      }
+    ],
+    "isError": false
+  },
+  "route3": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"1\":{\"replayRejected\":true,\"destination\":\"Rumah03\",\"condition\":100,\"reward\":45}}"
+      }
+    ],
+    "isError": false
+  },
+  "routes45": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"1\":{\"replayRejected\":true,\"destination\":\"Rumah04\",\"condition\":100,\"reward\":45},\"2\":{\"replayRejected\":true,\"destination\":\"Rumah05\",\"condition\":100,\"reward\":46}}"
+      }
+    ],
+    "isError": false
+  },
+  "limitations": [
+    "Client Humanoid MoveTo tests; server-backtrack setup via character PivotTo between orders, not a human session",
+    "No full phone/network/performance or DataStore regression",
+    "Local place save unconfirmed"
+  ],
+  "console": "Only bootstrap in checked Play output"
+}

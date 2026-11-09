@@ -1,0 +1,51 @@
+{
+  "stage": "Polish03",
+  "date": "2026-11-07",
+  "routes12": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"1\":{\"destination\":\"Rumah01\",\"condition\":100,\"reward\":47},\"2\":{\"destination\":\"Rumah02\",\"condition\":100,\"reward\":47}}"
+      }
+    ],
+    "isError": false
+  },
+  "route3": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"bypassUsed\":true,\"destination\":\"Rumah03\",\"condition\":100,\"reward\":45}"
+      }
+    ],
+    "isError": false
+  },
+  "routes45": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"1\":{\"replayRejected\":true,\"destination\":\"Rumah04\",\"condition\":100,\"reward\":46},\"2\":{\"replayRejected\":true,\"destination\":\"Rumah05\",\"condition\":100,\"reward\":46}}"
+      }
+    ],
+    "isError": false
+  },
+  "layout": {
+    "frontStreetsZ": [
+      28,
+      144
+    ],
+    "houseFront": "+Z",
+    "roofsRebuilt": 6,
+    "destinationPositionsUnchanged": true
+  },
+  "limitations": [
+    "Automatic client Humanoid MoveTo along front routes; return-to-depot setup teleported for each assignment",
+    "Not a human/physical mobile/network or full hazard regression test",
+    "Local place save for this revision not confirmed"
+  ],
+  "state": {
+    "mode": "Edit",
+    "hudEnabled": true,
+    "fieldOfView": 70,
+    "activePackages": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "path": "D:\\YANG CORPORATE\\Roblox\\Game1\\main_game.rbxl",
+  "saved": true,
+  "modeAtSave": "Edit",
+  "method": "UIAutomation: File > Save to File (Ctrl+S tidak menulis perubahan pada percobaan awal)",
+  "sizeBytes": 122320,
+  "lastWriteTimeWIB": "2026-11-07 00:31:03",
+  "sha256": "5A1B0C24A707BF2FBDE574D966E9AB59936070F1DA25760292967FE154628276",
+  "backup": "backups/main_game.before-T07-T10.20261107.rbxl",
+  "backupSha256": "427ABCA22663342A08E24009222A9DE954EBFA7AF285AEDC22445BF50396B089",
+  "published": false,
+  "reopenedAfterSave": false,
+  "runtimeScriptsMatchLocalSources": true,
+  "temporaryTestScriptsInEdit": 0,
+  "activePackagesInEdit": 0,
+  "deviceSimulator": "default"
+}

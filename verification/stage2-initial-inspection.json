@@ -1,0 +1,29 @@
+{
+  "name": "main_game.rbxl",
+  "scripts": [
+    {
+      "path": "StarterPlayer.StarterPlayerScripts.PaketKilatInput",
+      "characters": 1208
+    },
+    {
+      "path": "ReplicatedStorage.PaketKilat.Shared.Config",
+      "characters": 808
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.DeliveryService",
+      "characters": 6165
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.PackageService",
+      "characters": 4910
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.Bootstrap",
+      "characters": 2724
+    }
+  ],
+  "mapY": 1045,
+  "placeId": 0,
+  "starterGui": [],
+  "spawn": true
+}

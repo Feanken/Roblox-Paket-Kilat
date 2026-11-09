@@ -1,0 +1,7 @@
+{
+  "trials": [],
+  "checks": [],
+  "mode": "Studio Play / physics runtime / one real client",
+  "error": "ServerScriptService.Stage3PhysicsChecks:14: Physics timeout",
+  "pass": false
+}

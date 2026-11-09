@@ -1,0 +1,111 @@
+{
+  "revision": "CourierUI12",
+  "date": "2026-11-09",
+  "studioId": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "scope": "UI only; map, terrain, prices, rewards, server movement and remotes unchanged",
+  "sources": {
+    "src/UITheme12.luau": "ReplicatedStorage.PaketKilat.Shared.UITheme12",
+    "src/PrototypeInput.client.luau": "StarterPlayer.StarterPlayerScripts.PaketKilatInput",
+    "src/DeliveryFeedback.client.luau": "StarterPlayer.StarterPlayerScripts.PaketKilatFeedback",
+    "src/CourierMovement.client.luau": "StarterPlayer.StarterPlayerScripts.PaketKilatMovement",
+    "src/RouteGuide.client.luau": "StarterPlayer.StarterPlayerScripts.PaketKilatRouteGuide"
+  },
+  "backup": {
+    "disk": "backups/main_game.before-ui12.20261109.rbxl",
+    "live": "ServerStorage.PaketKilat_PreUI12"
+  },
+  "desktop": {
+    "root": [
+      1350,
+      863
+    ],
+    "card": [
+      300,
+      152
+    ],
+    "meter": [
+      352,
+      56
+    ],
+    "visibleTextOverflow": [],
+    "mouseShopOpen": true,
+    "mouseShopClose": true,
+    "mouseHelpOpen": true,
+    "mouseHelpClose": true,
+    "manualGuideFits": true,
+    "shopBackdropOrigin": [
+      0,
+      0
+    ],
+    "shopBackdropSize": [
+      1350,
+      921
+    ],
+    "shopHidesCardActionsMeters": true
+  },
+  "phone": {
+    "device": "iPhone 17 Pro",
+    "orientation": "LandscapeLeft",
+    "root": [
+      750,
+      323
+    ],
+    "card": [
+      260,
+      136
+    ],
+    "meterPosition": [
+      199,
+      191
+    ],
+    "guidePosition": [
+      190,
+      259
+    ],
+    "visibleIdleTextOverflow": [],
+    "shopTextOverflow": [],
+    "dropPrimary": "Ambil ulang",
+    "dropSecondary": "Pulihkan",
+    "dropButtonFits": true,
+    "resultTextFits": {
+      "reward": true,
+      "detail": true,
+      "next": true
+    },
+    "touchTested": false
+  },
+  "fixture": {
+    "method": "Server position at depot/destination; ActionRequest with server snapshot IDs. UI state and rendering regression, not a full walking lap.",
+    "states": [
+      "Idle",
+      "Carrying",
+      "Dropped",
+      "Carrying",
+      "Idle"
+    ],
+    "deliveredReward": 41,
+    "consoleRuntimeErrors": 0,
+    "limitations": "Initial emulator keyboard E attempts did not consistently activate; those are not counted as passed input tests. Successful final action-state checks used explicit remote fixtures."
+  },
+  "final": {
+    "mode": "Edit",
+    "device": "default",
+    "guiEnabled": true,
+    "activePackages": 0
+  },
+  "savedPlace": {
+    "verified": false,
+    "evidence": "verification/saved-ui12.json",
+    "reason": "Saved file is 304601 bytes; CourierUI12/UITheme12/SprintGrip11/CurrentStreets10 markers absent. Owner must File > Save to File."
+  },
+  "screenshots": [
+    "verification/ui12-desktop.jpg",
+    "verification/ui12-phone.jpg",
+    "verification/ui12-shop.jpg",
+    "verification/ui12-reward.jpg"
+  ],
+  "limitations": [
+    "No physical mobile/touch or multiplayer/performance test in this UI pass.",
+    "Latest full-viewport backdrop adjustment rechecked on desktop; phone shop layout and hidden-HUD behavior checked before that adjustment."
+  ]
+}

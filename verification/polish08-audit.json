@@ -1,0 +1,47 @@
+{
+  "stage": "Polish08",
+  "date": "2026-11-08",
+  "studio": "a744cded-d722-4861-a08d-1e2f5af0ffca",
+  "observedOrigin": "2,4477,0",
+  "routeParts": 16,
+  "collision": false,
+  "checks": {
+    "gToggleOff": true,
+    "gToggleOn": true,
+    "shopHides": true,
+    "dropHides": true,
+    "pickupRestores": true,
+    "returnAfterDelivery": true,
+    "floorSamples": 683,
+    "unsupportedFloorSamples": 0,
+    "phoneViewport": "750x323",
+    "phoneButtonPosition": "468,12",
+    "phoneButtonSize": "84x44",
+    "phoneLayoutFits": true,
+    "resetClearsDots": true,
+    "resetNoDuplicateFolder": true
+  },
+  "deliveryFixture": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"replayRejected\":true,\"returnRoute\":true,\"dots\":16,\"condition\":100,\"reward\":40}"
+      }
+    ],
+    "isError": false
+  },
+  "startupFix": "Puddle absent in saved owner place. HazardService Init now FindFirstChild and slip conditional; Bootstrap subsequently ready/profileReady true",
+  "limitations": [
+    "Delivery test used server placement; full walking test hung and was terminated, not passed",
+    "First tests failed before startup repair; missing Puddle had stopped Bootstrap, not a DataStore failure",
+    "Phone layout only, not touch or physical-device testing",
+    "Polyline is generated from current streets; individual street/house moves require config regeneration",
+    "Current place save not verified"
+  ],
+  "end": {
+    "mode": "Edit",
+    "defaultViewport": true,
+    "HUD": true,
+    "activePackages": 0
+  }
+}

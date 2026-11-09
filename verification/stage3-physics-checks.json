@@ -1,0 +1,230 @@
+{
+  "trials": [
+    {
+      "hasEffect": true,
+      "packageType": "Biasa",
+      "hazard": "Puddle",
+      "condition": 90,
+      "velocity": "-16.78639030456543, 0.020383529365062714, 0"
+    },
+    {
+      "hasEffect": true,
+      "motionSpeed": -14.13549231559482,
+      "packageType": "Biasa",
+      "hazard": "MovingBarrier",
+      "condition": 90
+    },
+    {
+      "packageType": "Biasa",
+      "hazard": "NarrowPlankSideFall",
+      "held": true,
+      "status": "Dropped"
+    },
+    {
+      "packageType": "Biasa",
+      "hazard": "CarriedHardLanding",
+      "condition": 90,
+      "maxFall": 78.47998046875
+    },
+    {
+      "packageType": "Biasa",
+      "hazard": "DroppedHardLanding",
+      "condition": 90
+    },
+    {
+      "hasEffect": true,
+      "packageType": "Rapuh",
+      "hazard": "Puddle",
+      "condition": 80,
+      "velocity": "-16.103315353393555, 0.007411860395222902, 0.009393173269927502"
+    },
+    {
+      "hasEffect": true,
+      "motionSpeed": 13.402223611835781,
+      "packageType": "Rapuh",
+      "hazard": "MovingBarrier",
+      "condition": 80
+    },
+    {
+      "packageType": "Rapuh",
+      "hazard": "NarrowPlankSideFall",
+      "held": true,
+      "status": "Dropped"
+    },
+    {
+      "packageType": "Rapuh",
+      "hazard": "CarriedHardLanding",
+      "condition": 80,
+      "maxFall": 78.47998046875
+    },
+    {
+      "packageType": "Rapuh",
+      "hazard": "DroppedHardLanding",
+      "condition": 80
+    }
+  ],
+  "mode": "Studio Play / physics runtime / one real client",
+  "pass": true,
+  "checks": [
+    {
+      "name": "Puddle validated damage Biasa",
+      "pass": true
+    },
+    {
+      "name": "Puddle has planar slide Biasa",
+      "pass": true
+    },
+    {
+      "name": "Puddle no repeated damage Biasa",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 1",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 1",
+      "pass": true
+    },
+    {
+      "name": "Slide objects removed Biasa",
+      "pass": true
+    },
+    {
+      "name": "Swept moving barrier hit Biasa",
+      "pass": true
+    },
+    {
+      "name": "Barrier applies bounded push Biasa",
+      "pass": true
+    },
+    {
+      "name": "Push expires Biasa",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 2",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 2",
+      "pass": true
+    },
+    {
+      "name": "Plank failure remains recoverable Biasa",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 3",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 3",
+      "pass": true
+    },
+    {
+      "name": "Fallen player returned to depot Biasa",
+      "pass": true
+    },
+    {
+      "name": "Carried hard landing Biasa",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 4",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 4",
+      "pass": true
+    },
+    {
+      "name": "Dropped hard landing Biasa",
+      "pass": true
+    },
+    {
+      "name": "Puddle validated damage Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Puddle has planar slide Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Puddle no repeated damage Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 6",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 6",
+      "pass": true
+    },
+    {
+      "name": "Slide objects removed Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Swept moving barrier hit Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Barrier applies bounded push Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Push expires Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 7",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 7",
+      "pass": true
+    },
+    {
+      "name": "Plank failure remains recoverable Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 8",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 8",
+      "pass": true
+    },
+    {
+      "name": "Fallen player returned to depot Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Carried hard landing Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Recover identity/penalty 9",
+      "pass": true
+    },
+    {
+      "name": "Recovery clears effect 9",
+      "pass": true
+    },
+    {
+      "name": "Dropped hard landing Rapuh",
+      "pass": true
+    },
+    {
+      "name": "Reset removes live hazard effect",
+      "pass": true
+    },
+    {
+      "name": "Hazards and recovery never credit coins",
+      "pass": true
+    }
+  ]
+}

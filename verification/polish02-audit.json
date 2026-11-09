@@ -1,0 +1,34 @@
+{
+  "audit": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"revision\":\"Polish02\",\"templateColliderPreserved\":true,\"inputSourceBytes\":14745,\"simulator\":\"default\",\"newBodiesOrScripts\":0,\"feedbackSourceBytes\":6595}"
+      }
+    ],
+    "isError": false
+  },
+  "runtime": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"total\":47,\"replayRejected\":true,\"position\":\"210, 81.0399933\",\"viewport\":\"750, 323\",\"allResultTextFits\":true,\"passed\":true,\"size\":\"330, 148\"}"
+      }
+    ],
+    "isError": false
+  },
+  "checks": [
+    "drop marker matches package; highlight matches package",
+    "pickup hides package billboard",
+    "recovery condition80 and notice",
+    "result auto-hides; one panel instance",
+    "reset preserves47 coins; next order Rapuh and handling label correct"
+  ],
+  "limitations": [
+    "Emulator and automated path, not physical phone or human gameplay",
+    "Initial failed delivery test cut a diagonal outside old road; corrected waypoints passed",
+    "Initial simulator orientation call before device selection rejected; selecting device first succeeded",
+    "Package closeup screenshot was occluded by depot roof and is not used as visual evidence",
+    "Main place save remains unconfirmed; source migrations saved"
+  ]
+}

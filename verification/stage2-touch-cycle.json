@@ -1,0 +1,63 @@
+{
+  "walkStart": "0, 1048.9710693359375, -3.0024693842278793e-09",
+  "steps": [
+    {
+      "status": "Carrying",
+      "condition": 100,
+      "name": "Start",
+      "coins": 0
+    },
+    {
+      "status": "Dropped",
+      "condition": 100,
+      "name": "Drop",
+      "coins": 0
+    },
+    {
+      "status": "Carrying",
+      "condition": 100,
+      "name": "Pickup",
+      "coins": 0
+    },
+    {
+      "status": "Dropped",
+      "condition": 100,
+      "name": "DropAgain",
+      "coins": 0
+    },
+    {
+      "status": "Dropped",
+      "condition": 80,
+      "name": "Recover",
+      "coins": 0
+    },
+    {
+      "status": "Carrying",
+      "condition": 80,
+      "name": "PickupRecovered",
+      "coins": 0
+    }
+  ],
+  "touchBegan": 8,
+  "pass": true,
+  "finalCoins": 43,
+  "device": "iPhone 17 Pro emulator",
+  "setupTeleport": true,
+  "walkEnd": "89.08369445800781, 1048.9710693359375, -3.0024693842278793e-09",
+  "walkedAcrossMap": true,
+  "initialCoins": 0,
+  "result": {
+    "recoveryCount": 1,
+    "total": 43,
+    "duration": 27.066334009170532,
+    "condition": 80,
+    "timeBonus": 6,
+    "completedAt": 1793985968.221711,
+    "destinationName": "Rumah Bu Sari",
+    "baseReward": 25,
+    "destinationId": "Rumah01",
+    "conditionBonus": 12,
+    "orderId": "6d4d763f-f0ae-4dea-bf05-6fda2533ea21"
+  },
+  "keyboardCount": 0
+}

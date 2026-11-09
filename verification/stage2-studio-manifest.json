@@ -1,0 +1,131 @@
+{
+  "map": [
+    {
+      "path": "Workspace.PaketKilat.Map.DepotPad",
+      "size": "28, 2, 28",
+      "position": "0, 1045, 0"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.HousePad",
+      "size": "28, 2, 28",
+      "position": "100, 1045, 0"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.SafeRoadDepot",
+      "size": "12, 2, 32",
+      "position": "0, 1045, -29.999996185302734"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.SafeRoadAcross",
+      "size": "112, 2, 12",
+      "position": "50, 1045, -40"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.SafeRoadHouse",
+      "size": "12, 2, 32",
+      "position": "100, 1045, -29.999996185302734"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.NarrowPlank",
+      "size": "72, 1, 3",
+      "position": "50, 1045.5, 0"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Depot.BackWall",
+      "size": "6, 10, 1",
+      "position": "-5, 1051, -12"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Depot.Roof",
+      "size": "17, 1, 11",
+      "position": "0, 1056.5, -8.5"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Depot.PickupPoint",
+      "size": "4, 1, 4",
+      "position": "0, 1046, -6"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Depot.BackWallRight",
+      "size": "6, 10, 1",
+      "position": "5, 1051, -12"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Rumah01.Body",
+      "size": "13, 9, 10",
+      "position": "104, 1050.5, -8"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Rumah01.Roof",
+      "size": "16, 2, 13",
+      "position": "104, 1056, -8"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Rumah01.Door",
+      "size": "3, 6, 0.30000001192092896",
+      "position": "104, 1049, -2.8499999046325684"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.Rumah01.DestinationPoint",
+      "size": "5, 0.30000001192092896, 5",
+      "position": "100, 1046.1500244140625, 3"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.RecoveryPoint",
+      "size": "5, 0.30000001192092896, 5",
+      "position": "8, 1046.1500244140625, 4"
+    },
+    {
+      "path": "Workspace.PaketKilat.Map.PrototypeSpawn",
+      "size": "5, 1, 5",
+      "position": "-6, 1046, 5"
+    }
+  ],
+  "deviceReset": true,
+  "device": "default",
+  "temporaryScripts": 0,
+  "activePackages": 0,
+  "name": "main_game.rbxl",
+  "scripts": [
+    {
+      "path": "StarterPlayer.StarterPlayerScripts.PaketKilatInput",
+      "file": "PrototypeInput.client.luau",
+      "match": true
+    },
+    {
+      "path": "ReplicatedStorage.PaketKilat.Shared.Config",
+      "file": "Config.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.DeliveryService",
+      "file": "DeliveryService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.PackageService",
+      "file": "PackageService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.Bootstrap",
+      "file": "Bootstrap.server.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.EconomyService",
+      "file": "EconomyService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.PlayerLifecycle",
+      "file": "PlayerLifecycle.luau",
+      "match": true
+    }
+  ],
+  "originalSpawn": true,
+  "mapY": 1045,
+  "gui": {
+    "screenOrientation": "Enum.ScreenOrientation.LandscapeSensor"
+  }
+}

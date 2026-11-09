@@ -1,0 +1,63 @@
+{
+  "touch": false,
+  "elements": [
+    {
+      "bounds": {
+        "y": 12,
+        "x": 14,
+        "w": 360,
+        "h": 156
+      },
+      "name": "TopCard",
+      "within": true
+    },
+    {
+      "text": "Ke depot [E]",
+      "bounds": {
+        "y": 351.6099853515625,
+        "x": 1182,
+        "w": 152,
+        "h": 48
+      },
+      "name": "Primary",
+      "within": true
+    },
+    {
+      "text": "PAKET KILAT!",
+      "name": "Title",
+      "textFits": true
+    },
+    {
+      "text": "793 koin",
+      "name": "Coins",
+      "textFits": true
+    },
+    {
+      "text": "Selesai · Rumah Pak Budi",
+      "name": "Destination",
+      "textFits": true
+    },
+    {
+      "text": "Biasa · 80/100 · 9.6 dtk",
+      "name": "ConditionText",
+      "textFits": true
+    },
+    {
+      "text": "+44: dasar 25 · kondisi 12 · waktu 7\nREKOR BARU: 9.6 dtk",
+      "name": "Hint",
+      "textFits": true
+    }
+  ],
+  "pass": true,
+  "coreControls": [],
+  "rootSize": "1350, 863",
+  "state": {
+    "Status": "Idle",
+    "LastCode": "Delivered",
+    "Coins": 793
+  },
+  "viewport": "1350, 921",
+  "orientation": "Enum.ScreenOrientation.LandscapeSensor",
+  "screenInsets": "Enum.ScreenInsets.CoreUISafeInsets",
+  "guiInset": "0, 58"
+}

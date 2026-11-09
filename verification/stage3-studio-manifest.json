@@ -1,0 +1,81 @@
+{
+  "destinations": [
+    {
+      "id": "Rumah01",
+      "path": "Workspace.PaketKilat.Map.Rumah01.DestinationPoint",
+      "position": "100, 1046.1500244140625, 3"
+    },
+    {
+      "id": "Rumah02",
+      "path": "Workspace.PaketKilat.Map.Rumah02.DestinationPoint",
+      "position": "-100, 1046.1500244140625, 3"
+    },
+    {
+      "id": "Rumah03",
+      "path": "Workspace.PaketKilat.Map.Rumah03.DestinationPoint",
+      "position": "0, 1046.1500244140625, 123"
+    },
+    {
+      "id": "Rumah04",
+      "path": "Workspace.PaketKilat.Map.Rumah04.DestinationPoint",
+      "position": "100, 1046.1500244140625, 123"
+    },
+    {
+      "id": "Rumah05",
+      "path": "Workspace.PaketKilat.Map.Rumah05.DestinationPoint",
+      "position": "-100, 1046.1500244140625, 123"
+    }
+  ],
+  "mapY": 1045,
+  "placeId": 0,
+  "scripts": [
+    {
+      "path": "StarterPlayer.StarterPlayerScripts.PaketKilatInput",
+      "file": "PrototypeInput.client.luau",
+      "match": true
+    },
+    {
+      "path": "ReplicatedStorage.PaketKilat.Shared.Config",
+      "file": "Config.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.DeliveryService",
+      "file": "DeliveryService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.PackageService",
+      "file": "PackageService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.Bootstrap",
+      "file": "Bootstrap.server.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.EconomyService",
+      "file": "EconomyService.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.PlayerLifecycle",
+      "file": "PlayerLifecycle.luau",
+      "match": true
+    },
+    {
+      "path": "ServerScriptService.PaketKilat.HazardService",
+      "file": "HazardService.luau",
+      "match": true
+    }
+  ],
+  "temporaryScripts": [],
+  "device": "default",
+  "name": "main_game.rbxl",
+  "gameId": 0,
+  "parts": 89,
+  "guiCount": 1,
+  "originalSpawn": true,
+  "activePackages": 0
+}

@@ -1,0 +1,23 @@
+{
+  "revision": "Polish04",
+  "activeStudio": "4b3a852b-e2ec-4605-bb2e-8f7d2137b568",
+  "oldStudio": "8290d62f-41ef-4966-8f46-6e47bfc7275f",
+  "reason": "Owner Play session was P02; old editing session had P03",
+  "supportedTrees": 5,
+  "interaction": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"fixtureOnly\":true,\"condition\":100,\"reward\":48}"
+      }
+    ],
+    "isError": false
+  },
+  "limitations": [
+    "P04 walk test interrupted/closed; not passed",
+    "Interaction verification used server setup teleport, not complete route",
+    "Initial tree migration assumed old coordinates; scoped map rolled back and migration adapted to actual yard centers",
+    "Streaming PickupPoint guard added to client feedback",
+    "No physical phone test or local save confirmation"
+  ]
+}

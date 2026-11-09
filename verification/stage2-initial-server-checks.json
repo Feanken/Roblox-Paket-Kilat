@@ -1,0 +1,222 @@
+{
+  "pass": false,
+  "mode": "Studio Play; one real desktop client; server harness",
+  "finalCoins": 144,
+  "checks": [
+    {
+      "pass": true,
+      "name": "Start valid",
+      "detail": "Start"
+    },
+    {
+      "pass": true,
+      "name": "Single active order",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination denied",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant delivery denied",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Client reward payload denied",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Malformed requests rate limited",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Invalid delivery leaves coins untouched",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Foreign identity denied",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Drop before delivery",
+      "detail": "Drop"
+    },
+    {
+      "pass": true,
+      "name": "Dropped delivery denied",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Repickup before delivery",
+      "detail": "Pickup"
+    },
+    {
+      "pass": true,
+      "name": "Distant package denied even with nearby player",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Formula scenario 1",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "Delivered then Idle 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Completed package resources removed 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate duplicate no money 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed duplicate no money 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Old order replay while new order active 2",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Formula scenario 2",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "Delivered then Idle 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Completed package resources removed 2",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Immediate duplicate no money 2",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Delayed duplicate no money 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Old order replay while new order active 3",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Formula scenario 3",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "Delivered then Idle 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Completed package resources removed 3",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Immediate duplicate no money 3",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Delayed duplicate no money 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Result snapshot is detached",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Three server deliveries counted",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero duration formula maximum 50",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Economy independently rejects duplicate credit",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Recovery penalty before delivery",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Recovered reward uses original elapsed time and condition",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Respawn clears Carrying",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Respawn keeps session balance Carrying",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Character bindings do not accumulate Carrying",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "New order after respawn Carrying",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Respawn clears Dropped",
+      "detail": ""
+    },
+    {
+      "pass": false,
+      "name": "Respawn keeps session balance Dropped",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Character bindings do not accumulate Dropped",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "New order after respawn Dropped",
+      "detail": ""
+    }
+  ]
+}

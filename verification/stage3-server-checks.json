@@ -1,0 +1,739 @@
+{
+  "assignments": [
+    {
+      "packageType": "Biasa",
+      "destinationId": "Rumah01"
+    },
+    {
+      "packageType": "Rapuh",
+      "destinationId": "Rumah02"
+    },
+    {
+      "packageType": "Biasa",
+      "destinationId": "Rumah03"
+    },
+    {
+      "packageType": "Rapuh",
+      "destinationId": "Rumah04"
+    },
+    {
+      "packageType": "Biasa",
+      "destinationId": "Rumah05"
+    },
+    {
+      "packageType": "Rapuh",
+      "destinationId": "Rumah01"
+    },
+    {
+      "packageType": "Biasa",
+      "destinationId": "Rumah02"
+    },
+    {
+      "packageType": "Rapuh",
+      "destinationId": "Rumah03"
+    },
+    {
+      "packageType": "Biasa",
+      "destinationId": "Rumah04"
+    },
+    {
+      "packageType": "Rapuh",
+      "destinationId": "Rumah05"
+    }
+  ],
+  "checks": [
+    {
+      "pass": true,
+      "name": "Server assignment 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 1",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 1",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 1",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 1",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 2",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 2",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 2",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 2",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 3",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 3",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 3",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 3",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 4",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 4",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 4",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 4",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 4",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 4",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 4",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 4",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 4",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 4",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 5",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 5",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 5",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 5",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 5",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 5",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 5",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 5",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 5",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 5",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 6",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 6",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 6",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 6",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 6",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 6",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 6",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 6",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 6",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 6",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 7",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 7",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 7",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 7",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 7",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 7",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 7",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 7",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 7",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 7",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 8",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 8",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 8",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 8",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 8",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 8",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 8",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 8",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 8",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 8",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 9",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 9",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 9",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 9",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 9",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 9",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 9",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 9",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 9",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 9",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Server assignment 10",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Package type visible 10",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Type damage and cooldown 10",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination 10",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant request 10",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Route reward 10",
+      "detail": "Delivered"
+    },
+    {
+      "pass": true,
+      "name": "First record per pair 10",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delivered resources cleared 10",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Immediate replay 10",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Delayed replay 10",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "All ten pairs covered",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Best and result snapshots detached",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah02Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah02Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah02Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah02Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah02Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah02Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah05Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah05Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah05Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah05Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah05Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah05Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah01Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah01Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah01Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah01Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah01Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah01Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah04Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah04Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah04Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah04Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah04Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah04Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah03Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah03Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah03Biasa",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Record eligible/faster/slower/tie/recovery Rumah03Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Credit ledger Rumah03Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition base reward Rumah03Rapuh",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Session records discarded on leave",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Recovery cannot create first record",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Respawn keeps session coins and records",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Client cannot select destination",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Client cannot report damage",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "New order after respawn",
+      "detail": ""
+    }
+  ],
+  "mode": "Studio Play; one real client; server runtime harness",
+  "finalCoins": 470,
+  "pass": true
+}

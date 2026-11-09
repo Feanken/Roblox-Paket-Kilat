@@ -1,0 +1,36 @@
+{
+  "stage": "Polish01",
+  "date": "2026-11-07",
+  "audit": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"revision\":\"Polish01\",\"hudEnabled\":true,\"origin\":\"0, 5568, 0\",\"signMaxDistance\":32,\"collidable\":0,\"scripts\":0,\"parts\":133}"
+      }
+    ],
+    "isError": false
+  },
+  "runtime": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"replayRejected\":true,\"note\":\"Original house body required approach from x94; first automated waypoint was through the house. Detour succeeds.\",\"passed\":true,\"reward\":42}"
+      }
+    ],
+    "isError": false
+  },
+  "geometry": {
+    "preservedParts": 90,
+    "note": "Matched siblings by name, position and size to handle duplicate Window names; first audit incorrectly used FindFirstChild for duplicates."
+  },
+  "limitations": [
+    "One automated desktop delivery; no human or physical mobile test",
+    "First route waypoint intersected original house body; corrected approach via x94 passed",
+    "Local main_game.rbxl remains 149380 bytes; saving Studio edits to disk not confirmed"
+  ],
+  "generatedAsset": {
+    "id": "8a74bd48-5f8c-4e42-b7a7-1b670915870d",
+    "staticParts": 53,
+    "noRuntimeScripts": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "trials": [
+    {
+      "packageType": "Biasa",
+      "displacementAfterRelease": 6.773124694824219,
+      "pass": true
+    },
+    {
+      "packageType": "Rapuh",
+      "displacementAfterRelease": 6.41400146484375,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

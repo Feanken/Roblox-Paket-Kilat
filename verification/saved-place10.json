@@ -1,0 +1,13 @@
+{
+  "bytes": 304601,
+  "chunks": 2314,
+  "markers": {
+    "Landscape09": true,
+    "DepotParcels10": true,
+    "CurrentStreets10": false,
+    "PaketKilat_CreatorAssets09": true,
+    "PaketKilat_CreatorAssets10": true,
+    "Current map routes. General guidance, not a guarantee of no hazards.": false
+  },
+  "method": "Read-only Roblox binary chunk decompression; marker presence, not full reopen/gameplay validation"
+}

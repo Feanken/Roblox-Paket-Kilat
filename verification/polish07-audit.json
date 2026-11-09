@@ -1,0 +1,81 @@
+{
+  "review": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"modelSizes\":[[\"GardenTree1\",\"7.2080078125, 11.499942779541016, 7.071677207946777\"],[\"GardenTree2\",\"7.208013534545898, 11.499942779541016, 7.071677207946777\"],[\"GardenTree3\",\"7.208013534545898, 11.499942779541016, 7.071678161621094\"],[\"GardenTree4\",\"7.207998275756836, 11.499942779541016, 7.071677207946777\"],[\"GardenTree5\",\"7.2080078125, 11.499942779541016, 7.071678161621094\"],[\"DepotBench\",\"7.8176188468933105, 3.9579713344573975, 3.1612207889556885\"],[\"DepotFence1\",\"0.7887663841247559, 2.4400010108947754, 8.558558464050293\"],[\"DepotFence2\",\"0.7887663841247559, 2.4400010108947754, 8.558558464050293\"],[\"DepotFence3\",\"0.7887663841247559, 2.4400010108947754, 8.558558464050293\"]],\"statuses\":{\"rbxassetid://1278518815\":\"Enum.AssetFetchStatus.Success\",\"rbxassetid://102240183850853\":\"Enum.AssetFetchStatus.Success\",\"rbxassetid://1278512125\":\"Enum.AssetFetchStatus.Success\",\"rbxassetid://1278519390\":\"Enum.AssetFetchStatus.Success\",\"rbxassetid://6165177553\":\"Enum.AssetFetchStatus.Success\"},\"scripts\":0,\"unsafeBodies\":0,\"preloadOK\":true,\"parts\":19}"
+      }
+    ],
+    "isError": false
+  },
+  "final": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"hud\":true,\"previewRemoved\":true,\"scripts\":0,\"reviewRemoved\":true,\"activePackages\":0,\"placements\":[{\"asset\":\"4893246329\",\"name\":\"GardenTree1\",\"bottomRelative\":1.0801067352294922},{\"asset\":\"4893246329\",\"name\":\"GardenTree2\",\"bottomRelative\":1.0801067352294922},{\"asset\":\"4893246329\",\"name\":\"GardenTree3\",\"bottomRelative\":1.0801067352294922},{\"asset\":\"4893246329\",\"name\":\"GardenTree4\",\"bottomRelative\":1.0801067352294922},{\"asset\":\"4893246329\",\"name\":\"GardenTree5\",\"bottomRelative\":1.0801067352294922},{\"asset\":\"111013476485423\",\"name\":\"DepotBench\",\"bottomRelative\":1.0800963640213013},{\"asset\":\"8092188374\",\"name\":\"DepotFence1\",\"bottomRelative\":1.0798041820526124},{\"asset\":\"8092188374\",\"name\":\"DepotFence2\",\"bottomRelative\":1.0798041820526124},{\"asset\":\"8092188374\",\"name\":\"DepotFence3\",\"bottomRelative\":1.0798041820526124}],\"parts\":19}"
+      }
+    ],
+    "isError": false
+  },
+  "runtime": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"replayRejected\":true,\"walked\":true,\"condition\":100,\"reward\":47}"
+      }
+    ],
+    "isError": false
+  },
+  "sources": [
+    {
+      "id": "4893246329",
+      "name": "Low Poly Tree",
+      "creator": "Abishpc",
+      "url": "https://create.roblox.com/store/asset/4893246329",
+      "freeAtReview": true,
+      "priceCents": 0,
+      "sourceParts": 3,
+      "copies": 5,
+      "status": "used"
+    },
+    {
+      "id": "111013476485423",
+      "name": "Wooden Bench",
+      "creator": "thatpower29",
+      "url": "https://create.roblox.com/store/asset/111013476485423",
+      "freeAtReview": true,
+      "priceCents": 0,
+      "sourceParts": 1,
+      "copies": 1,
+      "status": "used, decorative only"
+    },
+    {
+      "id": "8092188374",
+      "name": "Mesh Wooden Fence",
+      "creator": "logoffkid",
+      "url": "https://create.roblox.com/store/asset/8092188374",
+      "freeAtReview": true,
+      "priceCents": 0,
+      "sourceParts": 1,
+      "copies": 3,
+      "status": "used, decorative only"
+    },
+    {
+      "id": "75862842734848",
+      "creator": "XxEllaArrowBlastxX",
+      "freeAtReview": true,
+      "status": "rejected; 6 script containers plus GUI/Camera/lighting content; removed without execution"
+    },
+    {
+      "id": "12549617200",
+      "creator": "Remadex Development",
+      "freeAtReview": true,
+      "status": "not selected; 2MeshParts and1Weld; conifer style less suitable"
+    }
+  ],
+  "limitations": [
+    "One desktop automated route; no real phone/performance/multiplayer regression",
+    "No external script executed; structural audit is not a complete security or IP-rights guarantee",
+    "Local .rbxl save still unconfirmed"
+  ]
+}

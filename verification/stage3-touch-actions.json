@@ -1,0 +1,22 @@
+{
+  "state": {
+    "Status": "Carrying",
+    "LastCode": "Pickup",
+    "OrderId": "c88115fe-d64d-4a98-a6e4-93502470c037",
+    "Coins": 92
+  },
+  "trace": {
+    "touch": 4,
+    "keyboard": 0
+  },
+  "package": {
+    "status": "Carrying",
+    "ownerUserId": 4737266825,
+    "orderId": "c88115fe-d64d-4a98-a6e4-93502470c037",
+    "packageType": "Rapuh",
+    "destinationId": "Rumah04",
+    "condition": 80,
+    "outOfBounds": false
+  },
+  "pass": true
+}

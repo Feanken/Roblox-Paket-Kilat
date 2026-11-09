@@ -1,0 +1,13 @@
+{
+  "mode": "Studio Play Client; MCP user_keyboard_input",
+  "orderId": "3236c564-dca0-40b3-8184-401a07a88274",
+  "steps": [
+    {"input":"E hold 400ms at depot", "status":"Carrying", "condition":100},
+    {"input":"Q", "status":"Dropped", "condition":100},
+    {"input":"E hold 400ms near package", "status":"Carrying", "condition":100},
+    {"input":"Q then R", "status":"Dropped", "condition":80, "position":"8.0001, 198.2882, 4.0001"},
+    {"input":"Walk to recovery point then E hold 400ms", "status":"Carrying", "condition":80}
+  ],
+  "pass":true,
+  "limitations":["Keyboard tested; touch emulator and physical mobile device not tested."]
+}

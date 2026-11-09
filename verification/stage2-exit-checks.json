@@ -1,0 +1,13 @@
+{
+  "sessionRemoved": true,
+  "orderRemoved": true,
+  "lifecycleBindingsRemoved": true,
+  "pass": true,
+  "packageRemoved": true,
+  "coinsBefore": 43,
+  "packageConnectionRemoved": true,
+  "requestCacheRemoved": true,
+  "mode": "Actual PlayerRemoving via Kick in local Studio Play",
+  "coinsBeforeDiscard": 43,
+  "activePackages": 0
+}

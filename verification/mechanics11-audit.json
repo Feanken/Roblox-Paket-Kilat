@@ -1,0 +1,78 @@
+{
+  "stage": "Mechanics11",
+  "date": "2026-11-09",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "stamina": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"regenerated\":56,\"exhaustedObserved\":true,\"normalSpeed\":16,\"minStamina\":0}"
+      }
+    ],
+    "isError": false
+  },
+  "common": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"SawExhausted\":true,\"Status\":\"Carrying\",\"LastStamina\":100,\"Condition\":100,\"LastGrip\":99,\"GripLosses\":0,\"MinGrip\":74,\"MinStamina\":2}"
+      }
+    ],
+    "isError": false
+  },
+  "fragile": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"SawExhausted\":true,\"Status\":\"Dropped\",\"LastStamina\":69,\"Condition\":80,\"LastGrip\":72,\"GripLosses\":1,\"MinGrip\":0,\"MinStamina\":2}"
+      }
+    ],
+    "isError": false
+  },
+  "delivery": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"reward\":37,\"replayRejected\":true,\"condition\":80,\"afterGripLossDelivery\":true}"
+      }
+    ],
+    "isError": false
+  },
+  "checks": {
+    "actualKeyInput": "W+LeftShift",
+    "normalSpeed": 16,
+    "sprintSpeed": 22.4,
+    "releaseRestores": true,
+    "staminaExhaustionRestores": true,
+    "recovery": true,
+    "invalidPayloadReject": true,
+    "extraArgumentReject": true,
+    "spamCapped": true,
+    "intentLeaseExpires": true,
+    "shopStops": true,
+    "textFocusStops": true,
+    "resetMeters100": true,
+    "resetOnePanel": true,
+    "phone": {
+      "viewport": "750x323",
+      "panel": "352x48",
+      "position": "199,199",
+      "button": "459,201",
+      "buttonSize": "84x44",
+      "fits": true
+    }
+  },
+  "limitations": [
+    "Movement tests use actual keyboard keys with a temporary camera alignment LocalScript; fixture teleport used only for setup/delivery, not full five-route playtesting",
+    "Earlier harness assumed PlayerModule exists; it did not; early MoveTo tests and one exhaustion assertion failed. Do not count those as passes",
+    "Startup DeliveryCelebration UI race found and fixed with FindFirstChild; final startup output bootstrap only",
+    "Local defaults tested; ConfigService live override path not tested or published",
+    "Phone layout and keyboard tested, not pure touch or physical phone, multiplayer or balance validation"
+  ],
+  "end": {
+    "mode": "Edit",
+    "viewport": "default",
+    "activePackages": 0,
+    "HUD": true
+  }
+}

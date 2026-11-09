@@ -1,0 +1,16 @@
+{
+  "afterRecovery": {
+    "status": "Dropped",
+    "playerPosition": "-6, 200.64378356933594, 5",
+    "condition": 80,
+    "sameId": true
+  },
+  "beforeRecovery": {
+    "status": "Dropped",
+    "playerY": 154.517333984375,
+    "outOfBounds": true
+  },
+  "orderId": "c8efc6e7-bf12-4aa6-89c7-844233cf4d6c",
+  "pass": true,
+  "finalStatus": "Carrying"
+}

@@ -1,0 +1,146 @@
+{
+  "mode": "Studio Play / server Script / one real client",
+  "pass": true,
+  "checks": [
+    {
+      "pass": true,
+      "name": "Start at depot",
+      "detail": "Start"
+    },
+    {
+      "pass": true,
+      "name": "Authoritative data",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Carried visible weld",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Second order denied",
+      "detail": "OrderActive"
+    },
+    {
+      "pass": true,
+      "name": "Wrong destination denied",
+      "detail": "WrongDestination"
+    },
+    {
+      "pass": true,
+      "name": "Distant completion denied",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Snapshot detached from state",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Malformed argument denied",
+      "detail": "InvalidArguments"
+    },
+    {
+      "pass": true,
+      "name": "No T07 action exposed",
+      "detail": "UnknownAction"
+    },
+    {
+      "pass": true,
+      "name": "Stale ID denied",
+      "detail": "NotOwnerOrStale"
+    },
+    {
+      "pass": true,
+      "name": "Drop physical server owner",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Foreign identity denied pickup",
+      "detail": "NotOwnerOrStale"
+    },
+    {
+      "pass": true,
+      "name": "Distant pickup denied",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "Owner repickup",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Damage debounce",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Recovery identity and penalty",
+      "detail": "Recover"
+    },
+    {
+      "pass": true,
+      "name": "Recovery safe position",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Request spam denied",
+      "detail": "RateLimited"
+    },
+    {
+      "pass": true,
+      "name": "Recovery cooldown denied",
+      "detail": "RecoveryCooldown"
+    },
+    {
+      "pass": true,
+      "name": "Recovered package still distance checked",
+      "detail": "TooFar"
+    },
+    {
+      "pass": true,
+      "name": "World boundary holds lost package",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Out of bounds recovery",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Fallen player returned to safe depot",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Condition clamps zero",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Zero condition repickup",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Internal completion lock once without reward",
+      "detail": "CompletionLocked"
+    },
+    {
+      "pass": true,
+      "name": "Basic cancellation clears package",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "name": "Distant start denied",
+      "detail": "TooFar"
+    }
+  ]
+}

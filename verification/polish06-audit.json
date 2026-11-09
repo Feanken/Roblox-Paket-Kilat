@@ -1,0 +1,52 @@
+{
+  "revision": "Polish06",
+  "audit": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"neighborhood\":\"Polish05\",\"revision\":\"Polish06\",\"hudEnabled\":true,\"signs\":6,\"simulator\":\"default\",\"activePackages\":0}"
+      }
+    ],
+    "isError": false
+  },
+  "runtime": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"compactCard\":\"280, 132\",\"replayRejected\":true,\"next\":\"Berikut: Rumah Pak Budi · ke depot\",\"condition\":80,\"recordEligible\":false,\"passed\":true,\"reward\":44}"
+      }
+    ],
+    "isError": false
+  },
+  "desktop": {
+    "viewport": "1350x863",
+    "card": "320x132",
+    "storage": "320x22",
+    "manualHelpHeight": 66,
+    "manualHelpMouse": true
+  },
+  "phone": {
+    "device": "iPhone 17 Pro landscape",
+    "viewport": "750x323",
+    "card": "280x132",
+    "storage": "280x22",
+    "autoGuideHeight": 52,
+    "textFits": true
+  },
+  "checks": [
+    "Idle/Carrying/Dropped labels fit",
+    "Actual MoveTo route to Bu Sari after recovery; replay rejected",
+    "Results hide topcard and status; expiry restores both",
+    "Server death/reset restores HUD",
+    "Keyboard B shop opens/hides guide",
+    "Desktop Help opens manual guide66 via mouse"
+  ],
+  "limitations": [
+    "Phone manual Help mouse injection did not activate; first harness assertion failed; desktop manual Help later passed",
+    "Not physical phone or pure touch testing",
+    "Source .rbxl save unconfirmed"
+  ],
+  "corrections": [
+    "Removed old render assignment that overrode storage22 with38"
+  ]
+}
