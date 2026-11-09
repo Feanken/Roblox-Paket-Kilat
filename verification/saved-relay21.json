@@ -1,0 +1,29 @@
+{
+  "bytes": 395960,
+  "mtime": "2026-11-09T06:56:02.345Z",
+  "markers": {
+    "NeighborRelay21": false,
+    "GripGear20": true,
+    "GripUpgradeReduction": true,
+    "CourierCompass19": true,
+    "CompactPhone18": true
+  },
+  "preRelaySources": {
+    "DeliveryService.luau": true,
+    "EconomyService.luau": true,
+    "MovementTuning.luau": true,
+    "PrototypeInput.client.luau": true,
+    "CourierNavigation19.client.luau": true,
+    "RouteGuide.client.luau": true,
+    "DeliveryFeedback.client.luau": true
+  },
+  "unchangedSources": {
+    "ProfileSchema.luau": true,
+    "CourierMovement.luau": true,
+    "CosmeticService.luau": true,
+    "Gear20.luau": true,
+    "GearShop20.client.luau": true,
+    "UITheme12.luau": true,
+    "PackageService.luau": true
+  }
+}

@@ -1,4 +1,36 @@
-# Pembaruan TERBARU — Gear20: progres peralatan (9 November 2026)
+# Pembaruan TERBARU — Relay21: titipan antar rumah (9 November 2026)
+
+Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. DeliveryFlowRevision=NeighborRelay21. Memperbaiki perjalanan kosong yang berulang: setelah pesanan depot selesai, pelanggan menawarkan satu titipan Biasa ke rumah lain. Ambil di titik rumah sumber, atau Lewati dan kembali ke depot. Tawaran default60detik dengan countdown/bar emas pada kartu lama. E/tombolAmbil menerima, Q/tombolLewati menolak. Tanpa panel HUD permanen baru. Setelah titipan selesai tidak ada titipan berikutnya; maksimal satu lanjutan per pesanan depot.
+
+## Implementasi dan rollback
+
+Baru server ModuleScript PaketKilat.Relay21 dari src/Relay21.luau; shared ModuleScript ReplicatedStorage.PaketKilat.Shared.CourierPaths21 dari src/CourierPaths21.luau. Diubah DeliveryService, EconomyService, MovementTuning, PaketKilatInput, PaketKilatNavigation19, PaketKilatRouteGuide, PaketKilatFeedback. File client kanonik masing-masing PrototypeInput.client.luau, CourierNavigation19.client.luau, RouteGuide.client.luau, DeliveryFeedback.client.luau. Pasang kedua module baru sebelum menjalankan source yang memakainya. src/UpgradeRelay21.luau mereproduksi attribute revisi; tanpa perubahan map/aset/GUI template atau schema profil.
+
+Backup7source di ServerStorage.PaketKilat_PreRelay21 dan backups/relay21-sources/. Folder backup awal tidak ditemukan saat pemeriksaan akhir, penyebab tidak diketahui; dipulihkan dari tujuh snapshot source praedit yang identik di disk, lalu diverifikasi7children. Backup disk tetap utuh. Backup place backups/main_game.before-relay21.20261109.rbxl serta handoff.before-relay21.md. Rollback dengan mengembalikan seluruh7source, menghapus Relay21/CourierPaths21 serta marker DeliveryFlowRevision. Profil tetap schema2 dari Gear20, jadi rollback Relay21 tidak mengubah data schema.
+
+Server menyimpan relayOffers per UserId, memakai GUID/expiry server. AcceptRelay/SkipRelay melewati remoteActionRequest lama, cooldown tetap. Terima memeriksa profil/hidup/tidak ada order/arity2/token aktif/expiry/jarak3D titik rumah aktual. ID rumah/harga/hadiah tidak dipilih client. Mengambil pesanan depot baru membuang tawaran lama. Cancel/respawn/leave membersihkannya juga. Jadwal depot tidak maju saat titipan diambil. PK_RelayOfferSeconds default60 bounds20..120 dan PK_RelayTimeScale default1.4 bounds1..3 memakai adapter ConfigService; tidak membuat konfigurasi cloud baru.
+
+CourierPaths21 menyambung route jalan sumber terbalik ke tujuan pada simpang bersama terakhir. Titik memakai basis DepotPad terbaru. Pemilihan bergantian antara dua kandidat dengan panjang jalur terpendek, bukan jarak garis lurus. Saat menunggu tawaran, kompas menunjuk titik sumber; setelah menerima, panduan menuju rumah tujuan. Dekat depot, primary/navigation/highlight tetap mengutamakan depot. Expiry/skip kembali ke alur kembali depot. Hasil pengantaran memberitahu ada titipan opsional.
+
+Titipan memakai ledger hadiah lama (dasar/kondisi/waktu/cap/target), jobBonus0, tanpa hadiah saat menerima/skip. TargetSeconds=max(15,panjangJalur/16*RelayTimeScale). Titipan tidak membandingkan/menulis rekor depot; recordReason=RelayRoute, tampilan menjelaskan rekor depot tetap. Target sesi dan cap tetap bisa berkontribusi pada hadiah pengantaran sah.
+
+## Verifikasi
+
+GameId0/StudioMemory saja. PhaseA:20pasangan rute berarah endpoint/panjang simetris, regular delivery fixture berhasil49koin/1pengantaran; replay tanpa kredit. Far=TooFar, tipe/arity salah=InvalidArguments, token lama/expired=RelayExpired. Expiry server diuji dengan memajukan timestamp fixture. Tidak ada kredit dari menerima tawaran; replay Accept ketika Carrying=OrderActive. Paket owner benar, snapshot isRelay/sourceId, jadwal depot tetap.
+
+Rumah01→Rumah02 ditempuh melalui empat character_navigation waypoint speed_multiplier1, seluruh panggilanSuccess. UI tiba Carrying/kondisi100/Antar paket/ready. Tombol actualPrimary menyelesaikan; hasil72koin (termasuk cap/target sesi lama), saldo121,2pengantaran. Durasi110.28detik mencakup jeda QA, bukan estimasi waktu berjalan/balance. Rekor regular awal0.50detik berasal dari teleport fixture dan hanya data uji lokal; setelah relay tetap utuh, jumlah record1. Replay pengantaran=NotOwnerOrStale tanpa kredit. Relay selesai tidak membuat tawaran lagi,0paket aktif. Tawaran tambahan fixture untuk pengujianSkip: actualSecondary berhasil tanpa kredit; Cancel membersihkan tawaran; depot order baru dan quote Gear20(0/80) tetap bekerja.
+
+GalaxyA06 LandscapeSensor/CoreUISafeInsets,Root705x280: tujuan/countdown/Ambil/Lewati muat, tidak ada TextFits gagal, screenshot verification/relay21-phone.jpg. Tawaran dihasilkan oleh regular delivery fixture asli, bukan modal yang dipaksa terbuka. UI dekat depot actionStart/navdepot/highlightPickupPoint sementara tawaran aktif. Tawaran kemudian kedaluwarsa secara alami dan UI kembali ke depot/secondaryhidden. Fixture tambahan untuk memaksa expiry di HP terlambat karena tawaran sudah kedaluwarsa; assertion harness itu tidak dihitung sebagai uji timer terpisah. Fixture respawn baru: offer hilang, health100,Idle, koin tetap.
+
+Eksekusi require EconomyService langsung dari tool berada pada cache module terpisah (Data nil); pengujian state sebenarnya memakai normal Script runtime sementara. Fresh terakhir coins0/deliveries0/Grip0/noOffer, UI normal, console hanya Bootstrapready. TemporaryRelay21 scripts hanya hidup di Play dan tidak tersimpan di Edit. Akhir Edit/Stop, simulator default,HUDaktif,0paket. Satu perjalanan diuji penuh via tool, belum semua rute/manual manusia/HP touch fisik/multiplayer/performa atau DataStore published.
+
+Source final sinkron di disk. Bukti verification/relay21-audit.json,relay21-phone.jpg,saved-relay21.json. Backup menyimpan sumber praRelay yang aktif, termasuk Gear20/Nav19.
+
+**Simpan File > Save to File sebelum menutup Studio.** Binary saat diperiksa395960byte/2026-11-09T06:56:02.345Z telah memuat Gear20 dan Navigation19, tetapi NeighborRelay21 belum ada. Perubahan Relay21 ada pada Studio aktif; source/dokumen/bukti sudah di disk.
+
+---
+
+# Arsip — Gear20: progres peralatan (9 November 2026)
 
 Sesi aktif57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, ProgressionRevision=GripGear20. Tujuan: memberi alasan menabung hasil antar paket. Toko kini memiliki tab Tas dan Peralatan. Sarung tangan tiga level berharga80/140/220 (total440), mengurangi drain genggaman sprint10/20/30%; kecepatan, stamina dan regenerasi tetap. Efek dikunci ketika pesanan berikut dimulai. Visual glove cokelat/teal/emas, massless/noncollision, pada tangan R15 atau lengan R6. Tidak ada aset baru dari luar atau perubahan map.
 

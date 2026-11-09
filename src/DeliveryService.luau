@@ -1,7 +1,9 @@
 -- Seluruh transisi dan kredit resmi berjalan sinkron di server.
 local HttpService = game:GetService("HttpService")
 local Movement = require(script.Parent.CourierMovement)
-local Delivery = {orders = {}, requests = {}}
+local Relay = require(script.Parent.Relay21)
+local Tuning = require(script.Parent.MovementTuning)
+local Delivery = {orders = {}, requests = {}, relayOffers = {}}
 local C, P, W, emit, E, H, K, T
 function Delivery.Init(config, packages, world, publish, economy, hazards, cosmetics, telemetry)
 	C, P, W, emit, E, H = config, packages, world, publish, economy, hazards
@@ -20,9 +22,17 @@ local function destinationPoint(id)
 	local model=W.Map:FindFirstChild(id)
 	return model and model:FindFirstChild("DestinationPoint")
 end
+local function relayOffer(player)
+	local id = player.UserId
+	local offer = Relay.Current(Delivery.relayOffers[id], workspace:GetServerTimeNow())
+	Delivery.relayOffers[id] = offer
+	return offer
+end
 function Delivery.Snapshot(player)
 	local snapshot = E.Snapshot(player)
 	snapshot.status = "Idle"
+ local relay = relayOffer(player)
+ if relay then snapshot.relayOffer = table.clone(relay) end
  snapshot.movement=Movement.Snapshot(player)
  snapshot.routeBonus=require(script.Parent.CityBonus13).Snapshot(Delivery.orders[player.UserId])
  if T then snapshot.onboarding=T:Snapshot(player) end
@@ -38,12 +48,12 @@ function Delivery.Snapshot(player)
 	snapshot.destinationPosition=point and point.Position
 	local o = Delivery.orders[player.UserId]
 	if o then
-		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus"}) do snapshot[key] = o[key] end
+		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus","isRelay","sourceId"}) do snapshot[key] = o[key] end
 		snapshot.destinationName=C.Routes[o.destinationId].Name
   snapshot.packagePosition=o.package and o.package.Parent and o.package.Position or nil
 		local point=destinationPoint(o.destinationId)
 		snapshot.destinationPosition=point and point.Position
-		snapshot.currentBestTime=E.GetBest(player,o.destinationId,o.packageType)
+		if not o.isRelay then snapshot.currentBestTime=E.GetBest(player,o.destinationId,o.packageType) end
 	end
 	return snapshot
 end
@@ -81,6 +91,7 @@ function Delivery.Complete(player, orderId, destinationId)
 	if T then T:Completed(player,o,result,E.Snapshot(player).coins) end
  P.Destroy(o)
 	Delivery.orders[player.UserId] = nil
+ Delivery.relayOffers[player.UserId] = Relay.Make(C,W.Map,o,E.Snapshot(player).deliveryCount,HttpService:GenerateGUID(false),workspace:GetServerTimeNow(),Tuning.Get())
 	Delivery.Publish(player, "Delivered")
 	return true, "Delivered"
 end
@@ -92,13 +103,21 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 	if type(action) ~= "string" or #action > 16
 		or (orderId ~= nil and (type(orderId) ~= "string" or #orderId > 64))
 		or (destinationId ~= nil and (type(destinationId) ~= "string" or #destinationId > 64)) then return false, "InvalidArguments" end
-	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true, AcceptJob=true, BuyGrip=true}
+	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true, AcceptJob=true, BuyGrip=true, AcceptRelay=true, SkipRelay=true}
 	if not allowed[action] then return false, "UnknownAction" end
 	if (action=="Start" or action=="Sync") and orderId~=nil then return false,"InvalidArguments" end
 	if (action == "Deliver" and type(destinationId) ~= "string") or (action ~= "Deliver" and destinationId ~= nil) then return false, "InvalidArguments" end
 	if action == "Sync" then Delivery.Publish(player, "Sync"); return true, "Sync" end
 	if not E.Has(player) then return false,"ProfileUnavailable" end
  if not root(player) then return false, "NotAlive" end
+ if action=='SkipRelay' then
+  if arity and arity~=2 then return false,'InvalidArguments' end
+  if Delivery.orders[player.UserId] then return false,'OrderActive' end
+  local offer=relayOffer(player)
+  if not offer or offer.id~=orderId then return false,'RelayExpired' end
+  Delivery.relayOffers[player.UserId]=nil
+  Delivery.Publish(player,'RelaySkipped') return true,'RelaySkipped'
+ end
  if action=='BuyGrip'then
   if arity and arity~=2 then return false,'InvalidArguments'end
   if Delivery.orders[player.UserId]then return false,'OrderActive'end
@@ -115,11 +134,22 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
  end
  if action == "Deliver" then return Delivery.Complete(player, orderId, destinationId) end
 	local o = Delivery.orders[player.UserId]
-	if action == "Start" or action=="AcceptJob" then
+	if action == "Start" or action=="AcceptJob" or action=='AcceptRelay' then
 		if o then return false, "OrderActive" end
-		if not near(player, W.Map.Depot.PickupPoint.Position) then return false, "TooFar" end
 		local assignment=E.PeekAssignment(player)
-  if action=='AcceptJob'then assignment=E.ResolveOffer(player,orderId)if not assignment then return false,'OfferExpired'end end
+  local relay
+  if action=='AcceptRelay' then
+   if arity and arity~=2 then return false,'InvalidArguments' end
+   relay=relayOffer(player)
+   if not relay or relay.id~=orderId then return false,'RelayExpired' end
+   local pickup=destinationPoint(relay.sourceId)
+   if not pickup or not destinationPoint(relay.destinationId) then return false,'UnavailableDestination' end
+   if not near(player,pickup.Position) then return false,'TooFar' end
+   assignment={DestinationId=relay.destinationId,PackageType='Biasa',name='Titipan tetangga',JobBonus=0}
+  else
+   if not near(player, W.Map.Depot.PickupPoint.Position) then return false, "TooFar" end
+   if action=='AcceptJob'then assignment=E.ResolveOffer(player,orderId)if not assignment then return false,'OfferExpired'end end
+  end
 		o = {
 			orderId = HttpService:GenerateGUID(false), ownerUserId = player.UserId,
 			packageType = assignment.PackageType, destinationId = assignment.DestinationId, status = "Carrying",
@@ -128,10 +158,12 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			lastRecoveryAt = -1, lastRecoveryClock = -math.huge, lastDamageAt = -math.huge,
 			outOfBounds = false, player = player, jobName=assignment.name or 'Reguler',jobBonus=assignment.JobBonus or 0,
 		}
+  if relay then o.isRelay=true o.sourceId=relay.sourceId o.targetSeconds=relay.targetSeconds end
 		Delivery.orders[player.UserId] = o
 		P.Create(o)
 		P.Carry(o, root(player))
-		E.AdvanceAssignment(player)
+  Delivery.relayOffers[player.UserId]=nil
+  if not relay then E.AdvanceAssignment(player) end
   if T then T:OrderStarted(player,o) end
 	else
 		if not o or o.ownerUserId ~= player.UserId or o.orderId ~= orderId then return false, "NotOwnerOrStale" end
@@ -164,7 +196,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			end
 		end
 	end
-	Delivery.Publish(player, action=='AcceptJob'and 'Start'or action)
+	Delivery.Publish(player, (action=='AcceptJob'or action=='AcceptRelay')and 'Start'or action)
 	return true, action
 end
 function Delivery.Impact(o, cause)
@@ -186,6 +218,7 @@ function Delivery.OutOfBounds(o)
 	Delivery.Publish(o.player, "OutOfBounds")
 end
 function Delivery.Cancel(player, code)
+ Delivery.relayOffers[player.UserId] = nil
  if T then T:Cancelled(player) end
 	if H then H.Clear(player) end
 	local o = Delivery.orders[player.UserId]
@@ -194,6 +227,7 @@ function Delivery.Cancel(player, code)
 	Delivery.Publish(player, code or "Cancelled")
 end
 function Delivery.RemovePlayer(player)
+ Delivery.relayOffers[player.UserId] = nil
 	if H then H.Clear(player) end
 	local o = Delivery.orders[player.UserId]
 	if o then P.Destroy(o); Delivery.orders[player.UserId] = nil end

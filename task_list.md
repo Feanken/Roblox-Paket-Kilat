@@ -298,7 +298,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] N19-F: LintasKota Rumah04 tetapCarrying/outOfBoundsfalse dan diantar100/56koin; fixture bukan perjalanan berjalan penuh.
 - [x] N19-G: paket dihilangkan sementara dari client tetap ditunjuk25stud; outOfBounds memintaRecover tanpa panah; Recover dari distrik sah tidak teleport, kondisi80/recovery1.
 - [x] N19-H: source/audit/screenshot/handoff tersimpan; akhirEdit/default/HUDaktif/0paket.
-- [ ] N19-I: simpan CourierCompass19 ke main_game.rbxl dari Studio aktif; file yang diperiksa belum memuat marker revisi ini.
+- [x] N19-I: save berikutnya395960byte sudah memuat CourierCompass19; source praRelay dan komponen navigasi diperiksa kembali pada Relay21.
 - [ ] N19-J: uji rute berjalan penuh/HP fisik/multiplayer/performa dan kondisi map yang jalannya dipindah individual.
 
 ## Gear20 — progres peralatan kurir
@@ -312,6 +312,20 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] G20-G: tab toko Tas/Peralatan, HP Galaxy705x280 muat via fixture modal terbuka; desktop pointer membuka toko, empat baris tas muat.
 - [x] G20-H: fresh StudioMemory kembali coins0/Grip0, source final sinkron, fixture dihapus, Edit/default/HUDaktif, console fresh Bootstrap saja.
 - [x] G20-I: audit/screenshot/migrasi label/design/handoff tersimpan di workspace.
-- [ ] G20-J: File > Save to File dari Studio aktif; file391011byte masih belum memiliki GripGear20 maupun Navigation19.
+- [x] G20-J: save berikutnya395960byte sudah memuat Gear20/Navigation19; source praRelay dan module Gear20 sesuai pada pemeriksaan Relay21.
 - [ ] G20-K: uji published DataStore migrasi/save/rejoin dan rencana rollback kompatibel schema2 sebelum deploy.
 - [ ] G20-L: HP touch fisik, multiplayer/performa, avatar R6 dan balance harga; pointer menu emulator belum membuktikan alur mobile.
+
+## Relay21 — kurangi perjalanan kosong kembali ke depot
+
+- [x] R21-A: backup tujuh source aktif di disk serta backup place/handoff sebelum edit; folder ServerStorage dipulihkan dari snapshot praedit pada pemeriksaan akhir (7source).
+- [x] R21-B: satu tawaran opsional setelah pesanan depot; sumber rumah pelanggan, tujuan berbeda, batas ambil default60detik.
+- [x] R21-C: validasi token/arity/profil/hidup/jarak/order aktif; expired/stale/far/extra argumen ditolak; skip tanpa kredit.
+- [x] R21-D: penerimaan tidak memajukan jadwal depot, tidak memberi koin; pengantaran memakai ledger lama, replay tanpa kredit.
+- [x] R21-E: titipan selesai tidak membuat rantai tak terbatas; tidak mengubah rekor depot; cancel/respawn menghapus tawaran.
+- [x] R21-F:20pasangan rute berarah diuji endpoint/panjang simetris; panduan menyambung jalan pada simpang bersama.
+- [x] R21-G: satu rute Rumah01→Rumah02 ditempuh via tool navigasi speed1 melalui empat waypoint, sampai Carrying100/ready dan diantar via tombol aktual.
+- [x] R21-H: desktop Ambil/Lewati aktual, phoneGalaxy705x280 seluruh teks muat, countdown/bar pada kartu lama; dekat depot tetap Start/depot/highlightdepot.
+- [x] R21-I: fresh StudioMemory coins0/deliveries0/Grip0/noOffer, console fresh Bootstrap saja; source/audit/screenshot/handoff disimpan.
+- [ ] R21-J: File > Save to File untuk NeighborRelay21; file395960byte telah memuat Navigation19/Gear20, belum Relay21.
+- [ ] R21-K: playtest manusia/balance target waktu/harga, rute lain penuh, HP touch fisik, multiplayer dan performa; belum diverifikasi.

@@ -1,0 +1,292 @@
+{
+  "stage": "Relay21",
+  "date": "2026-11-09",
+  "studio": "57631be1-2a04-4ce1-8cc1-77570cda5f16",
+  "checks": {
+    "r21runtimeEvidence": {
+      "A": {
+        "expiredCode": "RelayExpired",
+        "pathPairs": 20,
+        "source": "Rumah01",
+        "offer": "ce3549cd-ec90-4d22-a609-b165a08f5922",
+        "regularDelivered": true,
+        "deliveryCount": 1,
+        "coins": 49,
+        "packages": 0,
+        "regularRecord": 0.5009479522705078,
+        "malformedCode": "InvalidArguments",
+        "farCode": "TooFar",
+        "replayedDeliveryNoCredit": true,
+        "destination": "Rumah02",
+        "staleCode": "RelayExpired",
+        "extraCode": "InvalidArguments"
+      },
+      "D": {
+        "depotOrderStillWorks": true,
+        "gearQuoteUnchanged": true,
+        "cancelClearsOffer": true,
+        "coins": 121,
+        "packages": 0,
+        "skipNoCredit": true
+      },
+      "C": {
+        "replayCode": "NotOwnerOrStale",
+        "replayedDeliveryNoCredit": true,
+        "noChainOffer": true,
+        "duration": 110.27992391586304,
+        "condition": 100,
+        "coins": 121,
+        "packages": 0,
+        "delivered": true,
+        "regularRecordUnchanged": true,
+        "depotRecords": 1,
+        "recordReason": "RelayRoute",
+        "reward": 72
+      },
+      "B": {
+        "replayCode": "OrderActive",
+        "source": "Rumah01",
+        "scheduleUnchanged": true,
+        "id": "86d615a8-d537-45a9-a0c5-6a39c3652e37",
+        "coinsUnchanged": true,
+        "targetSeconds": 21.875,
+        "packageOwner": 4737266825,
+        "relaySnapshot": true,
+        "status": "Carrying",
+        "destination": "Rumah02"
+      }
+    },
+    "r21offerUI": {
+      "enabled": true,
+      "action": "AcceptRelay",
+      "primary": "Ambil titipan [E]",
+      "navigationTarget": "titipan",
+      "routeDots": 0,
+      "title": "Ambil titipan",
+      "secondary": "Lewati titipan [Q]",
+      "toast": false,
+      "destination": "Titipan → Rumah Pak Budi",
+      "secondaryVisible": true,
+      "detail": "Ambil di sini · 48 dtk"
+    },
+    "r21carryingUI": {
+      "remaining": 250,
+      "bad": [],
+      "navigation": "tujuan",
+      "dots": 16,
+      "destination": "Rumah Pak Budi",
+      "code": "Movement",
+      "detail": "Titipan · 100/100"
+    },
+    "r21walkEndUI": {
+      "enabled": true,
+      "navigation": "ready",
+      "status": "Carrying",
+      "destination": "Rumah Pak Budi",
+      "primary": "Antar paket [E]",
+      "detail": "Titipan · 100/100"
+    },
+    "r21phoneUI": {
+      "navigation": "titipan",
+      "root": "705, 280",
+      "primary": "Ambil titipan",
+      "condition": "Ambil di sini · 52 dtk",
+      "title": "Ambil titipan",
+      "secondaryVisible": true,
+      "bad": [],
+      "available": true,
+      "toast": false,
+      "destination": "Titipan → Rumah Pak Budi",
+      "primaryEnabled": true,
+      "secondary": "Lewati titipan"
+    },
+    "r21phoneFresh": {
+      "fresh": {
+        "grip": 0,
+        "coins": 0
+      },
+      "ready": true
+    },
+    "r21depotUI": {
+      "enabled": true,
+      "highlight": "Workspace.PaketKilat.Map.Depot.PickupPoint",
+      "available": true,
+      "nav": "depot",
+      "action": "Start"
+    },
+    "r21expiredUI": {
+      "action": "Start",
+      "available": false,
+      "dots": 0,
+      "nav": "depot",
+      "secondary": false
+    },
+    "r21respawn": {
+      "action": "Start",
+      "available": false,
+      "status": "Idle",
+      "nav": "depot",
+      "respawn": {
+        "status": "Idle",
+        "health": 100,
+        "offerCleared": true,
+        "coinsUnchanged": true
+      }
+    },
+    "r21end": {
+      "device": "default",
+      "temporary": [],
+      "packages": 0,
+      "hud": true
+    },
+    "r21finalFresh": {
+      "title": "Pilih pesanan di depot",
+      "available": false,
+      "fresh": {
+        "offerAbsent": true,
+        "deliveries": 0,
+        "status": "Idle",
+        "storage": "StudioMemory",
+        "grip": 0,
+        "coins": 0
+      },
+      "primary": "Ke depot [E]",
+      "jobBoard": false,
+      "secondaryVisible": false
+    },
+    "r21finalConsole": "[PaketKilat] Bootstrap ready — T21; onboarding + LocalOnly analytics in Studio",
+    "finalEnd": {
+      "backup": 7,
+      "temporary": [],
+      "device": "default",
+      "hud": true,
+      "packages": 0,
+      "revision": "NeighborRelay21"
+    },
+    "finalSources": [
+      {
+        "1": {
+          "file": "DeliveryService.luau",
+          "class": "ModuleScript",
+          "matches": true
+        },
+        "2": {
+          "file": "EconomyService.luau",
+          "class": "ModuleScript",
+          "matches": true
+        },
+        "3": {
+          "file": "MovementTuning.luau",
+          "class": "ModuleScript",
+          "matches": true
+        }
+      },
+      {
+        "1": {
+          "file": "PrototypeInput.client.luau",
+          "class": "LocalScript",
+          "matches": true
+        },
+        "2": {
+          "file": "CourierNavigation19.client.luau",
+          "class": "LocalScript",
+          "matches": true
+        },
+        "3": {
+          "file": "RouteGuide.client.luau",
+          "class": "LocalScript",
+          "matches": true
+        }
+      },
+      {
+        "1": {
+          "file": "DeliveryFeedback.client.luau",
+          "class": "LocalScript",
+          "matches": true
+        },
+        "2": {
+          "file": "CourierPaths21.luau",
+          "class": "ModuleScript",
+          "matches": true
+        },
+        "3": {
+          "file": "Relay21.luau",
+          "class": "ModuleScript",
+          "matches": true
+        }
+      }
+    ],
+    "preRelaySavedSources": {
+      "DeliveryService.luau": true,
+      "EconomyService.luau": true,
+      "MovementTuning.luau": true,
+      "PrototypeInput.client.luau": true,
+      "CourierNavigation19.client.luau": true,
+      "RouteGuide.client.luau": true,
+      "DeliveryFeedback.client.luau": true
+    }
+  },
+  "walk": [
+    {
+      "point": "2",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Success"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "point": "3",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Success"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "point": "4",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Success"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "point": "5",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Success"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "limitations": [
+    "Only GameId=0 StudioMemory, no published DataStore, physical phone, multiplayer, or performance validation.",
+    "Regular first delivery used a character-position fixture; its 0.50-second record is local test data only.",
+    "Relay path from Rumah01 to Rumah02 was traversed through four sequential character_navigation calls at speed_multiplier1. Arrival UI Carrying100/ready; actual tool-driven walk, not a manual human playtest.",
+    "110.28-second order duration includes QA pauses; not an assessment of target-time balance or pure walking time.",
+    "20 directed route pairs checked for endpoints and length symmetry; only one was fully traversed.",
+    "Phone offer produced by actual regular delivery fixture; layout verified on GalaxyA06 705x280 landscape. Physical touch not tested.",
+    "Tool-side require of runtime EconomyService had a separate module cache (Data nil). Subsequent checks used temporary normal server Scripts to access actual runtime state.",
+    "Forced-expiry phone fixture ran after real offer had already expired and asserted; not counted as an independent forced timer test. Natural expiry UI returned to depot. PhaseA explicitly tested server forced expiry successfully.",
+    "Final fresh Play has only Bootstrap console; no temporary scripts remain in Edit.",
+    "No new assets, schema changes, cloud configuration writes, publication, or real player balance edits.",
+    "Initial ServerStorage backup folder absent at final inspection for unknown reason; rebuilt from seven exact pre-edit source snapshots, then rechecked7children. Disk backups remained present."
+  ]
+}

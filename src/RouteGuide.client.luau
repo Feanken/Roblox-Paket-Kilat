@@ -3,6 +3,7 @@ local Players=game:GetService("Players") local RunService=game:GetService("RunSe
 local CAS=game:GetService("ContextActionService") local UIS=game:GetService("UserInputService")
 local p=Players.LocalPlayer local shared=game.ReplicatedStorage:WaitForChild("PaketKilat")
 local routes=require(shared.Shared:WaitForChild("SafeRoutes08"))
+local Paths=require(shared.Shared:WaitForChild('CourierPaths21'))
 local Theme=require(shared.Shared.UITheme12)
 local ui=p:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
 local state={} local enabled=true local connections={}
@@ -36,8 +37,10 @@ local function refresh()
  button:SetAttribute("RouteEnabled",enabled)
  local char=p.Character local root=char and char:FindFirstChild("HumanoidRootPart") local hum=char and char:FindFirstChildOfClass("Humanoid")
  local returning=state.status=="Idle" and state.lastResult~=nil
+ local offer=state.status=='Idle'and state.relayOffer
+ if offer and workspace:GetServerTimeNow()<offer.expiresAt then hide()return end
  local id=state.status=="Carrying" and state.destinationId or returning and state.lastResult.destinationId
- local offsets=id and routes[id]
+ local offsets=id and Paths.Between(routes,state.status=='Carrying'and state.sourceId or nil,id)
  hide()
  if not enabled or not state.profileReady or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')or state.outOfBounds or not root or not hum or hum.Health<=0 or not offsets or not state.depotPosition then return end
  local basis=state.routeBasis or CFrame.identity

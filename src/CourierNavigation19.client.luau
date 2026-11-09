@@ -18,21 +18,24 @@ local function render()
  if not state.profileReady then ui:SetAttribute('NavigationMode19','hidden')card.Title.Text='PAKET KILAT'return end
  if not root or not hum or hum.Health<=0 then ui:SetAttribute('NavigationMode19','hidden')card.Title.Text='Muncul ulang...'return end
  local target,kind
- if state.status=='Idle'then target,kind=state.depotPosition,'depot'
+ if state.status=='Idle'then
+  local offer=state.relayOffer
+  if offer and workspace:GetServerTimeNow()<offer.expiresAt and(root.Position-state.depotPosition).Magnitude>config.ActionDistance then target,kind=offer.pickupPosition,'titipan'
+  else target,kind=state.depotPosition,'depot'end
  elseif state.status=='Carrying'then target,kind=state.destinationPosition,'tujuan'
  elseif state.status=='Dropped'and not state.outOfBounds then local p=ownPackage()target,kind=p and p.Position or state.packagePosition,'paket'end
  if not target then ui:SetAttribute('NavigationMode19',state.status=='Dropped'and 'recover'or 'hidden')ui:SetAttribute('NavigationDistance19',nil)card.Title.Text=state.status=='Dropped'and 'Pulihkan paket'or 'PAKET KILAT'return end
  local distance=(root.Position-target).Magnitude local ready=distance<=config.ActionDistance
  local directionTarget=target local remaining=flat(target-root.Position).Magnitude local mode='direct'
  local route=workspace:FindFirstChild('PaketKilatLocalSafeRoute')
- if not ready and state.status~='Dropped'and route and(route:GetAttribute('VisibleDots')or 0)>0 then
+ if not ready and state.status~='Dropped'and kind~='titipan'and route and(route:GetAttribute('VisibleDots')or 0)>0 then
   local selected,index=nil,0
   for _,p in ipairs(route:GetChildren())do local step=p:GetAttribute('RouteStep19')or 0 if p.Transparency<1 and step<=3 and step>index then selected,index=p,step end end
   if selected then directionTarget=selected.Position mode='route'remaining=route:GetAttribute('RemainingDistance19')or remaining end
  end
  if ready then
   arrow.Text='✓'arrow.Rotation=0 arrow.TextColor3=Color3.fromRGB(57,151,127)
-  card.Title.Text=kind=='depot'and 'Pilih pesanan'or kind=='paket'and 'Ambil ulang'or 'Siap diantar'
+  card.Title.Text=kind=='depot'and 'Pilih pesanan'or kind=='titipan'and 'Ambil titipan'or kind=='paket'and 'Ambil ulang'or 'Siap diantar'
  else
   local camera=workspace.CurrentCamera local forward=flat(camera and camera.CFrame.LookVector or root.CFrame.LookVector)
   if forward.Magnitude<.001 then forward=flat(root.CFrame.LookVector)end

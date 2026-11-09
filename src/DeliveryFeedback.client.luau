@@ -6,6 +6,7 @@ local player=Players.LocalPlayer
 local remote=game.ReplicatedStorage:WaitForChild("PaketKilat").Remotes
 local ui=player:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
 local Theme=require(game.ReplicatedStorage.PaketKilat.Shared.UITheme12)
+local Config=require(game.ReplicatedStorage.PaketKilat.Shared.Config)
 local state,shownOrder={},nil
 local connections={}
 local function connect(signal,fn) local c=signal:Connect(fn) table.insert(connections,c) return c end
@@ -76,7 +77,13 @@ local function refresh()
  local target=state.status=="Dropped" and p or nil
  if map and not target then
   if state.status=="Idle" then
-   local depot=map:FindFirstChild("Depot") target=depot and depot:FindFirstChild("PickupPoint")
+   local offer=state.relayOffer
+   local depot=map:FindFirstChild('Depot')local pickup=depot and depot:FindFirstChild('PickupPoint')
+   local char=player.Character local r=char and char:FindFirstChild('HumanoidRootPart')
+   local atDepot=r and pickup and(r.Position-pickup.Position).Magnitude<=Config.ActionDistance
+   if offer and workspace:GetServerTimeNow()<offer.expiresAt and not atDepot then
+    local source=map:FindFirstChild(offer.sourceId)target=source and source:FindFirstChild('DestinationPoint')
+   else target=pickup end
   elseif state.status=="Carrying" then
    local house=map:FindFirstChild(state.destinationId or "") target=house and house:FindFirstChild("DestinationPoint")
   end
@@ -102,7 +109,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    end
    detail.TextWrapped=true
    detail.TextSize=11
-   nextStep.Text="Kembali ke depot · pilih pesanan berikutnya"
+   nextStep.Text=snapshot.relayOffer and 'Ada titipan di sini · lanjut antar atau kembali ke depot' or "Kembali ke depot · pilih pesanan berikutnya"
    if tween then tween:Cancel() end
    scale.Scale=.88 tween=TweenService:Create(scale,TweenInfo.new(.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=1}) tween:Play()
   end

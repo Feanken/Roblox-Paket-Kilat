@@ -91,10 +91,10 @@ function E.Award(player,order,now)
 	local duration=math.max(0.001,now-order.startedAt)
 	local condition=math.clamp(order.condition,0,C.InitialCondition)
 	local conditionBonus=math.floor(C.ConditionBonus*condition/C.InitialCondition)
-	local timeBonus=math.floor(C.TimeBonus*math.clamp(1-duration/route.TargetSeconds,0,1))
+	local timeBonus=math.floor(C.TimeBonus*math.clamp(1-duration/(order.targetSeconds or route.TargetSeconds),0,1))
 	local key=order.destinationId.."|"..order.packageType
 	local previous=p.bestTimes[key]
-	local eligible=order.recoveryCount==0
+	local eligible=order.recoveryCount==0 and not order.isRelay
 	local newRecord=eligible and (previous==nil or duration<previous)
 	local result={
 		orderId=order.orderId,destinationId=order.destinationId,destinationName=route.Name,packageType=order.packageType,
@@ -102,7 +102,8 @@ function E.Award(player,order,now)
 		baseReward=C.BaseReward,conditionBonus=conditionBonus,timeBonus=timeBonus,
 		routeBonus=require(script.Parent.CityBonus13).Reward(order),
   total=C.BaseReward+conditionBonus+timeBonus+require(script.Parent.CityBonus13).Reward(order),completedAt=now,
-		recordEligible=eligible,recordReason=not eligible and "Recovered" or nil,
+		recordEligible=eligible,recordReason=order.isRelay and "RelayRoute" or not eligible and "Recovered" or nil,
+		isRelay=order.isRelay==true,sourceId=order.sourceId,
 		previousBest=previous,newRecord=newRecord,
 	}
 	result.jobBonus=math.floor((order.jobBonus or 0)*condition/C.InitialCondition)
