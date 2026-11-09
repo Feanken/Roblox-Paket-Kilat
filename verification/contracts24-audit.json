@@ -1,0 +1,140 @@
+{
+  "stage": "Contracts24",
+  "checks": {
+    "b24tests": {
+      "isolated": {
+        "historyCap": 5,
+        "replayNoCredit": true,
+        "overflowNoCommit": true,
+        "dirty": 7,
+        "cases": 7,
+        "offers": 6
+      },
+      "live": {
+        "total": 63,
+        "history": 1,
+        "offers": 6,
+        "kind": "priority",
+        "schema": 2,
+        "bonus": 14
+      }
+    },
+    "b24board": {
+      "visible": true,
+      "bad": [],
+      "detail": "Biasa · bonus maks. +14\nKondisi ≥95, tepat waktu, tanpa pulih."
+    },
+    "b24historyUI": {
+      "visible": true,
+      "text": "1. Rumah Bu Sari  ·  3★  ·  +63 koin\n",
+      "offersHidden": true,
+      "fits": true
+    },
+    "b24phoneBoard": {
+      "visible": true,
+      "position": "42.5, 0",
+      "bad": [],
+      "size": "620, 280"
+    },
+    "b24phoneSpecialFixture": {
+      "visible": true,
+      "bad": [],
+      "detail": "Biasa · bonus maks. +14\nKondisi ≥95, tepat waktu, tanpa pulih."
+    },
+    "b24objectiveWarning": {
+      "objectiveFits": true,
+      "objective": "100/100 · Prioritas · 42s · kondisi ≥95",
+      "warning": "Genggaman menipis. Lepas sprint agar pulih."
+    },
+    "b24finalPhone": {
+      "hint": "Kontrak berhasil · bonus +18",
+      "isolated": {
+        "historyCap": 5,
+        "replayNoCredit": true,
+        "overflowNoCommit": true,
+        "dirty": 7,
+        "cases": 7,
+        "offers": 6
+      },
+      "detailFits": true,
+      "live": {
+        "total": 62,
+        "history": 1,
+        "offers": 6,
+        "kind": "priority",
+        "schema": 2,
+        "bonus": 14
+      },
+      "detail": "Dasar 25 · Kondisi 15 · Waktu 7\nPos 0 · Kerja 0 · Target 20 · Kontrak 18"
+    },
+    "b24fresh": {
+      "history": 0,
+      "storage": "StudioMemory",
+      "gear": 0,
+      "offers": 6,
+      "coins": 0
+    },
+    "b24freshConsole": "[PaketKilat] Bootstrap ready — T21; onboarding + LocalOnly analytics in Studio",
+    "end": {
+      "backup": 8,
+      "temporary": [],
+      "device": "default",
+      "tabDefault": true,
+      "packages": 0,
+      "hud": true
+    },
+    "finalSources": [
+      {
+        "1": {
+          "matches": true,
+          "file": "JobOffers17.luau"
+        },
+        "2": {
+          "matches": true,
+          "file": "EconomyService.luau"
+        },
+        "3": {
+          "matches": true,
+          "file": "DeliveryService.luau"
+        }
+      },
+      {
+        "1": {
+          "matches": true,
+          "file": "MovementTuning.luau"
+        },
+        "2": {
+          "matches": true,
+          "file": "JobBoard17.client.luau"
+        },
+        "3": {
+          "matches": true,
+          "file": "PrototypeInput.client.luau"
+        }
+      },
+      {
+        "1": {
+          "matches": true,
+          "file": "DeliveryFeedback.client.luau"
+        },
+        "2": {
+          "matches": true,
+          "file": "CourierMovement.client.luau"
+        },
+        "3": {
+          "matches": true,
+          "file": "Contracts24.luau"
+        }
+      }
+    ]
+  },
+  "limits": [
+    "StudioMemory only; no published data or external-player tests.",
+    "Phone contracts layout used temporary initial tab1 fixture; restored tab0 before final fresh play. Native emulator pointer did not switch tabs. Desktop native tab/history clicks passed.",
+    "Low-grip notice tested via server-injected movement snapshot, not a physical sprint-drain test.",
+    "Priority completion used character position fixture; bonuses for other conditions checked in isolated module tests.",
+    "Additional play occurred during QA: last visible result bonus18 differed from recorded priority14 fixture. Do not treat that UI as the same order.",
+    "Keyboard focus guards statically verified; physical phone input, multiplayer and performance not tested.",
+    "History is session-only; schema2 unchanged. No release or cloud changes."
+  ]
+}

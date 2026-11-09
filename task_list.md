@@ -327,7 +327,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] R21-G: satu rute Rumah01→Rumah02 ditempuh via tool navigasi speed1 melalui empat waypoint, sampai Carrying100/ready dan diantar via tombol aktual.
 - [x] R21-H: desktop Ambil/Lewati aktual, phoneGalaxy705x280 seluruh teks muat, countdown/bar pada kartu lama; dekat depot tetap Start/depot/highlightdepot.
 - [x] R21-I: fresh StudioMemory coins0/deliveries0/Grip0/noOffer, console fresh Bootstrap saja; source/audit/screenshot/handoff disimpan.
-- [ ] R21-J: File > Save to File untuk NeighborRelay21; file395960byte telah memuat Navigation19/Gear20, belum Relay21.
+- [x] R21-J: save442913byte berikutnya memuat NeighborRelay21 (diperiksa pada Contracts24).
 - [ ] R21-K: playtest manusia/balance target waktu/harga, rute lain penuh, HP touch fisik, multiplayer dan performa; belum diverifikasi.
 
 ## Quality22 — hasil pengantaran dan pelanggan
@@ -341,7 +341,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Q22-G:5pelanggan/56Part, lantai aktual dan tanpa collision; kaki semua terukur≈.0298stud di atas permukaan, animasi/bubble mengikuti hasil sah.
 - [x] Q22-H: panel330x212 muat pada Galaxy705x280, semua teks muat; actualdesktop×menutup hasil dan memperlihatkan bubble; replay UI tidak mengulang reaksi.
 - [x] Q22-I: finalfreshStudioMemory coins0/delivery0/Grip0/current0/best0, consoleBootstrap saja, Edit/default/0paket/tanpa fixture; source/audit/gambar/handoff tersimpan.
-- [ ] Q22-J: File > Save to File; binary395960byte belum memuat Relay21 maupun CustomerRatings22.
+- [x] Q22-J: save442913byte berikutnya memuat CustomerRatings22 (diperiksa pada Contracts24).
 - [ ] Q22-K: uji HP touch fisik, semua orientasi/perangkat, multiplayer/performa, balance penilaian dan playtest manusia; phone×belum terverifikasi sebagai aksi yang ditargetkan.
 
 ## City23 — penataan kota
@@ -355,5 +355,22 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] C23-G:16model grounding tanpa reviewflag,2bangku baca gap0,75preloadSuccess/0failure; jalur tepi kota dan clearance kanopi diuji saat Play.
 - [x] C23-H: rute depot-apron→Rumah01 ditempuh dan diantar100/47koin/3bintang/tawaranRelay; console clean. Fixture pertama dari markerPickup yang collidable dikecualikan.
 - [x] C23-I:5source gameplay/client cocok dengan disk, akhirEdit/HUDaktif/0paket/tanpa fixture/reviewfolder; source migrasi/audit/gambar/handoff tersimpan.
-- [ ] C23-J: File > Save to File; binary395960byte masih sebelum Relay21/Quality22/City23.
+- [x] C23-J: save442913byte berikutnya memuat LivedInTown23 (diperiksa pada Contracts24).
 - [ ] C23-K: profiling HP fisik/multiplayer, semua rute manusia dan interaksi avatar berukuran ekstrem; belum diuji.
+
+## Contracts24 — sepuluh perbaikan internal
+
+- [x] B24-01: kontrak Prioritas dengan target kondisi/waktu.
+- [x] B24-02: kontrak Paket mulus untuk paket Rapuh.
+- [x] B24-03: kontrak Pemburu cap untuk eksplorasi jalur.
+- [x] B24-04: tab Biasa/Kontrak/Riwayat, enam pilihan tanpa enam kartu sekaligus.
+- [x] B24-05: target perjalanan ringkas termasuk countdown Prioritas.
+- [x] B24-06: bonus bersyarat server, base tetap saat gagal, replay/overflow tanpa commit.
+- [x] B24-07: riwayat lima pengantaran sesi; snapshot tidak memutasi profil.
+- [x] B24-08: rincian bonus dan status kontrak pada panel hasil.
+- [x] B24-09: guard fokus TextBox untuk E/Q/R/B; verifikasi source, belum uji mengetik manual.
+- [x] B24-10: peringatan genggaman≤25, rearm≥50; diverifikasi memakai snapshot uji.
+- [x] B24-11: tujuh kasus kontrak, ledger/history/overflow, pembelian tawaran dan payout Prioritas aktual lewat fixture; desktop tab/riwayat klik berhasil; HP layout muat.
+- [x] B24-12: fresh coins0/history0/gear0/offers6, consoleBootstrap saja, backup8source, Edit/default/HUDaktif/0paket/tanpa fixture.
+- [ ] B24-13: simpan SpecialContracts24 ke main_game.rbxl; save442913byte belum memuatnya.
+- [ ] B24-14: penilaian pemilik/balance dan input HP fisik. Publikasi/uji pemain luar ditunda sesuai arahan pemilik.

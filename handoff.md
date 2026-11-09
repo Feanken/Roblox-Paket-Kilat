@@ -1,4 +1,36 @@
-# Pembaruan TERBARU — City23: pusat kota dan ruang warga (9 November 2026)
+# Pembaruan TERBARU — Contracts24: sepuluh perbaikan internal
+
+Permintaan pemilik: pengembangan besar sampai puas; publikasi dan uji pemain luar ditunda. Paket ini mencakup sepuluh perubahan pada kontrak/feedback/kenyamanan, bukan klaim semua sepuluh tahap roadmap (termasuk sepeda) selesai atau kualitas terukur naik10kali.
+
+1–3: tiga kontrak Prioritas/Paket mulus/Pemburu cap.4: tab Biasa/Kontrak/Riwayat.5: target aktif pada HUD lama.6: bonus bersyarat server.7: riwayat5pengantaran sesi.8: hasil menjelaskan bonus/status.9: guard fokus keyboard E/Q/R/B.10: peringatan genggaman rendah.
+
+Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl, JobRevision=SpecialContracts24. Kota City23 dipertahankan. Tidak ada aset/map/schema/publikasi/cloudwrite baru.
+
+## Source dan aturan
+
+Baru ModuleScript ServerScriptService.PaketKilat.Contracts24 dari src/Contracts24.luau. Diubah8source: JobOffers17,EconomyService,DeliveryService,MovementTuning,JobBoard17.client,PrototypeInput.client,DeliveryFeedback.client,CourierMovement.client. Client live bernama PaketKilatJobBoard17/Input/Feedback/Movement. Pasang Contracts24 sebelum menjalankan module yang memakainya.
+
+Offers.Build mempertahankan3tawaran lama lalu menambah3kontrak dengan token revisi yang sama. Prioritas: kondisi≥max(RatingCleanCondition,RatingExcellentCondition),durasi≤TargetSeconds,tanpaRecover,bonus14. Paket mulus: Rapuh,kondisi≥InitialCondition100,tanpaRecover,bonus18. Pemburu cap: jumlahcap≥CityStampLimit2,kondisi≥RatingCleanCondition80,tanpaRecover,bonus16. PK_ContractPriorityReward/PerfectReward/ExploreReward bounded0..30/floor. Tawaran/tuning dikunci saat dibuat; contract disalin ke order. Client mengirim AcceptJob(id) saja. Target gagal tetap bisa diantar dengan bonus kontrak0, komponen hadiah lama tetap.
+
+Bonus kontrak dihitung di Economy.Award sebelum guard ekonomi dan commit ledger. History ditambah hanya setelah guard, maksimal5. Snapshot recentDeliveries hanya fieldringkas; history/rangkaian tetap sesi, profil schema2 tidak berubah. Relay tidak mewarisi kontrak yang selesai. Panel hasil menampilkan KontrakN dan berhasil/belum terpenuhi. HP menggunakan ConditionText lama; desktop Hint lama. Peringatan lowgrip≤25 memakai MobileNotice dan teks desktop, rearm≥50/pesananbaru.
+
+Backup8source praedit: backups/contracts24-sources/ dan ServerStorage.PaketKilat_PreContracts24. Binary/handoff backups/main_game.before-contracts24.20261109.rbxl dan handoff.before-contracts24.md. Rollback konsisten8source lalu hapus Contracts24/JobRevision24; profil tidak perlu migrasi. Source migration City23 tidak disentuh.
+
+## Verifikasi dan batas
+
+GameId0/StudioMemory. Tujuh kasus helper: prioritas berhasil/telat, perfect rusak/utuh, explore kurang/cukupcap, Recover ditolakbonus. Clone Economy dengan mockData:6offers, replay tanpa kredit/history tambahan, historycap5 setelah7award, EconomyLimit tanpa commit/dirty tambahan (dirty7). Actual AcceptJob kontrak+Deliver dengan posisi fixture: Prioritas bonus14,total63 pada runawal; runHP dengan jeda total62, schema2/history1/offers6. Ini fixture teleport, bukan perjalanan manusia. UI hasil terakhir juga memperlihatkan bonus18 dari aktivitas lain saat sesi berjalan; tidak disamakan dengan orderfixture Prioritas.
+
+Desktop native pointer berpindah tab Kontrak dan Riwayat; history menunjukkan tujuan/bintang/koin, labelFits. GalaxyA06 Root705x280: board620x280 di(42.5,0), tabnormal muat. Pointer emulator tidak mengganti tab sehingga pemeriksaan kontrak memakai temporary initialtab1 fixture; semua teks muat. Source final dikembalikan tab0 sebelumfresh. TargetCarrying “100/100 · Prioritas · 42s · kondisi≥95” muat. Low-grip warning diuji dengan snapshot movement.grip20 dari scriptserver uji (bukan drain sprint fisik). HasilKontrak/rincian2baris muat. Keyboard focus guards hanya diperiksa source; input fisik belum diuji.
+
+Freshfinal coins0/history0/gear0/offers6/StudioMemory, consoleBootstrap saja. AkhirEdit/default/HUDenabled/0paket/tanpa TemporaryContracts24, backup8source. Tidak ada uji pemain luar, publishedDataStore, publikasi, profiling atau HP fisik. Balance kontrak perlu dinilai pemilik saat bermain.
+
+Bukti verification/contracts24-audit.json,contracts24-phone.jpg,saved-contracts24.json. Design/tasklist diperbarui. Sembilan source final di src.
+
+**Simpan File > Save to File sebelum menutup Studio.** Save terakhir442913byte/2026-11-09T08:23:14.646Z sudah memuat Relay21/Quality22/City23; SpecialContracts24 belum ada. Paket ini masih pada sesi Studio aktif.
+
+---
+
+# Arsip — City23: pusat kota dan ruang warga (9 November 2026)
 
 Sesi57631be1-2a04-4ce1-8cc1-77570cda5f16/main_game.rbxl. CityRevision=LivedInTown23. Fokus permintaan pemilik: tampilan kota. Lima blok polos sekarang memiliki jendela tiga sisi, storefront jalan, papan nama fisik di dua frontage, kanopi bergaris, cornice/parapet dan tank bundar. Roti Kampung/Wisma Kilat/Bengkel Sepeda/Buku & Cerita/Balai Warga memakai aksen atap berbeda. Label Billboard lama lima gedung dinonaktifkan. Rumah, depot dan marker pengantaran tidak dipindah. Tidak menambah interior atau sistem membeli di gedung.
 
