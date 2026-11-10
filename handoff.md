@@ -1,4 +1,37 @@
-# Pembaruan TERBARU — Batch31: Rute Borongan, paket sepuluh perbaikan
+# Pembaruan TERBARU — City32: map, ornamen dan detail kota
+
+10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 dipakai sesuai persetujuan pemilik sebelumnya. Permintaan: tiga lapis perbaikan visual. Akhir sesi Edit, HUDenabled, tidak ada fixture/kamera/script baru yang dipasang permanen. Tidak ada publikasi atau pemain luar.
+
+## Hasil yang terlihat
+
+1. KebunWarga, TamanTimur dan KebunPiknik: tanaman, bunga dua sisi, lima pohon tambahan, dua bangku dekorasi, satu lampu dan empat pijakan batu. Memakai rumput/floor lama, tidak mengubah Terrain atau menambah lembar tanah besar.
+2. Bengkel: dua sepeda gratis yang ringan, papan alat berpenyangga serta blade sign SERVIS. Pasar: tiga papan nama kios menggantung di atap, tiga papan menu kategori dan rentang pennant berwarna. Tiga BillboardGui lama di MarketAwning dinonaktifkan dengan backup ObjectValue/WasEnabled.
+3. Lima gedung: kotak bunga dan bracket, talang/downpipe/clips, AC dan ventilasi atap yang menapak. Lima rumah: bingkai pintu, nomor01–05, lampu teras. Jalan: tiga nama kawasan serta delapan drainase tipis.
+
+Map.City32 berisi462BasePart,38di antaranyaMeshPart;0script/constraint/light/unanchored/collider/CanTouch/CanQuery. Bangku dan sepeda tambahan adalah dekorasi, bukan fungsi duduk/kendaraan baru. Mekanik istirahat empat bangku lama, pengantaran, ekonomi, pelanggan, borongan dan seluruh source gameplay tidak diubah.
+
+## Verifikasi dan batas
+
+-140Surface15 cocok baseline posisi/ukuran/material;17anchor unik depot/tujuan/recovery/spawn/seat/pos cocok. Snapshot awal berbasis full path menimpa nama lantai berulang, sehingga pemeriksaan lantai memakai multiset140rekaman inspeksi sebelum mutasi. Tiga mismatch path yang sempat dilaporkan bukan mutasi geometri; cek multiset bersih. Tidak ada penulisanTerrain dalam migrasi.
+-19model penempatan awal mendapat ray sampling mesh, gap terburuk0,00684stud;6semak isian menyalin dukungan tanah pot yang sama.25model memiliki metadata dukungan. Lima alas ventilasi gap0 terhadap atap lama. Bracket bunga dan clips pipa disesuaikan agar mencapai dinding, bukan menggantung.
+- Audit footprint tersampel: minimum11,89stud dari pusat polylineSafeRoutes08 untuk ornamen berdiri yang diperiksa; detail melekat fasad/rumah dan aksen floor tipis dikecualikan. Papan PASAR PAGI dipindah ke tepi timur agar tidak berada pada pendekatan Rumah04.
+- Empat segmenHumanoid:MoveTo Play lolos:akses taman, depan bengkel, lorong pasar, zebra cross. Awal segmen di-teleport untuk fixture; seluruh segmen sendiri berjalan, sehat100 dan material lantai sesuai. Bukan perjalanan paket penuh/human usability/FPS.
+- Awal fixture sempat menunggu PlayerModule yang tidak ada dalam player ini; percobaan itu dikecualikan. Stop/freshPlay dan fixturebounded tanpaPlayerModule berhasil, console akhirBootstrap saja. Tidak ada scriptfixture dipasang di DataModel.
+-38mesh PreloadAsync Success,0failure. Seluruh22label pemeriksaan TextFits true. Screenshot Edit:city32-overview/workshop/market/garden/house.jpg; HUD disembunyikan hanya untuk foto lalu dipulihkan. Batas:belum HP fisik, multiplayer, FPS atau semua sudut kamera.
+
+## File, pemasangan dan rollback
+
+Source:src/CleanCityAssets32.luau,CityOrnaments32.luau,CityFinishing32.luau;CityAudit32.luau read-only. Saat membangun dari baseline:import15022611108 ke folderreviewServerStorage dalamEdit, jalankanClean→Ornaments→Finishing. Ketiganya menolak instalasi ganda. Tidak diubah menjadi server runtime generator.
+
+Bukti:verification/city32-audit.json,city32-surface-baseline.json,creator-assets32.json,saved-city32.json dan CityWalk32.fixture.luau (fixture lokal, bukan script produksi). Baselinebinary backups/main_game.before-city32.20261110.rbxl dan handoff.before-city32.md. ServerStorage.PaketKilat_PreCity32 berisi snapshotanchor serta baselinefloor;PaketKilat_PreCity32Signs memegang3ObjectValue dengan WasEnabled.
+
+Rollback art:hapusMap.City32, pulihkan Enabled ketiga ValueGui pada PreCity32Signs keWasEnabled, dan kembalikan attribute CityRevision keLivedInTown23. Library32 boleh dihapus setelah tidak dipakai. Tidak perlu menimpa source gameplay31. Binarybaseline hanya versi yang tersimpan sebelumCity32.
+
+**Simpan sesi AutoRecovery ke main_game.rbxl sebelum menutup Studio.** Filemain_game sekarang466647byte/2026-11-10T02:44:45.073Z (09:44:45WIB), sudah memuatContextCoach29/ParcelReceipt30/CourierCircuits31;belumNeighbourhoodDetails32/City32. Catatan save sebelumnya di arsip sudah tersupersesi oleh hasil ini. Source lokal/dokumen/bukti City32 tersimpan. Tidak ada tool MCP untuk Save file lokal; jangan mengklaim binary sudah mengikuti Edit.
+
+---
+
+# Arsip — Batch31: Rute Borongan, paket sepuluh perbaikan
 
 10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik. Fokus: satu perjalanan berisi tiga kiriman, tanpa kembali mengambil paket ke depot di antara rumah. Pengembangan lokal; publikasi dan pemain luar tetap ditunda.
 

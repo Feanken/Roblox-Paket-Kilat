@@ -1,0 +1,336 @@
+{
+  "date": "2026-11-10",
+  "studio": "6654bdf4-6d9a-4365-b5fc-cd30708a66d3",
+  "place": "main_game_AutoRecovery_0.rbxl",
+  "edit": {
+    "lights": 0,
+    "minimumRouteClearance": 11.890000000596046,
+    "meshParts": 38,
+    "routeReview": [],
+    "code": [],
+    "touchable": [],
+    "labels": [
+      {
+        "text": "SERVIS",
+        "face": "Right",
+        "fits": true
+      },
+      {
+        "text": "SERVIS",
+        "face": "Left",
+        "fits": true
+      },
+      {
+        "text": "ROTI HANGAT\n\nBaru dari oven",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "ROTI HANGAT\n\nBaru dari oven",
+        "face": "Front",
+        "fits": true
+      },
+      {
+        "text": "SAYUR SEGAR\n\nWortel panen pagi",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "SAYUR SEGAR\n\nWortel panen pagi",
+        "face": "Front",
+        "fits": true
+      },
+      {
+        "text": "BUAH SEGAR\n\nPilihan hari ini",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "BUAH SEGAR\n\nPilihan hari ini",
+        "face": "Front",
+        "fits": true
+      },
+      {
+        "text": "PESISIR",
+        "face": "Front",
+        "fits": true
+      },
+      {
+        "text": "PESISIR",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "ALUN-ALUN",
+        "face": "Front",
+        "fits": true
+      },
+      {
+        "text": "ALUN-ALUN",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "PASAR PAGI",
+        "face": "Front",
+        "fits": true
+      },
+      {
+        "text": "PASAR PAGI",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "ROTI HANGAT",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "SAYUR SEGAR",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "BUAH SEGAR",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "01",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "02",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "03",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "04",
+        "face": "Back",
+        "fits": true
+      },
+      {
+        "text": "05",
+        "face": "Back",
+        "fits": true
+      }
+    ],
+    "roofSupports": [
+      {
+        "name": "TOKO ROTI",
+        "gap": 0
+      },
+      {
+        "name": "RUMAH SUSUN",
+        "gap": 0
+      },
+      {
+        "name": "BENGKEL",
+        "gap": 0
+      },
+      {
+        "name": "TOKO BUKU",
+        "gap": 0
+      },
+      {
+        "name": "KANTOR KAMPUNG",
+        "gap": 0
+      }
+    ],
+    "unanchored": [],
+    "colliders": [],
+    "constraints": [],
+    "mapRevision": "NeighbourhoodDetails32",
+    "queryable": [],
+    "ground": [
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunWarga.GardenShrub-1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunWarga.GardenShrub0",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunWarga.GardenShrub1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunWarga.InfillShrub-1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunWarga.InfillShrub1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.TamanTimur.GardenShrub-1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.TamanTimur.GardenShrub0",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.TamanTimur.GardenShrub1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.TamanTimur.InfillShrub-1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.TamanTimur.InfillShrub1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunPiknik.GardenShrub-1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunPiknik.GardenShrub0",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunPiknik.GardenShrub1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunPiknik.InfillShrub-1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunPiknik.InfillShrub1",
+        "gap": 0.00037109374989086064
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.NeighbourhoodTree1.NeighbourhoodTree1",
+        "gap": 0.0048828125
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.NeighbourhoodTree2.NeighbourhoodTree2",
+        "gap": 0.0048828125
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.NeighbourhoodTree3.NeighbourhoodTree3",
+        "gap": 0.00341796875
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.NeighbourhoodTree4.NeighbourhoodTree4",
+        "gap": 0.0068359375
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.NeighbourhoodTree5.NeighbourhoodTree5",
+        "gap": 0.0048828125
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.KebunBench.KebunBench",
+        "gap": 0
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.EastGardenBench.EastGardenBench",
+        "gap": 0
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.EastGardenLamp.EastGardenLamp",
+        "gap": 0
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.BengkelDisplayBicycle.BengkelDisplayBicycle",
+        "gap": 0
+      },
+      {
+        "name": "Workspace.PaketKilat.Map.City32.BengkelParkedBicycle.BengkelParkedBicycle",
+        "gap": 0
+      }
+    ],
+    "parts": 462
+  },
+  "walking": [
+    {
+      "health": 100,
+      "arrived": true,
+      "name": "Akses taman",
+      "moved": 11.199531555175781,
+      "floorMaterial": "Grass",
+      "localY": 3.970703601837158,
+      "seconds": 0.9507599999997183,
+      "distanceRemaining": 0.800422728061676
+    },
+    {
+      "health": 100,
+      "arrived": true,
+      "name": "Depan bengkel",
+      "moved": 9.3056001663208,
+      "floorMaterial": "Pavement",
+      "localY": 3.970703601837158,
+      "seconds": 0.7688294000017777,
+      "distanceRemaining": 1.324721097946167
+    },
+    {
+      "health": 100,
+      "arrived": true,
+      "name": "Lorong pasar",
+      "moved": 48.755767822265625,
+      "floorMaterial": "Pavement",
+      "localY": 3.970703601837158,
+      "seconds": 3.2327791999996407,
+      "distanceRemaining": 1.244476318359375
+    },
+    {
+      "health": 100,
+      "arrived": true,
+      "name": "Zebra cross",
+      "moved": 17.514808654785156,
+      "floorMaterial": "Pavement",
+      "localY": 3.970703601837158,
+      "seconds": 1.2835852000007435,
+      "distanceRemaining": 1.4852447509765625
+    }
+  ],
+  "preload": {
+    "preloadOk": true,
+    "meshes": 38,
+    "fetched": 38,
+    "marketLabels": [
+      [
+        "BUAH SEGAR",
+        true
+      ],
+      [
+        "SAYUR SEGAR",
+        true
+      ],
+      [
+        "ROTI HANGAT",
+        true
+      ]
+    ],
+    "failed": []
+  },
+  "anchors": {
+    "anchorChanges": [],
+    "baseline": 140,
+    "surfaces": 140,
+    "anchors": 17,
+    "surfaceChanges": []
+  },
+  "limits": [
+    "Walk starts were repositioned; each of four short segments used Humanoid:MoveTo.",
+    "Route clearance uses sampled 2D rectangles, excludes details mounted on existing building walls and thin pavement accents.",
+    "No physical phone FPS, multiplayer, full delivery route or human playtest claimed.",
+    "Initial PlayerModule-dependent fixture stalled because this custom player has no PlayerModule. Fresh Play and bounded fixture passed, initial attempt excluded."
+  ],
+  "nativeSurfaceSupport": {
+    "stoneCount": 4,
+    "drainFrameCount": 8,
+    "maxAbsoluteGapStud": 0.000293,
+    "method": "Downward raycast against unchanged Surface15 after final sub-.03stud alignment; floating point tolerance .001"
+  }
+}

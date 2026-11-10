@@ -440,7 +440,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] HP layout muat, notifikasi tidak menimpa pesan aktif atau mengulang tiap snapshot.
 - [x] Dua source disk/Edit sama, freshIdle/koin0/history0/offers6; akhirEdit/default/0paket/tanpafixture.
 - [x] Source/audit/gambar/design/handoff tersimpan, diffcheck lolos.
-- [ ] Simpan AutoRecovery ke main_game.rbxl untuk ContextCoach29; binary458926byte belum memuatnya.
+- [x] City32 memverifikasi main_game466647byte sudah memuatContextCoach29.
 - [ ] HP/gamepad fisik, kamera/seluruh rute/multiplayer/performa; publikasi/pemain luar tetap ditunda.
 
 
@@ -455,7 +455,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Dua source disk/Edit sama; freshIdle/koin0/history0/offers6,5groundedNPC,0parcelvisible; akhirEdit/default/0paket/tanpafixture.
 - [x] Source/audit/design/handoff tersimpan, diffcheck lolos.
 - [x] Pose dasar parcel terlihat pada Batch31 melalui captureframe normal; kamera seluruhsudut/kliping menyeluruh masih perlu diperiksa.
-- [ ] Simpan AutoRecovery ke main_game.rbxl untuk Coach29 dan Customers30; binary458926byte belum memuat keduanya.
+- [x] City32 memverifikasi main_game466647byte sudah memuatCoach29/Customers30.
 - [ ] HP/gamepad fisik, multiplayer dan profiling; publikasi/pemain luar tetap ditunda.
 
 
@@ -475,5 +475,21 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] B31-12: desktop native pilihan/Ambil/Cukupdulu, layoutGalaxyA06/receipt260tinggi, tab0 dipulihkan.
 - [x] B31-13:11source disk/Edit cocok, backup10source, freshIdle/coins0/history0/6+3offers/schema2/0paket, akhirEdit/default/tanpafixture.
 - [x] B31-14: source, design/handoff, harnessfixture, audit/gambar tersimpan; diffcheck lolos.
-- [ ] B31-15: Save AutoRecovery bersih ke main_game.rbxl; binary458926byte masih tanpaCoach29/Customers30/Batch31.
+- [x] B31-15: diperiksa padaCity32; main_game466647byte/09:44:45WIB sudah memuatCoach29/Customers30/Batch31.
 - [ ] B31-16: perjalanan3stop manusia, sentuh/gamepad fisik, semua sudut kamera, multiplayer/performa dan penilaian balance oleh pemilik; publikasi/pemain luar ditunda.
+
+
+## City32 — tiga lapis visual kota (10 November 2026)
+
+- [x] C32-01: backup binary tersimpan, handoff dan snapshot anchor; simpan baseline multiset140Surface15.
+- [x] C32-02: tiga kebun, lima pohon, dua bangku, satu lampu dan empat pijakan batu; jaga akses lama.
+- [x] C32-03: review sepeda gratis15022611108 di ServerStorage/Edit; tiga mesh bersih, dua salinan statis di bengkel.
+- [x] C32-04: papan alat bengkel, papan menu kategori, papan nama menggantung pada kios dan festoon pasar; backup enabled3BillboardGui lama.
+- [x] C32-05: detail dinding lima gedung, penyangga kotak bunga/pipa, AC dan ventilasi atap yang menapak.
+- [x] C32-06: bingkai pintu/nomor/lampu lima rumah, nama jalan dan delapan drainase tipis.
+- [x] C32-07: audit462part/38mesh tanpa kode/constraint/light/collision/touch/query;25model dukungan, lima alas ventilasi gap0, koridor sampel bebas review.
+- [x] C32-08:140bidang lantai dan17anchor cocok baseline, tanpa perubahan terrain.
+- [x] C32-09: Play fresh empat segmenMoveTo lolos,38preloadSuccess/0failure, consoleBootstrap saja; akhirEdit/HUDenabled/tanpafixture terpasang.
+- [x] C32-10: source, spesifikasi, audit, provenance dan lima gambar disimpan; diffcheck lolos.
+- [ ] C32-11: simpan AutoRecovery ke main_game.rbxl. Pemeriksaan terbaru466647byte/09:44:45WIB memuatCoach29/Customers30/Batch31 tetapi belumCity32.
+- [ ] C32-12: inspeksi pemilik atas tampilan; FPS/HP fisik/multiplayer tetap belum diklaim. Tidak menerbitkan atau mengundang pemain luar.

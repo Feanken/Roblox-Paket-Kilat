@@ -128,3 +128,14 @@ NPC lokal Part buatan proyek dari Customers22 dipakai ulang. Parcel/tape kosmeti
 ## Batch31 — 10 November 2026
 
 Rute borongan memakai geometry jalan, NPC, paket dan assetCreatorStore bersih yang sudah ada. Tab/sketsa/progres/receipt memakai GUI/font bawaan Roblox. Tidak ada impor, pembelian, unggahan, atau asset3D baru. Pemeriksaan pose memakai clone lokalsementara yang dihapus sebelum akhirEdit.
+
+
+## City32 — 10 November 2026
+
+| Aset | Creator | ID / tautan | Pemakaian |
+| --- | --- | --- | --- |
+| Low Poly Bicycle | ItzRoVoider | [15022611108](https://create.roblox.com/store/asset/15022611108) | Dua sepeda statis di depan/samping bengkel;3MeshPart per salinan |
+
+MCP search_asset(scope=creator_store,priceFilter=free,assetType=Model) mengembalikan isFree=true/priceCents0 pada saat pencarian. Kandidat ditaruh di ServerStorage.PaketKilat_City32Review saat Edit; struktur3MeshPart/1Model, tidak ada LuaSourceContainer. Library akhir ServerStorage.PaketKilat_CreatorAssets32.Bicycle memakai whitelist render, anchored/noncollision, tanpa joint/constraint/interaksi kendaraan. Folder review dihapus sebelum Play; tidak ada pembelian atau kode vendor yang dijalankan. Source CleanCityAssets32.luau. Identitas creator/status gratis tidak merupakan penetapan hak IP seluruh konten pihak ketiga.
+
+Memakai ulang BroadleafTree/ParkBench dari library07 dan GardenBush/StreetLamp dari library09 yang sudah dibersihkan; lampu clone baru tidak menyertakan Light dinamis. Papan, detail fasad, kotak bunga, pipa, drainase dan ornamen segitiga dibuat dari primitive/font bawaan. Total tambahan462BasePart/38MeshPart,38fetchSuccess/0failure pada Play, bukan pengukuran FPS. Kandidat bus stop tidak diimpor karena tidak cocok kebutuhan; shelter baru tidak dibuat. Bukti verification/creator-assets32.json dan city32-audit.json.

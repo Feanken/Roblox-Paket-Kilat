@@ -75,3 +75,8 @@ Sesudah observasi, tanyakan: apa tujuan permainan menurutmu; apa yang membingung
 ## Pemisahan bukti teknis
 
 T01–T20 sebelumnya memakai Studio; delapan klien benar-benar dijalankan, tetapi bukan delapan manusia/HP. T21 sudah menambah regresi dua klien73/73, telemetri injeksi33/33, layout emulator dan sampel FPS desktop60 detik. Angka teknis itu dicatat di verification/handoff, tidak disalin sebagai hasil manusia pada tabel di atas. Dashboard analitik live belum diverifikasi.
+
+
+## City32 — verifikasi teknis lokal, 10 November 2026
+
+Tambahan visual462part/38mesh pada Map.City32. Empat segmenMoveTo pendek berhasil,38mesh preloadSuccess/0failure,17anchor dan140bidang floor cocok baseline; consolePlay freshBootstrap saja. Screenshot3D/Edit tersedia. Fixture memindahkan avatar ke awal masing-masing segmen dan berjalan ke ujung; tidak membawa paket dan bukan uji pemain manusia/HP fisik/performa. HP/FPS/multiplayer tidak dievaluasi ulang pada pass ini. Bukti verification/city32-audit.json; ini tidak mengubah status T22/T23 atau izin rilis/pemain luar.

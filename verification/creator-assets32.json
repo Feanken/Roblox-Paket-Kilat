@@ -1,0 +1,25 @@
+{
+  "name": "Low Poly Bicycle",
+  "creator": "ItzRoVoider",
+  "assetId": "15022611108",
+  "url": "https://create.roblox.com/store/asset/15022611108",
+  "observedOn": "2026-11-10",
+  "search": {
+    "scope": "creator_store",
+    "priceFilter": "free",
+    "assetType": "Model",
+    "isFree": true,
+    "priceCents": 0
+  },
+  "raw": {
+    "Model": 1,
+    "MeshPart": 3,
+    "LuaSourceContainer": 0
+  },
+  "cleanTemplate": "ServerStorage.PaketKilat_CreatorAssets32.Bicycle",
+  "copies": 2,
+  "partsPerCopy": 3,
+  "reviewDeletedBeforePlay": true,
+  "purchase": false,
+  "runtimeCode": false
+}
