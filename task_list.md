@@ -442,3 +442,18 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Source/audit/gambar/design/handoff tersimpan, diffcheck lolos.
 - [ ] Simpan AutoRecovery ke main_game.rbxl untuk ContextCoach29; binary458926byte belum memuatnya.
 - [ ] HP/gamepad fisik, kamera/seluruh rute/multiplayer/performa; publikasi/pemain luar tetap ditunda.
+
+
+## Customers30 — interaksi pelanggan (10 November 2026)
+
+- [x] Backup client aktif, binarybaseline dan handoff.
+- [x] Sapaan unik lima rumah; hanya tujuan aktif, sekali perorder, cap dipahami lewat helperstatus yang sama.
+- [x] Respons Delivered menunggu panelhasil/menu selesai; parcel lokal lalu lambaian, variasi dialog dan info titipan.
+- [x] Parcel/tape noncollision, grounding lama dan orientasi keluar pintu, resetrespawn/timeout/dedupe20.
+- [x] Delapan aturan helper; wronghouse/greeting/Sync/deliveredreplay tidak mengulang respons.
+- [x] Data receipt, parcelopacity, rating/coin dan TextFits desktop/phone terverifikasi pada sesi lokal.
+- [x] Dua source disk/Edit sama; freshIdle/koin0/history0/offers6,5groundedNPC,0parcelvisible; akhirEdit/default/0paket/tanpafixture.
+- [x] Source/audit/design/handoff tersimpan, diffcheck lolos.
+- [ ] Periksa pose/kliping/penampilan di viewport3D normal; MCP memberi tangkapan3Dhitam. Tidak dianggap lolos visual.
+- [ ] Simpan AutoRecovery ke main_game.rbxl untuk Coach29 dan Customers30; binary458926byte belum memuat keduanya.
+- [ ] HP/gamepad fisik, multiplayer dan profiling; publikasi/pemain luar tetap ditunda.

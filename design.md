@@ -435,3 +435,12 @@ Guide.Hint dan MobileNotice18 yang sudah ada mengikuti keadaan paket: berburu ca
 Peringatan barrier memakai footprint lokal, arah gerak dan ketinggian kaki; pemain di atas hazard atau berjalan menjauh tidak diberi peringatan yang salah. Ini presentasi saja; deteksi benturan/hadiah/kontrak tetap server lama. Puddle opsional didukung helper, tetapi tidak ada pada map saat ini.
 
 22kasus helper lolos. Cap/RuteOFF/barrier, kasus kontrak/drop/out/stamp dan bangku serta antrean notifikasi HP diuji lokal. Fixture penurunan tinggi awal dikecualikan karena memicu benturan. Detail pada handoff.md/verification/coach29-audit.json. Tidak ada panel permanen atau fieldprofil baru.
+
+
+## Customers30 — sapaan dan penerimaan paket (10 November 2026)
+
+Lima pelanggan lokal mendapat sapaan berbeda. Hanya rumah tujuan yang menyambut kurir perorder; bonus cap yang masih bisa dikejar dijelaskan lewat sapaan. Sesudah Delivered dari server, respons menunggu panelhasil/menu tertutup dan pemain dekat, lalu menampilkan parcel kosmetik3detik dan lambaian. Dialog dipilih menurut rating/siklus, kontrakberhasil dan titipan. Idle menghadap keluar rumah.
+
+DuaPart parcel perNPC noncollision, tidak ada paket/reward/remote baru. Dedupe20id, waktuantrean12detik, resetrespawn dan modejarak menghindari reaksi lama berulang. Grounding dan visibilitas rumah dipertahankan. Server/ledger/schema2 tidak berubah.
+
+Aturan helper8kasus serta data integrasi greeting/holding/counter/TextFits desktop dan phone diperiksa. Tampilan3DMCP hitam, sehingga pose/kliping belum disetujui secara visual. Kamera/previewfixture dibersihkan. Detail pada handoff.md dan verification/customers30-audit.json.

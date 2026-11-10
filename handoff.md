@@ -1,4 +1,46 @@
-# Pembaruan TERBARU — Coach29: petunjuk perjalanan sesuai keadaan
+# Pembaruan TERBARU — Customers30: pelanggan menyambut dan menerima paket
+
+10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik. Iterasi ini menambah respons pelanggan sebelum/sesudah pengantaran, tanpa mengubah ekonomi. Tidak ada publikasi atau pemain luar.
+
+## Perilaku
+
+Pelanggan tujuan menyapa satu kali perorder saat kurir mendekat; pelanggan rumah lain tidak mengaku sebagai penerima. Lima rumah punya sapaan berbeda. Untuk kontrak eksplorasi yang masih kekurangan cap, sapaan mengingatkan keliling jika mengejar bonus; kontrak yang sudah gugur tidak terus meminta cap.
+
+Pengantaran server yang baru membuat reaksi menunggu panel hasil ditutup/berakhir. Setelah UI lapang dan pemain masih dekat, pelanggan memegang parcel lokal selama3detik, lalu melambaikan tangan dalam jendela reaksi8detik. Antrean ditinggalkan setelah12detik agar tidak menampilkan reaksi lama saat pemain kembali jauh kemudian. Teks beragam perrating dan jumlahrespons; kontrak berhasil dan titipan berikutnya mendapat kalimat terkait.
+
+Parcel terdiri dari kotak/tape, duaPart noncollision perNPC (10Part tambahan untuk limaNPC); bukan order/paketfisik/remote baru. Boneka idle menghadap keluar berdasarkan Body→Door rumah; hanya target/recentreaction yang menoleh kepada kurir. Rumah yang kehilangan DestinationPoint tidak meninggalkan NPC terlihat.
+
+Bubble memakai ukuran lama220x64 desktop dan200x56/11px padaHP. Menu/toko/board/target/panelhasil menyembunyikan bubble. Greeting dan result tidak berulang pada Sync; deliveredid disimpan maksimal20 untuk dedupe. Respawn menghapus antrean/pose tertunda.
+
+## Source
+
+Baru ReplicatedStorage.PaketKilat.Shared.CustomerDialogue30 dari src/CustomerDialogue30.luau (memakai ContractStatus25 untuk sapaan cap). Diubah satu client PaketKilatCustomers22/src/Customers22.client.luau. Helper dipasang sebelum client. Dua source disk/Edit sama. Server, kontrak/hadiah, ledger, profil schema2 dan kamera produksi tidak berubah.
+
+## Verifikasi dan batas visual
+
+Delapan aturan helper lolos: kurang/cukupcap, capgugur, sapaan antar rumah, variasi/siklusreaksi, titipan dan kontrakberhasil. Lima NPC Grounded22true, seluruh parcel tersembunyi dan tidak memiliki collider pada sesi awal/akhir.
+
+Desktop: mendekati rumah salah tidak menyapa; rumah tujuan greetingCount1/teksBuSari muat; Sync tidak mengulang. Actual Deliver lokal100kondisi/2bintang/40koin. Selama toast: pendingtrue/holdingfalse/receipt0. Setelah tombol tutup: pendingfalse/holdingtrue/boxTransparency0/receipt1/bubbletrue/teksmuat. Setelah animasi dan Sync: boxTransparency1/receipt1. Delivered snapshot yang sama dikirim ulang untuk tes presentasi: reaction1/receipt1/koin40 tetap.
+
+Phone GalaxyA06 landscape800x360/CoreUISafeInsets: pengantaran lokal kedua pada sesi baru juga100kondisi/2bintang/40koin. Bubble200x56 TextFits, parcelholdingtrue dan receipt1 setelah panelhasil tertutup. Kedua result lambat karena jeda QA, bukan klaim pengantaran berjalan manusia; posisi dikontrol dan avatar di-anchor.
+
+**Pose/penampilan 3D belum disetujui secara visual.** Tangkapan MCP Play maupun pratinjau sementara Edit menampilkan3Dhitam meskipun GUI dan dataobjek aktif. Kamera inspeksi sementara dan preview telah dihapus. Percobaan Set3dRenderingEnabled ditolak capabilityRobloxScript; tidak ada perubahan renderer. Screenshot hitam tidak dikirim sebagai bukti kualitas visual. Satu captureNPC kedua masih fasegreeting, bukan receipt, dan dikecualikan. Tidak mengklaim kamera/kliping/animasi telah dilihat.
+
+Fresh akhir Idle/koin0/history0/offers6/0paket; limaNPC grounded, parcelhidden/pendingfalse/holdingfalse. ConsoleBootstrap saja. AkhirEdit/default viewport/HUDenabled/0paket/tanpaTemporaryCustomers30, backup1source. Orientasi outward diperiksa smoke tanpa error; guard markerada terakhir adalah penambahan boolean. Belum physicaltouch/gamepad/multiplayer/performa.
+
+Bukti verification/customers30-audit.json dan saved-customers30.json. git diff --check lolos (peringatanLF/CRLF saja).
+
+## Backup dan simpan
+
+Backup source asli: backups/customers30-sources/ dan ServerStorage.PaketKilat_PreCustomers30. Baselinebinary backups/main_game.before-customers30.20261110.rbxl dan handoff.before-customers30.md berasal dari main_game di disk, bukan snapshot penuh AutoRecovery lain.
+
+Rollback parsial: pulihkan sourceCustomers22, hapus shared CustomerDialogue30 dan attribute CustomerLifeRevision. Semua body/parcelNPC dibuat lokal dan otomatis hilang saatStop; tidak ada map geometry atau profil yang perlu dipulihkan.
+
+**Simpan sesi AutoRecovery ini ke main_game.rbxl sebelum menutup Studio.** Binary masih458926byte/2026-11-10T01:00:40.984Z (08:00:40WIB), memuatPreview28/Rest27 tetapi ContextCoach29 dan ParcelReceipt30 belum ada. Source lokal/dokumentasi sudah disimpan; kedua iterasi masih pada sesiEditaktif.
+
+---
+
+# Arsip — Coach29: petunjuk perjalanan sesuai keadaan
 
 10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik. Petunjuk lama yang menyuruh langsung ke rumah ketika pemain masih berburu cap diganti petunjuk sesuai keadaan. Tidak ada publikasi/pemain luar.
 

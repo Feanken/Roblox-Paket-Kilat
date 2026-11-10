@@ -1,0 +1,259 @@
+{
+  "revision": "ParcelReceipt30",
+  "date": "2026-11-10",
+  "studio": "6654bdf4-6d9a-4365-b5fc-cd30708a66d3",
+  "place": "main_game_AutoRecovery_0.rbxl",
+  "scope": "New shared dialogue helper and existing local customer controller only. No rewards/server/profile changes.",
+  "dialogueChecks": {
+    "count": 8,
+    "passed": true
+  },
+  "initial": [
+    {
+      "id": "Rumah01",
+      "grounded": true,
+      "parcelVisible": false,
+      "bodyNonCollision": true
+    },
+    {
+      "id": "Rumah02",
+      "grounded": true,
+      "parcelVisible": false,
+      "bodyNonCollision": true
+    },
+    {
+      "id": "Rumah03",
+      "grounded": true,
+      "parcelVisible": false,
+      "bodyNonCollision": true
+    },
+    {
+      "id": "Rumah04",
+      "grounded": true,
+      "parcelVisible": false,
+      "bodyNonCollision": true
+    },
+    {
+      "id": "Rumah05",
+      "grounded": true,
+      "parcelVisible": false,
+      "bodyNonCollision": true
+    }
+  ],
+  "wrongHouse": {
+    "text": "Label",
+    "greeting": 0,
+    "bubble": false
+  },
+  "greeting": {
+    "greeting": 1,
+    "holding": false,
+    "text": "Bu Sari:\nHalo, kurir! Paketnya boleh diantar di sini.",
+    "fits": true,
+    "bubble": true
+  },
+  "greetingSync": {
+    "reaction": 0,
+    "greeting": 1,
+    "holding": false
+  },
+  "desktopDelivery": {
+    "status": "Idle",
+    "result": {
+      "jobName": "Reguler",
+      "orderId": "53ba298a-d0eb-4efc-ab91-8c084d190126",
+      "condition": 100,
+      "isRelay": false,
+      "jobBonus": 0,
+      "completedAt": 1794273587.680757,
+      "bestTime": 55.680017948150635,
+      "contractBonus": 0,
+      "destinationId": "Rumah01",
+      "conditionBonus": 15,
+      "recoveryCount": 0,
+      "total": 40,
+      "bestCleanStreak": 1,
+      "rating": {
+        "stars": 2,
+        "onTime": false,
+        "name": "RAPI",
+        "clean": true
+      },
+      "packageType": "Biasa",
+      "destinationName": "Rumah Bu Sari",
+      "challengeBonus": 0,
+      "timeBonus": 0,
+      "duration": 55.680017948150635,
+      "cleanStreak": 1,
+      "newRecord": true,
+      "recordEligible": true,
+      "routeBonus": 0,
+      "baseReward": 25
+    },
+    "coins": 40
+  },
+  "desktopPending": {
+    "holding": false,
+    "coins": 40,
+    "toast": true,
+    "pending": true,
+    "reaction": 1,
+    "receipt": 0
+  },
+  "desktopReceipt": {
+    "receipt": 1,
+    "fits": true,
+    "holding": true,
+    "text": "Bu Sari:\nPaketnya aman. Terima kasih! Ada titipan lagi.",
+    "toast": false,
+    "pending": false,
+    "boxOpacity": 0,
+    "bubble": true
+  },
+  "afterSync": {
+    "box": 1,
+    "holding": false,
+    "reaction": 1,
+    "receipt": 1
+  },
+  "duplicateDelivered": {
+    "coins": 40,
+    "pending": false,
+    "reaction": 1,
+    "receipt": 1
+  },
+  "phone": {
+    "config": {
+      "ok": true,
+      "name": "Samsung Galaxy A06",
+      "width": 800,
+      "orientation": "Enum.ScreenOrientation.LandscapeSensor",
+      "height": 360,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    "delivery": {
+      "status": "Idle",
+      "result": {
+        "jobName": "Reguler",
+        "orderId": "25821665-4ec9-45ef-abdd-0f282436e588",
+        "condition": 100,
+        "isRelay": false,
+        "jobBonus": 0,
+        "completedAt": 1794273772.124291,
+        "bestTime": 105.25143790245056,
+        "contractBonus": 0,
+        "destinationId": "Rumah01",
+        "conditionBonus": 15,
+        "recoveryCount": 0,
+        "total": 40,
+        "bestCleanStreak": 1,
+        "rating": {
+          "stars": 2,
+          "onTime": false,
+          "name": "RAPI",
+          "clean": true
+        },
+        "packageType": "Biasa",
+        "destinationName": "Rumah Bu Sari",
+        "challengeBonus": 0,
+        "timeBonus": 0,
+        "duration": 105.25143790245056,
+        "cleanStreak": 1,
+        "newRecord": true,
+        "recordEligible": true,
+        "routeBonus": 0,
+        "baseReward": 25
+      },
+      "coins": 40
+    },
+    "pending": {
+      "toast": true,
+      "pending": true,
+      "holding": false,
+      "receipt": 0
+    },
+    "receipt": {
+      "holding": true,
+      "receipt": 1,
+      "bubble": true,
+      "text": "Bu Sari:\nPaketnya aman. Terima kasih! Ada titipan lagi.",
+      "fits": true,
+      "box": 0
+    }
+  },
+  "fresh": {
+    "gui": true,
+    "npcs": [
+      {
+        "holding": false,
+        "scriptParts": 14,
+        "id": "Rumah01",
+        "grounded": true,
+        "parcel": 1,
+        "pending": false
+      },
+      {
+        "holding": false,
+        "scriptParts": 12,
+        "id": "Rumah02",
+        "grounded": true,
+        "parcel": 1,
+        "pending": false
+      },
+      {
+        "holding": false,
+        "scriptParts": 14,
+        "id": "Rumah03",
+        "grounded": true,
+        "parcel": 1,
+        "pending": false
+      },
+      {
+        "holding": false,
+        "scriptParts": 12,
+        "id": "Rumah04",
+        "grounded": true,
+        "parcel": 1,
+        "pending": false
+      },
+      {
+        "holding": false,
+        "scriptParts": 14,
+        "id": "Rumah05",
+        "grounded": true,
+        "parcel": 1,
+        "pending": false
+      }
+    ],
+    "packages": 0,
+    "server": "{\"history\":0,\"storage\":\"StudioMemory\",\"status\":\"Idle\",\"offers\":6,\"coins\":0}"
+  },
+  "final": {
+    "backup": 1,
+    "temporary": [],
+    "device": "default",
+    "revision": "ParcelReceipt30",
+    "packages": 0,
+    "gui": true
+  },
+  "sourceChecks": {
+    "Customers22.client.luau": true,
+    "CustomerDialogue30.luau": true
+  },
+  "limits": [
+    "Local GameId0/StudioMemory only; fixtures reposition and anchor avatar, not full walking playtests",
+    "Both recorded deliveries were regular/100condition/2stars/40coins; delay during QA exceeded target time",
+    "Receipt/greeting fields, transparency, counters, dialogue TextFits and timing were inspected; 3D visuals could not be verified",
+    "Studio captures showed black3D in Play and temporary Edit preview. No valid feature screenshot is supplied",
+    "Temporary camera framing and static preview were attempted, then removed; production source does not change camera",
+    "Set3dRenderingEnabled attempt was denied by RobloxScript capability; no renderer setting changed",
+    "First desktop position was behind house body; phone fixture corrected approach to street side",
+    "Second phone NPC capture was before receipt started; discarded as pose evidence",
+    "Shared seen-ID cache bounded to20; regular sync and replayed last Delivered snapshot did not add response/currency",
+    "Final normal-play smoke after outward-facing fix had 5grounded NPCs/0parcels visible; final marker-existence guard is one additional boolean check",
+    "No physical phone/gamepad/multiplayer/performance or animation appearance approval"
+  ],
+  "evidence": [
+    "saved-customers30.json"
+  ]
+}

@@ -118,3 +118,8 @@ Sketsa rute memakai Frame/TextLabel/font bawaan Roblox dan polyline SafeRoutes08
 ## Coach29 — 10 November 2026
 
 Menggunakan teks dan GUI bantuan/notifikasi yang sudah ada; tidak ada asset gambar/model/audio baru, impor, pembelian, upload atau publikasi. Geometri hazard dibaca untuk peringatan lokal tanpa mengubah mesh/posisi kota.
+
+
+## Customers30 — 10 November 2026
+
+NPC lokal Part buatan proyek dari Customers22 dipakai ulang. Parcel/tape kosmetik menambah10Part native untuk5NPC; dialog memakai font/GUI bawaan. Tidak ada aset gambar/model/audio baru dari luar, pencarian/impor/pembelian, upload atau publikasi.
