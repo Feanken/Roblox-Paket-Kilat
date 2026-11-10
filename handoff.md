@@ -1,4 +1,46 @@
-# Pembaruan TERBARU — City32: map, ornamen dan detail kota
+# Pembaruan TERBARU — Audio33: musik dan suara kampung
+
+10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 dipakai sesuai persetujuan pemilik. Fokus audio; mapCity32 dan gameplay/ekonomi tetap. AkhirEdit/HUDenabled/defaultviewport, tidak ada TemporaryAudio33 atau folder review, tanpa publikasi/pemain luar.
+
+## Hasil untuk pemain
+
+- Dua lagu gratis APM:Prima Bossa Nova168,30detik dan Happy Folk70,09detik, volume dasar.16/.15 dengan gainMusik default60%. Bergantian dengan crossfade2detik; maksimum dua suara musik ketika transisi. EQ musik ringan, tidak ada normalisasi loudness otomatis yang diklaim.
+- Burung pada KebunWarga/TamanTimur/KebunPiknik dan air mancur plaza memakai4emitter lokal invisible/noncollision/CanTouchfalse/CanQueryfalse. Sound3D InverseTapered, jarak35–42stud untuk taman dan34untukair. Di luar jangkauan plus3stud, volume merendah lalu loop dihentikan. Tidak menambah suara kerumunan asing/kendaraan tanpa objek.
+- Ambil/lepas memakai gesekan kardus, benturan memakai impact kardus, pengantaran/cap/sukses memakai chime berbeda level/pitch. Pulih dan click memakai bunyi bawaan. Delapan cue memakai satu voice perjenis, cooldown, tanpa hover sound. Delivered merendahkan musik ke32%gain selama1,6detik; menu/panel/hasil ke55%. Teks bantuan tetap.
+- Panel Suara:Musik/Suasana/Efek,±25poinpersentase dan klik/ketuknilai untukmute. M togglemusik pada komputer. Default60/65/80%, disimpan sebagai atribut client pemain untuk sesi ini, bukan DataStore. Suara langkah/lompat bawaan karakter sendiri ikut busEfek; pemain lain tidak diubah.
+- Mobile:Suara berada dalam Menu dua kolom (Rute/Petunjuk,Toko/Suara,Target sesi). Panel360×252 muatRoot705×280 padaGalaxyA06landscape. Launcherdesktop berada di bawahToko agar tidak menambah lebar toolbar. Efek inputlama diPrototypeInput dihapus, flashvisual dipertahankan, sehingga tidak dobel.
+
+## Implementasi
+
+Baru3source:Shared.AudioProfile33,StarterPlayerScripts.PaketKilatSoundscape33 danPaketKilatAudioLifecycle33. Diubah4source:PaketKilatInput/UITheme12/PaketKilatMobileShell18/PaketKilatFeedback. Ketujuh source disk/Edit cocok persis. Tidak mengubahDeliveryService/EconomyService/Configgameplay/remote/profil.
+
+Soundscape33 membuat SoundService.PaketKilatAudio33 (SoundGroup induk dan3bus),10Sound (2musik+8cue),EQ musik,4Soundambience diAttachment. Semua lokal. Kandidat7Sound diServerStorage ditinjau tanpa descendants/code, lalu direkonstruksi sebagai template inertVolume0/Playingfalse diPaketKilat_AudioAssets33. Runtime memakai ID terpilih dariAudioProfile; lihatasset_sources/creator-audio33.json.
+
+Fallbackcue:watchdog8detik mengganti asetcue yang belumloaded ke referensi bawaan. Musik yang belumloaded tidak menghalangi UI; pilih track yang tersedia. Tidak ada fallback lagu yang diunduh dari luar. Tween disimpan terbatas perSound, bukan daftar yang tumbuh setiap putaran. ReceiptDelivered didedupe20orderid. Own-character SoundGroup asal disimpan untuk dipulihkan saatcleanup.
+
+## Verifikasi
+
+- Tujuh asetStore preloadSuccess/IsLoaded/TimeLength>0; seluruh10Sound mixer dan4ambience loaded pada sesi akhir, Pickup memakaiIDStore dan tidakfallback. Status ini tidak membuktikan penilaian pendengaran.
+- Native desktop membuka panel, muteMusik danM memulihkan60%; muteEfek menjadi0 dengan Musik/Suasana tetap. Seluruh label panel pemeriksaan muat. Screenshotdesktopfinal menunjukkan semua leveldefault setelahpengujian.
+- Percepatakhir trackaktifMusic2 lewatTimePosition:13sampel menunjukkan dua track ber-volume saling silang, kemudian hanyaMusic1; crossfadecount1→2 dan TimePosition sebelumnya maju0,512detik. Percobaan awal menyasarMusic1yang sudah tidakaktif dikecualikan.
+- Kamera fixture dekatkebun→fountain→jauh:loop yang relevan playing, loop sebelumnya berhenti; daerah jauh semua berhenti. Emitters bukan collider. KameraScriptable fixture direset Studio; console tersebut adalah pesanresettool, bukan error produksi.
+- Serverfixture normal memakai servicecache sama denganBootstrap padaGameId0/StudioMemory. Avatar dipindah/di-anchor danelapseddiatur; bukan perjalanan manusia. Pickup3/Drop1/Impact1/Recover1/Delivered1 masing-masing Ended sesuai. Fixture kedua memperoleh1cap laluantar; Stamp1/Delivered1 selesai, snapshotDelivered sama dikirim ulang hanyauntukpresentasi dan tidak mengulangcue. Audioobserver memotretDeliveredduck.32 danchimeplaying.
+- SettingnondefaultMusik.35/Suasana0/Efek.8 melalui atributkontrol bertahan sesudahLoadCharacterAsync, tepat satucontroller danmusik tetapplaying.9Sound bawaan karakter diarahkan keEfek. Pointer percobaan beberapa kontrolphone tidakmengenai target; tidak dihitung sebagai kelulusan sentuh. Tombol desktop dan pembukaanpanelphone melalui pointer lain berhasil, layoutphone/hint diperiksa secara visual. HP fisik belum diuji.
+- Fallback diuji pada sesi khusus denganPickupIDkosong:beralih keaction_get_up.mp3/IsLoadedtrue/durasi.575s, musik tetapplaying. Profil asli dipulihkan sebelum sesi akhir dandicocokkan disk/Edit.
+- Cleanup awal lewatDestroying milikcontroller sendiri gagal dalamSignalBehaviorDeferred. Ditambahkanpengamat AudioLifecycle33 independen:penghapusancontroller kini menghapusmixer/emitter/panel/launcher/bindM dan mengembalikan9SoundGroupkarakter kenil. Sesi akhirfresh, Idle/koin0,4emitters, default60/65/80,0oldPaketKilatSFX, consoleBootstrap saja.
+- Simulator orientasisebelumdevice sempat ditolak; diperbaiki denganpilihdevicelebihdulu. AkhirStopSimulationAsync/defaultviewport; LandscapeSensor/CoreUISafeInsets/ClipToDeviceSafeArea=true/ResetOnSpawn=false tetap.
+
+Bukti verification/audio33-audit.json,creator-audio33.json,audio33-desktop.jpg,audio33-phone.jpg,audio33-phone-menu.jpg,Audio33Flow.fixture.server.luau,saved-audio33.json. Pengujian teknis tidak mencakup mendengarkan loudness/timbre oleh asisten, sentuh/gamepad/HP fisik,FPS atau seluruh perjalanan. Pemilik tetap menilai rasa musik/volume saatPlay.
+
+## Backup, pemasangan dan simpan
+
+Backup4source:ServerStorage.PaketKilat_PreAudio33 danbackups/audio33-sources. Binarybaseline backups/main_game.before-audio33.20261110.rbxl serta handoff.before-audio33.md. Pemasangan:buatModuleScriptAudioProfile33 diShared; pasang4sourceubah sebagai satu paket; tambahLocalScriptSoundscape33/AudioLifecycle33 diStarterPlayerScripts. Rollback:pulihkan4source, hapus3objeksourcebaru danattributeAudioRevision;hapuslibraryAudioAssets33 bila tidakdipakai. Hindari menjalankan generatorUI lama yang mengembalikan pemutarSFX lama.
+
+**Simpan AutoRecovery ke main_game.rbxl sebelum menutup Studio.** Filemain_game masih466647byte/2026-11-10T02:44:45.073Z (09:44:45WIB), memuatBatch31 tetapi belumCity32 maupunKampungSoundscape33. Dokumen/source/bukti sudah tersimpan; binarylokal belum mengikuti perubahan Studio. Tidak ada publikasi.
+
+---
+
+# Arsip — City32: map, ornamen dan detail kota
 
 10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 dipakai sesuai persetujuan pemilik sebelumnya. Permintaan: tiga lapis perbaikan visual. Akhir sesi Edit, HUDenabled, tidak ada fixture/kamera/script baru yang dipasang permanen. Tidak ada publikasi atau pemain luar.
 

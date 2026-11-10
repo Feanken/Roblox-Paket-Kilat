@@ -493,3 +493,17 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] C32-10: source, spesifikasi, audit, provenance dan lima gambar disimpan; diffcheck lolos.
 - [ ] C32-11: simpan AutoRecovery ke main_game.rbxl. Pemeriksaan terbaru466647byte/09:44:45WIB memuatCoach29/Customers30/Batch31 tetapi belumCity32.
 - [ ] C32-12: inspeksi pemilik atas tampilan; FPS/HP fisik/multiplayer tetap belum diklaim. Tidak menerbitkan atau mengundang pemain luar.
+
+
+## Audio33 — musik dan sound (10 November 2026)
+
+- [x] A33-01: inspeksi audio lama, backup source/binary/handoff dan spesifikasi.
+- [x] A33-02: cari aset audio gratis; tujuh kandidat berhasil preload, catat sumber.
+- [x] A33-03: dua musik bergantian/crossfade/duck tanpa pemutar ganda.
+- [x] A33-04: ambience3D tiga taman dan air mancur, rentang jarak/loop terkontrol.
+- [x] A33-05: cue paket/cap/UI/recovery dengan cooldown dan fallback; hapus pemutar cue lama.
+- [x] A33-06: Musik/Suasana/Efek terpisah, M, panel mobile ringkas, atribut sesi dan respawn.
+- [x] A33-07: Play/preload/end/crossfade/duck/mute/ambience/respawn/cleanup; UI desktop dan emulator phone.
+- [x] A33-08: source cocok disk/Edit, audit, provenance, dokumen dan save status.
+- [ ] A33-09: simpan AutoRecovery ke main_game.rbxl setelah perubahan audio.
+- [ ] A33-10: penilaian pendengaran pemilik dan HP fisik/performa; publikasi/pemain luar tetap ditunda.

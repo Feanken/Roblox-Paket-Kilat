@@ -69,7 +69,7 @@ local function refresh()
  impact.Position=UDim2.new(.5,0,0,math.min(216,height*.59))
  impact.Size=UDim2.fromOffset(math.min(310,width-32),36)
  local boardOpen=ui:GetAttribute('JobBoardOpen17')==true
- local shopOpen=ui.Shop.Visible or boardOpen
+ local shopOpen=ui.Shop.Visible or boardOpen or ui:GetAttribute('AudioOpen33')==true
  toast.Visible=os.clock()<expires and not shopOpen
  continueBatch.Visible=toast.Visible and batchActive==true stopBatch.Visible=continueBatch.Visible
  stopBatch.Active=stopBatch.Visible and state.orderId~=nil

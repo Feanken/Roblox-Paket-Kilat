@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-10",
+  "scope": "creator_store",
+  "priceFilter": "free",
+  "purchase": false,
+  "upload": false,
+  "localAudioFilesDistributed": false,
+  "assets": [
+    {
+      "description": "",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/1837070127",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=1837070127&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "1837070127",
+      "name": "Prima Bossa Nova",
+      "priceCents": 0,
+      "creatorName": "APMOfficial",
+      "source": "creator_store"
+    },
+    {
+      "description": "\"Bright, melodic guitar\"\r\nDuration: 67 seconds\r\n\r\nGenre: \r\nLibrary: KPM - FTV Media\r\nAlbum: ACOUSTIC GUITAR SOLOS 2\r\nAlbum Info: Contemporary & classical acoustic moods\r\n\r\nCourtesy of APM Music.",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/1842176791",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=1842176791&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "1842176791",
+      "name": "Happy Folk",
+      "priceCents": 0,
+      "creatorName": "APMOfficial",
+      "source": "creator_store"
+    },
+    {
+      "description": "Asylum Birds, Peaceful Daytime Ambience, Calls Tweets, Chirps, Loop\n\nDuration: 36.0 seconds\nCategory: Birds - Land\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/9112742473",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9112742473&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "9112742473",
+      "name": "Asylum Birds 1 (SFX)",
+      "priceCents": 0,
+      "creatorName": "ProSoundEffects",
+      "source": "creator_store"
+    },
+    {
+      "description": "Water Fountain, Huntington Park, California, Exterior, CU, Water Splashing, Spraying, Light Fizzing, Plopping\n\nDuration: 66.2 seconds\nCategory: Water - Flowing\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/9120557315",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9120557315&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "9120557315",
+      "name": "Water Fountain 2 (SFX)",
+      "priceCents": 0,
+      "creatorName": "ProSoundEffects",
+      "source": "creator_store"
+    },
+    {
+      "description": "Box Slide, Thin Department Store Type, Cardboard Rub, Quick Grab\n\nDuration: 1.5 seconds\nCategory: Foley - Props\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/9113578876",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9113578876&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "9113578876",
+      "name": "Box Slide Cardboard Rub 19 (SFX)",
+      "priceCents": 0,
+      "creatorName": "ProSoundEffects",
+      "source": "creator_store"
+    },
+    {
+      "description": "Box Slide, Thin Department Store Type, Cardboard Rub, Quick Grab, Increased Impact\n\nDuration: 2.2 seconds\nCategory: Foley - Props\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/9113579352",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9113579352&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "9113579352",
+      "name": "Box Slide Cardboard Rub 2 (SFX)",
+      "priceCents": 0,
+      "creatorName": "ProSoundEffects",
+      "source": "creator_store"
+    },
+    {
+      "description": "Synth Sparkle Tone, High Pitch Bell Tone, Ding, Ring, UI\n\nFull Name: Synth Sparkle Tone High Pitch Bell Tone Ding 4\nDuration: 1.2 seconds\nCategory: User Interface\nAsset Type: Sound Effect\n\nCourtesy of Pro Sound Effects.",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/9126073001",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=9126073001&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "9126073001",
+      "name": "Synth Sparkle Tone High Pitch Bell Tone Ding (SFX)",
+      "priceCents": 0,
+      "creatorName": "ProSoundEffects",
+      "source": "creator_store"
+    }
+  ]
+}

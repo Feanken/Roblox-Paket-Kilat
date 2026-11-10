@@ -139,3 +139,22 @@ Rute borongan memakai geometry jalan, NPC, paket dan assetCreatorStore bersih ya
 MCP search_asset(scope=creator_store,priceFilter=free,assetType=Model) mengembalikan isFree=true/priceCents0 pada saat pencarian. Kandidat ditaruh di ServerStorage.PaketKilat_City32Review saat Edit; struktur3MeshPart/1Model, tidak ada LuaSourceContainer. Library akhir ServerStorage.PaketKilat_CreatorAssets32.Bicycle memakai whitelist render, anchored/noncollision, tanpa joint/constraint/interaksi kendaraan. Folder review dihapus sebelum Play; tidak ada pembelian atau kode vendor yang dijalankan. Source CleanCityAssets32.luau. Identitas creator/status gratis tidak merupakan penetapan hak IP seluruh konten pihak ketiga.
 
 Memakai ulang BroadleafTree/ParkBench dari library07 dan GardenBush/StreetLamp dari library09 yang sudah dibersihkan; lampu clone baru tidak menyertakan Light dinamis. Papan, detail fasad, kotak bunga, pipa, drainase dan ornamen segitiga dibuat dari primitive/font bawaan. Total tambahan462BasePart/38MeshPart,38fetchSuccess/0failure pada Play, bukan pengukuran FPS. Kandidat bus stop tidak diimpor karena tidak cocok kebutuhan; shelter baru tidak dibuat. Bukti verification/creator-assets32.json dan city32-audit.json.
+
+
+## Audio33 — 10 November 2026
+
+Semua tujuh aset berikut ditemukan dengan MCPsearch_asset(scope=creator_store,assetType=Audio,priceFilter=free);isFree=true/priceCents0 saatpencarian. Tidak membeli, mengunggah ulang, atau menyertakan fileaudio distribusi di repo. Gunakan referensi ID dalam runtimeRoblox. Metadata danstatusgratis bukan izinredistribusi di luarRoblox.
+
+| Aset | Creator | ID / tautan | Pemakaian dan durasi terukur |
+| --- | --- | --- | --- |
+| Prima Bossa Nova | APMOfficial | [1837070127](https://create.roblox.com/store/asset/1837070127) | Musik1;168,30detik |
+| Happy Folk | APMOfficial | [1842176791](https://create.roblox.com/store/asset/1842176791) | Musik2;70,09detik;metadata menyebut gitar melodis |
+| Asylum Birds 1 (SFX) | ProSoundEffects | [9112742473](https://create.roblox.com/store/asset/9112742473) | Burung taman;36,01detik |
+| Water Fountain 2 (SFX) | ProSoundEffects | [9120557315](https://create.roblox.com/store/asset/9120557315) | Air mancur;66,20detik |
+| Box Slide Cardboard Rub 19 (SFX) | ProSoundEffects | [9113578876](https://create.roblox.com/store/asset/9113578876) | Ambil/lepas paket;.945detik |
+| Box Slide Cardboard Rub 2 (SFX) | ProSoundEffects | [9113579352](https://create.roblox.com/store/asset/9113579352) | Impactkardus;1,711detik |
+| Synth Sparkle Tone High Pitch Bell Tone Ding (SFX) | ProSoundEffects | [9126073001](https://create.roblox.com/store/asset/9126073001) | Antar/cap/sukses;1,163detik |
+
+Kandidat diinsersebagaiSound keServerStorage saatEdit;0descendants/script. LibraryinertPaketKilat_AudioAssets33.Volume0/Playingfalse,dibuatbaru dariSoundId;folderreview dihapus sebelumbuildfinal. Soundscape33 memakai Sound/SoundGroup/EqualizerSoundEffect bawaan, tanpa vendor code. CueClick/Pulih/fallback tetap mereferensikan audio bawaan yang sudahdicatatT15 (action_get_up.mp3,action_jump_land.mp3,volume_slider.ogg), tidak disalin ke repo. Kandidat kerumunan bahasaasing/casino serta efekUI tidakjelas tidakdiimpor. SumberperlengkapanmapCity32 tidakberubah.
+
+TujuhfetchSuccessdan14Soundruntime loaded, Play/Ended serta crossfade diperiksa. Bukti creator-audio33.json/audio33-audit.json. Ini bukan penilaian subjektif kualitas rekaman/loudness, audit hakIP pihaklain atau jaminan akses pada semua versi pengalaman di masa depan.

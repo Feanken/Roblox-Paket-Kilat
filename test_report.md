@@ -80,3 +80,8 @@ T01–T20 sebelumnya memakai Studio; delapan klien benar-benar dijalankan, tetap
 ## City32 — verifikasi teknis lokal, 10 November 2026
 
 Tambahan visual462part/38mesh pada Map.City32. Empat segmenMoveTo pendek berhasil,38mesh preloadSuccess/0failure,17anchor dan140bidang floor cocok baseline; consolePlay freshBootstrap saja. Screenshot3D/Edit tersedia. Fixture memindahkan avatar ke awal masing-masing segmen dan berjalan ke ujung; tidak membawa paket dan bukan uji pemain manusia/HP fisik/performa. HP/FPS/multiplayer tidak dievaluasi ulang pada pass ini. Bukti verification/city32-audit.json; ini tidak mengubah status T22/T23 atau izin rilis/pemain luar.
+
+
+## Audio33 — verifikasi teknis lokal, 10 November 2026
+
+Tujuh audioStoregratis dimuat, dua musik bergantian/crossfade,4emitter3D berhenti saatjauh, kontrolbus terpisah danprefsnondefault bertahanrespawn. FixtureStudioMemory memicuPickup/Drop/Impact/Recover/Stamp/Delivered; Play/Ended danDeliveredduck.32 terukur, replayreceipt tidak mengulangcue. Cleanup melaluiobserverindependen lolos setelahperbaikan. ProfileIDkosong fixturefallback dipulihkan;7source disk/Edit cocok. ConsolefreshBootstrap saja. Desktop danGalaxyA06landscape/Root705×280 diperiksa; sentuhfisik/FPS/pendengaran asisten tidak diklaim. Publikasi/pemain luar tetap ditunda; T22/T23 tidak dicentang.

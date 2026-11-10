@@ -72,36 +72,13 @@ markerText.Size, markerText.BackgroundColor3 = UDim2.fromScale(1,1), Theme.Ink
 markerText.BackgroundTransparency, markerText.TextColor3 = 0.08, Theme.Gold
 markerText.Font, markerText.TextSize, markerText.TextWrapped = Enum.Font.GothamBold, 15, true
 markerText.Parent = label
-local sfx=Instance.new("Folder")
-sfx.Name="PaketKilatSFX"
-sfx.Parent=game:GetService("SoundService")
-local cues={}
-for name,settings in pairs(C.Audio) do
-	local sound=Instance.new("Sound")
-	sound.Name,sound.SoundId,sound.Volume,sound.PlaybackSpeed=name,settings.Id,settings.Volume,settings.Speed
-	sound:SetAttribute("PlayCount",0)
-	sound:SetAttribute("EndedCount",0)
-	sound.Ended:Connect(function() sound:SetAttribute("EndedCount",(sound:GetAttribute("EndedCount") or 0)+1) end)
-	sound.Parent=sfx
-	cues[name]=sound
-end
-task.spawn(function()
-	local list={}
-	for _,sound in pairs(cues) do table.insert(list,sound) end
-	local ok,err=pcall(function() ContentProvider:PreloadAsync(list) end)
-	sfx:SetAttribute("PreloadSucceeded",ok)
-	if not ok then warn("[PaketKilat] Audio preload:",err) end
-end)
+-- Audio33 owns sounds; keep this visual response so cues are never played twice.
 local function cue(name)
-	local sound=cues[name]
-	sound:Stop()
-	sound:Play()
-	sound:SetAttribute("PlayCount",(sound:GetAttribute("PlayCount") or 0)+1)
-	local stroke=card:FindFirstChildWhichIsA("UIStroke")
-	if stroke then
-		stroke.Color=name=="Impact" and Color3.fromRGB(255,128,91) or Color3.fromRGB(109,236,175)
-		TweenService:Create(stroke,TweenInfo.new(0.6),{Color=Theme.Line}):Play()
-	end
+ local stroke=card:FindFirstChildWhichIsA("UIStroke")
+ if stroke then
+  stroke.Color=name=="Impact" and Color3.fromRGB(255,128,91)or Color3.fromRGB(109,236,175)
+  TweenService:Create(stroke,TweenInfo.new(.6),{Color=Theme.Line}):Play()
+ end
 end
 local function aliveRoot()
 	local char = player.Character
@@ -144,7 +121,7 @@ local function render()
  guide.FPS.Visible=guideManual or perfShowing
  guide.Hint.Size=UDim2.new(1,(guideManual or perfShowing) and -124 or -70,1,-12)
  guide.Size=UDim2.fromOffset(math.min(C.Onboarding.Width,math.max(260,w-290)),C.Onboarding.Height)
- guide.Visible=not(Theme.IsMobile(ui)and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")))and not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not Theme.IsMobile(ui)and not guideDismissed and onboarding.stage~="Complete")
+ guide.Visible=not ui:GetAttribute("AudioOpen33")and not(Theme.IsMobile(ui)and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")))and not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not Theme.IsMobile(ui)and not guideDismissed and onboarding.stage~="Complete")
  local guideStage=state.status=="Dropped" and "Dropped" or onboarding.stage
  guide.Hint.Text=perfShowing and (ui:GetAttribute("PerfText") or "Mengukur FPS...") or (C.Onboarding[guideStage] or C.Onboarding.FindDepot)
  if relay and not perfShowing then guide.Hint.Text='Ada titipan di rumah ini. Ambil untuk lanjut, atau Lewati untuk kembali ke depot.' end
@@ -293,7 +270,7 @@ local function render()
  end
 end
 local function activate(b)
-	if not shopOpen and state.profileReady and b:GetAttribute("ActionEnabled") then
+	if not shopOpen and not ui:GetAttribute("AudioOpen33") and state.profileReady and b:GetAttribute("ActionEnabled") then
 		local action=b:GetAttribute("Action")
   if action=="Start"then ui:SetAttribute("JobBoardOpen17",not ui:GetAttribute("JobBoardOpen17"))return end
   if action=='AcceptRelay'or action=='SkipRelay'then local offer=currentRelay()if offer then RS.Remotes.ActionRequest:FireServer(action,offer.id)end return end

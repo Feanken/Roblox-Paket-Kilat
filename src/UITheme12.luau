@@ -22,12 +22,13 @@ function T.ToolbarLayout(ui)
  local mobile=T.IsMobile(ui)
  local open=ui:GetAttribute("MobileMenuOpen18")==true
  local blocked=ui.Shop.Visible or ui:GetAttribute("JobBoardOpen17")==true
- for i,name in ipairs({"RouteToggle","HelpToggle","ShopToggle"})do
+ for i,name in ipairs({"RouteToggle","HelpToggle","ShopToggle","AudioToggle33"})do
   local b=ui:FindFirstChild(name)
   if b then
-   b.Size=UDim2.fromOffset(mobile and 204 or 84,44)
-   b.Position=mobile and UDim2.new(1,-228,0,66+(i-1)*48)or UDim2.new(1,-282+(i-1)*92,0,ui.AbsoluteSize.Y<500 and 12 or 20)
+   b.Size=UDim2.fromOffset(mobile and 96 or 84,44)
+   b.Position=mobile and UDim2.new(1,-228+((i-1)%2)*108,0,66+math.floor((i-1)/2)*48)or UDim2.new(1,name=="AudioToggle33"and -98 or -282+(i-1)*92,0,(ui.AbsoluteSize.Y<500 and 12 or 20)+(name=="AudioToggle33"and 50 or 0))
    if name~="RouteToggle"then b.Visible=not mobile or open and not blocked end
+   if name=="AudioToggle33"then local result=ui:FindFirstChild("DeliveryCelebration")b.Visible=(not mobile or open)and not blocked and not(result and result.Visible)end
    if mobile then b.ZIndex=4 end
   end
  end
