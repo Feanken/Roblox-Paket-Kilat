@@ -454,6 +454,26 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Data receipt, parcelopacity, rating/coin dan TextFits desktop/phone terverifikasi pada sesi lokal.
 - [x] Dua source disk/Edit sama; freshIdle/koin0/history0/offers6,5groundedNPC,0parcelvisible; akhirEdit/default/0paket/tanpafixture.
 - [x] Source/audit/design/handoff tersimpan, diffcheck lolos.
-- [ ] Periksa pose/kliping/penampilan di viewport3D normal; MCP memberi tangkapan3Dhitam. Tidak dianggap lolos visual.
+- [x] Pose dasar parcel terlihat pada Batch31 melalui captureframe normal; kamera seluruhsudut/kliping menyeluruh masih perlu diperiksa.
 - [ ] Simpan AutoRecovery ke main_game.rbxl untuk Coach29 dan Customers30; binary458926byte belum memuat keduanya.
 - [ ] HP/gamepad fisik, multiplayer dan profiling; publikasi/pemain luar tetap ditunda.
+
+
+## Batch31 — paket sepuluh perbaikan (10 November 2026)
+
+- [x] B31-01: tiga pilihan Borongan dan penerimaan sekali di depot.
+- [x] B31-02: sketsa seluruh rute dengan nomor3pemberhentian dan jarak jalan.
+- [x] B31-03: campuran Biasa/Rapuh perbagian rute diperlihatkan sebelum ambil.
+- [x] B31-04: kiriman berikut otomatis di tas/aktif setelah kiriman sebelumnya.
+- [x] B31-05: jalur antar-rumah meneruskan dari sumber sebelumnya.
+- [x] B31-06: counteri/3, sisapaket, rumah berikut dan potensi bonusfinish.
+- [x] B31-07: finishbonus captured/clamp/mincondition/norecovery di ledger kiriman akhir.
+- [x] B31-08: Cukupdulu mempertahankan bayarankiriman selesai; death/cancel membersihkan manifest.
+- [x] B31-09: receipt/ringkasan total/waktu dan rincian bonus relevan.
+- [x] B31-10: dialog borongan dan keterbacaan bubble pelanggan yang menghormati halangan map.
+- [x] B31-11: replay/stale/wronghouse, overflowleg1/final, recovery/damage/cancel/death/missingtarget, regresiReguler/Relay/Prioritas.
+- [x] B31-12: desktop native pilihan/Ambil/Cukupdulu, layoutGalaxyA06/receipt260tinggi, tab0 dipulihkan.
+- [x] B31-13:11source disk/Edit cocok, backup10source, freshIdle/coins0/history0/6+3offers/schema2/0paket, akhirEdit/default/tanpafixture.
+- [x] B31-14: source, design/handoff, harnessfixture, audit/gambar tersimpan; diffcheck lolos.
+- [ ] B31-15: Save AutoRecovery bersih ke main_game.rbxl; binary458926byte masih tanpaCoach29/Customers30/Batch31.
+- [ ] B31-16: perjalanan3stop manusia, sentuh/gamepad fisik, semua sudut kamera, multiplayer/performa dan penilaian balance oleh pemilik; publikasi/pemain luar ditunda.

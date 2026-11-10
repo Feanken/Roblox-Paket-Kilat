@@ -16,15 +16,18 @@ local title=text(board,'Title',16,12,160,24,18)title.Text='Pesanan'
 local info=text(board,'Info',16,54,500,18,11)info.Font=Enum.Font.GothamMedium
 local close=Instance.new('TextButton')close.Name='Close'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-52,0,8)close.Text='×'close.ZIndex=12 close.Parent=board theme.ToolbarButton(close)close.TextSize=21
 local tab=0 local selectedIds={}local tabs={}local render
-for i,label in {'Biasa','Kontrak','Riwayat'}do
+for i,label in {'Biasa','Kontrak','Borongan','Riwayat'}do
  local b=Instance.new('TextButton')b.Name='Tab24_'..i;b.Text=label;b.ZIndex=12;b.TextSize=11;b.Parent=board;theme.ToolbarButton(b)
  bind(b.Activated,function()tab=i-1 render()end)tabs[i]=b
 end
 local history=text(board,'History24',16,78,588,176,11)history.Font=Enum.Font.GothamMedium history.TextYAlignment=Enum.TextYAlignment.Top
+local function offerAt(i)
+ return tab==2 and state.batchOffers and state.batchOffers[i]or tab<2 and state.jobOffers and state.jobOffers[tab*3+i]or nil
+end
 local function selected()
- if tab==2 then return nil end
+ if tab==3 then return nil end
  local first
- for i=1,3 do local offer=state.jobOffers and state.jobOffers[tab*3+i]
+ for i=1,3 do local offer=offerAt(i)
   if offer then first=first or offer;if selectedIds[tab]==offer.id then return offer end end
  end
  selectedIds[tab]=first and first.id return first
@@ -36,7 +39,7 @@ for i=1,3 do
  local name=text(card,'Name',10,5,180,19,13)
  local dest=text(card,'Destination',10,27,180,19,11)dest.Font=Enum.Font.GothamMedium
  rows[i]={frame=card,name=name,dest=dest,outline=outline}
- bind(card.Activated,function()local o=state.jobOffers and state.jobOffers[tab*3+i]if o and tab~=2 then selectedIds[tab]=o.id render()end end)
+ bind(card.Activated,function()local o=offerAt(i)if o and tab~=3 then selectedIds[tab]=o.id render()end end)
 end
 local panel=Instance.new('Frame')panel.Name='Preview28'panel.BackgroundColor3=theme.Soft panel.BorderSizePixel=0 panel.ZIndex=11 panel.Parent=board rounded(panel,12)
 local destination=text(panel,'Destination',12,7,330,22,15)
@@ -57,17 +60,21 @@ local function draw(offer,w,h)
   f.Size=UDim2.fromOffset(d.Magnitude,thickness)f.Rotation=math.deg(math.atan2(d.Y,d.X))f.BackgroundColor3=color f.BorderSizePixel=0 f.ZIndex=z f.Parent=diagram
  end
  for _,path in pairs(routes)do for i=1,#path-1 do line(path[i],path[i+1],theme.Line,2,12)end end
- local route=offer and preview.Route(routes,offer.destinationId)if not route then return end
+ local route=offer and preview.OfferRoute(routes,offer)if not route then return end
  for i=1,#route.points-1 do line(route.points[i],route.points[i+1],theme.Ink,3,13)end
- for i,point in ipairs({route.points[1],route.points[#route.points]})do
+ local markers={{point=route.points[1],text='D'}}
+ if offer.isBatch then for i,id in ipairs(offer.batchDestinations)do local path=routes[id]table.insert(markers,{point=path[#path],text=tostring(i)})end
+ else table.insert(markers,{point=route.points[#route.points],text='T'})end
+ for i,mark in ipairs(markers)do
+  local point=mark.point
   local p=project(point)local dot=Instance.new('TextLabel')dot.Name=i==1 and 'Depot28'or 'Target28'
-  dot.AnchorPoint=Vector2.new(.5,.5)dot.Position=UDim2.fromOffset(p.X,p.Y)dot.Size=UDim2.fromOffset(14,14)dot.Text=i==1 and 'D'or 'T'
+  dot.AnchorPoint=Vector2.new(.5,.5)dot.Position=UDim2.fromOffset(p.X,p.Y)dot.Size=UDim2.fromOffset(14,14)dot.Text=mark.text
   dot.BackgroundColor3=i==1 and theme.Ink or theme.Gold dot.TextColor3=i==1 and theme.Cream or theme.Ink dot.Font=Enum.Font.GothamBold dot.TextSize=9 dot.BorderSizePixel=0 dot.ZIndex=14 dot.Parent=diagram rounded(dot,7)
  end
 end
 bind(accept.Activated,function()
  local offer=selected()
- if offer and accept.Active and os.clock()>=pendingUntil then pendingUntil=os.clock()+1 shared.Remotes.ActionRequest:FireServer('AcceptJob',offer.id)render()end
+ if offer and accept.Active and os.clock()>=pendingUntil then pendingUntil=os.clock()+1 shared.Remotes.ActionRequest:FireServer(offer.isBatch and 'AcceptBatch'or 'AcceptJob',offer.id)render()end
 end)
 bind(close.Activated,function()root:SetAttribute('JobBoardOpen17',false)end)
 render=function()
@@ -76,24 +83,24 @@ render=function()
  board.Visible=open backdrop.Visible=open
  local camera=workspace.CurrentCamera if camera then backdrop.Position=UDim2.fromOffset(-root.AbsolutePosition.X,-root.AbsolutePosition.Y)backdrop.Size=UDim2.fromOffset(camera.ViewportSize.X,camera.ViewportSize.Y)end
  local width=math.min(620,root.AbsoluteSize.X-24)local left=math.clamp(math.floor(width*.32),146,198)local right=width-left-32
- board.Size=UDim2.fromOffset(width,280)title.Size=UDim2.fromOffset(width-338,24)info.Size=UDim2.fromOffset(width-32,18)
- for i,b in tabs do b.Position=UDim2.fromOffset(width-318+(i-1)*86,6)b.Size=UDim2.fromOffset(82,44)theme.Action(b,true,tab~=i-1)end
- history.Size=UDim2.fromOffset(width-32,176)history.Visible=tab==2 panel.Visible=tab~=2
+ board.Size=UDim2.fromOffset(width,280)title.Size=UDim2.fromOffset(width-380,24)info.Size=UDim2.fromOffset(width-32,18)
+ for i,b in tabs do b.Position=UDim2.fromOffset(width-354+(i-1)*74,6)b.Size=UDim2.fromOffset(70,44)theme.Action(b,true,tab~=i-1)end
+ history.Size=UDim2.fromOffset(width-32,176)history.Visible=tab==3 panel.Visible=tab~=3
  local lines={}
  for i,v in state.recentDeliveries or {}do table.insert(lines,string.format('%d. %s · %d★ · +%d koin\n%s · %d/100 · %.1fs · %s',i,v.destinationName,v.stars,v.total,v.jobName or 'Pesanan',v.condition or 0,v.duration or 0,v.contractReason or 'Tanpa kontrak'))end
  history.Text=#lines>0 and table.concat(lines,'\n')or 'Belum ada pengantaran. Ambil pesanan pertamamu.'
  local char=player.Character local hum=char and char:FindFirstChildOfClass('Humanoid')local r=char and char:FindFirstChild('HumanoidRootPart')
  local near=r and state.depotPosition and(r.Position-state.depotPosition).Magnitude<=config.ActionDistance
  info.Text=os.clock()<noticeUntil and notice or near and 'Pilih pekerjaan untuk melihat jalur dan syaratnya.'or 'Dekati depot untuk mengambil pesanan.'
- if tab==2 then info.Text='Lima pengantaran terakhir · sesi ini saja'end
+ if tab==3 then info.Text='Lima pengantaran terakhir · sesi ini saja'end
  local offer=selected()board:SetAttribute('SelectedOffer28',offer and offer.id)
  for i,row in ipairs(rows)do
-  local o=state.jobOffers and state.jobOffers[tab*3+i]local chosen=o and offer and o.id==offer.id
-  row.frame.Visible=tab~=2 row.frame.Active=open and o~=nil
+  local o=offerAt(i)local chosen=o and offer and o.id==offer.id
+  row.frame.Visible=tab~=3 row.frame.Active=open and o~=nil
   row.frame.Position=UDim2.fromOffset(12,76+(i-1)*64)row.frame.Size=UDim2.fromOffset(left,56)
   row.name.Size=UDim2.fromOffset(left-20,19)row.dest.Size=UDim2.fromOffset(left-20,19)
   row.frame.BackgroundColor3=chosen and theme.Gold or theme.Soft row.outline.Color=chosen and theme.Ink or theme.Line
-  row.name.Text=o and o.name or 'Memuat...'row.dest.Text=o and o.destinationName or ''
+  row.name.Text=o and o.name or 'Memuat...'row.dest.Text=o and(o.isBatch and('3 kiriman · finish +'..o.jobBonus)or o.destinationName)or ''
  end
  panel.Position=UDim2.fromOffset(left+20,76)panel.Size=UDim2.fromOffset(right,184)
  destination.Size=UDim2.fromOffset(right-24,22)meta.Size=UDim2.fromOffset(right-24,18)
@@ -102,20 +109,23 @@ render=function()
  diagram.Position=UDim2.fromOffset(right-mapWidth-12,54)diagram.Size=UDim2.fromOffset(mapWidth,72)
  reward.Size=UDim2.fromOffset(right-mapWidth-30,24)
  accept.Position=UDim2.fromOffset(12,132)accept.Size=UDim2.fromOffset(right-24,44)
- local route=offer and preview.Route(routes,offer.destinationId)
- destination.Text=offer and offer.destinationName or 'Pilih pekerjaan'
+ local route=offer and preview.OfferRoute(routes,offer)
+ destination.Text=offer and(offer.isBatch and offer.name or offer.destinationName)or 'Pilih pekerjaan'
  local distance=route and(string.format('%d stud',math.floor(route.distance+.5)))or 'Jalur belum tersedia'
  meta.Text=offer and(offer.packageType..' · '..distance..' · rute dasar')or ''
  conditions.Text=offer and preview.Conditions(offer)or ''
+ if offer and offer.isBatch then local stops={}for i,id in ipairs(offer.batchDestinations)do stops[i]=i..'. '..config.Routes[id].Name..(offer.packageTypes[i]=='Rapuh'and ' · rapuh'or '')end conditions.Text=table.concat(stops,'\n')end
  reward.Text=offer and(not offer.contract and offer.jobBonus==0 and string.format('Dasar +%d\nTanpa bonus kerja',config.BaseReward)or string.format('Dasar +%d\n%s +%d*',config.BaseReward,offer.contract and 'Kontrak'or 'Kerja maks.',offer.jobBonus))or ''
+ if offer and offer.isBatch then reward.Text=string.format('Dasar +%d/kiriman\nFinish maks. +%d*',config.BaseReward,offer.jobBonus)end
  if near and os.clock()>=noticeUntil then
-  if tab==1 then info.Text='*Bonus bersyarat. Jarak belum termasuk perjalanan ke pos cap.'
+  if tab==2 then info.Text='*Finish mengikuti kondisi terendah; memakai Pulihkan menggugurkan bonus.'
+  elseif tab==1 then info.Text='*Bonus bersyarat. Jarak belum termasuk perjalanan ke pos cap.'
   elseif tab==0 then info.Text='*Bonus kerja mengikuti kondisi. Bonus lain dihitung saat tiba.'end
  end
- local active=open and tab~=2 and near and hum and hum.Health>0 and offer~=nil and os.clock()>=pendingUntil
- accept.Active=active==true accept.AutoButtonColor=active==true accept.Text=os.clock()<pendingUntil and 'Menyiapkan...'or 'Ambil pesanan'
+ local active=open and tab~=3 and near and hum and hum.Health>0 and offer~=nil and os.clock()>=pendingUntil
+ accept.Active=active==true accept.AutoButtonColor=active==true accept.Text=os.clock()<pendingUntil and 'Menyiapkan...'or(offer and offer.isBatch and 'Ambil 3 kiriman'or 'Ambil pesanan')
  theme.Action(accept,active==true,false)
- if open and tab~=2 then draw(offer,mapWidth,72)end
+ if open and tab~=3 then draw(offer,mapWidth,72)end
 end
 bind(shared.Remotes.StateChanged.OnClientEvent,function(s,code)
  state=s

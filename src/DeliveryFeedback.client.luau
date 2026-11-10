@@ -45,6 +45,8 @@ local highlight=Instance.new("Highlight") highlight.Name="PaketKilatLocalFocus"
 highlight.DepthMode=Enum.HighlightDepthMode.Occluded highlight.FillTransparency=.85
 highlight.OutlineTransparency=.1 highlight.FillColor=Color3.fromRGB(255,208,96)
 highlight.OutlineColor=Color3.fromRGB(255,208,96) highlight.Parent=workspace
+local continueBatch=Instance.new('TextButton')continueBatch.Name='ContinueBatch31'continueBatch.Text='Lanjut kirim'continueBatch.ZIndex=22 continueBatch.Parent=toast Theme.ToolbarButton(continueBatch)Theme.Action(continueBatch,true,false)
+local stopBatch=Instance.new('TextButton')stopBatch.Name='StopBatch31'stopBatch.Text='Cukup dulu'stopBatch.ZIndex=22 stopBatch.Parent=toast Theme.ToolbarButton(stopBatch)
 local expires,noticeExpires=0,0
 local countFrom,countTotal=0,0
 local tween
@@ -57,7 +59,11 @@ local function ownPackage()
 end
 local function refresh()
  local width,height=ui.AbsoluteSize.X,ui.AbsoluteSize.Y
- toast.Size=UDim2.fromOffset(math.min(330,math.max(260,width-40)),212)
+ local batchActive=state.batch~=nil and state.lastResult and state.lastResult.isBatch and state.status~='Idle'
+ toast.Size=UDim2.fromOffset(math.min(330,math.max(260,width-40)),batchActive and 260 or 212)
+ local bw=(toast.Size.X.Offset-32)/2
+ continueBatch.Position=UDim2.fromOffset(12,204)continueBatch.Size=UDim2.fromOffset(bw,44)
+ stopBatch.Position=UDim2.fromOffset(20+bw,204)stopBatch.Size=UDim2.fromOffset(bw,44)
  if countTotal>0 then reward.Text=string.format('+%d KOIN',math.floor(countTotal*math.clamp((os.clock()-countFrom)/.65,0,1)))end
  -- Keep transient notices below the upper HUD on short landscape screens.
  impact.Position=UDim2.new(.5,0,0,math.min(216,height*.59))
@@ -65,6 +71,8 @@ local function refresh()
  local boardOpen=ui:GetAttribute('JobBoardOpen17')==true
  local shopOpen=ui.Shop.Visible or boardOpen
  toast.Visible=os.clock()<expires and not shopOpen
+ continueBatch.Visible=toast.Visible and batchActive==true stopBatch.Visible=continueBatch.Visible
+ stopBatch.Active=stopBatch.Visible and state.orderId~=nil
  ui.TopCard.Visible=not toast.Visible and not shopOpen
  ui.StorageStatus.Visible=not toast.Visible and not shopOpen and(not Theme.IsMobile(ui)or ui.StorageStatus:GetAttribute("Alert18")==true)
  ui.Actions.Visible=not shopOpen and not toast.Visible and(not Theme.IsMobile(ui)or not ui:GetAttribute("MobileTargetOpen18"))
@@ -122,13 +130,21 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    ratingHint.Text=rating and rating.stars==3 and 'Paket utuh dan tiba tepat waktu.'or rating and rating.stars==2 and(not rating.onTime and 'Paket aman. Coba tiba lebih cepat.'or 'Paket aman. Jaga kondisinya lebih tinggi.')or result.recoveryCount>0 and 'Coba antar tanpa memulihkan paket.'or 'Paket terkirim. Kurangi benturan.'
    if result.contractKind then ratingHint.Text=result.contractSucceeded and ('Kontrak berhasil · bonus +'..result.contractBonus)or ('Kontrak: '..(result.contractStatus and result.contractStatus.reason or 'syarat belum terpenuhi'))end
    streak.Text=string.format('Rapi beruntun %d · terbaik sesi %d',result.cleanStreak or 0,result.bestCleanStreak or 0)
-   detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\nPos %d · Kerja %d · Target %d · Kontrak %d',result.baseReward,result.conditionBonus,result.timeBonus,result.routeBonus or 0,result.jobBonus or 0,result.challengeBonus or 0,result.contractBonus or 0)
-   if (result.challengeBonus or 0)>0 then
+   local extras={}
+   for _,item in ipairs({{'Cap',result.routeBonus},{'Kerja',result.jobBonus},{'Target',result.challengeBonus},{'Kontrak',result.contractBonus},{'Borongan',result.batchBonus}})do if(item[2]or 0)>0 then table.insert(extras,item[1]..' +'..item[2])end end
+   detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\n%s',result.baseReward,result.conditionBonus,result.timeBonus,#extras>0 and table.concat(extras,' · ')or result.isBatch and result.batchIndex<result.batchTotal and 'Bonus finish dinilai setelah 3 kiriman.'or 'Tanpa bonus tambahan')
+   if result.isBatch then
+    title.Text=result.batchIndex==result.batchTotal and 'BORONGAN SELESAI!'or('KIRIMAN '..result.batchIndex..'/'..result.batchTotal)
+    ratingHint.Text=result.batchIndex<result.batchTotal and 'Kiriman berikutnya sudah di tas.'or result.batchBonusEligible and('Bonus finish +'..result.batchBonus)or 'Bonus finish gugur: dipulihkan.'
+    streak.Text=string.format('Borongan +%d terkumpul · %.1f dtk',result.batchEarned,result.batchDuration)
+   end
+   if not result.isBatch and (result.challengeBonus or 0)>0 then
     title.Text="TARGET TERCAPAI!"
    end
    detail.TextWrapped=true
    detail.TextSize=11
    nextStep.Text=snapshot.relayOffer and 'Ada titipan di sini · lanjut antar atau kembali ke depot' or "Kembali ke depot · pilih pesanan berikutnya"
+   if result.isBatch then nextStep.Text=result.batchInterrupted and 'Borongan terhenti: tujuan berikut tidak tersedia.'or snapshot.batch and('Berikut: '..snapshot.destinationName)or(snapshot.relayOffer and 'Selesai! Ambil titipan, atau kembali ke depot.'or 'Tiga kiriman tuntas. Kembali ke depot untuk pesanan baru.')end
    if tween then tween:Cancel() end
    scale.Scale=.88 tween=TweenService:Create(scale,TweenInfo.new(.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=1}) tween:Play()
   end
@@ -137,11 +153,13 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
   noticeExpires=os.clock()+2
  elseif code=="Recover" then
   impact.Text="Paket kembali ke petak pemulihan" noticeExpires=os.clock()+2
- elseif code=="Start" or code=="Respawned" or code=="Cancelled" then
+ elseif code=="Start" or code=="Respawned" or code=="Cancelled" or code=="BatchCancelled" then
   expires=0 noticeExpires=0
  end
  refresh()
 end)
+connect(continueBatch.Activated,function()expires=0 refresh()end)
+connect(stopBatch.Activated,function()if state.batch and state.orderId then remote.ActionRequest:FireServer('CancelBatch',state.orderId)end end)
 connect(close.Activated,function()toast:SetAttribute('DismissedOrder22',shownOrder)expires=0 refresh()end)
 local elapsed=0
 connect(RunService.Heartbeat,function(dt) elapsed+=dt if elapsed>=.1 then elapsed=0 refresh() end end)

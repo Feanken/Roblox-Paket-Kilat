@@ -1,0 +1,2425 @@
+{
+  "revision": "CourierCircuits31",
+  "date": "2026-11-10",
+  "place": "main_game_AutoRecovery_0.rbxl",
+  "studio": "6654bdf4-6d9a-4365-b5fc-cd30708a66d3",
+  "features": [
+    "Three Borongan route choices",
+    "Three numbered stops in route preview",
+    "Mixed Biasa/Rapuh cargo",
+    "One depot pickup and automatic next parcel",
+    "House-to-house guidance",
+    "Current stop/remaining/next destination HUD",
+    "Finish bonus scaled by lowest condition, disqualified by any Recover",
+    "Stop after a delivery while keeping prior earnings",
+    "Per-leg receipt and final route total/duration with relevant bonuses only",
+    "Batch-aware customer dialogue and readable map-occluded bubbles"
+  ],
+  "config": {
+    "key": "PK_BatchFinishBonus",
+    "default": 20,
+    "bounds": [
+      0,
+      50
+    ],
+    "capture": "Frozen in current offer; new offers after schedule revision pick up new tuning"
+  },
+  "pure": "Catalog unique three stops/types, segment previews, finite bonus bounds, prior condition and recovery snapshot checks passed",
+  "routes": [
+    {
+      "points": 14,
+      "name": "Putaran Pasar",
+      "distance": 680.0587730407715
+    },
+    {
+      "points": 14,
+      "name": "Lintas Kampung",
+      "distance": 693.0587730407715
+    },
+    {
+      "points": 14,
+      "name": "Dua Sisi Kota",
+      "distance": 782.0587730407715
+    }
+  ],
+  "cleanRun": [
+    {
+      "action": "wrong",
+      "data": {
+        "extra": {
+          "code": "WrongDestination"
+        },
+        "packages": 1,
+        "coins": 0,
+        "batch": {
+          "total": 3,
+          "index": 1,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": false,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "6a7074c3-3634-4977-b525-477f5356f982",
+          "minCondition": 100,
+          "remaining": 3,
+          "name": "Putaran Pasar",
+          "bonusEligible": true,
+          "earned": 0,
+          "bonus": 20
+        },
+        "history": 0,
+        "status": "Carrying",
+        "packageType": "Biasa"
+      }
+    },
+    {
+      "action": "overflow",
+      "data": {
+        "extra": {
+          "atomic": true,
+          "code": "EconomyLimit"
+        },
+        "packages": 1,
+        "coins": 0,
+        "batch": {
+          "total": 3,
+          "index": 1,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": false,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "6a7074c3-3634-4977-b525-477f5356f982",
+          "minCondition": 100,
+          "remaining": 3,
+          "name": "Putaran Pasar",
+          "bonusEligible": true,
+          "earned": 0,
+          "bonus": 20
+        },
+        "history": 0,
+        "status": "Carrying",
+        "packageType": "Biasa"
+      }
+    },
+    {
+      "action": "step",
+      "data": {
+        "extra": "step",
+        "packages": 1,
+        "coins": 48,
+        "batch": {
+          "total": 3,
+          "index": 2,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": true,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "6a7074c3-3634-4977-b525-477f5356f982",
+          "minCondition": 100,
+          "remaining": 2,
+          "name": "Putaran Pasar",
+          "bonusEligible": true,
+          "earned": 48,
+          "bonus": 20
+        },
+        "history": 1,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 13.148707866668701,
+          "batchEarned": 48,
+          "batchName": "Putaran Pasar",
+          "orderId": "3f33e7b1-fbd1-47d6-bb50-888ffdce94c8",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276101.31421,
+          "batchIndex": 1,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "isBatch": true,
+          "total": 48,
+          "destinationName": "Rumah Bu Sari",
+          "bestCleanStreak": 1,
+          "cleanStreak": 1,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 1/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah01",
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "duration": 5.000108003616333,
+          "routeBonus": 0,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah01"
+      }
+    },
+    {
+      "action": "replay",
+      "data": {
+        "extra": {
+          "replaySafe": true,
+          "code": "NotOwnerOrStale"
+        },
+        "packages": 1,
+        "coins": 48,
+        "batch": {
+          "total": 3,
+          "index": 2,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": true,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "6a7074c3-3634-4977-b525-477f5356f982",
+          "minCondition": 100,
+          "remaining": 2,
+          "name": "Putaran Pasar",
+          "bonusEligible": true,
+          "earned": 48,
+          "bonus": 20
+        },
+        "history": 1,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 13.148707866668701,
+          "batchEarned": 48,
+          "batchName": "Putaran Pasar",
+          "orderId": "3f33e7b1-fbd1-47d6-bb50-888ffdce94c8",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276101.31421,
+          "batchIndex": 1,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "isBatch": true,
+          "total": 48,
+          "destinationName": "Rumah Bu Sari",
+          "bestCleanStreak": 1,
+          "cleanStreak": 1,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 1/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah01",
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "duration": 5.000108003616333,
+          "routeBonus": 0,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah01"
+      }
+    },
+    {
+      "action": "step",
+      "data": {
+        "extra": "step",
+        "packages": 1,
+        "coins": 116,
+        "batch": {
+          "total": 3,
+          "index": 3,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": true,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": true,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "6a7074c3-3634-4977-b525-477f5356f982",
+          "minCondition": 100,
+          "remaining": 1,
+          "name": "Putaran Pasar",
+          "bonusEligible": true,
+          "earned": 116,
+          "bonus": 20
+        },
+        "history": 2,
+        "status": "Carrying",
+        "packageType": "Rapuh",
+        "result": {
+          "batchDuration": 19.11550283432007,
+          "batchEarned": 116,
+          "batchName": "Putaran Pasar",
+          "orderId": "cd556136-b264-416c-a4f8-884beb98c648",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276107.281005,
+          "batchIndex": 2,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah01",
+          "total": 68,
+          "destinationName": "Rumah Bu Rina",
+          "bestCleanStreak": 2,
+          "cleanStreak": 2,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 2/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah03",
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "challengeBonus": 20,
+          "timeBonus": 8,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "challengeName": "Kurir Rapi",
+          "duration": 5.000212907791138,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah03"
+      }
+    },
+    {
+      "action": "step",
+      "data": {
+        "extra": "step",
+        "packages": 0,
+        "coins": 185,
+        "history": 3,
+        "status": "Idle",
+        "result": {
+          "batchDuration": 22.132203817367554,
+          "batchEarned": 185,
+          "batchName": "Putaran Pasar",
+          "orderId": "1eb7b8a5-6601-4e6b-9490-ee1528f44071",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276110.297706,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah03",
+          "total": 69,
+          "destinationName": "Rumah Pak Agus",
+          "bestCleanStreak": 3,
+          "cleanStreak": 3,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 3/3",
+          "batchBonusEligible": true,
+          "batchBonus": 20,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 9,
+          "challengeBonus": 0,
+          "destinationId": "Rumah04",
+          "duration": 5.000162839889526,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "action": "replay",
+      "data": {
+        "extra": {
+          "replaySafe": true,
+          "code": "NotOwnerOrStale"
+        },
+        "packages": 0,
+        "coins": 185,
+        "history": 3,
+        "status": "Idle",
+        "result": {
+          "batchDuration": 22.132203817367554,
+          "batchEarned": 185,
+          "batchName": "Putaran Pasar",
+          "orderId": "1eb7b8a5-6601-4e6b-9490-ee1528f44071",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276110.297706,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah03",
+          "total": 69,
+          "destinationName": "Rumah Pak Agus",
+          "bestCleanStreak": 3,
+          "cleanStreak": 3,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 3/3",
+          "batchBonusEligible": true,
+          "batchBonus": 20,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 9,
+          "challengeBonus": 0,
+          "destinationId": "Rumah04",
+          "duration": 5.000162839889526,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "action": "stale",
+      "data": {
+        "extra": {
+          "code": "OfferExpired"
+        },
+        "packages": 0,
+        "coins": 185,
+        "history": 3,
+        "status": "Idle",
+        "result": {
+          "batchDuration": 22.132203817367554,
+          "batchEarned": 185,
+          "batchName": "Putaran Pasar",
+          "orderId": "1eb7b8a5-6601-4e6b-9490-ee1528f44071",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276110.297706,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah03",
+          "total": 69,
+          "destinationName": "Rumah Pak Agus",
+          "bestCleanStreak": 3,
+          "cleanStreak": 3,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 3/3",
+          "batchBonusEligible": true,
+          "batchBonus": 20,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 9,
+          "challengeBonus": 0,
+          "destinationId": "Rumah04",
+          "duration": 5.000162839889526,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    }
+  ],
+  "regressions": [
+    {
+      "case": "damaged:start",
+      "value": 2,
+      "data": {
+        "extra": "start",
+        "packages": 1,
+        "coins": 185,
+        "batch": {
+          "total": 3,
+          "index": 1,
+          "stops": [
+            {
+              "id": "Rumah02",
+              "done": false,
+              "name": "Rumah Pak Budi",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah05",
+              "done": false,
+              "name": "Rumah Bu Dewi",
+              "packageType": "Rapuh"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            }
+          ],
+          "id": "9f07e497-b52b-4cf5-b131-6aa8a7064f76",
+          "minCondition": 100,
+          "remaining": 3,
+          "name": "Lintas Kampung",
+          "bonusEligible": true,
+          "earned": 0,
+          "bonus": 20
+        },
+        "history": 3,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 22.132203817367554,
+          "batchEarned": 185,
+          "batchName": "Putaran Pasar",
+          "orderId": "1eb7b8a5-6601-4e6b-9490-ee1528f44071",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276110.297706,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah03",
+          "total": 69,
+          "destinationName": "Rumah Pak Agus",
+          "bestCleanStreak": 3,
+          "cleanStreak": 3,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 3/3",
+          "batchBonusEligible": true,
+          "batchBonus": 20,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 9,
+          "challengeBonus": 0,
+          "destinationId": "Rumah04",
+          "duration": 5.000162839889526,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "damaged:leg1",
+      "value": 80,
+      "data": {
+        "extra": "step",
+        "packages": 1,
+        "coins": 230,
+        "batch": {
+          "total": 3,
+          "index": 2,
+          "stops": [
+            {
+              "id": "Rumah02",
+              "done": true,
+              "name": "Rumah Pak Budi",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah05",
+              "done": false,
+              "name": "Rumah Bu Dewi",
+              "packageType": "Rapuh"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            }
+          ],
+          "id": "9f07e497-b52b-4cf5-b131-6aa8a7064f76",
+          "minCondition": 80,
+          "remaining": 2,
+          "name": "Lintas Kampung",
+          "bonusEligible": true,
+          "earned": 45,
+          "bonus": 20
+        },
+        "history": 4,
+        "status": "Carrying",
+        "packageType": "Rapuh",
+        "result": {
+          "batchDuration": 3.2190349102020264,
+          "batchEarned": 45,
+          "batchName": "Lintas Kampung",
+          "orderId": "cb758ca2-0c7a-4e4f-8cbf-b5fe285bc32b",
+          "condition": 80,
+          "jobBonus": 0,
+          "completedAt": 1794276198.479735,
+          "batchIndex": 1,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 12,
+          "isBatch": true,
+          "total": 45,
+          "destinationName": "Rumah Pak Budi",
+          "bestCleanStreak": 4,
+          "cleanStreak": 4,
+          "recordReason": "BatchRoute",
+          "jobName": "Lintas Kampung 1/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah02",
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "duration": 5.000328779220581,
+          "routeBonus": 0,
+          "rating": {
+            "stars": 2,
+            "onTime": true,
+            "name": "RAPI",
+            "clean": true
+          },
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah02"
+      }
+    },
+    {
+      "case": "damaged:leg2",
+      "value": 100,
+      "data": {
+        "extra": "step",
+        "packages": 1,
+        "coins": 279,
+        "batch": {
+          "total": 3,
+          "index": 3,
+          "stops": [
+            {
+              "id": "Rumah02",
+              "done": true,
+              "name": "Rumah Pak Budi",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah05",
+              "done": true,
+              "name": "Rumah Bu Dewi",
+              "packageType": "Rapuh"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            }
+          ],
+          "id": "9f07e497-b52b-4cf5-b131-6aa8a7064f76",
+          "minCondition": 80,
+          "remaining": 1,
+          "name": "Lintas Kampung",
+          "bonusEligible": true,
+          "earned": 94,
+          "bonus": 20
+        },
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 6.282989978790283,
+          "batchEarned": 94,
+          "batchName": "Lintas Kampung",
+          "orderId": "89b6a3c7-ec6d-419e-93b6-fa7bb9627e69",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276201.54369,
+          "batchIndex": 2,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah02",
+          "total": 49,
+          "destinationName": "Rumah Bu Dewi",
+          "bestCleanStreak": 5,
+          "cleanStreak": 5,
+          "recordReason": "BatchRoute",
+          "jobName": "Lintas Kampung 2/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 9,
+          "challengeBonus": 0,
+          "destinationId": "Rumah05",
+          "duration": 5.000164985656738,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah05"
+      }
+    },
+    {
+      "case": "damaged:finish16",
+      "value": 100,
+      "data": {
+        "extra": "step",
+        "packages": 0,
+        "coins": 343,
+        "history": 5,
+        "status": "Idle",
+        "result": {
+          "batchDuration": 10.366374015808105,
+          "batchEarned": 158,
+          "batchName": "Lintas Kampung",
+          "orderId": "0f87b43f-6b55-4b66-bd42-b37f733f18b1",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276205.627074,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah05",
+          "total": 64,
+          "destinationName": "Rumah Bu Rina",
+          "bestCleanStreak": 6,
+          "cleanStreak": 6,
+          "recordReason": "BatchRoute",
+          "jobName": "Lintas Kampung 3/3",
+          "batchBonusEligible": true,
+          "batchBonus": 16,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "destinationId": "Rumah03",
+          "duration": 5.000155925750732,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "recover:start",
+      "value": 1,
+      "data": {
+        "extra": "start",
+        "packages": 1,
+        "coins": 343,
+        "batch": {
+          "total": 3,
+          "index": 1,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": false,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "484ec750-8afb-449c-afeb-f3b1efeea197",
+          "minCondition": 100,
+          "remaining": 3,
+          "name": "Putaran Pasar",
+          "bonusEligible": true,
+          "earned": 0,
+          "bonus": 20
+        },
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 10.366374015808105,
+          "batchEarned": 158,
+          "batchName": "Lintas Kampung",
+          "orderId": "0f87b43f-6b55-4b66-bd42-b37f733f18b1",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276205.627074,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah05",
+          "total": 64,
+          "destinationName": "Rumah Bu Rina",
+          "bestCleanStreak": 6,
+          "cleanStreak": 6,
+          "recordReason": "BatchRoute",
+          "jobName": "Lintas Kampung 3/3",
+          "batchBonusEligible": true,
+          "batchBonus": 16,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "destinationId": "Rumah03",
+          "duration": 5.000155925750732,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "recover:actualDropRecoverPickup",
+      "data": {
+        "extra": "recover",
+        "packages": 1,
+        "coins": 343,
+        "batch": {
+          "total": 3,
+          "index": 1,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": false,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "484ec750-8afb-449c-afeb-f3b1efeea197",
+          "minCondition": 80,
+          "remaining": 3,
+          "name": "Putaran Pasar",
+          "bonusEligible": false,
+          "earned": 0,
+          "bonus": 20
+        },
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 10.366374015808105,
+          "batchEarned": 158,
+          "batchName": "Lintas Kampung",
+          "orderId": "0f87b43f-6b55-4b66-bd42-b37f733f18b1",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276205.627074,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah05",
+          "total": 64,
+          "destinationName": "Rumah Bu Rina",
+          "bestCleanStreak": 6,
+          "cleanStreak": 6,
+          "recordReason": "BatchRoute",
+          "jobName": "Lintas Kampung 3/3",
+          "batchBonusEligible": true,
+          "batchBonus": 16,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "destinationId": "Rumah03",
+          "duration": 5.000155925750732,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "recover:leg1",
+      "data": {
+        "extra": "step",
+        "packages": 1,
+        "coins": 388,
+        "batch": {
+          "total": 3,
+          "index": 2,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": true,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": false,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "484ec750-8afb-449c-afeb-f3b1efeea197",
+          "minCondition": 80,
+          "remaining": 2,
+          "name": "Putaran Pasar",
+          "bonusEligible": false,
+          "earned": 45,
+          "bonus": 20
+        },
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 8.450138092041016,
+          "batchEarned": 45,
+          "batchName": "Putaran Pasar",
+          "orderId": "c404b926-66f2-48bb-84de-98818df36ad6",
+          "condition": 80,
+          "jobBonus": 0,
+          "completedAt": 1794276217.160773,
+          "batchIndex": 1,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 12,
+          "isBatch": true,
+          "total": 45,
+          "destinationName": "Rumah Bu Sari",
+          "bestCleanStreak": 6,
+          "cleanStreak": 0,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 1/3",
+          "batchBonusEligible": false,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah01",
+          "recoveryCount": 1,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "duration": 5.000200986862183,
+          "routeBonus": 0,
+          "rating": {
+            "stars": 1,
+            "onTime": true,
+            "name": "TUNTAS",
+            "clean": false
+          },
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah01"
+      }
+    },
+    {
+      "case": "recover:leg2",
+      "data": {
+        "extra": "step",
+        "packages": 1,
+        "coins": 436,
+        "batch": {
+          "total": 3,
+          "index": 3,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": true,
+              "name": "Rumah Bu Sari",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah03",
+              "done": true,
+              "name": "Rumah Bu Rina",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah04",
+              "done": false,
+              "name": "Rumah Pak Agus",
+              "packageType": "Rapuh"
+            }
+          ],
+          "id": "484ec750-8afb-449c-afeb-f3b1efeea197",
+          "minCondition": 80,
+          "remaining": 1,
+          "name": "Putaran Pasar",
+          "bonusEligible": false,
+          "earned": 93,
+          "bonus": 20
+        },
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Rapuh",
+        "result": {
+          "batchDuration": 11.89991807937622,
+          "batchEarned": 93,
+          "batchName": "Putaran Pasar",
+          "orderId": "8a40323b-dd85-4dba-8b9d-aea744605af6",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276220.610553,
+          "batchIndex": 2,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah01",
+          "total": 48,
+          "destinationName": "Rumah Bu Rina",
+          "bestCleanStreak": 6,
+          "cleanStreak": 1,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 2/3",
+          "batchBonusEligible": false,
+          "batchBonus": 0,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Biasa",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "destinationId": "Rumah03",
+          "duration": 5.000174045562744,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah03"
+      }
+    },
+    {
+      "case": "recover:finish0",
+      "data": {
+        "extra": "step",
+        "packages": 0,
+        "coins": 485,
+        "history": 5,
+        "status": "Idle",
+        "result": {
+          "batchDuration": 15.148859977722168,
+          "batchEarned": 142,
+          "batchName": "Putaran Pasar",
+          "orderId": "3d4a5005-5320-4465-b47c-a6d6049abfef",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276223.859495,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah03",
+          "total": 49,
+          "destinationName": "Rumah Pak Agus",
+          "bestCleanStreak": 6,
+          "cleanStreak": 2,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 3/3",
+          "batchBonusEligible": false,
+          "batchBonus": 0,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 9,
+          "challengeBonus": 0,
+          "destinationId": "Rumah04",
+          "duration": 5.000192880630493,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "cancel:start",
+      "value": 3,
+      "data": {
+        "extra": "start",
+        "packages": 1,
+        "coins": 485,
+        "batch": {
+          "total": 3,
+          "index": 1,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": false,
+              "name": "Rumah Bu Sari",
+              "packageType": "Rapuh"
+            },
+            {
+              "id": "Rumah02",
+              "done": false,
+              "name": "Rumah Pak Budi",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah05",
+              "done": false,
+              "name": "Rumah Bu Dewi",
+              "packageType": "Biasa"
+            }
+          ],
+          "id": "3e1431dd-f630-4856-815e-05fc1cb4157b",
+          "minCondition": 100,
+          "remaining": 3,
+          "name": "Dua Sisi Kota",
+          "bonusEligible": true,
+          "earned": 0,
+          "bonus": 20
+        },
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Rapuh",
+        "result": {
+          "batchDuration": 15.148859977722168,
+          "batchEarned": 142,
+          "batchName": "Putaran Pasar",
+          "orderId": "3d4a5005-5320-4465-b47c-a6d6049abfef",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276223.859495,
+          "batchIndex": 3,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "sourceId": "Rumah03",
+          "total": 49,
+          "destinationName": "Rumah Pak Agus",
+          "bestCleanStreak": 6,
+          "cleanStreak": 2,
+          "recordReason": "BatchRoute",
+          "jobName": "Putaran Pasar 3/3",
+          "batchBonusEligible": false,
+          "batchBonus": 0,
+          "isRelay": false,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 9,
+          "challengeBonus": 0,
+          "destinationId": "Rumah04",
+          "duration": 5.000192880630493,
+          "routeBonus": 0,
+          "isBatch": true,
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "cancel:paidLeg1",
+      "data": {
+        "extra": "step",
+        "packages": 1,
+        "coins": 533,
+        "batch": {
+          "total": 3,
+          "index": 2,
+          "stops": [
+            {
+              "id": "Rumah01",
+              "done": true,
+              "name": "Rumah Bu Sari",
+              "packageType": "Rapuh"
+            },
+            {
+              "id": "Rumah02",
+              "done": false,
+              "name": "Rumah Pak Budi",
+              "packageType": "Biasa"
+            },
+            {
+              "id": "Rumah05",
+              "done": false,
+              "name": "Rumah Bu Dewi",
+              "packageType": "Biasa"
+            }
+          ],
+          "id": "3e1431dd-f630-4856-815e-05fc1cb4157b",
+          "minCondition": 100,
+          "remaining": 2,
+          "name": "Dua Sisi Kota",
+          "bonusEligible": true,
+          "earned": 48,
+          "bonus": 20
+        },
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 2.6322031021118164,
+          "batchEarned": 48,
+          "batchName": "Dua Sisi Kota",
+          "orderId": "682706be-6078-4841-876f-376595007ac0",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276229.875513,
+          "batchIndex": 1,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "isBatch": true,
+          "total": 48,
+          "destinationName": "Rumah Bu Sari",
+          "bestCleanStreak": 6,
+          "cleanStreak": 3,
+          "recordReason": "BatchRoute",
+          "jobName": "Dua Sisi Kota 1/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah01",
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "duration": 5.000159025192261,
+          "routeBonus": 0,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        },
+        "sourceId": "Rumah01"
+      }
+    },
+    {
+      "case": "cancel:keepPaid",
+      "data": {
+        "extra": "cancel",
+        "packages": 0,
+        "coins": 533,
+        "history": 5,
+        "status": "Idle",
+        "result": {
+          "batchDuration": 2.6322031021118164,
+          "batchEarned": 48,
+          "batchName": "Dua Sisi Kota",
+          "orderId": "682706be-6078-4841-876f-376595007ac0",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276229.875513,
+          "batchIndex": 1,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "isBatch": true,
+          "total": 48,
+          "destinationName": "Rumah Bu Sari",
+          "bestCleanStreak": 6,
+          "cleanStreak": 3,
+          "recordReason": "BatchRoute",
+          "jobName": "Dua Sisi Kota 1/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah01",
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "duration": 5.000159025192261,
+          "routeBonus": 0,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "regression:ordinary",
+      "data": {
+        "extra": "ordinary",
+        "packages": 1,
+        "coins": 533,
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "batchDuration": 2.6322031021118164,
+          "batchEarned": 48,
+          "batchName": "Dua Sisi Kota",
+          "orderId": "682706be-6078-4841-876f-376595007ac0",
+          "condition": 100,
+          "jobBonus": 0,
+          "completedAt": 1794276229.875513,
+          "batchIndex": 1,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "isBatch": true,
+          "total": 48,
+          "destinationName": "Rumah Bu Sari",
+          "bestCleanStreak": 6,
+          "cleanStreak": 3,
+          "recordReason": "BatchRoute",
+          "jobName": "Dua Sisi Kota 1/3",
+          "batchBonusEligible": true,
+          "batchBonus": 0,
+          "isRelay": false,
+          "destinationId": "Rumah01",
+          "recoveryCount": 0,
+          "packageType": "Rapuh",
+          "timeBonus": 8,
+          "challengeBonus": 0,
+          "duration": 5.000159025192261,
+          "routeBonus": 0,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "newRecord": false,
+          "baseReward": 25,
+          "batchTotal": 3
+        }
+      }
+    },
+    {
+      "case": "regression:ordinaryDelivery",
+      "data": {
+        "extra": "step",
+        "packages": 0,
+        "coins": 582,
+        "history": 5,
+        "status": "Idle",
+        "result": {
+          "bestTime": 5.000184059143066,
+          "jobName": "Reguler",
+          "batchBonusEligible": false,
+          "bestCleanStreak": 6,
+          "orderId": "977da1ff-d54a-40cd-aa9e-5504fcc77d1c",
+          "condition": 100,
+          "isRelay": false,
+          "jobBonus": 0,
+          "completedAt": 1794276239.442245,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "contractBonus": 0,
+          "destinationId": "Rumah05",
+          "conditionBonus": 15,
+          "isBatch": false,
+          "recoveryCount": 0,
+          "total": 49,
+          "challengeBonus": 0,
+          "batchBonus": 0,
+          "packageType": "Biasa",
+          "destinationName": "Rumah Bu Dewi",
+          "timeBonus": 9,
+          "duration": 5.000184059143066,
+          "cleanStreak": 1,
+          "newRecord": true,
+          "recordEligible": true,
+          "routeBonus": 0,
+          "baseReward": 25
+        }
+      }
+    },
+    {
+      "case": "regression:relay",
+      "data": {
+        "extra": "relay",
+        "packages": 1,
+        "coins": 582,
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "bestTime": 5.000184059143066,
+          "jobName": "Reguler",
+          "batchBonusEligible": false,
+          "bestCleanStreak": 6,
+          "orderId": "977da1ff-d54a-40cd-aa9e-5504fcc77d1c",
+          "condition": 100,
+          "isRelay": false,
+          "jobBonus": 0,
+          "completedAt": 1794276239.442245,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "contractBonus": 0,
+          "destinationId": "Rumah05",
+          "conditionBonus": 15,
+          "isBatch": false,
+          "recoveryCount": 0,
+          "total": 49,
+          "challengeBonus": 0,
+          "batchBonus": 0,
+          "packageType": "Biasa",
+          "destinationName": "Rumah Bu Dewi",
+          "timeBonus": 9,
+          "duration": 5.000184059143066,
+          "cleanStreak": 1,
+          "newRecord": true,
+          "recordEligible": true,
+          "routeBonus": 0,
+          "baseReward": 25
+        },
+        "sourceId": "Rumah05"
+      }
+    },
+    {
+      "case": "regression:relayDelivery",
+      "data": {
+        "extra": "step",
+        "packages": 0,
+        "coins": 628,
+        "history": 5,
+        "status": "Idle",
+        "result": {
+          "challengeBonus": 0,
+          "batchBonusEligible": false,
+          "duration": 5.000156879425049,
+          "routeBonus": 0,
+          "isRelay": true,
+          "jobBonus": 0,
+          "completedAt": 1794276245.408114,
+          "bestCleanStreak": 6,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "isBatch": false,
+          "recoveryCount": 0,
+          "total": 46,
+          "jobName": "Titipan tetangga",
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "newRecord": false,
+          "destinationName": "Rumah Bu Rina",
+          "orderId": "181e8a44-ec6c-430a-a779-c39e0960f241",
+          "timeBonus": 6,
+          "condition": 100,
+          "cleanStreak": 2,
+          "destinationId": "Rumah03",
+          "sourceId": "Rumah05",
+          "batchBonus": 0,
+          "packageType": "Biasa",
+          "baseReward": 25,
+          "recordReason": "RelayRoute"
+        }
+      }
+    },
+    {
+      "case": "regression:priority",
+      "data": {
+        "extra": "priority",
+        "packages": 1,
+        "coins": 628,
+        "history": 5,
+        "status": "Carrying",
+        "packageType": "Biasa",
+        "result": {
+          "challengeBonus": 0,
+          "batchBonusEligible": false,
+          "duration": 5.000156879425049,
+          "routeBonus": 0,
+          "isRelay": true,
+          "jobBonus": 0,
+          "completedAt": 1794276245.408114,
+          "bestCleanStreak": 6,
+          "contractBonus": 0,
+          "recordEligible": false,
+          "conditionBonus": 15,
+          "isBatch": false,
+          "recoveryCount": 0,
+          "total": 46,
+          "jobName": "Titipan tetangga",
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "newRecord": false,
+          "destinationName": "Rumah Bu Rina",
+          "orderId": "181e8a44-ec6c-430a-a779-c39e0960f241",
+          "timeBonus": 6,
+          "condition": 100,
+          "cleanStreak": 2,
+          "destinationId": "Rumah03",
+          "sourceId": "Rumah05",
+          "batchBonus": 0,
+          "packageType": "Biasa",
+          "baseReward": 25,
+          "recordReason": "RelayRoute"
+        }
+      }
+    },
+    {
+      "case": "regression:priorityDelivery",
+      "data": {
+        "extra": "step",
+        "packages": 0,
+        "coins": 690,
+        "history": 5,
+        "status": "Idle",
+        "result": {
+          "challengeBonus": 0,
+          "batchBonusEligible": false,
+          "bestTime": 5.000205039978027,
+          "duration": 5.000205039978027,
+          "routeBonus": 0,
+          "isRelay": false,
+          "jobBonus": 0,
+          "completedAt": 1794276251.624648,
+          "bestCleanStreak": 6,
+          "cleanStreak": 3,
+          "contractBonus": 14,
+          "recordEligible": true,
+          "conditionBonus": 15,
+          "isBatch": false,
+          "recoveryCount": 0,
+          "total": 62,
+          "rating": {
+            "stars": 3,
+            "onTime": true,
+            "name": "ISTIMEWA",
+            "clean": true
+          },
+          "jobName": "Prioritas",
+          "newRecord": true,
+          "destinationName": "Rumah Bu Sari",
+          "orderId": "89dde5fb-3e35-409d-84f0-786a29c7ac59",
+          "timeBonus": 8,
+          "condition": 100,
+          "contractSucceeded": true,
+          "destinationId": "Rumah01",
+          "batchBonus": 0,
+          "packageType": "Biasa",
+          "contractStatus": {
+            "irreversible": false,
+            "code": "ready",
+            "short": "Prioritas 40s · +14",
+            "eligible": true,
+            "reason": "Syarat terpenuhi"
+          },
+          "baseReward": 25,
+          "contractKind": "priority"
+        }
+      }
+    }
+  ],
+  "desktop": {
+    "board": {
+      "visible": true,
+      "selected": "8:regular:batch1",
+      "text": [
+        {
+          "text": "Pesanan",
+          "name": "Title",
+          "fits": true
+        },
+        {
+          "text": "*Finish mengikuti kondisi terendah; memakai Pulihkan menggugurkan bonus.",
+          "name": "Info",
+          "fits": true
+        },
+        {
+          "text": "1. Rumah Bu Sari · 3★ · +48 koin\nPutaran Pasar 1/3 · 100/100 · 5.0s · Borongan 1/3\n2. Rumah Bu Sari · 3★ · +62 koin\nPrioritas · 100/100 · 5.0s · Syarat terpenuhi\n3. Rumah Bu Rina · 3★ · +46 koin\nTitipan tetangga · 100/100 · 5.0s · Tanpa kontrak\n4. Rumah Bu Dewi · 3★ · +49 koin\nReguler · 100/100 · 5.0s · Tanpa kontrak\n5. Rumah Bu Sari · 3★ · +48 koin\nDua Sisi Kota 1/3 · 100/100 · 5.0s · Borongan 1/3",
+          "name": "History24",
+          "fits": true
+        },
+        {
+          "text": "Putaran Pasar",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "3 kiriman · finish +20",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Lintas Kampung",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "3 kiriman · finish +20",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Dua Sisi Kota",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "3 kiriman · finish +20",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Putaran Pasar",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "3 paket · 680 stud · rute dasar",
+          "name": "RouteInfo",
+          "fits": true
+        },
+        {
+          "text": "1. Rumah Bu Sari\n2. Rumah Bu Rina\n3. Rumah Pak Agus · rapuh",
+          "name": "Conditions",
+          "fits": true
+        },
+        {
+          "text": "Dasar +25/kiriman\nFinish maks. +20*",
+          "name": "Reward",
+          "fits": true
+        },
+        {
+          "text": "D",
+          "name": "Depot28",
+          "fits": true
+        },
+        {
+          "text": "1",
+          "name": "Target28",
+          "fits": true
+        },
+        {
+          "text": "2",
+          "name": "Target28",
+          "fits": true
+        },
+        {
+          "text": "3",
+          "name": "Target28",
+          "fits": true
+        }
+      ],
+      "accept": "Ambil 3 kiriman"
+    },
+    "acceptedByUI": {
+      "extra": "read",
+      "packages": 1,
+      "coins": 738,
+      "batch": {
+        "total": 3,
+        "index": 1,
+        "stops": [
+          {
+            "id": "Rumah01",
+            "done": false,
+            "name": "Rumah Bu Sari",
+            "packageType": "Biasa"
+          },
+          {
+            "id": "Rumah03",
+            "done": false,
+            "name": "Rumah Bu Rina",
+            "packageType": "Biasa"
+          },
+          {
+            "id": "Rumah04",
+            "done": false,
+            "name": "Rumah Pak Agus",
+            "packageType": "Rapuh"
+          }
+        ],
+        "id": "790e4438-741f-48a1-aa5e-95a270a8323b",
+        "minCondition": 100,
+        "remaining": 3,
+        "name": "Putaran Pasar",
+        "bonusEligible": true,
+        "earned": 0,
+        "bonus": 20
+      },
+      "history": 5,
+      "status": "Carrying",
+      "packageType": "Biasa",
+      "result": {
+        "batchDuration": 3.7825779914855957,
+        "batchEarned": 48,
+        "batchName": "Putaran Pasar",
+        "orderId": "7cb24724-4be5-4234-abdb-bc5e21bde610",
+        "condition": 100,
+        "jobBonus": 0,
+        "completedAt": 1794276347.421043,
+        "batchIndex": 1,
+        "contractBonus": 0,
+        "recordEligible": false,
+        "conditionBonus": 15,
+        "isBatch": true,
+        "total": 48,
+        "destinationName": "Rumah Bu Sari",
+        "bestCleanStreak": 6,
+        "cleanStreak": 4,
+        "recordReason": "BatchRoute",
+        "jobName": "Putaran Pasar 1/3",
+        "batchBonusEligible": true,
+        "batchBonus": 0,
+        "isRelay": false,
+        "previousBest": 5.000205039978027,
+        "destinationId": "Rumah01",
+        "recoveryCount": 0,
+        "packageType": "Biasa",
+        "timeBonus": 8,
+        "bestTime": 5.000205039978027,
+        "challengeBonus": 0,
+        "duration": 5.000218868255615,
+        "routeBonus": 0,
+        "rating": {
+          "stars": 3,
+          "onTime": true,
+          "name": "ISTIMEWA",
+          "clean": true
+        },
+        "newRecord": false,
+        "baseReward": 25,
+        "batchTotal": 3
+      }
+    },
+    "partialResult": {
+      "stop": true,
+      "rows": [
+        {
+          "text": "KIRIMAN 1/3",
+          "name": "Title",
+          "fits": true
+        },
+        {
+          "text": "+48 KOIN",
+          "name": "Reward",
+          "fits": true
+        },
+        {
+          "text": "Dasar 25 · Kondisi 15 · Waktu 8\nPos 0 · Kerja 0 · Target 0 · Kontrak 0 · Borongan 0",
+          "name": "Detail",
+          "fits": true
+        },
+        {
+          "text": "Berikut: Rumah Bu Rina",
+          "name": "Next",
+          "fits": true
+        },
+        {
+          "text": "★★★ · ISTIMEWA",
+          "name": "Rating22",
+          "fits": true
+        },
+        {
+          "text": "Kiriman berikutnya sudah di tas.",
+          "name": "RatingHint22",
+          "fits": true
+        },
+        {
+          "text": "Borongan +48 terkumpul · 3.8 dtk",
+          "name": "Streak22",
+          "fits": true
+        }
+      ],
+      "continue": true,
+      "size": "330, 260",
+      "status": "Carrying",
+      "destination": "2/3 · Rumah Bu Rina",
+      "condition": "Biasa · 100/100 · Rekor —",
+      "hint": "BORONGAN 2/3 · finish maks. +20\nBerikut: Rumah Pak Agus"
+    },
+    "cancelledByUI": {
+      "extra": "read",
+      "packages": 0,
+      "coins": 738,
+      "history": 5,
+      "status": "Idle",
+      "result": {
+        "batchDuration": 3.7825779914855957,
+        "batchEarned": 48,
+        "batchName": "Putaran Pasar",
+        "orderId": "7cb24724-4be5-4234-abdb-bc5e21bde610",
+        "condition": 100,
+        "jobBonus": 0,
+        "completedAt": 1794276347.421043,
+        "batchIndex": 1,
+        "contractBonus": 0,
+        "recordEligible": false,
+        "conditionBonus": 15,
+        "isBatch": true,
+        "total": 48,
+        "destinationName": "Rumah Bu Sari",
+        "bestCleanStreak": 6,
+        "cleanStreak": 4,
+        "recordReason": "BatchRoute",
+        "jobName": "Putaran Pasar 1/3",
+        "batchBonusEligible": true,
+        "batchBonus": 0,
+        "isRelay": false,
+        "previousBest": 5.000205039978027,
+        "destinationId": "Rumah01",
+        "recoveryCount": 0,
+        "packageType": "Biasa",
+        "timeBonus": 8,
+        "bestTime": 5.000205039978027,
+        "challengeBonus": 0,
+        "duration": 5.000218868255615,
+        "routeBonus": 0,
+        "rating": {
+          "stars": 3,
+          "onTime": true,
+          "name": "ISTIMEWA",
+          "clean": true
+        },
+        "newRecord": false,
+        "baseReward": 25,
+        "batchTotal": 3
+      }
+    },
+    "death": {
+      "extra": "read",
+      "packages": 0,
+      "coins": 786,
+      "history": 5,
+      "status": "Idle",
+      "result": {
+        "batchDuration": 6.384602069854736,
+        "batchEarned": 48,
+        "batchName": "Putaran Pasar",
+        "orderId": "62938cb9-3a6c-4b02-9783-e6e02843d640",
+        "condition": 100,
+        "jobBonus": 0,
+        "completedAt": 1794276453.350675,
+        "batchIndex": 1,
+        "contractBonus": 0,
+        "recordEligible": false,
+        "conditionBonus": 15,
+        "isBatch": true,
+        "total": 48,
+        "destinationName": "Rumah Bu Sari",
+        "bestCleanStreak": 6,
+        "cleanStreak": 1,
+        "recordReason": "BatchRoute",
+        "jobName": "Putaran Pasar 1/3",
+        "batchBonusEligible": true,
+        "batchBonus": 0,
+        "isRelay": false,
+        "previousBest": 5.000205039978027,
+        "destinationId": "Rumah01",
+        "recoveryCount": 0,
+        "packageType": "Biasa",
+        "timeBonus": 8,
+        "bestTime": 5.000205039978027,
+        "challengeBonus": 0,
+        "duration": 5.000253200531006,
+        "routeBonus": 0,
+        "rating": {
+          "stars": 3,
+          "onTime": true,
+          "name": "ISTIMEWA",
+          "clean": true
+        },
+        "newRecord": false,
+        "baseReward": 25,
+        "batchTotal": 3
+      }
+    },
+    "ordinaryResult": {
+      "stop": false,
+      "rows": [
+        {
+          "text": "REKOR BARU!",
+          "name": "Title",
+          "fits": true
+        },
+        {
+          "text": "+62 KOIN",
+          "name": "Reward",
+          "fits": true
+        },
+        {
+          "text": "Dasar 25 · Kondisi 15 · Waktu 8\nPos 0 · Kerja 0 · Target 0 · Kontrak 14 · Borongan 0",
+          "name": "Detail",
+          "fits": true
+        },
+        {
+          "text": "Ada titipan di sini · lanjut antar atau kembali ke depot",
+          "name": "Next",
+          "fits": true
+        },
+        {
+          "text": "★★★ · ISTIMEWA",
+          "name": "Rating22",
+          "fits": true
+        },
+        {
+          "text": "Kontrak berhasil · bonus +14",
+          "name": "RatingHint22",
+          "fits": true
+        },
+        {
+          "text": "Rapi beruntun 3 · terbaik sesi 6",
+          "name": "Streak22",
+          "fits": true
+        }
+      ],
+      "continue": false,
+      "size": "330, 212"
+    }
+  },
+  "phone": {
+    "device": {
+      "ok": true,
+      "name": "Samsung Galaxy A06",
+      "width": 800,
+      "orientation": "Enum.ScreenOrientation.LandscapeSensor",
+      "height": 360,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    "board": {
+      "board": "620, 280",
+      "root": "705, 280",
+      "selected": "1:regular:batch2",
+      "open": true,
+      "rows": [
+        {
+          "text": "Pesanan",
+          "name": "Title",
+          "fits": true
+        },
+        {
+          "text": "Dekati depot untuk mengambil pesanan.",
+          "name": "Info",
+          "fits": true
+        },
+        {
+          "text": "Belum ada pengantaran. Ambil pesanan pertamamu.",
+          "name": "History24",
+          "fits": true
+        },
+        {
+          "text": "Putaran Pasar",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "3 kiriman · finish +20",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Lintas Kampung",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "3 kiriman · finish +20",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Dua Sisi Kota",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "3 kiriman · finish +20",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Lintas Kampung",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "3 paket · 693 stud · rute dasar",
+          "name": "RouteInfo",
+          "fits": true
+        },
+        {
+          "text": "1. Rumah Pak Budi\n2. Rumah Bu Dewi · rapuh\n3. Rumah Bu Rina",
+          "name": "Conditions",
+          "fits": true
+        },
+        {
+          "text": "Dasar +25/kiriman\nFinish maks. +20*",
+          "name": "Reward",
+          "fits": true
+        },
+        {
+          "text": "D",
+          "name": "Depot28",
+          "fits": true
+        },
+        {
+          "text": "1",
+          "name": "Target28",
+          "fits": true
+        },
+        {
+          "text": "2",
+          "name": "Target28",
+          "fits": true
+        },
+        {
+          "text": "3",
+          "name": "Target28",
+          "fits": true
+        }
+      ]
+    },
+    "partial": {
+      "visible": true,
+      "conditionFits": true,
+      "rows": [
+        {
+          "text": "KIRIMAN 1/3",
+          "name": "Title",
+          "fits": true
+        },
+        {
+          "text": "+45 KOIN",
+          "name": "Reward",
+          "fits": true
+        },
+        {
+          "text": "Dasar 25 · Kondisi 12 · Waktu 8\nPos 0 · Kerja 0 · Target 0 · Kontrak 0 · Borongan 0",
+          "name": "Detail",
+          "fits": true
+        },
+        {
+          "text": "Berikut: Rumah Bu Rina",
+          "name": "Next",
+          "fits": true
+        },
+        {
+          "text": "★★☆ · RAPI",
+          "name": "Rating22",
+          "fits": true
+        },
+        {
+          "text": "Kiriman berikutnya sudah di tas.",
+          "name": "RatingHint22",
+          "fits": true
+        },
+        {
+          "text": "Borongan +45 terkumpul · 3.2 dtk",
+          "name": "Streak22",
+          "fits": true
+        }
+      ],
+      "condition": "Biasa · 100/100 · sisa 2",
+      "stop": true,
+      "continue": true,
+      "hint": "BORONGAN 2/3 · finish maks. +16\nBerikut: Rumah Pak Agus",
+      "destination": "2/3 · Rumah Bu Rina",
+      "destinationFits": true,
+      "size": "330, 260"
+    },
+    "finish": {
+      "visible": true,
+      "rows": [
+        {
+          "text": "BORONGAN SELESAI!",
+          "name": "Title",
+          "fits": true
+        },
+        {
+          "text": "+65 KOIN",
+          "name": "Reward",
+          "fits": true
+        },
+        {
+          "text": "Dasar 25 · Kondisi 15 · Waktu 9\nPos 0 · Kerja 0 · Target 0 · Kontrak 0 · Borongan 16",
+          "name": "Detail",
+          "fits": true
+        },
+        {
+          "text": "Tiga kiriman tuntas. Pilih pekerjaan berikutnya.",
+          "name": "Next",
+          "fits": true
+        },
+        {
+          "text": "★★★ · ISTIMEWA",
+          "name": "Rating22",
+          "fits": true
+        },
+        {
+          "text": "Bonus finish +16",
+          "name": "RatingHint22",
+          "fits": true
+        },
+        {
+          "text": "Borongan +158 terkumpul · 11.8 dtk",
+          "name": "Streak22",
+          "fits": true
+        }
+      ],
+      "stop": false,
+      "size": "330, 212"
+    },
+    "resultData": {
+      "extra": "step",
+      "packages": 0,
+      "coins": 304,
+      "history": 5,
+      "status": "Idle",
+      "result": {
+        "batchDuration": 11.798085927963257,
+        "batchEarned": 158,
+        "batchName": "Putaran Pasar",
+        "orderId": "366b504a-cf41-44fa-a236-75528e978f9c",
+        "condition": 100,
+        "jobBonus": 0,
+        "completedAt": 1794276633.259811,
+        "batchIndex": 3,
+        "contractBonus": 0,
+        "recordEligible": false,
+        "conditionBonus": 15,
+        "sourceId": "Rumah03",
+        "total": 65,
+        "destinationName": "Rumah Pak Agus",
+        "bestCleanStreak": 5,
+        "cleanStreak": 5,
+        "recordReason": "BatchRoute",
+        "jobName": "Putaran Pasar 3/3",
+        "batchBonusEligible": true,
+        "batchBonus": 16,
+        "isRelay": false,
+        "rating": {
+          "stars": 3,
+          "onTime": true,
+          "name": "ISTIMEWA",
+          "clean": true
+        },
+        "recoveryCount": 0,
+        "packageType": "Rapuh",
+        "timeBonus": 9,
+        "challengeBonus": 0,
+        "destinationId": "Rumah04",
+        "duration": 5.00020694732666,
+        "routeBonus": 0,
+        "isBatch": true,
+        "newRecord": false,
+        "baseReward": 25,
+        "batchTotal": 3
+      }
+    }
+  },
+  "edges": {
+    "missingOfferBlocked": true,
+    "coinsAfter": 448,
+    "missingContinuationInterrupted": true,
+    "finalBonusOverflowAtomic": true
+  },
+  "finalReceiptText": {
+    "nextFits": true,
+    "streakFits": true,
+    "detailFits": true,
+    "buttons": false,
+    "detail": "Dasar 25 · Kondisi 15 · Waktu 8\nBonus finish dinilai setelah 3 kiriman."
+  },
+  "liveCustomerReceipt": {
+    "holding": true,
+    "fits": true,
+    "bubble": true,
+    "text": "Bu Sari:\nPaketku sudah kuterima. Semangat untuk kiriman berikutnya!",
+    "alwaysOnTop": true,
+    "box": 0
+  },
+  "pose": {
+    "parts": 14,
+    "text": "Bu Sari:\nPaketku sudah kuterima. Semangat untuk kiriman berikutnya!",
+    "fits": true,
+    "box": 0
+  },
+  "fresh": {
+    "npcs": [
+      {
+        "grounded": true,
+        "name": "Rumah01",
+        "holding": false
+      },
+      {
+        "grounded": true,
+        "name": "Rumah02",
+        "holding": false
+      },
+      {
+        "grounded": true,
+        "name": "Rumah03",
+        "holding": false
+      },
+      {
+        "grounded": true,
+        "name": "Rumah04",
+        "holding": false
+      },
+      {
+        "grounded": true,
+        "name": "Rumah05",
+        "holding": false
+      }
+    ],
+    "status": "Idle",
+    "gui": true,
+    "packages": 0,
+    "server": "{\"batchOffers\":3,\"coins\":0,\"batchActive\":false,\"history\":0,\"storage\":\"StudioMemory\",\"status\":\"Idle\",\"profile\":{\"ownedCosmetics\":{\"TasStandar\":true},\"bestTimes\":[],\"upgrades\":{\"Grip\":0},\"deliveryCount\":0,\"equippedCosmetic\":\"TasStandar\",\"schemaVersion\":2,\"coins\":0},\"resting\":false,\"offers\":6}"
+  },
+  "end": {
+    "backup": 10,
+    "temporary": [],
+    "defaultTab": true,
+    "device": "default",
+    "revision": "CourierCircuits31",
+    "packages": 0,
+    "gui": true
+  },
+  "sourceChecks": {
+    "DeliveryService.luau": "true",
+    "EconomyService.luau": "true",
+    "MovementTuning.luau": "true",
+    "JobBoard17.client.luau": "true",
+    "JobPreview28.luau": "true",
+    "PrototypeInput.client.luau": "true",
+    "DeliveryFeedback.client.luau": "true",
+    "JourneyCoach29.luau": "true",
+    "CustomerDialogue30.luau": "true",
+    "Customers22.client.luau": "true",
+    "Batch31.luau": "true"
+  },
+  "limits": [
+    "GameId0/StudioMemory only; no published data, release or external players",
+    "QA harness teleports/anchors and sets each leg elapsed to5s; money results are validation fixtures, not real walking speed or player enjoyment measurements",
+    "Clean first run48+68+69=185 includes20session challenge and20finish; not a guaranteed fixed route payout",
+    "Condition80 route finish16; actual Drop/Recover/Pickup causes finish0; cancel keeps first paid delivery",
+    "Ordinary, relay and priority acceptance/delivery regression passed; replay/wronghouse/expired offer/overflow/death tested",
+    "Batches are session-only; one active physical parcel, remaining parcels represented by server-held route manifest",
+    "Phone layout was checked in GalaxyA06 emulator; initialtab2 was temporary, finaltab0 restored. User/GUI changes occurred during some live samples; snapshots record actual selected tabs",
+    "No physical phone/gamepad/multiplayer/performance profiling or full manually walked three-stop run",
+    "Customer pose inspected via a static clone captured from the normal holding frame and shifted6studs for framing; production duration stays3s. Live sample also verified bubbletrue/TextFits/boxvisible",
+    "Two visual-fixture experiments discarded: hot-reload slow pose and reading BindableFunction.OnInvoke callback. Correct Invoke and fresh scene capture succeeded; final clean console Bootstrap only",
+    "Final receipt formatting removes zero bonus clutter; last partial receipt text rechecked after that edit",
+    "No production camera changes, no map geometry edits or Creator Store imports"
+  ],
+  "evidence": [
+    "batch31-desktop.jpg",
+    "batch31-phone-board.jpg",
+    "batch31-phone-result.jpg",
+    "batch31-customer-pose.jpg",
+    "batch31-flow.jpg",
+    "saved-batch31.json"
+  ]
+}

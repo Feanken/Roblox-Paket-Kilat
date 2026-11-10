@@ -1,4 +1,67 @@
-# Pembaruan TERBARU — Customers30: pelanggan menyambut dan menerima paket
+# Pembaruan TERBARU — Batch31: Rute Borongan, paket sepuluh perbaikan
+
+10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik. Fokus: satu perjalanan berisi tiga kiriman, tanpa kembali mengambil paket ke depot di antara rumah. Pengembangan lokal; publikasi dan pemain luar tetap ditunda.
+
+## Sepuluh perubahan pemain
+
+1. Tab Borongan dengan Putaran Pasar, Lintas Kampung, dan Dua Sisi Kota.
+2. Pratinjau seluruh perjalanan, marker D/1/2/3, urutan rumah dan panjang jalan.
+3. Paket Biasa/Rapuh ditempatkan pada bagian rute berbeda, terlihat sebelum menerima.
+4. Satu penerimaan di depot; kiriman berikut otomatis keluar dari tas setelah pengantaran.
+5. Panduan meneruskan jalur dari rumah sebelumnya, bukan memulai lagi dari depot.
+6. HUD menampilkan kiriman i/3, sisa paket, rumah berikut dan perkiraan batas bonus finish.
+7. Bonus finish default20, mengikuti kondisi terendah dari ketiga paket dan gugur jika pernah Pulihkan.
+8. Tombol Cukup dulu setelah kiriman: sisa rute dibatalkan, bayaran kiriman selesai tetap.
+9. Hasil perkiriman dan ringkasan akhir menampilkan total borongan/waktu; rincian uang hanya memuat bonus relevan.
+10. Respons pelanggan mengenali borongan; bubble lebih terbaca dan memakai pemeriksaan halangan map.
+
+Pemain mengambil paket pada menu Borongan lalu mengantar berurutan. Server menyimpan manifest tiga kiriman; hanya paket aktif yang menjadi objek fisik. Paket cadangan disimpan sebagai metadata tas, tidak menambah tiga objek fisik/physics. Stamina tetap, genggaman/paket baru mengikuti perilaku order lama. Urutan rute tetap sesuai pratinjau.
+
+Rute dasar terukur:680.059/693.059/782.059stud. Jarak berasal dari SafeRoutes08+CourierPaths21, bukan jaminan waktu/hazard/hasil nyata. Tiga tujuan setiap katalog unik. Paket dibayar perkiriman. Finish bukan pembayaran terpisah yang dapat diklaim: bonus masuk award ledger kiriman terakhir sebelum batas ekonomi diperiksa. Borongan tidak mengubah rekor waktu depot; rating dan target sesi tetap berjalan perkiriman.
+
+## Source dan kontrak server
+
+Baru sharedModule ReplicatedStorage.PaketKilat.Shared.Batch31/src/Batch31.luau. Diubah10source: DeliveryService,EconomyService,MovementTuning,JobBoard17.client,JobPreview28,PrototypeInput.client,DeliveryFeedback.client,JourneyCoach29,CustomerDialogue30,Customers22.client. Sebelas source cocok disk/Edit; formatter receipt terakhir juga dicocokkan sesudah perapian.
+
+DeliveryService.createOrder dipakai bersama oleh Reguler/Kontrak/Titipan/Borongan. State borongan Delivery.batches bersifat sesi; snapshot.batch dan batchOffers bukan fieldprofil baru. AcceptBatch/CancelBatch memakai RemoteEvent ActionRequest lama, opaque offerid/orderid, validasi depot/profil/hidup/argumen/owner/stale. Offer dibekukan sampai revisi jadwal berikutnya. Tiap leg memakai orderId baru, state batchId/index ikut divalidasi pada Complete. SourceId rumah sebelumnya mengaktifkan jalur Between yang sudah ada.
+
+Kondisi terendah dan pernahRecover diakumulasi setelah award berhasil. Bonus terakhir=floor(capturedBonus×minCondition/100),0 bila pernahRecover; input nonfinite ditolak. Saat overflow: state tetapCarrying, completionLock dilepas, index/history/uang tidak maju. Tujuan hilang saat menerima ditolak; bila tujuan berikut hilang setelah satu kiriman dibayar, rute dihentikan dan hasil menjelaskan gangguan tanpa menarik bayaran lama. Cancel/death/profilelost/leave membuang manifest dan paket belum diantar.
+
+PK_BatchFinishBonus ditambahkan pada MovementTuning, default20/bounds0..50, dibekukan pada offer. Tidak menerbitkan config/eksperimen cloud. Profil tetap schemaVersion2. History5 tetap, kini memberi label Borongan i/3. Tidak ada aset/model eksternal baru.
+
+## Pengujian
+
+Semua finansial/gameplay menggunakan GameId0/StudioMemory. Harness mengunci/memindahkan avatar dan mengatur elapsed leg5detik untuk angka stabil; ini validasi server, bukan perjalanan manusia atau tolok ukur waktu bermain.
+- Bersih:48+68+69=185 pada sesi awal, mencakup20target sesi dan20finish. Bukan tarif tetap semua sesi.
+- Satu paket80, sisanya100:finish16. Actual Drop/Recover/Pickup di legawal:finish0 meski paket berikut utuh.
+- Salah tujuan, replay saat leg2/setelahfinal, offerlama:ditolak tanpa koin/index tambahan.
+- Overflow di leg1 dan overflow khusus bonusakhir pada leg3:atomik, tidak memberi history/deliverycount/koin tambahan.
+- Cancel melalui handler dan tombol nyata mempertahankan bayaran leg1. Death setelahleg1 membersihkan batch/paket dengan bayaran lama tetap.
+- Tujuan hilang saataccept ditolak; tujuan lanjutan yang dihapus sementara menghentikan rute setelah bayar kiriman sebelumnya, kemudian marker dipulihkan.
+- Reguler, Titipan, Prioritas masih bisa diterima/diantar; Reguler/kontrak tetap eligible rekor, titipan/borongan tidak.
+- Tiga katalog/pratinjau polylines, bonus finite/clamp/mincondition/recovery dan snapshotpotential diperiksa.
+
+Desktop native tabBorongan/Ambil3kiriman/Cukupdulu berhasil. Seluruh label yang diperiksa muat. PhoneGalaxyA06 landscape800x360/Root705x280: board620x280, receiptpartial330x260, receiptakhir330x212 dan counter/sisa muat. Temporary initialtab2 untuk layout dikembalikan0. Beberapa pilihan/tab sempat berubah selama sesi; data audit mencatat pilihan sebenarnya. Physical touch/gamepad belum diuji.
+
+Viewport3D terlihat kembali pada sesi baru, tanpa perubahan renderer produksi. Pose parcel Customers30 diperiksa lewat salinan statis yang ditangkap dari frameholding normal, digeser6stud hanya untuk framing. Sample live juga merekamholdingtrue/box0/bubbletrue/TextFits/AlwaysOnToptrue. Durasi produksi tetap3detik; tidak ada kamera produksi baru. Bubble memeriksa raycast map/terrain sebelum tampil agar tetap menghormati dinding. Kamera semua arah/semua ukuran avatar belum diperiksa.
+
+Eksperimen visual awal (hotreload pose lambat dan pembacaan callback OnInvoke secara langsung) dikecualikan. Invoke yang benar/fresh capture berhasil; semua script/view/clone/debugger sementara dibersihkan. Sesi bersih akhir consoleBootstrap saja.
+
+Fresh akhir Idle/koin0/history0/offers6+batchOffers3/batchinactive/0paket/profile schema2; limaNPCgrounded/holdingfalse. AkhirEdit/default viewport/HUDenabled/0paket/tanpaTemporaryBatch31, backup10source. Belum seluruh rute berjalan manusia, multiplayer/profiling/HP fisik. Tidak ada publikasi/remoteclaim baru.
+
+Bukti verification/batch31-audit.json, Batch31GameplayChecks.server.luau (fixtureStudio yang tidak dipasang permanen), batch31-desktop.jpg, batch31-phone-board.jpg, batch31-phone-result.jpg, batch31-customer-pose.jpg, batch31-flow.jpg, saved-batch31.json. Screenshot receipt sebelum perapian formatter0bonus; versi teks akhir diperiksa ulang muat. git diff --check lolos (peringatanLF/CRLF saja).
+
+## Backup, pemasangan, simpan
+
+Backup10source aktif pada backups/batch31-sources/ dan ServerStorage.PaketKilat_PreBatch31. Baselinebinary backups/main_game.before-batch31.20261110.rbxl serta handoff.before-batch31.md. Binary hanya filemain_game yang tersimpan di disk, bukan seluruh perubahan AutoRecovery lain.
+
+Rollback parsial: pulihkan10source lalu hapus shared Batch31 dan attribute BatchRevision. Binary baseline lebih lama dariCoach29/Customers30; hindari menggunakannya untuk rollback31 saja. Pemasangan dari source: sharedBatch31 lebih dulu, lalu seluruh10source sebagai satu paket.
+
+**Simpan sesi AutoRecovery bersih ini ke main_game.rbxl sebelum menutup Studio.** Binary masih458926byte/2026-11-10T01:00:40.984Z (08:00:40WIB), memuatPreview28/Rest27. ContextCoach29/ParcelReceipt30/CourierCircuits31 belum ada; markerTemporaryBatch31 juga tidak ada. Source lokal, dokumen, bukti sudah tersimpan.
+
+---
+
+# Arsip — Customers30: pelanggan menyambut dan menerima paket
 
 10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik. Iterasi ini menambah respons pelanggan sebelum/sesudah pengantaran, tanpa mengubah ekonomi. Tidak ada publikasi atau pemain luar.
 

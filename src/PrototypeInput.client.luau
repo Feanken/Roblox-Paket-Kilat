@@ -32,6 +32,7 @@ local messages = {
 	NotAlive = "Menunggu muncul kembali di depot...",
 	Respawned = "Siap! Ambil pesanan di depot.",
 	Cancelled = "Pesanan dibatalkan. Saldo tetap.",
+ BatchCancelled="Borongan dihentikan. Kiriman selesai tetap dibayar.",
 	Impact = "Paket terbentur! Dekati paket atau pulihkan.",
  GripLost = "Genggaman habis! Ambil paket, lalu kurangi sprint.",
  CityStamp = "Cap bonus didapat! Koin dibayar saat paket sampai.",
@@ -190,7 +191,8 @@ local function render()
 		card.Destination.Text=state.destinationName or C.DestinationName
 		card.ConditionText.Text=state.isRelay and string.format('Titipan · %d/100',condition) or string.format("%s · %d/100 · Rekor %s",state.packageType,condition,bestText(state.currentBestTime))
 	end
-	if Theme.IsMobile(ui)and state.status~="Idle"then
+	if state.batch and state.status~='Idle'then card.Destination.Text=string.format('%d/%d · %s',state.batch.index,state.batch.total,state.destinationName)end
+ if Theme.IsMobile(ui)and state.status~="Idle"then
   local b=state.routeBonus
   card.ConditionText.Text=string.format("%s · %d/100%s",state.isRelay and 'Titipan' or state.packageType or "Paket",condition,b and string.format(" · cap %d/%d",b.count,b.limit)or "")
  end
@@ -203,14 +205,18 @@ local function render()
    card.ConditionText.TextColor3=contractStatus.irreversible and Color3.fromRGB(177,85,48)or Theme.Ink
   end
  end
+ if Theme.IsMobile(ui)and state.batch and state.status~='Idle'then card.ConditionText.Text=string.format('%s · %d/100 · sisa %d',state.packageType,condition,state.batch.remaining)end
  if os.clock()<feedbackUntil then card.Hint.Text=feedback
+ elseif state.batch then
+  local b=state.batch local next=b.stops[b.index+1]
+  card.Hint.Text=string.format('BORONGAN %d/%d · finish %s\n%s',b.index,b.total,b.bonusEligible and('maks. +'..b.potentialBonus)or 'gugur: dipulihkan',next and('Berikut: '..next.name)or 'Kiriman terakhir · selesaikan rute')
  elseif contractStatus then
   card.Hint.Text=contractStatus.irreversible and ('KONTRAK GUGUR · '..contractStatus.reason..'\nPengantaran tetap dibayar. Lanjutkan ke tujuan.')
    or string.format('KONTRAK · bonus +%d saat diantar\n%s',state.contract.reward,contractStatus.short)
 
 	elseif relay then card.Hint.Text='Pelanggan punya titipan ke rumah lain. Opsional: satu perjalanan lagi, tanpa kembali ke depot.'
 	elseif state.status=="Idle" and last then
-		local record=last.recordReason=='RelayRoute' and 'Titipan selesai · rekor depot tetap' or not last.recordEligible and "Tanpa rekor: paket dipulihkan"
+		local record=last.recordReason=='BatchRoute'and 'Borongan · rekor depot tetap'or last.recordReason=='RelayRoute' and 'Titipan selesai · rekor depot tetap' or not last.recordEligible and "Tanpa rekor: paket dipulihkan"
 			or (last.newRecord and ("REKOR BARU: "..bestText(last.bestTime)) or ("Terbaik: "..bestText(last.bestTime)))
 		card.Hint.Text=string.format("+%d koin · %s",last.total,record)
 	elseif state.status=="Carrying" and state.routeBonus then

@@ -41,6 +41,7 @@ function M.Get(s,c)
  end
  if c.nearDestination then return hint('deliver','Sudah di rumah tujuan. Pilih Antar paket untuk menyelesaikan pesanan.')end
  if contract and contract.kind=='explore'then return hint('stampsReady','Cap lengkap! Lanjut ke rumah tujuan, lalu pilih Antar paket.',false,true)end
+ if s.batch then return hint('batch',string.format('Borongan %d/%d. %s',s.batch.index,s.batch.total,s.packageType=='Rapuh'and 'Paket rapuh; batasi sprint.'or 'Ikuti TUJUAN; kiriman berikutnya sudah di tas.'))end
  if s.packageType=='Rapuh'then return hint('fragile','Paket rapuh: batasi sprint dan jaga genggaman. Ikuti TUJUAN.')end
  return hint('destination','Ikuti TUJUAN. Hindari benturan, lalu Antar paket di rumah yang benar.')
 end

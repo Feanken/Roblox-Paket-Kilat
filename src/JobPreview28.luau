@@ -1,4 +1,5 @@
 -- Read-only offer descriptions and diagram geometry. No reward calculation.
+local Paths=require(script.Parent.CourierPaths21)
 local P={}
 function P.Route(routes,id)
  local points=routes[id]if not points or #points<2 then return nil end
@@ -6,7 +7,19 @@ function P.Route(routes,id)
  for i=1,#points-1 do distance+=(points[i+1]-points[i]).Magnitude end
  return {points=points,distance=distance}
 end
+function P.OfferRoute(routes,offer)
+ if not offer then return nil end
+ if not offer.isBatch then return P.Route(routes,offer.destinationId)end
+ local points={}local source
+ for _,id in ipairs(offer.batchDestinations)do
+  local leg=Paths.Between(routes,source,id)if not leg then return nil end
+  for i,v in ipairs(leg)do if #points==0 or i>1 then table.insert(points,v)end end
+  source=id
+ end
+ return {points=points,distance=Paths.Length(points)}
+end
 function P.Conditions(offer)
+ if offer.isBatch then return '3 kiriman berurutan\nBonus finish: tanpa Pulihkan'end
  local c=offer.contract
  if c then
   local condition=string.format('Kondisi ≥%d',c.condition)

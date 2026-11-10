@@ -444,3 +444,14 @@ Lima pelanggan lokal mendapat sapaan berbeda. Hanya rumah tujuan yang menyambut 
 DuaPart parcel perNPC noncollision, tidak ada paket/reward/remote baru. Dedupe20id, waktuantrean12detik, resetrespawn dan modejarak menghindari reaksi lama berulang. Grounding dan visibilitas rumah dipertahankan. Server/ledger/schema2 tidak berubah.
 
 Aturan helper8kasus serta data integrasi greeting/holding/counter/TextFits desktop dan phone diperiksa. Tampilan3DMCP hitam, sehingga pose/kliping belum disetujui secara visual. Kamera/previewfixture dibersihkan. Detail pada handoff.md dan verification/customers30-audit.json.
+
+
+## Batch31 — Rute Borongan (10 November 2026)
+
+Tiga pilihan borongan menawarkan3kiriman berurutan dengan campuran Biasa/Rapuh. Satu penerimaan di depot menghasilkan manifest server; kiriman aktif memakai physics lama, dua kiriman cadangan berupa metadata tas. Setiap pengantaran dibayar melalui ledger order lama dan langsung menyiapkan kiriman berikut di rumah sebelumnya. Panduan memakai jalur Between dan pratinjau menampilkan seluruh3stop.
+
+Bonus finish ditangkap dari PK_BatchFinishBonus (default20/bounds0..50) pada offer. Bonus hanya masuk award ketiga, mengikuti kondisi paket terendah dan0 jika pernahRecover. Record waktu depot dikecualikan dari borongan, rating/target sesi tetap perkiriman. Uang yang sudah dibayar tidak dibatalkan saat stop/death; kiriman belumselesai dan bonusfinish ditinggalkan. Tidak ada fieldprofil/migrasi baru (schema2).
+
+UI empat tabBiasa/Kontrak/Borongan/Riwayat,3rute bernomor, progresi/3+sisa+berikutnya, receiptpartial denganLanjut/Cukupdulu, ringkasan akhirtotal/waktu. Rincian uang tidak menumpuk komponen0. Dialog pelanggan mengenali borongan; bubble menggunakan raycast/AlwaysOnTop agar terbaca saat garis pandang bersih. Kota dan asset lama tetap.
+
+Replay, salah tujuan, staleoffer, overflow (termasukbonusakhir), recovery, stop, death dan tujuan hilang diuji diStudioMemory. Reguler/relay/prioritas lolos regresi. Layout desktop/GalaxyA06 muat, pose penerimaan dasar terlihat pada captureframe. Tidak mengklaim seluruh rute fisik/HPasli/multiplayer/performa diuji. Detail pada handoff.md dan verification/batch31-audit.json.

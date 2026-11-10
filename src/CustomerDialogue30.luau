@@ -25,6 +25,7 @@ function M.Reaction(result,hasRelay,count)
  local stars=result.rating and result.rating.stars or 1
  stars=math.clamp(math.floor(stars),1,3)
  local pool=reactions[stars]local line=pool[((count or 1)-1)%#pool+1]
+ if result.isBatch then line=result.batchIndex<result.batchTotal and 'Paketku sudah kuterima. Semangat untuk kiriman berikutnya!'or 'Semua kiriman borongan selesai. Terima kasih, kurir!'end
  if result.contractSucceeded then line='Targetmu tercapai! Paketnya sudah kuterima.'end
  if hasRelay then line..=' Ada titipan lagi.'end
  return line

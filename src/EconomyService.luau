@@ -5,6 +5,7 @@ local Tuning=require(script.Parent.MovementTuning)
 local Contracts=require(script.Parent.Contracts24)
 local Gear=require(script.Parent.Gear20)
 local Rating=require(script.Parent.DeliveryRating22)
+local Batch=require(game.ReplicatedStorage.PaketKilat.Shared.Batch31)
 local E={sessions={}}
 local C,Data
 local function copy(value) return value and table.clone(value) or nil end
@@ -36,13 +37,18 @@ function E.PeekOffers(player)
  if not s.offers then s.offers=Offers.Build(C,s.nextOrderIndex,s.offerRevision,Tuning.Get())end
  return s.offers
 end
+function E.PeekBatchOffers(player)
+ local s=E.sessions[player.UserId]if not s then return {}end
+ if not s.batchOffers then s.batchOffers=Batch.Offers(E.PeekOffers(player)[1].id,Tuning.Get().BatchFinishBonus,C)end
+ return s.batchOffers
+end
 function E.ResolveOffer(player,id)
  for _,offer in ipairs(E.PeekOffers(player))do if offer.id==id then return offer end end
 end
 function E.AdvanceAssignment(player)
 	local s=E.sessions[player.UserId]
 	s.nextOrderIndex=s.nextOrderIndex%#C.OrderSchedule+1
- s.offerRevision+=1 s.offers=nil
+ s.offerRevision+=1 s.offers=nil s.batchOffers=nil
 end
 function E.GetBest(player,destinationId,packageType)
 	local s=E.sessions[player.UserId]
@@ -62,6 +68,8 @@ function E.Snapshot(player)
   for _,v in s.history do table.insert(out.recentDeliveries,table.clone(v))end
   out.jobOffers={}
   for _,offer in ipairs(E.PeekOffers(player))do table.insert(out.jobOffers,{id=offer.id,name=offer.name,description=offer.description,destinationName=C.Routes[offer.DestinationId].Name,destinationId=offer.DestinationId,packageType=offer.PackageType,jobBonus=offer.Contract and offer.Contract.reward or offer.JobBonus,contract=offer.Contract and table.clone(offer.Contract)})end
+  out.batchOffers={}
+  for _,offer in E.PeekBatchOffers(player)do local v=table.clone(offer)v.batchDestinations=table.clone(offer.batchDestinations)v.packageTypes=table.clone(offer.packageTypes)table.insert(out.batchOffers,v)end
   out.lastResult=copy(s.lastResult) out.bestTimes=table.clone(p.bestTimes)
   out.ownedCosmetics=table.clone(p.ownedCosmetics) out.equippedCosmetic=p.equippedCosmetic
  end
@@ -99,7 +107,7 @@ function E.Award(player,order,now)
 	local timeBonus=math.floor(C.TimeBonus*math.clamp(1-duration/(order.targetSeconds or route.TargetSeconds),0,1))
 	local key=order.destinationId.."|"..order.packageType
 	local previous=p.bestTimes[key]
-	local eligible=order.recoveryCount==0 and not order.isRelay
+	local eligible=order.recoveryCount==0 and not order.isRelay and not order.isBatch
 	local newRecord=eligible and (previous==nil or duration<previous)
 	local result={
 		orderId=order.orderId,destinationId=order.destinationId,destinationName=route.Name,packageType=order.packageType,
@@ -107,7 +115,7 @@ function E.Award(player,order,now)
 		baseReward=C.BaseReward,conditionBonus=conditionBonus,timeBonus=timeBonus,
 		routeBonus=require(script.Parent.CityBonus13).Reward(order),
   total=C.BaseReward+conditionBonus+timeBonus+require(script.Parent.CityBonus13).Reward(order),completedAt=now,
-		recordEligible=eligible,recordReason=order.isRelay and "RelayRoute" or not eligible and "Recovered" or nil,
+		recordEligible=eligible,recordReason=order.isBatch and "BatchRoute" or order.isRelay and "RelayRoute" or not eligible and "Recovered" or nil,
 		isRelay=order.isRelay==true,sourceId=order.sourceId,
 		previousBest=previous,newRecord=newRecord,
 	}
@@ -117,8 +125,12 @@ function E.Award(player,order,now)
  result.contractBonus,result.contractSucceeded,result.contractStatus=Contracts.Evaluate(order.contract,result,stamps and stamps.count or 0)
  result.contractKind=order.contract and order.contract.kind
  result.total+=result.contractBonus
+ result.isBatch=order.isBatch==true result.batchIndex=order.batchIndex result.batchTotal=order.batchTotal result.batchName=order.batchName
+ result.batchBonusEligible=order.isBatch and not order.batchRecovered and order.recoveryCount==0 or false
+ result.batchBonus=Batch.Bonus(order,C.InitialCondition)result.total+=result.batchBonus
  local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
  result.challengeBonus=challengeBonus result.challengeName=challengeName result.total+=challengeBonus
+ if order.isBatch then result.batchEarned=(order.batchEarned or 0)+result.total result.batchDuration=math.max(0,now-order.batchStartedAt)end
  result.rating=Rating.Evaluate(result,order.targetSeconds or route.TargetSeconds,s.ratingTuning)
  local nextRun=Rating.Advance(s.qualityRun,result.rating)
  result.cleanStreak=nextRun.current result.bestCleanStreak=nextRun.best
@@ -132,7 +144,7 @@ function E.Award(player,order,now)
 	p.deliveryCount+=1
 	if newRecord then p.bestTimes[key]=duration end
 	result.bestTime=p.bestTimes[key]
- table.insert(s.history,1,{destinationName=result.destinationName,total=result.total,stars=result.rating.stars,duration=result.duration,condition=result.condition,jobName=result.jobName,contractBonus=result.contractBonus,contractReason=result.contractStatus and result.contractStatus.reason})
+ table.insert(s.history,1,{destinationName=result.destinationName,total=result.total,stars=result.rating.stars,duration=result.duration,condition=result.condition,jobName=result.jobName,contractBonus=result.contractBonus,contractReason=result.isBatch and ('Borongan '..result.batchIndex..'/'..result.batchTotal)or result.contractStatus and result.contractStatus.reason})
  if #s.history>5 then table.remove(s.history)end
 	s.lastResult=result
  Data:Dirty(player.UserId)

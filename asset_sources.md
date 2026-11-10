@@ -123,3 +123,8 @@ Menggunakan teks dan GUI bantuan/notifikasi yang sudah ada; tidak ada asset gamb
 ## Customers30 — 10 November 2026
 
 NPC lokal Part buatan proyek dari Customers22 dipakai ulang. Parcel/tape kosmetik menambah10Part native untuk5NPC; dialog memakai font/GUI bawaan. Tidak ada aset gambar/model/audio baru dari luar, pencarian/impor/pembelian, upload atau publikasi.
+
+
+## Batch31 — 10 November 2026
+
+Rute borongan memakai geometry jalan, NPC, paket dan assetCreatorStore bersih yang sudah ada. Tab/sketsa/progres/receipt memakai GUI/font bawaan Roblox. Tidak ada impor, pembelian, unggahan, atau asset3D baru. Pemeriksaan pose memakai clone lokalsementara yang dihapus sebelum akhirEdit.

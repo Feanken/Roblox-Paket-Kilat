@@ -53,7 +53,7 @@ local function create(id, index)
 	piece('ParcelTape30',Vector3.new(.17,.87,.87),Color3.fromRGB(245,219,162))
 	local bubble = Instance.new("BillboardGui")
 	bubble.Name, bubble.Size, bubble.StudsOffset = "Reaction22", UDim2.fromOffset(220, 64), Vector3.new(0, 1.65, 0)
-	bubble.MaxDistance, bubble.AlwaysOnTop, bubble.Enabled = 50, false, false
+	bubble.MaxDistance, bubble.AlwaysOnTop, bubble.Enabled = 50, true, false
 	bubble.Parent = parts.Head
 	local label = Instance.new("TextLabel")
 	label.Name, label.Size = "Dialogue", UDim2.fromScale(1, 1)
@@ -172,7 +172,13 @@ table.insert(connections, RunService.Heartbeat:Connect(function(dt)
 		c.model:SetAttribute("Waving22", wave == true)
 		c.bubble.Size=mobile and UDim2.fromOffset(200,56)or UDim2.fromOffset(220,64)
 		c.label.TextSize=mobile and 11 or 12
-		c.bubble.Enabled = visible==true and(now<c.untilTime or awaiting and now<c.greetingUntil)and not blocked and(root.Position-c.base).Magnitude<40
+		local showBubble=visible==true and(now<c.untilTime or awaiting and now<c.greetingUntil)and not blocked and(root.Position-c.base).Magnitude<40
+  if showBubble then
+   local camera=workspace.CurrentCamera local delta=camera and(c.parts.Head.Position-camera.CFrame.Position)
+   showBubble=delta~=nil and delta.Magnitude<=c.bubble.MaxDistance
+   if showBubble then local obstruction=workspace:Raycast(camera.CFrame.Position,delta,ray)showBubble=not obstruction or obstruction.Distance>=delta.Magnitude-.1 end
+  end
+  c.bubble.Enabled=showBubble==true
 		c.parts.Parcel30.Transparency=holding and 0 or 1 c.parts.ParcelTape30.Transparency=holding and 0 or 1
 		if visible then
 			local delta = Vector3.new(root.Position.X - c.base.X, 0, root.Position.Z - c.base.Z)
