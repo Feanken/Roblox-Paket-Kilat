@@ -386,3 +386,16 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] S25-G: source/dokumen/audit/screenshot tersimpan; Edit/default/HUDaktif/0paket/tanpa fixture, backup5source.
 - [ ] S25-H: File > Save to File untuk ClearStatus25; save442913byte masih belum memuat Contracts24/Status25.
 - [ ] S25-I: penilaian pemilik dan HP touch fisik; publikasi/pemain luar tetap ditunda.
+
+
+## Stamp26 — panduan cap sebelum tujuan (2026-11-09)
+
+- [x] Tambah planner graf jalan untuk pos yang belum dikunjungi, mempertimbangkan dua cap dan rumah tujuan.
+- [x] Kirim geometri pos/ramp/jembatan saat kontrak eksplorasi masih aktif/layak.
+- [x] Hubungkan titik jalan, kompas, billboard dan highlight ke target cap yang sama.
+- [x] Pulihkan panduan rumah setelah cap lengkap; prioritaskan paket saat Drop; pertahankan toggle G.
+- [x] Periksa tujuh kasus planner, konektivitas lima pos, pengambilan dua cap + pengantaran, serta ramp/jembatan.
+- [x] Cek GalaxyA06 landscape, fresh sesi tanpa fixture, backup enam source dan kesamaan tujuh source disk/Studio.
+- [x] Simpan bukti dan perbarui design/handoff.
+- [ ] Pemilik: File > Save to File untuk memperbarui binary main_game.rbxl dari sesi Edit aktif.
+- [ ] Uji HP fisik/multiplayer/performa dan seluruh jalur; publikasi serta uji pemain luar tetap ditunda.

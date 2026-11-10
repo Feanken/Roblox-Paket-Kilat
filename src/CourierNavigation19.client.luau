@@ -17,17 +17,20 @@ local function render()
  arrow.Visible=false
  if not state.profileReady then ui:SetAttribute('NavigationMode19','hidden')card.Title.Text='PAKET KILAT'return end
  if not root or not hum or hum.Health<=0 then ui:SetAttribute('NavigationMode19','hidden')card.Title.Text='Muncul ulang...'return end
+ local route=workspace:FindFirstChild('PaketKilatLocalSafeRoute')
  local target,kind
  if state.status=='Idle'then
   local offer=state.relayOffer
   if offer and workspace:GetServerTimeNow()<offer.expiresAt and(root.Position-state.depotPosition).Magnitude>config.ActionDistance then target,kind=offer.pickupPosition,'titipan'
   else target,kind=state.depotPosition,'depot'end
- elseif state.status=='Carrying'then target,kind=state.destinationPosition,'tujuan'
+ elseif state.status=='Carrying'then
+  target,kind=state.destinationPosition,'tujuan'
+  local stamp=route and route:GetAttribute('GuidedStampId26')
+  if state.stampNavigation and stamp and not(state.routeBonus and state.routeBonus.visited[stamp])then target,kind=route:GetAttribute('GuidedStampPosition26'),'cap'end
  elseif state.status=='Dropped'and not state.outOfBounds then local p=ownPackage()target,kind=p and p.Position or state.packagePosition,'paket'end
  if not target then ui:SetAttribute('NavigationMode19',state.status=='Dropped'and 'recover'or 'hidden')ui:SetAttribute('NavigationDistance19',nil)card.Title.Text=state.status=='Dropped'and 'Pulihkan paket'or 'PAKET KILAT'return end
- local distance=(root.Position-target).Magnitude local ready=distance<=config.ActionDistance
+ local distance=(root.Position-target).Magnitude local ready=distance<=(kind=='cap'and state.routeBonus.radius or config.ActionDistance)
  local directionTarget=target local remaining=flat(target-root.Position).Magnitude local mode='direct'
- local route=workspace:FindFirstChild('PaketKilatLocalSafeRoute')
  if not ready and state.status~='Dropped'and kind~='titipan'and route and(route:GetAttribute('VisibleDots')or 0)>0 then
   local selected,index=nil,0
   for _,p in ipairs(route:GetChildren())do local step=p:GetAttribute('RouteStep19')or 0 if p.Transparency<1 and step<=3 and step>index then selected,index=p,step end end
@@ -35,7 +38,7 @@ local function render()
  end
  if ready then
   arrow.Text='✓'arrow.Rotation=0 arrow.TextColor3=Color3.fromRGB(57,151,127)
-  card.Title.Text=kind=='depot'and 'Pilih pesanan'or kind=='titipan'and 'Ambil titipan'or kind=='paket'and 'Ambil ulang'or 'Siap diantar'
+  card.Title.Text=kind=='cap'and 'Lewati pos'or kind=='depot'and 'Pilih pesanan'or kind=='titipan'and 'Ambil titipan'or kind=='paket'and 'Ambil ulang'or 'Siap diantar'
  else
   local camera=workspace.CurrentCamera local forward=flat(camera and camera.CFrame.LookVector or root.CFrame.LookVector)
   if forward.Magnitude<.001 then forward=flat(root.CFrame.LookVector)end
@@ -43,7 +46,7 @@ local function render()
   forward=forward.Unit local right=Vector3.new(-forward.Z,0,forward.X)local delta=flat(directionTarget-root.Position)
   local angle=math.deg(math.atan2(delta:Dot(right),delta:Dot(forward)))
   arrow.Text='▲'arrow.Rotation=angle arrow.TextColor3=theme.Gold
-  card.Title.Text=string.format('%d stud',math.ceil(remaining))
+  card.Title.Text=string.format(kind=='cap'and 'Cap · %d stud'or '%d stud',math.ceil(remaining))
   ui:SetAttribute('NavigationBearing19',angle)
  end
  arrow.Visible=true ui:SetAttribute('NavigationMode19',ready and 'ready'or mode)ui:SetAttribute('NavigationTarget19',kind)ui:SetAttribute('NavigationDistance19',remaining)

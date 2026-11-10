@@ -96,7 +96,12 @@ local function refresh()
     local source=map:FindFirstChild(offer.sourceId)target=source and source:FindFirstChild('DestinationPoint')
    else target=pickup end
   elseif state.status=="Carrying" then
-   local house=map:FindFirstChild(state.destinationId or "") target=house and house:FindFirstChild("DestinationPoint")
+   local route=workspace:FindFirstChild('PaketKilatLocalSafeRoute')
+   local id=state.stampNavigation and route and route:GetAttribute('GuidedStampId26')
+   if id and state.routeBonus.visited[id]then id=nil end
+   local stations=map.City13:FindFirstChild('Stations')
+   if id and stations then target=stations:FindFirstChild(id)end
+   if not target then local house=map:FindFirstChild(state.destinationId or "") target=house and house:FindFirstChild("DestinationPoint")end
   end
  end
  highlight.Adornee=target

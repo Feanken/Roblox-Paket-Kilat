@@ -1,4 +1,38 @@
-# Pembaruan TERBARU — Status25: umpan balik kontrak (Make It Better #23)
+# Pembaruan TERBARU — Stamp26: panduan kontrak Pemburu cap
+
+Perbaikan lanjutan setelah Make It Better #23/Status25. Kode internal RouteStamps26. Kontrak eksplorasi sekarang memandu pemain menuju cap yang belum dikunjungi, lalu kembali ke rumah setelah dua cap lengkap. Tidak ada publikasi atau uji pemain luar.
+
+## Implementasi
+
+Baru ReplicatedStorage.PaketKilat.Shared.StampRoutes26 dari src/StampRoutes26.luau. Enam source diubah: CityBonus13, DeliveryService, RouteGuide.client, CourierNavigation19.client, PrototypeInput.client, DeliveryFeedback.client. Semua tujuh source disk sama dengan Edit Studio. Pasang shared helper sebelum client yang memakainya.
+
+Server mengirim koordinat lima pos dan tiga lintasan tambahan ramp/jembatan hanya ketika kontrak explore masih memenuhi kondisi, Carrying, tanpa Recover, dan belum cukup cap. Snapshot cap menyertakan radius tangkapan server. CityBonus13 tetap memeriksa koleksi tiap .2 detik; tidak ada remote claim baru.
+
+Planner client memakai graf jalan SafeRoutes08, simpul proyeksi dan Dijkstra. Level jalan/jembatan terpisah sampai dihubungkan ramp. Pos yang sudah dikunjungi dilewati. Skor mempertimbangkan satu/dua cap yang masih diperlukan dan rumah akhir; fungsi ini khusus batas cap dua saat ini, bukan solver jumlah cap arbitrer. Nil jika graf/calon/jalur tidak tersedia.
+
+RouteGuide memakai ulang 16 titik visual, menyesuaikan orientasi titik pada tanjakan, dan memasang GuidedStampId26/GuidedStampPosition26 di folder lokal yang sudah ada. Kompas, billboard POS CAP, dan highlight mengikuti target sama. Toggle G mematikan panduan cap/jalan dan mengembalikan penanda rumah. Drop memprioritaskan paket; Pickup memulihkan panduan. Aksi Antar tetap ke rumah dan divalidasi server, pemain boleh mengantar tanpa memenuhi bonus cap. Kota, hadiah, profil schema2 dan ledger tidak berubah.
+
+## Bukti
+
+- Tujuh pemeriksaan planner: jarak jalan, skip visited, semua visited, graf kosong, level terpisah, sambungan level, optimasi dua stop+tujuan. Semua lolos.
+- Lima pos dapat dijangkau dalam graf. Perjalanan MCP dari depot ke Pos2, lalu Pos4 menghasilkan cap pertama/kedua. Panduan beralih ke rumah. Pengantaran berhasil, kondisi100, bonus kontrak16, total68 pada run ini. Total mencakup komponen hadiah lain dan bukan tarif tetap.
+- Uji fisik jembatan menggunakan fixture posisi dekat kaki ramp lalu Humanoid.MoveTo: naik dari jalan ke ramp, berjalan ke pos tengah; Pos3 tercatat server. Bukan perjalanan penuh depot→jembatan pada uji ini.
+- Toggle G OFF:0titik/tujuan rumah. Drop diuji ulang melalui handler dengan retry RateLimited: statusDropped, stampNavigation false,0titik,kompas paket. E Pickup asli memulihkan Carrying/cap/16titik.
+- Satu fixture awal berhenti saat RateLimited; hasil itu dikecualikan. Sesi keyboard antara pengantaran dan isolasi juga memiliki perubahan order/history lain; tidak dipakai sebagai bukti Drop. Sesi akhir bersih.
+- Samsung Galaxy A06 800x360 landscape; Root705x280. Header Cap90stud dan kondisi100/100·Cap0/2·bonus+16 TextFits, screenshot diperiksa. ScreenOrientation LandscapeSensor/CoreUISafeInsets/IgnoreGuiInset false. Emulator saja, bukan HP fisik.
+- Fresh terakhir Idle/coins0/0paket/0titik, console Bootstrap saja. Akhir Edit/default viewport/HUD enabled/0paket/tanpa TemporaryStamp26. Tidak ada profiling/multiplayer/uji semua pasangan pos-rumah.
+
+Bukti verification/stamps26-audit.json, stamps26-bridge.jpg, stamps26-phone.jpg, saved-stamps26.json.
+
+## Backup dan simpan
+
+Enam source asli: backups/stamps26-sources/ dan ServerStorage.PaketKilat_PreStamp26. Snapshot binary backups/main_game.before-stamps26.20261109.rbxl, handoff sebelumnya backups/handoff.before-stamps26.md. Untuk rollback tahap ini saja pulihkan enam source tersebut, hapus shared StampRoutes26 dan StampGuideRevision. Binary backup juga mendahului Contracts24/Status25; jangan gunakan sebagai rollback parsial.
+
+**File > Save to File pada Studio sebelum menutup.** main_game.rbxl di disk masih442913byte,2026-11-09T08:23:14.646Z. Marker LivedInTown23 ada; SpecialContracts24/ClearStatus25/RouteStamps26 belum ada. Source terbaru terpasang pada sesi Studio aktif, file source dan dokumentasi sudah tersimpan.
+
+---
+
+# Arsip — Status25: umpan balik kontrak (Make It Better #23)
 
 Nomor permintaan pemilik23, kode iterasi internalStatus25 setelahContracts24. Fokus: kontrak yang sudah gagal tidak lagi terlihat seperti target yang masih bisa dikejar. Harga, hadiah dan kota tetap. Tidak ada publikasi/pemain luar.
 

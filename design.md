@@ -399,3 +399,12 @@ Snapshot menambah recentDeliveries(max5:tujuan,total,bintang,durasi,bonus kontra
 Permintaan Make It Better ke-23 menurut hitungan pemilik. Module shared ContractStatus25 menghitung status yang sama untuk HUD dan evaluator bonus server, tanpa memberi client kewenangan membayar hadiah. Urutan alasan utama: dipulihkan, kondisi kurang, terlambat, cap belum cukup; jika seluruh syarat terpenuhi status ready. Recovery/kondisi/waktu yang gagal ditandai gugur, sedangkan cap kurang masih dapat dilengkapi selama perjalanan. Unknown contract atau input angka nonfinite ditolak untuk bonus. Status ready tetap memerlukan pengantaran sah di server.
 
 HUD HP memakai baris kondisi lama untuk status pendek dengan warna peringatan ketika gugur. Desktop menjelaskan bahwa pengantaran tetap dibayar. Hasil dan riwayat memuat alasan utama. Lima baris riwayat sekarang masing-masing dua baris: tujuan/bintang/koin dan pekerjaan/kondisi/durasi/alasan kontrak. Tidak menambah panel permanen, harga, hadiah atau field profil persisten.
+
+
+## Stamp26 — navigasi Pemburu cap (2026-11-09)
+
+Kontrak eksplorasi menggunakan panduan jalan yang sudah ada untuk mengunjungi cap sebelum rumah akhir. Client memilih pos belum dikunjungi berdasarkan jarak graf, kebutuhan satu/dua cap, dan tujuan pengantaran. Jalan tanah dan jembatan dihubungkan melalui ramp fisik; titik panduan mengikuti kemiringan ramp. Lima pos server dikirim bersama tiga lintasan tambahan hanya saat kontrak masih layak dan cap belum lengkap.
+
+Kompas/header, billboard POS CAP dan highlight mengikuti satu target. Setelah cukup cap, kondisi gugur, Recover, atau panduan G dimatikan, kembali ke rumah. Saat Dropped, prioritas navigasi adalah paket. HUD mobile memakai baris progres lama; tidak ada panel permanen baru. Panduan tidak menggerakkan pemain, mengambil cap, atau memberikan hadiah. Koleksi dan bonus tetap server-owned, profil schema2 tidak berubah.
+
+Verifikasi: tujuh kasus planner; lima pos terhubung pada graf; perjalanan ke dua cap lalu antar dengan bonus16; ramp/jembatan diuji dari posisi fixture dekat kaki ramp; Drop/Pickup serta toggle; GalaxyA06 landscape Root705x280/teks muat. Tidak mengklaim seluruh jalur fisik, FPS, HP asli atau multiplayer teruji. Detail dan batas pada handoff.md serta verification/stamps26-audit.json.

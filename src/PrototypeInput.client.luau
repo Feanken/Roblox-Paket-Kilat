@@ -237,9 +237,13 @@ local function render()
  if Theme.IsMobile(ui)then actions.Secondary.Position=UDim2.fromOffset(0,actions.Primary.Visible and 52 or 0)end
  local dropped=state.status=="Dropped" and ownPackage() or nil
 	local idleTarget=relay and not near(state.depotPosition) and relay.pickupPosition or state.depotPosition
+ local routeFolder=workspace:FindFirstChild('PaketKilatLocalSafeRoute')
+ local guidedStamp=state.status=='Carrying'and state.stampNavigation and routeFolder and routeFolder:GetAttribute('GuidedStampId26')
+ if guidedStamp and state.routeBonus.visited[guidedStamp]then guidedStamp=nil end
+ local stampPosition=guidedStamp and routeFolder:GetAttribute('GuidedStampPosition26')
 	local markerTarget=state.status=="Idle" and idleTarget
 		or (state.status=="Dropped"and not state.outOfBounds and(dropped and dropped.Position or state.packagePosition))
-  or (state.status=="Carrying"and state.destinationPosition)
+  or (state.status=="Carrying"and(stampPosition or state.destinationPosition))
 	label.Enabled=synced and state.profileReady==true and markerTarget~=nil
 		and not shopOpen and not state.outOfBounds
 		and (state.status~="Idle" or not near(idleTarget))
@@ -247,8 +251,8 @@ local function render()
 		marker.CFrame=CFrame.new(markerTarget)
 		local root=aliveRoot()
 		local distance=root and math.floor((root.Position-markerTarget).Magnitude+.5) or 0
-		local title=state.status=="Idle" and (relay and not near(state.depotPosition)and 'TITIPAN' or "DEPOT") or state.status=="Dropped" and "PAKETMU" or state.destinationName
-		markerText.Text=string.format("%s\n%d stud · %s",title,distance,state.status=="Dropped" and "Ambil ulang" or state.status=="Idle" and "Ambil pesanan" or "Antar ke sini")
+		local title=stampPosition and "POS CAP"or state.status=="Idle" and (relay and not near(state.depotPosition)and 'TITIPAN' or "DEPOT") or state.status=="Dropped" and "PAKETMU" or state.destinationName
+		markerText.Text=string.format("%s\n%d stud · %s",title,distance,state.status=="Dropped" and "Ambil ulang" or state.status=="Idle" and "Ambil pesanan" or stampPosition and "Lewati untuk cap"or "Antar ke sini")
 	end
 end
 local function activate(b)

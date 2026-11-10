@@ -3,6 +3,7 @@ local Players=game:GetService("Players") local RunService=game:GetService("RunSe
 local CAS=game:GetService("ContextActionService") local UIS=game:GetService("UserInputService")
 local p=Players.LocalPlayer local shared=game.ReplicatedStorage:WaitForChild("PaketKilat")
 local routes=require(shared.Shared:WaitForChild("SafeRoutes08"))
+local Stamps=require(shared.Shared:WaitForChild('StampRoutes26'))
 local Paths=require(shared.Shared:WaitForChild('CourierPaths21'))
 local Theme=require(shared.Shared.UITheme12)
 local ui=p:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
@@ -28,7 +29,7 @@ CAS:BindAction("PKSafeRoute",function(_,action)
  if action==Enum.UserInputState.Begin then toggle() end
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.G)
-local function hide() for _,dot in ipairs(dots) do dot.Transparency=1 end folder:SetAttribute("VisibleDots",0)folder:SetAttribute("RemainingDistance19",nil) end
+local function hide() for _,dot in ipairs(dots) do dot.Transparency=1 end folder:SetAttribute("VisibleDots",0)folder:SetAttribute("RemainingDistance19",nil)folder:SetAttribute("GuidedStampId26",nil)folder:SetAttribute("GuidedStampPosition26",nil) end
 local function flat(v) return Vector3.new(v.X,0,v.Z) end
 local function refresh()
  Theme.ToolbarLayout(ui)
@@ -47,6 +48,18 @@ local function refresh()
  local points={}
  if returning then for i=#offsets,1,-1 do table.insert(points,state.depotPosition+basis:VectorToWorldSpace(offsets[i])) end
  else for _,point in ipairs(offsets) do table.insert(points,state.depotPosition+basis:VectorToWorldSpace(point)) end end
+ if state.status=='Carrying'and state.stampNavigation then
+  local graph={}
+  for key,path in pairs(routes)do graph[key]={};for _,v in ipairs(path)do table.insert(graph[key],state.depotPosition+basis:VectorToWorldSpace(v))end end
+  local leg=hum.RigType==Enum.HumanoidRigType.R6 and char:FindFirstChild('Left Leg')
+  local feet=root.Position-Vector3.new(0,hum.HipHeight+root.Size.Y/2+(leg and leg.Size.Y or 0),0)
+  local plan=Stamps.Plan(feet,graph,state.stampNavigation.paths,state.stampNavigation.stations,state.routeBonus and state.routeBonus.visited,{destination=state.destinationPosition,needed=state.contract.stamps-state.routeBonus.count})
+  if plan then
+   points=plan.points
+   folder:SetAttribute('GuidedStampId26',plan.station.id)folder:SetAttribute('GuidedStampPosition26',plan.station.position)
+   button.Text=UIS.TouchEnabled and 'Cap: ON'or 'Cap [G]'
+  end
+ end
  local best,bestSegment,bestT=math.huge,nil,0
  for i=1,#points-1 do
   local a,b=flat(points[i]),flat(points[i+1]) local delta=b-a
@@ -70,7 +83,11 @@ local function refresh()
    step-=length cursor=points[segment+1] segment+=1
   end
   if segment>=#points then break end
-  dot.CFrame=CFrame.new(cursor+Vector3.new(0,.1,0))*CFrame.Angles(0,0,math.pi/2)
+  local tangent=(points[segment+1]-points[segment]).Unit
+  local normal=Vector3.yAxis-tangent*tangent.Y
+  normal=normal.Magnitude>.01 and normal.Unit or Vector3.yAxis
+  local at=cursor+normal*.1
+  dot.CFrame=CFrame.lookAt(at,at+tangent,normal)*CFrame.Angles(0,0,math.pi/2)
   dot.Transparency=.12 count+=1
  end
  folder:SetAttribute("VisibleDots",count) folder:SetAttribute("Returning",returning)

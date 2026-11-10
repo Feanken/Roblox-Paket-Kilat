@@ -54,6 +54,9 @@ function Delivery.Snapshot(player)
 		local point=destinationPoint(o.destinationId)
 		snapshot.destinationPosition=point and point.Position
 		if not o.isRelay then snapshot.currentBestTime=E.GetBest(player,o.destinationId,o.packageType) end
+  if o.status=='Carrying'and o.contract and o.contract.kind=='explore'and o.recoveryCount==0 and o.condition>=o.contract.condition and snapshot.routeBonus.count<o.contract.stamps then
+   snapshot.stampNavigation=require(script.Parent.CityBonus13).Navigation(W)
+  end
 	end
 	return snapshot
 end

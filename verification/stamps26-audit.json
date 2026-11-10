@@ -1,0 +1,133 @@
+{
+  "revision": "RouteStamps26",
+  "scope": "Local Studio only; no publishing or external playtest",
+  "rulesAndDelivery": {
+    "plans": "[{\"id\":\"Pos1\",\"length\":77.05877304077149,\"points\":3},{\"id\":\"Pos2\",\"length\":96.05877494812012,\"points\":4},{\"id\":\"Pos3\",\"length\":194.7279396057129,\"points\":8},{\"id\":\"Pos4\",\"length\":251.05877685546876,\"points\":7},{\"id\":\"Pos5\",\"length\":217.05828666687013,\"points\":6}]",
+    "rules": "{\"twoStopsAndDestination\":true,\"emptyGraph\":true,\"nearestStreetDistance\":true,\"separateLevels\":true,\"connectedLevels\":true,\"visitedSkipped\":true,\"noCandidates\":true}",
+    "delivery": "{\"ok\":true,\"history\":[{\"stars\":2,\"total\":68,\"contractReason\":\"Syarat terpenuhi\",\"jobName\":\"Pemburu cap\",\"contractBonus\":16,\"destinationName\":\"Rumah Pak Agus\",\"condition\":100,\"duration\":271.58837485313418}],\"count\":2,\"code\":\"Delivered\",\"condition\":100,\"coins\":68}"
+  },
+  "first": {
+    "contract": "Biasa · 100/100 · Rekor —",
+    "title": "Cap · 231 stud",
+    "position": "-45.000244140625, 4481, -14",
+    "status": "Carrying",
+    "nav": "cap",
+    "guided": "Pos4",
+    "coins": 0
+  },
+  "second": {
+    "title": "86 stud",
+    "hint": "KONTRAK · bonus +16 saat diantar\nCap lengkap · antar paket",
+    "status": "Carrying",
+    "first": "{\"status\":\"Carrying\",\"visited\":{\"Pos2\":true},\"count\":1,\"coins\":0}",
+    "nav": "tujuan",
+    "coins": 0
+  },
+  "bridgeRamp": {
+    "dots": [
+      [
+        37.993438720703125,
+        4488.69921875,
+        50
+      ],
+      [
+        32.993438720703125,
+        4488.69921875,
+        50
+      ],
+      [
+        27.993438720703125,
+        4488.69921875,
+        50
+      ],
+      [
+        22.993438720703125,
+        4488.69921875,
+        50
+      ]
+    ],
+    "rampTop": [
+      42.90229034423828,
+      4491.13916015625,
+      50.02378845214844
+    ],
+    "guided": "Pos3"
+  },
+  "bridgeCollected": {
+    "status": "Carrying",
+    "bridge": "{\"count\":1,\"status\":\"Carrying\",\"visited\":{\"Pos3\":true},\"condition\":100,\"nav\":true}",
+    "guided": "Pos4",
+    "nav": "cap"
+  },
+  "drop": {
+    "drop": "{\"status\":\"Dropped\",\"nav\":false}",
+    "status": "Dropped",
+    "nav": "paket",
+    "dots": 0
+  },
+  "pickup": {
+    "header": "Cap · 213 stud",
+    "textFits": true,
+    "status": "Carrying",
+    "nav": "cap",
+    "dots": 16,
+    "guided": "Pos4"
+  },
+  "phoneConfig": {
+    "ok": true,
+    "name": "Samsung Galaxy A06",
+    "height": 360,
+    "device": "samsung_galaxy_a06",
+    "width": 800
+  },
+  "phone": {
+    "headerFits": true,
+    "rootSize": "705, 280",
+    "header": "Cap · 90 stud",
+    "started": true,
+    "status": "Carrying",
+    "nav": "cap",
+    "condition": "100/100 · Cap 0/2 · bonus +16",
+    "conditionFits": true
+  },
+  "fresh": {
+    "profileReady": true,
+    "gui": true,
+    "dots": 0,
+    "status": "Idle",
+    "packages": 0,
+    "coins": 0
+  },
+  "edit": {
+    "backup": 6,
+    "revision": "RouteStamps26",
+    "device": "default",
+    "temporary": [],
+    "packages": 0,
+    "gui": true
+  },
+  "sources": {
+    "StampRoutes26.luau": true,
+    "CityBonus13.luau": true,
+    "DeliveryService.luau": true,
+    "RouteGuide.client.luau": true,
+    "CourierNavigation19.client.luau": true,
+    "PrototypeInput.client.luau": true,
+    "DeliveryFeedback.client.luau": true
+  },
+  "limitations": [
+    "LocalMemory data only",
+    "Five stations are graph-reachable; physical walking tested first two selected caps and bridge, not every route/house pair",
+    "Bridge access test was repositioned near ramp and used Humanoid.MoveTo",
+    "Phone is an emulator, not physical hardware",
+    "No performance or multiplayer profiling",
+    "Earlier isolated test script stopped at RateLimited; Drop/Pickup rechecked successfully with guarded retry",
+    "Intermediate keyboard session had unrelated order/history changes; excluded from Drop/Pickup evidence",
+    "rbxl file requires Save to File; source installed in live Edit session"
+  ],
+  "evidence": [
+    "stamps26-bridge.jpg",
+    "stamps26-phone.jpg",
+    "saved-stamps26.json"
+  ]
+}
