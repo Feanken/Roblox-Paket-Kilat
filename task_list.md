@@ -522,4 +522,21 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] U34-08:partisifloorterhubungtanpacelah/tumpukan,detailtamanpengganti.
 - [x] U34-09:Pos3menapakditanah,panduanPemburucapterhubungjalurbaru.
 - [x] U34-10:Play/gear/audio/cap/lintasan/layout/console,buktidansourcecocok.
-- [ ] U34-11:SaveAutoRecoverykemain_game.rbxl;penilaianpemilik/HPfisiktetapbelumdiklaim.
+- [x] U34-11:main_game.rbxl terverifikasi memuat TailoredCourier34 pada555136byte/14:43:12WIB.
+- [ ] U34-12:penilaian pemilik/HP fisik tetap belum diklaim.
+
+
+## District35 — dua distrik dan jembatan (10 November 2026)
+
+- [x] D35-00: inspeksi pulau aktual/sketsa, backup binary/handoff dan spesifikasi.
+- [x] D35-01: snapshot lantai/fondasi/anchor, pertahankan terrain dan kota lama.
+- [x] D35-02: jaringan jalan civic, ruko, diagonal, trotoar dan partisi lantai tanpa lapisan ganda.
+- [x] D35-03: jembatan datar, abutment, struktur bawah dan pagar; sambungan ke jalan lama.
+- [x] D35-04: deretan ruko3–4lantai dengan identitas usaha dan detail frontage.
+- [x] D35-05: taman pusat kota dan empat gedung kantor.
+- [x] D35-06: street furniture, tree/bench/lamp gratis dari library bersih, signage dan quay.
+- [x] D35-07: metadata calon alamat/pintu/node jalan; tidak mengaktifkan pesanan baru.
+- [x] D35-08: audit cakupan floor/clearance/grounding dan lintasan Play tanpa paket, capture visual.
+- [x] D35-09: source/manifest/alamat/bukti/dokumen/simpan status.
+- [x] D35-10: pemilik simpan ulang main_game555260byte/14:54:39WIB; marker35/34 dan tiga source authoring akhir cocok.
+- [ ] D35-11: penilaian pemilik/HP fisik/FPS/multiplayer; rilis tetap ditunda.

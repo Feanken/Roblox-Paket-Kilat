@@ -90,3 +90,14 @@ Tujuh audioStoregratis dimuat, dua musik bergantian/crossfade,4emitter3D berhent
 ## Upgrade34 — verifikasi lokal, 10 November 2026
 
 32kombinasi gear pada rig engineR6/R15,16pada avatar aktif,respawn;pengantaran3bintang/biasa/capPos3/replay;duaMoveTo dan343sampelfloor;5targetplannerterhubung;previewdesktopdanGalaxyA06landscape muat. Semua fixtureStudioMemory dengan penempatan/elapsed terkontrol, bukan perjalanan manusia atauHPfisik. Renderer gelap juga dilaporkan pemilik, lalu kembali setelah refresh kualitaslokal dan dipotret diEditor/Play. ConsoleakhirBootstrap saja. Bukti upgrade34-audit.json;tidak mengubah statusT22/T23 atau izin rilis.
+
+
+## District35 — pusat kota, ruko dan jembatan (10 November 2026)
+
+Sesi AutoRecovery yang disetujui. Baru:16ruko/4kantor/taman/jalan grid+diagonal/jembatan25stud/furnitur dan66model gratis dari library bersih.20calon alamat+16node; tujuan order aktif/bounds/ekonomi tetap.2122Part/114Mesh/682collider/0script/0light di root; menghapus578sel native redundan lewat penggabungan bidang setara luas.
+
+Audit7337sampel area0lubang, tinggiY4478; luas44997+59784stud².11koridor×3offset bebas penghalang solid. Dua ray tepat pada batas sel memerlukan toleransi.005stud, bukan lubang yang dapat menjatuhkan karakter; tes Humanoid melewati sambungan.66model feet gap maksimum.0181stud.17anchor final cocok baseline, setelah PickupPoint dipulihkan atas persetujuan pemilik. Bursa Kreatif hasil edit manual dipertahankan.
+
+Play awal:4segmen player lolos. Percobaan teleport client jauh gagal/tidak dipakai sebagai lulus karena Streaming/input; probe PlayerModule menghasilkan error harness. Rig server-owned sementara:6segmen(jembatan/3diagonal/avenue barat/depan ruko) lolos health100. FreshPlay setelah penggabungan lantai:2segmen jembatan/barat lolos, consoleBootstrap saja. RequestStreamAroundAsync mengonfirmasi dua area client tersedia;114mesh/11ID preloadSuccess. AkhirEdit/tanpafixture. Bukan pengujian perjalanan order penuh, HP fisik, FPS atau multiplayer.
+
+Source authoring3file cocokdisk/Edit, audit/alamat/owner override/status simpan dan3JPEG disimpan di verification/district35-*. Pemilik menyimpan ulang main_game555260byte/14:54:39WIB: District35/Upgrade34 dan ketiga source akhir cocok persis. Titik depot pada Edit sudah pulih; tidak ada save tertunda untuk tahap35. Tidak ada publikasi/pemain luar.

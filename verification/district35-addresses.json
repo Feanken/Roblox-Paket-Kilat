@@ -1,0 +1,262 @@
+[
+  {
+    "nearestNode": "CivicEastNorth",
+    "floorSupported": true,
+    "name": "Balai Layanan",
+    "id": "CBD04",
+    "district": "CivicCentre",
+    "candidateOnly": true,
+    "localPosition": [
+      98.00006103515625,
+      1.0000001192092896,
+      230
+    ]
+  },
+  {
+    "nearestNode": "CivicWestNorth",
+    "floorSupported": true,
+    "name": "Bursa Kreatif",
+    "id": "CBD03",
+    "district": "CivicCentre",
+    "candidateOnly": true,
+    "localPosition": [
+      -115.40006256103516,
+      1.0000001192092896,
+      272.5709228515625
+    ]
+  },
+  {
+    "nearestNode": "CivicEast",
+    "floorSupported": true,
+    "name": "Kantor Media",
+    "id": "CBD02",
+    "district": "CivicCentre",
+    "candidateOnly": true,
+    "localPosition": [
+      36.00001525878906,
+      1.0000001192092896,
+      168
+    ]
+  },
+  {
+    "nearestNode": "CivicWest",
+    "floorSupported": true,
+    "name": "Menara Kilat",
+    "id": "CBD01",
+    "district": "CivicCentre",
+    "candidateOnly": true,
+    "localPosition": [
+      -38.00001525878906,
+      1.0000001192092896,
+      168
+    ]
+  },
+  {
+    "nearestNode": "QuayUpperEast",
+    "floorSupported": true,
+    "name": "Galeri Tepi Air",
+    "id": "BQ16",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -223.8001251220703,
+      1.0000001192092896,
+      243.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayUpperEast",
+    "floorSupported": true,
+    "name": "Laundry Kota",
+    "id": "BQ15",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -246.2001190185547,
+      1.0000001192092896,
+      243.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayUpperEast",
+    "floorSupported": true,
+    "name": "Kedai Pagi",
+    "id": "BQ14",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -268.6001281738281,
+      1.0000001192092896,
+      243.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayUpperEast",
+    "floorSupported": true,
+    "name": "Rumah Desain",
+    "id": "BQ13",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -291.0001220703125,
+      1.0000001192092896,
+      243.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayUpperWest",
+    "floorSupported": true,
+    "name": "Pasar Lokal",
+    "id": "BQ12",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -313.4001159667969,
+      1.0000001192092896,
+      243.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayUpperWest",
+    "floorSupported": true,
+    "name": "Kafe Sudut",
+    "id": "BQ11",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -335.80010986328125,
+      1.0000001192092896,
+      243.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayMidEast",
+    "floorSupported": true,
+    "name": "Kantor Arsitek",
+    "id": "BQ10",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -223.8001251220703,
+      1.0000001192092896,
+      186.1999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayMidEast",
+    "floorSupported": true,
+    "name": "Klinik Sehat",
+    "id": "BQ09",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -246.2001190185547,
+      1.0000001192092896,
+      186.1999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayMidWest",
+    "floorSupported": true,
+    "name": "Buku Bata",
+    "id": "BQ08",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -380.6001281738281,
+      1.0000001192092896,
+      186.1999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuayMidWest",
+    "floorSupported": true,
+    "name": "Dapur Nusa",
+    "id": "BQ07",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -403.000244140625,
+      1.0000001192092896,
+      186.1999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuaySouthEast",
+    "floorSupported": true,
+    "name": "Atelier Utara",
+    "id": "BQ06",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -291.0001220703125,
+      1.0000001192092896,
+      128.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuaySouthWest",
+    "floorSupported": true,
+    "name": "Floris Jalan",
+    "id": "BQ05",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -313.4001159667969,
+      1.0000001192092896,
+      128.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuaySouthWest",
+    "floorSupported": true,
+    "name": "Toko Kamera",
+    "id": "BQ04",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -335.80010986328125,
+      1.0000001192092896,
+      128.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuaySouthWest",
+    "floorSupported": true,
+    "name": "Studio Kertas",
+    "id": "BQ03",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -358.20013427734375,
+      1.0000001192092896,
+      128.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuaySouthWest",
+    "floorSupported": true,
+    "name": "Kopi Kanal",
+    "id": "BQ02",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -380.6001281738281,
+      1.0000001192092896,
+      128.6999969482422
+    ]
+  },
+  {
+    "nearestNode": "QuaySouthWest",
+    "floorSupported": true,
+    "name": "Roti Kota",
+    "id": "BQ01",
+    "district": "BrickQuay",
+    "candidateOnly": true,
+    "localPosition": [
+      -403.000244140625,
+      1.0000001192092896,
+      128.6999969482422
+    ]
+  }
+]

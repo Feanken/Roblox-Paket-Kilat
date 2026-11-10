@@ -490,3 +490,17 @@ Harga/IDkepemilikan/upgrade/rumusdamage/hadiah tetap. Rintanganbalokdihapus atas
 
 
 HasilUpgrade34: factory gear native dipakai server dan pratinjau toko;8patch+2sourcebaru cocokdisk/Edit.11objek bridge/barrier pensiun diarsip, floor140→144/343sampelhit, Pos3grounded dan5targetplannerterhubung. Dua fanfare5,423/5,701detik mengikuti rating/finalbatch, masterEfek/mute/dedupe/fallback tetap.32kombinasirig,16avatargear,respawn,duaMoveTo,pengantaran/cap/replay,previewdesktop/phone lolos pemeriksaan yang dicatat. Batas/perincian dan rollback dihandoff;main_game masihCity32/Audio33 dan belumUpgrade34.
+
+
+## District35 — pusat kota dan pulau ruko (10 November 2026)
+
+Permintaan pemilik memakai sketsa jalan hitam: area kosong yang menyatu dengan pulau lama menjadi pusat kota berisi taman/kantor, pulau baru menjadi distrik ruko bertingkat dengan sentuhan PIK dan Manchester, dihubungkan jembatan jalan. Fokus tahap ini map dahulu; bangunan disiapkan sebagai calon alamat, belum dimasukkan katalog pesanan aktif.
+
+Lahan aktual dalam basis DepotPad: civic sekitarx[-137,145],z[153,310]; pulau ruko sekitarx[-445,-163],z[94,306]. Pusat kota memiliki dua konektor dari jalan lama menuju boulevard belakang, promenade taman, empat kantor dan ruang hijau utama. Pulau ruko memiliki dua avenue, empat jalan penghubung serta diagonal; ruko3–4lantai dengan fasad bata/stone trim, jendela tinggi, kanopi toko dan variasi usaha. Jembatan datar melintasi kanal sekitar25stud pada sambungan jalan lama dekatz144; trotoar dan guardrail disiapkan untuk berjalan.
+
+Kebutuhan D35: pembagian lantai tunggal termasuk diagonal, fondasi mendukung tepi lahan pengguna, sambungan ke jalan lama melewati curb yang dibuka, arsitektur/furnitur tidak menutup trotoar atau jembatan. Terrain, kota lama, perlengkapan, audio, ekonomi dan lima tujuan aktif dipertahankan. Model/ornamen gratis memakai library bersih yang sudah ada. Alamat baru memiliki metadata CandidateOnly dan pintu masuk yang jelas, tanpa remote/reward/prompt palsu. Batas paket lama belum diperluas karena ini tahap map; eksplorasi diuji tanpa paket.
+
+Arah visual: ruko berderet dan frontage komersial sebagai interpretasi PIK, bata merah, trim batu, atap slate dan pagar logam sebagai interpretasi Manchester; bukan replika bangunan/brand tertentu. Acuan Manchester: https://www.explore.manchester.ac.uk/neighbourhood-guides/northern-quarter/ . Semua nama usaha baru fiktif.
+
+
+Hasil District35:16ruko dan4kantor, taman/fountain, halte, dua jaringan jalan dan diagonal serta jembatan25stud sudah terpasang. Penggabungan bidang native mempertahankan luas44997+59784stud² sambil mengurangi578Part; final2122Part/114mesh/682collider.66model gratis dipakai ulang, kaki mesh disampel maksimumgap.0181stud.7337sampel area0lubang;11koridor bebas solid, dua exact-edge ray memakai toleransi.005stud. Enam lintasan rig fisik lolos dan dua diulang setelah merge; streaming/preload berhasil.20alamat CandidateOnly belum menjadi order. Edit manual Bursa Kreatif dipertahankan, PickupPoint dipulihkan sesuai jawaban pemilik. Detail/harness/batas/save status ada dihandoff dan verification/district35-*. Pemilik menyimpan ulang main_game555260byte/14:54:39WIB; marker District35/Upgrade34 dan ketiga source authoring akhir terverifikasi cocok.

@@ -1,0 +1,16 @@
+{
+  "bytes": 555260,
+  "mtime": "2026-11-10T07:54:39.832Z",
+  "district35": true,
+  "upgrade34": true,
+  "sources": {
+    "DistrictPlan35": true,
+    "DistrictBuilder35": true,
+    "DistrictDetails35": true
+  },
+  "latestSourceSaved": true,
+  "saveAgainRequired": false,
+  "placeSession": "main_game_AutoRecovery_0.rbxl",
+  "inEdit": true,
+  "ownerReportedResaved": true
+}

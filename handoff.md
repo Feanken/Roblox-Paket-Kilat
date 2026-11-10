@@ -1,4 +1,52 @@
-# Pembaruan terbaru — Upgrade34: achievement, gear, dan penyeberangan taman
+# Pembaruan terbaru — District35: pusat kota dan Bata Quay
+
+10 November 2026. Diterapkan ke sesi main_game_AutoRecovery_0.rbxl, Studio6654bdf4-6d9a-4365-b5fc-cd30708a66d3, sesuai persetujuan pemilik. Akhir Edit, tanpa karakter uji/fixture tersisa. Map dahulu; pesanan aktif tetap lima tujuan lama. Tidak ada publikasi atau undangan pemain luar.
+
+## Hasil map
+
+Area yang menyatu dengan pulau lama menjadi Civic Centre: empat kantor, taman utama dengan air mancur, promenade, bangku, pohon, halte dan boulevard. Bursa Kreatif dipindah, diputar dan diperkecil sendiri oleh pemilik saat pengerjaan; perubahan itu dipertahankan. Snapshot31Part ada di verification/district35-owner-office-overrides.json; Plan mencatat layout awal, bukan menggantikan edit pemilik tersebut.
+
+Pulau baru menjadi Bata Quay:16ruko dengan variasi tinggi3–4lantai, bata merah/cokelat, trim batu, jendela tinggi, kanopi, papan usaha, downpipe dan beberapa balkon. Ini interpretasi ruko PIK dan Northern Quarter Manchester, bukan replika brand/bangunan. Dua avenue, empat jalan penghubung dan satu diagonal mengikuti sketsa; ruang sisa mendapat pocket plaza, pohon, bangku dan jam jalan.
+
+Jembatan jalan datar melintasi25stud kanal; koneksi jalan antardistrik sekitar62stud. Ada carriageway18stud, dua trotoar4stud, abutment bata, struktur lengkung logam di bawah serta guardrail. Tepi pulau baru dan civic diberi retaining wall/cap/pagar; akses jembatan tetap terbuka.
+
+Ada20calon alamat(BQ01–16,CBD01–04), tag FutureDelivery35, CandidateOnly=true, dan16node jalan dengan metadata tetangga. Marker ini bukan tujuan order aktif, tidak memberi hadiah atau prompt. Batas paket belum diperluas; eksplorasi daerah baru lakukan tanpa membawa order. Semua bangunan berupa eksterior; belum ada interior toko/kantor.
+
+## Struktur, sumber dan perubahan pemilik
+
+Map.Districts35 menampung Surface35,CivicCentre,BrickQuay,RoadBridge,StreetDetails,FutureAddresses,NavigationNodes. Atribut DistrictRevision=TwinDistricts35. Tiga source Edit-only di src/DistrictPlan35.luau,DistrictBuilder35.luau,DistrictDetails35.luau cocok dengan ServerStorage.PaketKilat_District35Authoring. Tidak dipanggil Bootstrap dan tidak membangun ulang map saat Play.
+
+Floor civic44997stud² dan ruko59784stud² dipartisi per material, termasuk poligon diagonal. Semua permukaan baru topY4478; fondasi berakhir4477.5. Sel671Part lantai native digabung menjadi93 tanpa mengubah luas; diagonal tetap memakai WedgePart. Penggabungan mengurangi578Part/collider. Akhir:2122BasePart,114MeshPart,682collider,0script/0light pada distrik. Angka ini bukan pengukuran FPS.
+
+Aset gratis yang telah ditinjau pada tahap lama dipakai ulang: BroadleafTree25,ParkBench14,StreetLamp18,GardenBush8,Fountain1; total66model. Kaki mesh diperiksa per bagian dengan sampling lokal, bukan grid keseluruhan yang dapat melewatkan batang sempit. Gap sampel maksimum.0181stud. Dekorasi noncollision; badan/atap gedung dan struktur jalan/pagar solid.
+
+Backup binary baseline:backups/district35/main_game.before-district35.rbxl dan handoff.before.md. ServerStorage.PaketKilat_PreDistrict35 menyimpan Snapshot(17anchor+atribut) dan Objects29objek asli:2fondasi,2cover rumput,2floor approach,23parapet/cap/post. Fondasi lama diganti salinan lebih panjang agar grass overhang punya dukungan. Terrain tidak ditulis. Kota lama dipertahankan selain pembukaan sambungan jalan/curb.
+
+Pada akhir pengerjaan PickupPoint depot sempat bergeser sekitar5.79stud ke bawah lantai saat pengaturan map. Atas jawaban pemilik “Kembalikan titik ambil paket ke semula”, CFrame dipulihkan dari Snapshot. Final17anchor lama kembali cocok posisi/ukuran persis baseline. Gedung Bursa Kreatif tetap mengikuti edit pemilik.
+
+Sesudah memindah gedung di Edit, calon alamat dapat diselaraskan lewat:
+```lua
+require(game.ServerStorage.PaketKilat_District35Authoring.Details).SyncAddresses()
+```
+Ini helper authoring, bukan loop runtime. Jangan menjalankan Setup lagi pada map aktif; ia adalah migrasi awal. Backup asli diperlukan jika ingin rollback/rebuild.
+
+## Verifikasi dan batas
+
+Audit Edit7337titik area:0lubang/0tinggi salah. Sebelas koridor diperiksa pada tiga offset:0penghalang solid dan0lubang setelah toleransi tepi.005stud. Dua ray persis pada batas sel masih miss karena seam float; semua titik sekitar dan tes fisik melewatinya. Tidak menambah lapisan lantai besar yang bertumpuk.
+
+Player MoveTo awal melalui jembatan, trotoar, avenue civic dan promenade taman berhasil. Percobaan lanjutan teleport jauh tidak dipakai sebagai bukti lulus: Streaming belum selesai dan input manual tidak diisolasi. Probe PlayerModule gagal karena modul tersebut tidak tersedia; error berasal dari harness, bukan source game. Diganti rig sementara server-owned: jembatan, tiga segmen diagonal, avenue sisi barat dan depan ruko seluruhnya sampai/health100. Setelah penggabungan floor, freshPlay mengulang jembatan dan avenue barat: keduanya sampai/health100. Rig dibersihkan bahkan saat error; final tidak ada TemporaryDistrict35Walker.
+
+Client RequestStreamAroundAsync memuat floor FarQuay/DiagonalCentre pada tinggi1lokal.114mesh instance/11content ID preload Success. Console freshPlay akhir hanya Bootstrap. Tidak mengklaim perjalanan pengantaran penuh, audit HP fisik/FPS/multiplayer, penilaian balance atau semua sudut kamera. Gameplay/ekonomi/profil/audio/gear tetap memakai tahap sebelumnya.
+
+Bukti:verification/district35-audit.json, district35-addresses.json, district35-owner-office-overrides.json, district35-save-status.json dan district35-overview/ruko/park.jpg. Harness tests/District35EditAudit.luau, District35GroundingAudit.luau, District35Walk.fixture.server.luau. Tangkapan adalah render Studio, bukan mockup.
+
+## Status simpan
+
+Pemilik menyimpan ulang main_game.rbxl setelah perapian akhir:555260byte,mtime2026-11-10T07:54:39.832Z(14:54:39WIB). Binary memuat TwinDistricts35/TailoredCourier34; ketiga source DistrictPlan35, DistrictBuilder35 dan DistrictDetails35 cocok persis dengan disk/Edit. Pemilik mengonfirmasi simpan ulang sesudah pemulihan depot; Edit final PickupPoint=(9.999755859375,4478,136),17anchor cocok baseline. Tidak ada save tertunda untuk tahap35. Source/SDD/backup/bukti tersimpan, akhirEdit/tanpafixture. Penilaian pemilik/HP fisik/FPS/multiplayer dan rilis tetap terpisah.
+
+---
+
+# Arsip — Upgrade34: achievement, gear, dan penyeberangan taman
 
 10 November 2026. Place yang diedit tetap main_game_AutoRecovery_0.rbxl, Studio6654bdf4-6d9a-4365-b5fc-cd30708a66d3, sesuai persetujuan sebelumnya. Tiga permintaan pemilik ditangani sebagai sepuluh sasaran pada task_list. Akhir sesi Edit, HUD aktif, simulator default, kualitas render Automatic, tanpa fixture sementara. Tidak ada publikasi atau pemain luar.
 
