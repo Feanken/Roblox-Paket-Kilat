@@ -1,37 +1,36 @@
-local K={}
-local C,E
-function K.Init(config,economy) C,E=config,economy end
+-- Server-authoritative attachment; detailed geometry is shared with shop previews.
+local K={}local C,E
+local V=require(game.ReplicatedStorage.PaketKilat.Shared.GearVisuals34)
+function K.Init(config,economy)C,E=config,economy end
+local function attach(model,limb,cf)
+ model:PivotTo(cf)
+ for _,p in model:GetDescendants()do if p:IsA("BasePart")then
+  p.Anchored=false p.Massless=true p.CanCollide=false p.CanTouch=false p.CanQuery=false
+  local weld=Instance.new("WeldConstraint")weld.Part0=limb weld.Part1=p weld.Parent=p
+ end end
+end
 function K.Apply(player)
-	local char=player.Character if not char then return end
-	for _,name in ipairs({"PaketKilatBag","PaketKilatGloveLeft","PaketKilatGloveRight"})do local old=char:FindFirstChild(name)if old then old:Destroy()end end
-	local snapshot=E.Snapshot(player)
-	if not snapshot.profileReady then return end
-	local item=C.Cosmetics[snapshot.equippedCosmetic]
-	local torso=char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso")
-	local hum=char:FindFirstChildOfClass("Humanoid")
-	if not item or not torso or not hum or hum.Health<=0 then return end
-	local bag=Instance.new("Part")
-	bag.Name="PaketKilatBag" bag.Size=Vector3.new(1.5,1.7,0.65) bag.Color=item.Color
-	bag.Material=Enum.Material.SmoothPlastic bag.Massless=true
-	bag.CanCollide=false bag.CanTouch=false bag.CanQuery=false
-	bag.CFrame=torso.CFrame*CFrame.new(0,-0.1,torso.Size.Z/2+0.35)
-	bag:SetAttribute("CosmeticId",snapshot.equippedCosmetic)
-	local weld=Instance.new("WeldConstraint") weld.Part0=torso weld.Part1=bag weld.Parent=bag
-	bag.Parent=char
- local level=snapshot.gear and snapshot.gear.level or 0
- if level>0 then
-  local color=({Color3.fromRGB(143,102,71),Color3.fromRGB(39,119,115),Color3.fromRGB(211,166,56)})[level]
-  for _,side in ipairs({"Left","Right"})do
-   local limb=char:FindFirstChild(side.."Hand")or char:FindFirstChild(side.." Arm")
-   if limb then
-    local glove=Instance.new("Part")glove.Name="PaketKilatGlove"..side
-    local hand=limb.Name:find("Hand")~=nil
-    glove.Size=hand and(limb.Size+Vector3.new(.08,.06,.08))or Vector3.new(limb.Size.X+.08,.55,limb.Size.Z+.08)
-    glove.CFrame=limb.CFrame*(hand and CFrame.identity or CFrame.new(0,-limb.Size.Y/2+.24,0))
-    glove.Color=color glove.Material=Enum.Material.Fabric glove.Massless=true glove.CanCollide=false glove.CanTouch=false glove.CanQuery=false
-    glove:SetAttribute("GripLevel",level)local weld=Instance.new("WeldConstraint")weld.Part0=limb weld.Part1=glove weld.Parent=glove glove.Parent=char
-   end
+ local char=player.Character if not char then return end
+ for _,name in {"PaketKilatBag","PaketKilatGloveLeft","PaketKilatGloveRight"}do local old=char:FindFirstChild(name)if old then old:Destroy()end end
+ local state=E.Snapshot(player)if not state.profileReady then return end
+ local torso=char:FindFirstChild("UpperTorso")or char:FindFirstChild("Torso")
+ local hum=char:FindFirstChildOfClass("Humanoid")
+ local item=C.Cosmetics[state.equippedCosmetic]
+ if not torso or not hum or hum.Health<=0 or not item then return end
+ local scale=math.clamp(torso.Size.Y/2,.75,1.25)
+ local bag=V.Bag(state.equippedCosmetic,item.Color)bag:ScaleTo(scale)
+ local _,size=bag:GetBoundingBox()
+ attach(bag,torso,torso.CFrame*CFrame.new(0,-.06*scale,torso.Size.Z/2+size.Z*.43))
+ bag.Parent=char
+ local level=state.gear and state.gear.level or 0
+ if level>0 then for _,side in {"Left","Right"}do
+  local hand=char:FindFirstChild(side.."Hand")local limb=hand or char:FindFirstChild(side.." Arm")
+  if limb then
+   local size=hand and(limb.Size+Vector3.new(.05,.04,.05))or Vector3.new(limb.Size.X+.06,.65,limb.Size.Z+.06)
+   local glove=V.Glove(level,side,size)
+   attach(glove,limb,limb.CFrame*(hand and CFrame.identity or CFrame.new(0,-limb.Size.Y/2+.18,0)))
+   glove.Parent=char
   end
- end
+ end end
 end
 return K

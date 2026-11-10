@@ -123,7 +123,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
   local key=result.orderId or snapshot.orderId or (tostring(result.destinationName)..":"..tostring(result.duration)..":"..tostring(snapshot.deliveryCount))
   if key~=shownOrder then
    shownOrder=key expires=os.clock()+5 noticeExpires=0
-   title.Text=result.newRecord and "REKOR BARU!" or "PAKET SAMPAI!"
+   title.Text=result.newRecord and "REKOR BARU!"or result.rating and result.rating.stars==3 and "KIRIMAN SEMPURNA!"or "PENGANTARAN BERHASIL"
    countFrom=os.clock()countTotal=result.total reward.Text='+0 KOIN'
    local rating=result.rating
    stars.Text=rating and (string.rep('★',rating.stars)..string.rep('☆',3-rating.stars)..' · '..rating.name)or 'PAKET TERKIRIM'

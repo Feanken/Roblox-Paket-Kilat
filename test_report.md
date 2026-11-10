@@ -85,3 +85,8 @@ Tambahan visual462part/38mesh pada Map.City32. Empat segmenMoveTo pendek berhasi
 ## Audio33 — verifikasi teknis lokal, 10 November 2026
 
 Tujuh audioStoregratis dimuat, dua musik bergantian/crossfade,4emitter3D berhenti saatjauh, kontrolbus terpisah danprefsnondefault bertahanrespawn. FixtureStudioMemory memicuPickup/Drop/Impact/Recover/Stamp/Delivered; Play/Ended danDeliveredduck.32 terukur, replayreceipt tidak mengulangcue. Cleanup melaluiobserverindependen lolos setelahperbaikan. ProfileIDkosong fixturefallback dipulihkan;7source disk/Edit cocok. ConsolefreshBootstrap saja. Desktop danGalaxyA06landscape/Root705×280 diperiksa; sentuhfisik/FPS/pendengaran asisten tidak diklaim. Publikasi/pemain luar tetap ditunda; T22/T23 tidak dicentang.
+
+
+## Upgrade34 — verifikasi lokal, 10 November 2026
+
+32kombinasi gear pada rig engineR6/R15,16pada avatar aktif,respawn;pengantaran3bintang/biasa/capPos3/replay;duaMoveTo dan343sampelfloor;5targetplannerterhubung;previewdesktopdanGalaxyA06landscape muat. Semua fixtureStudioMemory dengan penempatan/elapsed terkontrol, bukan perjalanan manusia atauHPfisik. Renderer gelap juga dilaporkan pemilik, lalu kembali setelah refresh kualitaslokal dan dipotret diEditor/Play. ConsoleakhirBootstrap saja. Bukti upgrade34-audit.json;tidak mengubah statusT22/T23 atau izin rilis.

@@ -47,10 +47,10 @@ return table.freeze({
 	}),
 	CosmeticOrder=table.freeze({"TasStandar","TasMerah","TasBiru","TasHijau"}),
 	Cosmetics=table.freeze({
-		TasStandar=table.freeze({Name="Tas standar",Price=0,Color=Color3.fromRGB(200,151,79)}),
-		TasMerah=table.freeze({Name="Tas merah",Price=50,Color=Color3.fromRGB(238,89,88)}),
-		TasBiru=table.freeze({Name="Tas biru",Price=75,Color=Color3.fromRGB(75,163,242)}),
-		TasHijau=table.freeze({Name="Tas hijau",Price=100,Color=Color3.fromRGB(71,194,132)}),
+		TasStandar=table.freeze({Name="Pos klasik",Price=0,Color=Color3.fromRGB(200,151,79)}),
+		TasMerah=table.freeze({Name="Ransel kilat",Price=50,Color=Color3.fromRGB(238,89,88)}),
+		TasBiru=table.freeze({Name="Roll-top biru",Price=75,Color=Color3.fromRGB(75,163,242)}),
+		TasHijau=table.freeze({Name="Penjelajah hijau",Price=100,Color=Color3.fromRGB(71,194,132)}),
 	}),
 	Labels=table.freeze({Start="Ambil pesanan",Pickup="Ambil ulang",Drop="Lepas",Recover="Pulihkan",Deliver="Antar"}),
 })

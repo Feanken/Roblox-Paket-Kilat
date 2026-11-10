@@ -40,19 +40,21 @@ end
 function H.Init(config,world,delivery)
 	C,W,D=config,world,delivery
 	puddle=W.Map.Expansion.Hazards:FindFirstChild("Puddle")
-	barrier=W.Map.Expansion.Hazards.MovingBarrier
-	basePosition=barrier.Position
-	previousPosition=barrier.Position
+	barrier=W.Map.Expansion.Hazards:FindFirstChild("MovingBarrier")
+	basePosition=barrier and barrier.Position
+	previousPosition=barrier and barrier.Position
 end
 function H.Start()
 	local sampled=0
 	RunService.Heartbeat:Connect(function(dt)
 		H.elapsed+=dt
-		local omega=2*math.pi/C.Hazards.BarrierPeriod
-		local pos=basePosition+Vector3.new(C.Hazards.BarrierAmplitude*math.sin(H.elapsed*omega),0,0)
-		local speed=C.Hazards.BarrierAmplitude*omega*math.cos(H.elapsed*omega)
-		barrier.CFrame=CFrame.new(pos)
-		barrier:SetAttribute("MotionSpeed",speed)
+		local pos=basePosition local speed=0
+		if barrier and barrier.Parent then
+		 local omega=2*math.pi/C.Hazards.BarrierPeriod
+		 pos=basePosition+Vector3.new(C.Hazards.BarrierAmplitude*math.sin(H.elapsed*omega),0,0)
+		 speed=C.Hazards.BarrierAmplitude*omega*math.cos(H.elapsed*omega)
+		 barrier.CFrame=CFrame.new(pos)barrier:SetAttribute("MotionSpeed",speed)
+		end
 		for userId,effect in pairs(H.effects) do
 			if os.clock()>=effect.expires or not effect.root.Parent then
 				effect.velocity:Destroy(); effect.attachment:Destroy(); H.effects[userId]=nil
@@ -61,8 +63,8 @@ function H.Start()
 		sampled+=dt
 		if sampled<C.Hazards.SampleInterval then return end
 		sampled=0
-		local middle=(pos+previousPosition)/2
-		local swept=barrier.Size+Vector3.new(math.abs(pos.X-previousPosition.X),0,0)
+		local middle=pos and previousPosition and (pos+previousPosition)/2 or Vector3.zero
+		local swept=barrier and barrier.Parent and (barrier.Size+Vector3.new(math.abs(pos.X-previousPosition.X),0,0))or Vector3.zero
 		for _,o in pairs(D.orders) do
 			if o.outOfBounds or o.completionLocked then continue end
 			o.hazardCooldowns=o.hazardCooldowns or {}
@@ -86,7 +88,7 @@ function H.Start()
 				end
 			else o.slipSamples=0 end
 			local subject=o.status=="Carrying" and r or o.package
-			if subject and subject.Parent and math.abs(speed)>=C.Hazards.BarrierMinimumSpeed
+			if barrier and barrier.Parent and subject and subject.Parent and math.abs(speed)>=C.Hazards.BarrierMinimumSpeed
 				and inBox(subject.Position,middle,swept,1.25)
 				and os.clock()-(o.hazardCooldowns.Barrier or -math.huge)>=C.Hazards.BarrierCooldown then
 				local wasCarrying=o.status=="Carrying"

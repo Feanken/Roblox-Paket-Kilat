@@ -142,7 +142,7 @@ local function render()
  shop.Visible=shopOpen
  shop.Size=UDim2.fromOffset(math.min(620,w-24),272)
  ui.ShopToggle.Text=UIS.TouchEnabled and "Toko" or "Toko [B]"
- shop.Info.Text=os.clock()<feedbackUntil and feedback or(ui:GetAttribute("ShopTab20")=="gear"and "Upgrade dengan koin. Beli saat tidak membawa paket."or "Beli/pakai tas dekat depot. Pilih warna favoritmu.")
+ shop.Info.Text=os.clock()<feedbackUntil and feedback or(ui:GetAttribute("ShopTab20")=="gear"and "Upgrade dengan koin. Beli saat tidak membawa paket."or "Beli/pakai tas dekat depot. Pilih model tasmu.")
  for _,id in ipairs(C.CosmeticOrder) do
   local b=shop[id].Action
   local owned=state.ownedCosmetics and state.ownedCosmetics[id]

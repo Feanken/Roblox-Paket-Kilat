@@ -491,7 +491,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] C32-08:140bidang lantai dan17anchor cocok baseline, tanpa perubahan terrain.
 - [x] C32-09: Play fresh empat segmenMoveTo lolos,38preloadSuccess/0failure, consoleBootstrap saja; akhirEdit/HUDenabled/tanpafixture terpasang.
 - [x] C32-10: source, spesifikasi, audit, provenance dan lima gambar disimpan; diffcheck lolos.
-- [ ] C32-11: simpan AutoRecovery ke main_game.rbxl. Pemeriksaan terbaru466647byte/09:44:45WIB memuatCoach29/Customers30/Batch31 tetapi belumCity32.
+- [x] C32-11: Upgrade34 memverifikasi main_game499387byte sudah memuatCity32.
 - [ ] C32-12: inspeksi pemilik atas tampilan; FPS/HP fisik/multiplayer tetap belum diklaim. Tidak menerbitkan atau mengundang pemain luar.
 
 
@@ -505,5 +505,21 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] A33-06: Musik/Suasana/Efek terpisah, M, panel mobile ringkas, atribut sesi dan respawn.
 - [x] A33-07: Play/preload/end/crossfade/duck/mute/ambience/respawn/cleanup; UI desktop dan emulator phone.
 - [x] A33-08: source cocok disk/Edit, audit, provenance, dokumen dan save status.
-- [ ] A33-09: simpan AutoRecovery ke main_game.rbxl setelah perubahan audio.
+- [x] A33-09: Upgrade34 memverifikasi main_game499387byte sudah memuatAudio33.
 - [ ] A33-10: penilaian pendengaran pemilik dan HP fisik/performa; publikasi/pemain luar tetap ditunda.
+
+
+## Upgrade34 — sepuluh perbaikan terarah (10 November 2026)
+
+- [x] U34-00: inspeksi dependensi,backupsource/binary/handoff,SDD.
+- [x] U34-01:suaraachievementantar pendek danfanfarekirimanistimewa,duck/mute/fallback/dedupe.
+- [x] U34-02:empatbagbersiluetberbedadenganstraps/kantong/zip/hardware.
+- [x] U34-03:tigalevelglovedetailpalm/cuff/padding/fingers.
+- [x] U34-04:fitR6/R15,massless,weldnoncollision,replace/respawnbesih.
+- [x] U34-05:pratinjau3Dtasdanmodelgloveberikutnyaditoko;ID/hargatetap.
+- [x] U34-06:hapusbalokAWAS,serverhazardmenerimaobjekopsional.
+- [x] U34-07:hapussemuaramp/bridge/support/railing,penyeberangandatar.
+- [x] U34-08:partisifloorterhubungtanpacelah/tumpukan,detailtamanpengganti.
+- [x] U34-09:Pos3menapakditanah,panduanPemburucapterhubungjalurbaru.
+- [x] U34-10:Play/gear/audio/cap/lintasan/layout/console,buktidansourcecocok.
+- [ ] U34-11:SaveAutoRecoverykemain_game.rbxl;penilaianpemilik/HPfisiktetapbelumdiklaim.

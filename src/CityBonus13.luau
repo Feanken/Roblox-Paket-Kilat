@@ -21,24 +21,11 @@ function B.Navigation(world)
  end
  table.sort(stations,function(a,b)return a.id<b.id end)
  local paths={}
- local bridge=map.City13:FindFirstChild('PedestrianBridge')
- local west=map.City13:FindFirstChild('WestRamp')local east=map.City13:FindFirstChild('EastRamp')
- if bridge and west and east then
-  local function endpoints(ramp)
-   local a=ramp.CFrame:PointToWorldSpace(Vector3.new(0,ramp.Size.Y/2,-ramp.Size.Z/2))
-   local b=ramp.CFrame:PointToWorldSpace(Vector3.new(0,ramp.Size.Y/2,ramp.Size.Z/2))
-   if a.Y>b.Y then a,b=b,a end
-   b=Vector3.new(b.X,bridge.Position.Y+bridge.Size.Y/2,b.Z)
-   return a,b
-  end
-  local wl,wh=endpoints(west)local el,eh=endpoints(east)
-  table.insert(paths,{wl,wh,eh,el})
-  for _,foot in ipairs({wl,el})do
-   local offset=basis:VectorToObjectSpace(foot-pickup)
-   local side=pickup+basis:VectorToWorldSpace(Vector3.new(offset.X,0,offset.Z+6))
-   local street=pickup+basis:VectorToWorldSpace(Vector3.new(-22,0,offset.Z+6))
-   table.insert(paths,{foot,side,street})
-  end
+ local crossing=map:FindFirstChild("City34")
+ local nodes=crossing and crossing:FindFirstChild("WalkNodes")
+ if nodes then
+  local line={}for _,name in {"Node1","Node2","Node3"}do local p=nodes:FindFirstChild(name)if p then table.insert(line,p.Position)end end
+  if #line>=2 then table.insert(paths,line)end
  end
  return {stations=stations,paths=paths}
 end

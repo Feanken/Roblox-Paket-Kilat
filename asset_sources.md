@@ -158,3 +158,17 @@ Semua tujuh aset berikut ditemukan dengan MCPsearch_asset(scope=creator_store,as
 Kandidat diinsersebagaiSound keServerStorage saatEdit;0descendants/script. LibraryinertPaketKilat_AudioAssets33.Volume0/Playingfalse,dibuatbaru dariSoundId;folderreview dihapus sebelumbuildfinal. Soundscape33 memakai Sound/SoundGroup/EqualizerSoundEffect bawaan, tanpa vendor code. CueClick/Pulih/fallback tetap mereferensikan audio bawaan yang sudahdicatatT15 (action_get_up.mp3,action_jump_land.mp3,volume_slider.ogg), tidak disalin ke repo. Kandidat kerumunan bahasaasing/casino serta efekUI tidakjelas tidakdiimpor. SumberperlengkapanmapCity32 tidakberubah.
 
 TujuhfetchSuccessdan14Soundruntime loaded, Play/Ended serta crossfade diperiksa. Bukti creator-audio33.json/audio33-audit.json. Ini bukan penilaian subjektif kualitas rekaman/loudness, audit hakIP pihaklain atau jaminan akses pada semua versi pengalaman di masa depan.
+
+
+## Upgrade34 — 10 November 2026
+
+| Audio | Creator | Sumber gratis yang dipakai | Durasi di Studio |
+| --- | --- | --- | --- |
+| Spinning Around (b) | APMOfficial | [1839881844](https://create.roblox.com/store/asset/1839881844) |5,423detik; sting pengantaran biasa |
+| Winning Spirit | APMOfficial | [1836860398](https://create.roblox.com/store/asset/1836860398) |5,701detik; kiriman3bintang/finishborongan |
+
+MCPsearch_asset(scope=creator_store,assetType=Audio,priceFilter=free) mengembalikan isFree=true/priceCents0. Sound yang diimpor ditinjau inert di ServerStorage, dibuat ulang dariSoundId dalam PaketKilat_AudioAssets34 denganVolume0/Playingfalse. Tidak membeli/mengunggah ulang/distribusi fileaudio; pemakaian melalui runtimeRoblox. Metadata pencarian menulis2detik untuk Spinning Around, namun TimeLength aktual5,423detik yang dipakai untuk mix. Loading,Play/Ended danduck diperiksa. Tidak mengklaim evaluasi pendengaran atau hak redistribusi di luarRoblox.
+
+Tas dan sarung tangan adalah geometri native buatan proyek melalui GearVisuals34: Part, Sphere SpecialMesh bawaan, cylinder, Fabric/Metal/SmoothPlastic,SurfaceGui/font. Tidak memakai geometri gear pihak ketiga. Dua model gratis sempat ditinjau tanpa kode vendor dijalankan:low poly backpack11467460978/Maya_Kenobi (1Union),Cartoon glove15603104393/Squidward77chair (4Part/1Union/1SpecialMesh). Keduanya tidak cocok varian/fit yang diperlukan, tidak dipakai dan semua salinan review dihapus sebelum build akhir. Source dan metadata lengkap verification/creator-assets34.json.
+
+Penyeberangan/planter/bollard/papan memakai primitive native; partition memakai material floor lama. Tidak mengimpor aset lingkungan baru, menulis terrain atau membeli apa pun.

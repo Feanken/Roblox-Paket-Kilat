@@ -1,4 +1,46 @@
-# Pembaruan TERBARU — Audio33: musik dan suara kampung
+# Pembaruan terbaru — Upgrade34: achievement, gear, dan penyeberangan taman
+
+10 November 2026. Place yang diedit tetap main_game_AutoRecovery_0.rbxl, Studio6654bdf4-6d9a-4365-b5fc-cd30708a66d3, sesuai persetujuan sebelumnya. Tiga permintaan pemilik ditangani sebagai sepuluh sasaran pada task_list. Akhir sesi Edit, HUD aktif, simulator default, kualitas render Automatic, tanpa fixture sementara. Tidak ada publikasi atau pemain luar.
+
+## Perubahan pemain
+
+Pengantaran biasa memakai sting APM Spinning Around (b), terukur5,423detik. Kiriman tiga bintang atau kiriman terakhir borongan memakai Winning Spirit,5,701detik. Efek mengikuti bus Efek/mute/fallback lama; musik merendah ke32% gain selama5,5/5,8detik. Replay hasil untuk order yang sama tetap tidak mengulang cue. Receipt nonrekor tiga bintang bertajuk KIRIMAN SEMPURNA; rekor/target/borongan mempertahankan judul khususnya.
+
+Empat ID tas lama kini punya geometri berbeda: Pos klasik berupa satchel dengan flap dan dua buckle, Ransel kilat berpocket depan/zip/reflektor, Roll-top biru dengan gulungan/clip/sleeve, Penjelajah hijau dengan hood/dua kantong samping/strap kompresi. Badan melengkung memakai Sphere SpecialMesh bawaan; emblem KILAT dan hardware dibuat native. Tas12–15Part, bukan satu balok recolor. Dua strap belakang menempel ke torso. Nama tampilan diperbarui, ID dan harga0/50/75/100 tidak berubah.
+
+Sarung tangan memakai palm, thumb, finger caps, dan manset melengkung. Lv1 memiliki grip kulit dan jahitan, Lv2 menambah tiga bantalan knuckle/buckle, Lv3 menambah silicone grip dan strip manset.8/11/16Part per tangan. Semua massless, noncollision/nonquery/nontouch dan diweld pada tangan/ujung arm yang sesuai. Bentuk level berubah tanpa mengubah angka upgrade lama. Toko memakai factory yang sama dalam empat pratinjau tas dan sepasang glove level berikutnya. Label “pilih warna” menjadi “pilih model”.
+
+Jembatan/ramp/support/railing tujuh objek dihapus dari map aktif. Seluruh objek AWAS—balok bergerak, zona kuning, dua post—juga diangkat, total11objek. Mereka diarsip, bukan dihapus permanen. Diganti penyeberangan datar, bollard tepi, dua planter rendah, papan Pos Taman dan node jalan kaki. Pos3 sekarang pada local(6,1.1,80), tidak menggantung. Dua fringe rumput dipartisi menjadi6bidang; Surface15 berubah140→144. Sambungan tepi jalan diberi overlap.002stud untuk menutup seam float lama; tidak ada lapisan lantai besar baru. Terrain pemilik tidak ditulis. HazardService menerima barrier yang tidak ada, mempertahankan dukungan puddle opsional.
+
+Navigasi cap kini memiliki satu jalur datar barat→jalan tengah→Pos3. Kelima pos tetap dapat dipilih planner, bonus/cooldown/server validation lama tetap. Rute aman lima rumah dan ekonomi tidak diubah.
+
+## Source dan backup
+
+Baru: ReplicatedStorage.PaketKilat.Shared.GearVisuals34 dan StarterPlayerScripts.PaketKilatGearPreviews34.8source diubah:CosmeticService,HazardService,CityBonus13,Config,AudioProfile33,Soundscape33.client,DeliveryFeedback.client,PrototypeInput.client.10source persis cocok disk/Edit. CityCrossing34.luau adalah migrasi Edit, bukan generator runtime. Revisi world:CourierDetails34/TailoredCourier34/GroundedCrossing34/ AchievementDelivery34.
+
+Backup delapan source di backups/upgrade34-sources dan ServerStorage.PaketKilat_PreUpgrade34. MapObjects memuat13objek:11objek yang dipensiunkan dan2floor asli. Pos3CFrame menyimpan posisi awal. Binary baseline backups/main_game.before-upgrade34.20261110.rbxl dan handoff.before-upgrade34.md. Folder review/model kandidat dan seluruh temporary dihapus sebelum akhir.
+
+Rollback sebagai satu paket: pulihkan8source dan hapus2source baru, hapusMap.City34 serta6Surface15 dengan Upgrade34=true, kembalikan13MapObjects ke OriginalParent34, pulihkanPos3CFrame, lalu pulihkan atribut revisi sebelumnya dari handoff lama. Jangan mengembalikan source lama yang mewajibkan MovingBarrier tanpa mengembalikan objeknya.
+
+## Verifikasi
+
+-16kombinasi tas/level pada avatar aktif dan32kombinasi pada rig R6/R15 yang benar-benar dibuat engine: tidak ada part gear anchored/collide/touch/query, semuanya massless dan weld valid. Model berulang diganti bersih. ScaleTo.75 mempertahankan SphereMesh.Scale1, sehingga tubuh tas tidak mengecil ganda. Cuff terakhir dihaluskan sesudah matriks attachment; gaya akhir terlihat pada avatar dan bertahan respawn menjadi tas hijau/Lv3.
+- Dua lintasan MoveTo pendek melalui penyeberangan dan bekas area AWAS sampai, health100. Sampel floor343titik sempat7miss pada batasx-31 akibat seam float sangat kecil; koreksi tepi.002 menutupnya, final343/343hit. Overlap bidang lebih dari toleransi.003stud tidak ditemukan. Variasi tinggi dasar.00049stud.11objek pensiun tidak tersisa di map aktif.
+- Planner dapat mencapai kelima pos; seluruh titik menujuPos3 berada padaY4478, tanpa jalur elevated. Pos3 memberi satu cap server nyata dan ikut award6 pada fixture pengantaran. Fixture memindahkan/menahan avatar dan mengatur elapsed; bukan perjalanan manusia.
+- Pengantaran kondisi100/3bintang memicuExcellent, kondisi80 memicuDelivered. Replay receipt tidak menambahPlayCount. Excellent Play1/Ended1, musikduck.32 saat bermain dan kembali1 sesudahselesai. Kredit/hadiah tetap lewat ledger lama; misalnya total53 saat ada cap6 atau47 tanpa cap pada fixture. Nilai bukan tarif tetap. Screenshot receipt yang sempat diambil berada di tengah animasi counter, bukan angka final.
+- Empat pratinjau tas dan pasangan glove terlihat setelah renderer pulih; panel GalaxyA06landscape620×272 berada pada(42.5,4) diRoot705×280. Seluruh label gear TextFits. HP fisik/FPS/gamepad/multiplayer dan semua kombinasi pakaian/avatar belum dinilai.
+- Selama pengujian viewport MCP dan Studio pemilik sama-sama gelap. Penyebab tidak terisolasi. Refresh kualitas render lokal keLevel01 lalu kembaliAutomatic memulihkan 3D; sesudahnya Editor/Play/shop/avatar terlihat lagi. Tidak menambahkan kode renderer produksi atau mengubah Lighting. Draft bola Part yang tampak terpisah, typo child lookup row.Name, serta tangkapan gelap tidak dipakai sebagai bukti visual akhir.
+- Akhir freshPlay phone default gear0/coins0, consoleBootstrap saja. Setelah Stop:Edit/defaultviewport/HUDenabled, tidak ada TemporaryGear34/TemporaryUpgrade34, gallery, kandidat review atau runtime audio yang tersimpan. Tidak ada persistensi fixture keDataStore.
+
+Bukti verification/upgrade34-audit.json,creator-assets34.json,Upgrade34.fixture.server.luau,saved-upgrade34.json serta upgrade34-worn-gear/crossing/shop-bags/shop-gloves/phone.jpg. Audio diverifikasi loading/play/end, asisten tidak mendengar timbre/loudness; pemilik menilai rasa suaranya saatPlay. T22/T23 tidak dicentang dan rilis tetap ditunda.
+
+## Status simpan
+
+main_game.rbxl sekarang499387byte,mtime2026-11-10T05:07:02.318Z (12:07:02WIB). Sudah memuatCity32 danAudio33; tugas simpan dua tahap itu diperbarui. **Belum memuatUpgrade34. Simpan AutoRecovery yang terbuka ke main_game.rbxl sebelum menutup Studio.** Source lokal, dokumen dan bukti sudah tersimpan. Tidak melakukan publikasi.
+
+---
+
+# Arsip — Audio33: musik dan suara kampung
 
 10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 dipakai sesuai persetujuan pemilik. Fokus audio; mapCity32 dan gameplay/ekonomi tetap. AkhirEdit/HUDenabled/defaultviewport, tidak ada TemporaryAudio33 atau folder review, tanpa publikasi/pemain luar.
 

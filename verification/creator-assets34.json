@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-10",
+  "scope": "creator_store",
+  "priceFilter": "free",
+  "usedAudio": [
+    {
+      "description": "Lively energetic theme - link\r\nDuration: 2 seconds\r\n\r\nGenre: Pop\r\nLibrary: Juice Music\r\nAlbum: MORE ENTERTAINMENT\r\nAlbum Info: \"A spotlight on glitz, getaways and fun\"\r\n\r\nCourtesy of APM Music.",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/1839881844",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=1839881844&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "1839881844",
+      "name": "Spinning Around (b)",
+      "priceCents": 0,
+      "creatorName": "APMOfficial",
+      "source": "creator_store"
+    },
+    {
+      "description": "",
+      "creatorStoreUrl": "https://create.roblox.com/store/asset/1836860398",
+      "assetType": "Audio",
+      "thumbnailUrl": "https://thumbnails.roblox.com/v1/assets?assetIds=1836860398&returnPolicy=PlaceHolder&size=150x150&format=Png",
+      "isFree": true,
+      "assetId": "1836860398",
+      "name": "Winning Spirit",
+      "priceCents": 0,
+      "creatorName": "APMOfficial",
+      "source": "creator_store"
+    }
+  ],
+  "durations": {
+    "1836860398": 5.701201814058957,
+    "1839881844": 5.423287981859411
+  },
+  "gear": "Native geometry authored in GearVisuals34; no imported gear geometry used",
+  "rejectedModels": [
+    {
+      "id": "11467460978",
+      "creator": "Maya_Kenobi",
+      "reason": "Backpack union unsuitable for four tailored variants; removed"
+    },
+    {
+      "id": "15603104393",
+      "creator": "Squidward77chair",
+      "reason": "Oversized cartoon glove unsuitable; removed"
+    }
+  ],
+  "purchase": false,
+  "upload": false,
+  "vendorScriptsRun": false
+}

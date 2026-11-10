@@ -480,3 +480,13 @@ Kriteria A33: aset search free/metadata tercatat; audio ter-load/TimeLength>0 da
 
 
 Hasil Audio33: tiga source baru(AudioProfile33,Soundscape33.client,AudioLifecycle33.client) danempatpatchclient cocokdisk/Edit. Pengamatlifecycle independen dibutuhkan karena DeferredDestroying tidak menjalankan cleanup milikscript yang dihapus. TujuhasetStore berhasil dimuat; seluruh14Soundruntime loaded, crossfade/cue/duck/fallback/mute/respawn/cleanup terverifikasi. Desktop danpanelphone360×252 muatRoot705×280; potret tidak diuji karenaLandscapeSensor. Detailbukti/batas pada handoff/audio33-audit; binarymain_game belumCity32/Audio33.
+
+
+## Upgrade34 — pencapaian, perlengkapan dan jalur taman (10 November 2026)
+
+Permintaanpemilik: suara antar seperti achievement;tas/sarungtangan memiliki detail bentuk;hapus/ganti balokAWAS danjembatan. Sepuluh sasaran: (1)stingantarberhasil;(2)fanfarekiriman3bintang/finishborongan danprioritasmix;(3)empat siluettas berbeda;(4)kantong/strap/zip/buckle/emblem nyata;(5)sarungtangan bertingkatpalm/cuff/padding/finger;(6)fitR6/R15,masslessnoncollision;(7)pratinjau3Dtokotas/peralatan;(8)hapusbalokbergerakAWAS tanpaerrorserver;(9)ganti seluruhjembatandenganpenyeberangandatar,koridorpavingpartisitanpalantaitumpuk;(10)Pos3ditanahdanpanduanPemburucapdirutekanulang.
+
+Harga/IDkepemilikan/upgrade/rumusdamage/hadiah tetap. Rintanganbalokdihapus ataspermintaanpemilik;tidak menambahkan hazard pengganti yangmendorongtanpaperingatan. Jalurtamanmenjadi koneksipejalan kaki danareaistirahat,sementarajalanutama5tujuantetap. Terrainpemilikdipertahankan. Audio memakaiasetGratisCreatorStoreyangterverifikasi,mixEfek/mute/fallback/dedupe danmusikduck tetap. Tiga levelglove danempatbag harusdibedakanbentukdanpratinjaubukanwarnasaja. UjigearR6/R15/weld/pose/respawn,pengantaran/fanfare,capPos3/panduanserta lintaspenyeberangan. Tidakrilis/pemainluar.
+
+
+HasilUpgrade34: factory gear native dipakai server dan pratinjau toko;8patch+2sourcebaru cocokdisk/Edit.11objek bridge/barrier pensiun diarsip, floor140→144/343sampelhit, Pos3grounded dan5targetplannerterhubung. Dua fanfare5,423/5,701detik mengikuti rating/finalbatch, masterEfek/mute/dedupe/fallback tetap.32kombinasirig,16avatargear,respawn,duaMoveTo,pengantaran/cap/replay,previewdesktop/phone lolos pemeriksaan yang dicatat. Batas/perincian dan rollback dihandoff;main_game masihCity32/Audio33 dan belumUpgrade34.
