@@ -514,3 +514,13 @@ Pertahankan terrain, lima rumah/titik tujuan, pickup/recovery/spawn, rest seat d
 
 
 Hasil City36: loop jalan kota lama tersambung, lima gedung selaras frontZ46 dengan seluruh fasadnya,10bangunan/10calon alamat baru(total30),petak hijau civic/quay,32model gratis reuse dan display usaha berbeda. Depot/ShopPoint diperbaiki,dua picnic dinaikkan.17anchor dan empat kantor edit pemilik dipertahankan.719Part baru termasuk37mesh; Districts35 menjadi2618Part karena partisi diagonal.10757sampel floor0lubang,9koridor bebas solid,12segmen rig sampai,fixture toko/paket pada batas baru lolos tanpa perubahan koin.22SurfaceGui papan diperbaiki rasio canvas dan divisualkan stabil. Enamsource cocokdisk/Edit; filemain619614byte masih5dari6source akhir(koreksi papan perluSaveAs yang tepat). Detail/batas/status dihandoff dan verification/city36-*.
+
+
+## City37 — suasana hidup dan fasad ruko (10 November 2026)
+
+Fokus: warga lokal yang berjalan/membaca/minum/duduk di cafe, fasad samping/belakang ruko yang masih polos, dan payung pada tiga meja cafe yang sudah ada. Maksimum8aktor dekat pada desktop/5pada mobile, tanpa Humanoid/physics/remote/reward baru. Aktor dekoratif hanya muncul bila lantai sudah dimuat dan ruang berdirinya aman; jalur terkurasi mengikuti trotoar/taman. Controller lama CityLife15 dipensiunkan agar warga tidak berlipat. Satu pengendali animasi dan observer lifecycle independen menangani cleanup/respawn.
+
+Detail fasad diparent ke ruko, payung ke kelompok meja agar ikut ketika model dipindah. Pertahankan17anchor lama, gedung/edit kantor pemilik, floor dan30calon alamat. Tidak mengaktifkan order baru atau mengubah ekonomi. Sumber koordinat/jumlah warga adalah presentasi lokal dengan batas tetap, bukan eksperimen keseimbangan. Audit memakai panduan SceneAnalysis untuk pengukuran runtime dan tidak mengklaim FPS berdasarkan jumlah Part. Viewport gelap dipulihkan dengan refresh EditQualityLevel lokal lalu dikembalikanAutomatic; tidak menambah kode renderer produksi.
+
+
+Hasil City37:18profil warga lokal,max8desktop/5mobile,405Part detail fasad/payung pada15model yang mengikuti pemiliknya. Controller15dipensiunkan, observer independen menangani disable/destroy/respawn.464sampel jalur bebas floorhilang/badan bangunan;17anchor/30bodytetap. Warga bergerak,berhenti,baca,minum/duduk; cullingjauh0, lifecycle1folder,respawnbersih. EmulatorGalaxyA06landscape705×280membatasi5aktor. HUDyangnonaktif dipulihkan; EditQualityLevel refresh memulihkanviewportgelap. Sourcebaru5cocokdisk/Edit; SaveAsfiletarget tetap perluverifikasi. Rincian/batas dihandoff dan verification/city37-*.

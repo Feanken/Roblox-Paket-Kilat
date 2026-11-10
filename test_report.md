@@ -110,3 +110,10 @@ Source authoring3file cocokdisk/Edit, audit/alamat/owner override/status simpan 
 Play:10segmen Humanoid server-owned sampai health100;2segmenjunction diulang setelah aspal approach dirapikan, keduanya sampai/Asphalt.37mesh/8content ID preloadSuccess,consoleBootstrap saja. ServicefixtureStudioMemory: tokoEquipCosmetic danStart berhasil, paketCarrying/outOfBoundsfalse dix-130/132,Cancel→Idle dan koin tidak berubah. Karakterdipulihkan,fixture dibersihkan,akhirEdit. Bukan perjalanan order utuh atau tes HPfisik/FPS/multiplayer.
 
 Teks papan sempat gepeng karena CanvasSizing default;22SurfaceGui diubah kePixelsPerStud. Tangkapan transisi yang membesar dibuang; capture stabil terbaca normal.6source disk/Edit cocok. Map utama619614byte sudahCity36,tetapi koreksi canvasCityInfill36 terakhir belum tersimpan pada target proyek; pengguna menjelaskanCtrl+S padaAutoRecovery. Statuslanjut pada verification/city36-save-status.json. Tidak ada publikasi/pemain luar.
+
+
+## City37 — warga dan penyelesaian fasad
+
+464sampel18profil:floorhilang0/blockerbangunan0.405Partartanchored/noncollision/nontouch/nonquery,0script/light;17anchor dan30bodymodel tidakberubah. FreshPlay3aktor dekatspawn,7Quay,7taman,maxbudget8; motion~3.4stud/1.2s. Far→0/return→7. Disable/destroy membersihkanfolder,replace→1folder/7aktor,respawn→1folder/3aktor. BagianNPCsemuaanchored/nocollide/touch/query. SceneAnalysisOpaque satuview48764tri/35draw versus47636/34tanpawarga, bukanFPS.
+
+GalaxyA06landscapeTouchtrue,Root705×280,5aktor/budget5,HUDtrue. Defaultviewport dipulihkan;akhirEdit/tanparuntimeNPC. HUDtemplateawalfalse dipulihkantrue. Viewportgelap terpulih viaEditQualityLevel1→Automatic; penyebabtidakterisolasi. ConsoleakhirBootstrap saja. Tidak mengujiHPfisik/multiplayer/antarorderpenuh atau memberi hadiah. Source5cocokEdit/disk; source/artifactdanSDDtercatat, statusSaveAsmain_game pada city37-save-status.json.

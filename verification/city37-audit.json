@@ -1,0 +1,453 @@
+{
+  "edit": {
+    "models": [
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ01_Roti Kota.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ02_Kopi Kanal.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ03_Studio Kertas.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ04_Toko Kamera.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ05_Floris Jalan.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ06_Atelier Utara.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ07_Dapur Nusa.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ08_Buku Bata.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ09_Klinik Sehat.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ10_Kantor Arsitek.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ11_Kafe Sudut.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ12_Pasar Lokal.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ13_Rumah Desain.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ14_Kedai Pagi.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ15_Laundry Kota.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.BrickQuay.BQ16_Galeri Tepi Air.BrickBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD01_Menara Kilat.OfficeBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD02_Kantor Media.OfficeBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD03_Bursa Kreatif.OfficeBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD04_Balai Layanan.OfficeBody",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.OT01_STUDIO JAHIT.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.OT02_POS & KERTAS.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.CV01_KOPI TAMAN.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.CV02_GALERI KOTA.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.CQ01_KAFE PERSIMPANGAN.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.CQ02_FLORIS SUDUT.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.CQ03_BATA RECORDS.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.PK01_KIOS KORAN.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.PK02_TEH TAMAN.Body",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City36.Infill.PK03_BUNGA KOTA.Body",
+        "sizeDelta": 0
+      }
+    ],
+    "hud": true,
+    "runtimeResidue": false,
+    "totalCandidates": 30,
+    "anchors": [
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Depot.PickupPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah01.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RecoveryPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.PrototypeSpawn",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah02.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah03.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah04.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah05.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos1",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos2",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos3",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos4",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos5",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.Depot",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.Plaza",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.Reading",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.North",
+        "sizeDelta": 0
+      }
+    ],
+    "art": {
+      "models": 15,
+      "mesh": 6,
+      "bad": [],
+      "parts": 405
+    },
+    "oldControllerArchived": true,
+    "oldControllerActive": false
+  },
+  "routes": [
+    {
+      "id": "PesisirWalker",
+      "samples": 20,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "GardenReader",
+      "samples": 1,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "OldShopVisitor",
+      "samples": 29,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "MarketShopper",
+      "samples": 1,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "CivicPromenade",
+      "samples": 37,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "CivicGardenWalk",
+      "samples": 16,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "BoulevardVisitor",
+      "samples": 66,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "OfficeWestWalker",
+      "samples": 30,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "OfficeEastWalker",
+      "samples": 37,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "ParkReader",
+      "samples": 1,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "QuayShopper",
+      "samples": 75,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "QuayBookshopVisitor",
+      "samples": 31,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "QuayEastVisitor",
+      "samples": 26,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "QuayNorthWalker",
+      "samples": 73,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "CanalWalker",
+      "samples": 18,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "CafeGuest",
+      "samples": 1,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "RecordCafeGuest",
+      "samples": 1,
+      "holes": 0,
+      "blockers": []
+    },
+    {
+      "id": "FlorisVisitor",
+      "samples": 1,
+      "holes": 0,
+      "blockers": []
+    }
+  ],
+  "runtime": {
+    "first": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"folder\":true,\"attrs\":{\"Mobile37\":false,\"Profiles37\":18,\"Budget37\":8,\"ActiveCount37\":3},\"actors\":[{\"id\":\"GardenReader\",\"parts\":15},{\"id\":\"PesisirWalker\",\"parts\":15},{\"id\":\"OldShopVisitor\",\"parts\":16}],\"old\":false}"
+        }
+      ],
+      "isError": false
+    },
+    "quay": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"attrs\":{\"Mobile37\":false,\"Profiles37\":18,\"Budget37\":8,\"ActiveCount37\":7},\"actors\":[{\"id\":\"CafeGuest\",\"at\":[356.5965881347656,4480.115234375,-71.00250244140625],\"walking\":false,\"parts\":17},{\"id\":\"QuayBookshopVisitor\",\"at\":[391.73895263671877,4480.376953125,-52.080169677734378],\"walking\":true,\"parts\":16},{\"id\":\"QuayNorthWalker\",\"at\":[302.86846923828127,4480.35986328125,-110.30000305175781],\"walking\":true,\"parts\":13},{\"id\":\"FlorisVisitor\",\"at\":[283.99725341796877,4480.3447265625,-81.41697692871094],\"walking\":false,\"parts\":16},{\"id\":\"RecordCafeGuest\",\"at\":[416.0877990722656,4480.115234375,-121.00250244140625],\"walking\":false,\"parts\":17},{\"id\":\"QuayShopper\",\"at\":[407.4891357421875,4480.34716796875,4.707503318786621],\"walking\":true,\"parts\":15},{\"id\":\"QuayEastVisitor\",\"at\":[217.3918914794922,4480.3388671875,-52.10749816894531],\"walking\":true,\"parts\":15}]}"
+        }
+      ],
+      "isError": false
+    },
+    "motion": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"badParts\":[],\"budget\":8,\"count\":7,\"motion\":[{\"id\":\"CafeGuest\",\"delta\":0.018035888671875,\"walking\":false},{\"id\":\"QuayBookshopVisitor\",\"delta\":3.3490402698516847,\"walking\":true},{\"id\":\"FlorisVisitor\",\"delta\":0.00832366943359375,\"walking\":false},{\"id\":\"RecordCafeGuest\",\"delta\":0.000152587890625,\"walking\":false},{\"id\":\"QuayShopper\",\"delta\":3.40787410736084,\"walking\":true},{\"id\":\"QuayEastVisitor\",\"delta\":3.4118518829345705,\"walking\":true},{\"id\":\"QuayNorthWalker\",\"delta\":3.404297113418579,\"walking\":true}]}"
+        }
+      ],
+      "isError": false
+    },
+    "culling": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"returnedCount\":7,\"uiEnabled\":false,\"rootVisible\":true,\"farCount\":0}"
+        }
+      ],
+      "isError": false
+    },
+    "lifecycle": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"disabledCleared\":true,\"destroyedCleared\":true,\"restoredActors\":7,\"withoutResidents\":{\"Children\":[{\"Name\":\"Opaque\",\"Sizes\":{\"Drawcalls\":34,\"Triangles\":47636}}],\"Name\":\"TriangleComposition\",\"Sizes\":{\"Drawcalls\":34,\"Triangles\":47636}},\"withResidents\":{\"Children\":[{\"Name\":\"Opaque\",\"Sizes\":{\"Drawcalls\":35,\"Triangles\":48764}}],\"Name\":\"TriangleComposition\",\"Sizes\":{\"Drawcalls\":35,\"Triangles\":48764}},\"finalActors\":7,\"folderCount\":1}"
+        }
+      ],
+      "isError": false
+    },
+    "respawn": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"sameFolder\":true,\"active\":3,\"folderCount\":1,\"respawned\":true}"
+        }
+      ],
+      "isError": false
+    },
+    "phone": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"attrs\":{\"Mobile37\":true,\"Profiles37\":18,\"Budget37\":5,\"ActiveCount37\":5},\"touch\":true,\"hudEnabled\":true,\"active\":5,\"rootSize\":\"705, 280\"}"
+        }
+      ],
+      "isError": false
+    },
+    "park": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"budget\":8,\"hud\":true,\"active\":7,\"ids\":[\"CivicPromenade\",\"ParkReader\",\"CivicGardenWalk\",\"BoulevardVisitor\",\"OfficeEastWalker\",\"OfficeWestWalker\",\"MarketShopper\"]}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "renderer": {
+    "qualityResetWorked": "EditQualityLevel Level01 then restored Automatic",
+    "productionLightingChanged": false
+  },
+  "device": {
+    "name": "Samsung Galaxy A06",
+    "orientation": "LandscapeLeft",
+    "gameOrientation": "LandscapeSensor",
+    "defaultRestored": true
+  },
+  "limitations": [
+    "Decorative residents, no AI orders or interactions",
+    "View-dependent triangle/draw counts, not FPS benchmark",
+    "No physical-phone or multiplayer assessment"
+  ]
+}

@@ -182,3 +182,8 @@ Tidak ada pembelian/upload atau impor baru. Model yang telah dibersihkan dan div
 ## City36 — infill dan pemakaian ulang aset gratis
 
 32model memakai library bersih yang telah ditinjau: [BroadleafTree4893246329](https://create.roblox.com/store/asset/4893246329)(6), [ParkBench111013476485423](https://create.roblox.com/store/asset/111013476485423)(5), [StreetLamp3302675003](https://create.roblox.com/store/asset/3302675003)(11), [GardenBush7191673673](https://create.roblox.com/store/asset/7191673673)(8), [Bicycle15022611108](https://create.roblox.com/store/asset/15022611108)(2). Reuse dari tahap07/09/32, bukan klaim verifikasi ulang harga listing. Tidak ada pembelian/upload/impor baru.37mesh/8content ID preloadSuccess. Seluruh toko/kios,display koran/kain/parcel/teh/bunga/vinyl,meja bistro,marka/papan dibuat native;0script/0light diCity36.
+
+
+## City37 — fasad, cafe dan warga lokal
+
+Tidak ada pencarian/impor/pembelian aset baru.372Partbingkai/pane/mullion/sill dan33Partpayung dibuat native;6SphereSpecialMesh payung memakai tipe bawaan tanpaMeshId eksternal. Payung menempel pada meja cafeCity36 yang sudah ada. Warga dibuat dariPart/SphereMesh bawaan,warna/prop native, tanpaavatar/deskripsi/animasi/audio yang diunduh. Meja/kursi/landscape gratis tahap lama tetap dipakai.

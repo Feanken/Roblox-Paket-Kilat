@@ -555,3 +555,18 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] C36-08: planting/props/wayfinding/grounding, metadata alamat dan audio taman.
 - [x] C36-09: audit geometry/anchor/corridor, Play fisik dan bukti visual/source.
 - [ ] C36-10: simpan hasil ke main_game.rbxl; penilaian pemilik terpisah.
+
+
+## City37 — warga dan fasad
+
+- [x] C37-00: inspeksi, backup binary/handoff, spesifikasi dan pulihkan viewport Edit.
+- [x] C37-01: snapshot anchor/model dan archive controller warga lama.
+- [x] C37-02: detail delapan dinding samping dan enam fasad belakang ruko.
+- [x] C37-03: payung pada tiga area duduk cafe yang sudah ada.
+- [x] C37-04: profil aktivitas/jalur warga dan audit floor/clearance.
+- [x] C37-05: controller warga lokal dengan batas jumlah/jarak dan kesiapanStreaming.
+- [x] C37-06: pose jalan/diam/baca/minum/duduk dan variasi tampilan.
+- [x] C37-07: lifecycle/disable/destroy/respawn tanpa warga ganda.
+- [x] C37-08: Play, jalan, inspeksi visual dan pengukuran runtime yang tersedia.
+- [ ] C37-09: source/dokumen/bukti dan status simpan yang terverifikasi.
+- [ ] C37-10: simpan finalStudio ke main_game.rbxl dan penilaian pemilik.

@@ -1,4 +1,48 @@
-# Pembaruan terbaru — City36: jalan keliling, penataan gedung dan infill
+# Pembaruan terbaru — City37: warga, kafe dan fasad
+
+10 November 2026. Sesi main_game_AutoRecovery_0.rbxl/Studio6654bdf4-6d9a-4365-b5fc-cd30708a66d3 digunakan sesuai izin sebelumnya. Fokus suasana hidup dan penyelesaian fasad; tidak menambah order/hadiah. Akhir Edit, viewport default, HUD aktif, tanpa aktor Play tersimpan.
+
+## Hasil
+
+18profil warga dekoratif tersebar di kota lama,Civic Centre dan Bata Quay. Ada pejalan kaki,pembeli membawa tas,pembaca buku,pengunjung minum dan dua tamu duduk pada kursi cafe. Mereka hanya dibuat di client di sekitar pemain, maksimum8desktop/5mobile, radius135stud. Pemilihan diperbarui.75detik,pose20Hzdesktop/12Hzmobile. Ini aktor visual tanpaHumanoid,physics,collision,touch/query,dialog atau pemberian misi.30calon alamat dan lima tujuan aktif tetap.
+
+Warga muncul setelah raycast memastikan floor4478 dan volume berdirinya bebas bangunan. Profil berjalan memakai dua titik dengan jeda/putar balik. Posisi,shirt/skin/hair dan prop berbeda. Controller CityLife15 lama dipindah ke backup agar dua sistem warga tidak menumpuk. Pelanggan rumah22/30 yang menerima paket tetap.
+
+Delapan dinding samping ruko mendapat jendela tinggi,bingkai,mullion dan sill. Enam ruko baris belakang mendapat trim jendela belakang; total372Part dekor. Tiga kelompok meja cafe mendapat payung,tiang,rib dan finial,33Part/6SphereMesh bawaan.15model terpasang pada ruko/meja pemiliknya, sehingga ikut bila model dipindah. Tidak ada impor aset baru; meja/kursi lama tetap digunakan.
+
+HUD PaketKilatUI ditemukanEnabled=false. Keadaan awal disimpan dalam BoolValue OriginalHudEnabled37 dan template diaktifkan kembali. Tidak mengubah tata letak/harga/tombol. Viewport sempat gelap pada pemilik dan MCP. RefreshQualityLevel umum tidak memulihkan; refreshEditQualityLevel keLevel01 lalu kembaliAutomatic memulihkan3D. Penyebab dasarnya belum diisolasi. Tidak menambahkan kode renderer produksi atau mengubahLighting.
+
+## Source dan rollback
+
+Lima source baru:src/CityDetails37.luau(Edit-only),ResidentProfiles37.luau,CityResidents37.luau,Residents37.client.luau,ResidentLifecycle37.client.luau. Runtime module diReplicatedStorage.PaketKilat.Shared; duaLocalScript diStarterPlayerScripts bernamaPaketKilatResidents37 danPaketKilatResidentLifecycle37. Authoring diServerStorage.PaketKilat_City37Authoring.Details. Lima source cocokdisk/Edit.
+
+Observer lifecycle independen diperlukan karena callback milik VM LocalScript yang dihentikan tidak dapat diandalkan. Ia membersihkan controller saatDisabled,destroyed atau keluarPlayerScripts. Module menjaga satu state aktif dan satu folderPaketKilatLocalResidents37; Stop memutus koneksi serta menghapus actor. Folder/modelsArchivable=false. Tidak ada remote,DataStore atau loop perwarga baru.
+
+Backup disk:backups/city37/main_game.before-city37.rbxl dan handoff.before.md. Binary baseline menyalin file yang terakhir tersimpan, sehingga dapat belum mencakup koreksi papan City36 yang masih ada diAutoRecovery. Backup live ServerStorage.PaketKilat_PreCity37 menyimpan17anchor,30bodymodel,atributworld,controller15lama danOriginalHudEnabled37. Map.City37.ArtReferences memuat15ObjectValue ke detail yang terpasang pada pemilik.
+
+Rollback in-place: hancurkan15model pada ArtReferences.Value, hapusCity37 dan lima source/empat runtime instance baru, pulihkanPaketKilatCityLife15 keOriginalParent37 danHUDkeBoolValueawal. Pulihkan atributResidentsRevision sebelumnya. Jangan hanya menghapusfolderCity37 karena detail terpasang di ruko/meja. Terrain,floor,17anchor dan30body model tidak diubah.
+
+## Verifikasi
+
+464sampel jalur/posisi18profil:0floor hilang dan0bangunan penghalang. Audit405Part dekor:semuaanchored/noncollision/nontouch/nonquery,0script/0light.17anchor dan30bodymodel cocok posisi/ukuran denganbaseline. Kandidatalamat tetap30. Akhir Edit tidak memiliki folder aktor runtime, controller15tidak lagi aktif danHUDtrue.
+
+FreshPlay di kota lama membuat3warga; kunjunganQuay dantaman masing-masing7denganbudget8. Pejalan berubahposisi sekitar3.35–3.41stud selama1.2detik; aktor diam hanya berubahbounds sangat kecil akibat gerak tangan/cangkir. Tidak ada part aktor collide/touch/query. Pergi jauh membersihkanjumlah menjadi0 dan kembali memunculkan7.
+
+Disable memusnahkanfolder;enable memunculkan7kembali. Destroy owner membersihkanfolder dan penggantian owner menghasilkan tepat1folder/7aktor. Respawn mempertahankan1folder yang sama dan memunculkan3di spawn; tidak berlipat. ConsolePlay akhir hanyaBootstrap, selain satu pesan alat yang mereset CameraType setelah fixture.
+
+SceneAnalysis pada satu kameraQuay: denganwarga48764triangle/35draw, tanpa47636/34. AngkaOpaque satuview dan waktu berdekatan ini bukan benchmarkFPS/global serta dapat berubah karena occlusion/gerak. Tidak membuat klaim performa perangkat fisik.
+
+EmulatorSamsungGalaxyA06landscape:TouchEnabledtrue,Root705×280,5aktor/budget5,HUDenabled. GameLandscapeSensor sehingga tidak menguji portrait. Setterorientasi sebelum device aktif sempat ditolak; urutan device→orientation berhasil. Studio dikembalikan device default danPlay dihentikan. Tampilan desktop/phone,cafe dan fasad diperiksa setelahlayoutsettle. Tangkapan dari dalam bangunan tidak dipakai sebagai bukti final.
+
+Bukti verification/city37-audit.json serta city37-*.jpg; audit tests/City37EditAudit.luau dan City37RuntimeAudit.client.luau. Tidak mengklaim HPfisik,multiplayer,seluruh perjalanan pengantaran atauinteraksi warga baru. Publikasi/pemain luar tetap ditunda.
+
+## Status simpan
+
+Source,SDD,backup dan bukti lokal tersimpan. Sesi AutoRecovery memuatCity37; perlu memverifikasi Save to File As… ke D:/YANG CORPORATE/Roblox/Game1/main_game.rbxl. Ctrl+S padaAutoRecovery tidak otomatis membuktikan file target diperbarui. Status file akan dicatat pada verification/city37-save-status.json setelah pengecekan binary.
+
+---
+
+# Arsip — City36: jalan keliling, penataan gedung dan infill
 
 10 November 2026. Dikerjakan di sesi main_game_AutoRecovery_0.rbxl/Studio6654bdf4-6d9a-4365-b5fc-cd30708a66d3 sesuai izin yang sudah ada. Akhir Edit, tanpa fixture tersisa. Sepuluh sasaran pada task_list menangani kerusakan, struktur jalan dan pengisian kota; tidak mengklaim peningkatan mutu/FPS numerik10x.
 
