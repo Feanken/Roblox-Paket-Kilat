@@ -426,3 +426,12 @@ Papan pesanan menampilkan daftar tiga pekerjaan dan satu rincian terpilih. Rinci
 Pilihan disimpan pertab Biasa/Kontrak selama revisi offer sama; revisi baru mengganti pilihan usang. Riwayat tetap lima pengantaran sesi. UI tidak menambah panel permanen saat berjalan. Helper JobPreview28 murni presentasi/geometry; ekonomi, kontrak, profil dan kota tetap.
 
 Desktop seleksi tidak membuat order, server tokenlama ditolak, penerimaan baru cocok dengan tujuan terpilih. Layout GalaxyA06/board620x280 dan riwayat10baris muat. Tab0 dipulihkan setelah fixture1/2; pointer emulator bukan bukti touch fisik. Detail pada handoff.md dan verification/preview28-audit.json.
+
+
+## Coach29 — bantuan perjalanan sesuai keadaan (10 November 2026)
+
+Guide.Hint dan MobileNotice18 yang sudah ada mengikuti keadaan paket: berburu cap/RuteOFF, cap lengkap, paket jatuh/keluar jalur, kontrak gugur, genggaman rendah, bangku dan rumah tujuan. Mobile menampilkan satu notifikasi singkat per jenis/progres cap perorder, menunggu pesan/menu yang masih aktif. DismissGuide dan diagnostik tetap dihormati.
+
+Peringatan barrier memakai footprint lokal, arah gerak dan ketinggian kaki; pemain di atas hazard atau berjalan menjauh tidak diberi peringatan yang salah. Ini presentasi saja; deteksi benturan/hadiah/kontrak tetap server lama. Puddle opsional didukung helper, tetapi tidak ada pada map saat ini.
+
+22kasus helper lolos. Cap/RuteOFF/barrier, kasus kontrak/drop/out/stamp dan bangku serta antrean notifikasi HP diuji lokal. Fixture penurunan tinggi awal dikecualikan karena memicu benturan. Detail pada handoff.md/verification/coach29-audit.json. Tidak ada panel permanen atau fieldprofil baru.

@@ -9,6 +9,7 @@ local RS = game:GetService("ReplicatedStorage"):WaitForChild("PaketKilat")
 local C = require(RS.Shared.Config)
 local Theme = require(RS.Shared.UITheme12)
 local ContractStatus=require(RS.Shared.ContractStatus25)
+local Coach=require(RS.Shared:WaitForChild('JourneyCoach29'))
 local ui = player:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
 local card, actions = ui.TopCard, ui.Actions
 local state, synced = {status = "Idle", profileReady=false}, false
@@ -16,6 +17,8 @@ local shop=ui:WaitForChild("Shop")
 local shopOpen=false
 local guide=ui:WaitForChild("Guide")
 local guideDismissed,guideManual=false,false
+local hintOrder local seenHints={}
+local hazards=workspace:WaitForChild('PaketKilat'):WaitForChild('Map'):WaitForChild('Expansion'):WaitForChild('Hazards')
 Theme.Static(ui)
 local feedback, feedbackUntil = "", 0
 local messages = {
@@ -254,6 +257,34 @@ local function render()
 		local title=stampPosition and "POS CAP"or state.status=="Idle" and (relay and not near(state.depotPosition)and 'TITIPAN' or "DEPOT") or state.status=="Dropped" and "PAKETMU" or state.destinationName
 		markerText.Text=string.format("%s\n%d stud · %s",title,distance,state.status=="Dropped" and "Ambil ulang" or state.status=="Idle" and "Ambil pesanan" or stampPosition and "Lewati untuk cap"or "Antar ke sini")
 	end
+ local r=aliveRoot()local hazardKind,nearest
+ if r and state.status=='Carrying'and not(state.movement and state.movement.resting)then
+  local hum=r.Parent:FindFirstChildOfClass('Humanoid')
+  local leg=hum.RigType==Enum.HumanoidRigType.R6 and r.Parent:FindFirstChild('Left Leg')
+  local feet=r.Position-Vector3.new(0,hum.HipHeight+r.Size.Y/2+(leg and leg.Size.Y or 0),0)
+  for _,spec in ipairs({{'Puddle','puddle'},{'MovingBarrier','barrier'}})do
+   local part=hazards:FindFirstChild(spec[1])
+   if part then
+    local d=Coach.HazardDistance(feet,r.AssemblyLinearVelocity,part.CFrame,part.Size,C.ActionDistance*2)
+    if d and(not nearest or d<nearest)then nearest,hazardKind=d,spec[2]end
+   end
+  end
+ end
+ local coach=Coach.Get(state,{alive=r~=nil,canPickup=dropped and not state.outOfBounds and near(dropped.Position),nearDestination=near(state.destinationPosition),guidedStamp=guidedStamp,routeEnabled=ui:FindFirstChild('RouteToggle')and ui.RouteToggle:GetAttribute('RouteEnabled'),contractStatus=contractStatus,hazard=hazardKind})
+ ui:SetAttribute('JourneyHintKind29',coach and coach.kind)
+ if hintOrder~=state.orderId then hintOrder=state.orderId seenHints={}end
+ local celebration=ui:FindFirstChild('DeliveryCelebration')
+ local notice=ui:FindFirstChild('PackageNotice')
+ local blocked=shopOpen or ui:GetAttribute('JobBoardOpen17')or(celebration and celebration.Visible)
+ if coach and not perfShowing and not blocked then
+  guide.Hint.Text=coach.text
+  if coach.alert and not Theme.IsMobile(ui)and not guideDismissed then guide.Visible=true end
+  if Theme.IsMobile(ui)and coach.announce and not seenHints[coach.kind]and not guide.Visible
+   and not ui:GetAttribute('MobileMenuOpen18')and not ui:GetAttribute('MobileTargetOpen18')
+   and not(notice and notice.Visible)and os.clock()>=(ui:GetAttribute('MobileNoticeUntil18')or 0)then
+   ui:SetAttribute('MobileNoticeText18',coach.text)ui:SetAttribute('MobileNoticeUntil18',os.clock()+3)seenHints[coach.kind]=true
+  end
+ end
 end
 local function activate(b)
 	if not shopOpen and state.profileReady and b:GetAttribute("ActionEnabled") then

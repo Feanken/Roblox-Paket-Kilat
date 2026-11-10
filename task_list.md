@@ -426,5 +426,19 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Layout kontrak/riwayat HP muat; temporary tab dipulihkan0 dan fixture dibersihkan.
 - [x] Dua source disk/Edit sama, freshIdle/koin0/history0/offers6, consoleBootstrap, akhirEdit/default/0paket.
 - [x] Simpan source, audit, gambar, design/handoff.
-- [ ] Simpan AutoRecovery ke main_game.rbxl untuk RoutePreview28; binary456270byte belum memuatnya.
+- [x] Preview28 tersimpan: main_game458926byte terverifikasi memuat RoutePreview28 pada Coach29.
 - [ ] Pemeriksaan sentuh/gamepad fisik dan multiplayer; publikasi/pemain luar ditunda.
+
+
+## Coach29 — bantuan saat perjalanan (10 November 2026)
+
+- [x] Backup client aktif, binarybaseline dan handoff.
+- [x] Helper konteks untuk cap, RuteOFF, rumah tujuan, kontrak gugur, paket jatuh/keluar jalur, genggaman dan bangku.
+- [x] Peringatan barrier berbasis footprint/arah/ketinggian tanpa mengubah hazard server.
+- [x] Gunakan Guide/MobileNotice lama; dedupe perorder, hormati pesan aktif/menu/toko/hasil/dismiss/diagnostik.
+- [x] 22kasus helper dan integrasi aktual; pengujian terganggu benturan teleport diulang pada posisi tetap.
+- [x] HP layout muat, notifikasi tidak menimpa pesan aktif atau mengulang tiap snapshot.
+- [x] Dua source disk/Edit sama, freshIdle/koin0/history0/offers6; akhirEdit/default/0paket/tanpafixture.
+- [x] Source/audit/gambar/design/handoff tersimpan, diffcheck lolos.
+- [ ] Simpan AutoRecovery ke main_game.rbxl untuk ContextCoach29; binary458926byte belum memuatnya.
+- [ ] HP/gamepad fisik, kamera/seluruh rute/multiplayer/performa; publikasi/pemain luar tetap ditunda.

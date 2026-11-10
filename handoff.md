@@ -1,4 +1,44 @@
-# Pembaruan TERBARU — Preview28: pilih pesanan dengan pratinjau rute
+# Pembaruan TERBARU — Coach29: petunjuk perjalanan sesuai keadaan
+
+10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik. Petunjuk lama yang menyuruh langsung ke rumah ketika pemain masih berburu cap diganti petunjuk sesuai keadaan. Tidak ada publikasi/pemain luar.
+
+## Perilaku
+
+Area Petunjuk lama sekarang menjelaskan cap0/1/2, Rute dimatikan, cap kurang saat sudah dekat rumah, cap lengkap, paket jatuh/keluar jalur, kontrak gugur, genggaman rendah, istirahat dan tiba di tujuan. Kontrak gugur dijelaskan tetap bisa diantar dengan pembayaran biasa. Mematikan Rute tidak memaksa pemain berburu cap; pemain boleh mengantar tanpa bonus kontrak.
+
+Saat mendekati MovingBarrier, muncul peringatan menunggu celah. Deteksi memakai footprint CFrame/Size, arah gerak, jarak maksimal2×ActionDistance, dan ketinggian kaki avatar. Pemain di level jembatan tidak diperingatkan untuk hazard di bawahnya; yang bergerak menjauh di luar footprint juga diabaikan. Ini saran presentasi, bukan deteksi benturan server/garansi aman. Puddle saat ini tidak ada pada map; helper mendukungnya jika part itu dikembalikan, tanpa membuat genangan baru.
+
+Desktop memakai Guide.Hint, menghormati tombol tutup dan tampilan diagnostik. Peringatan dapat muncul lagi setelah onboarding selesai jika bantuan belum ditutup. HP memakai MobileNotice18 yang sudah ada, tiga detik dan sekali per jenis/progres cap perorder. Menunggu notifikasi aktif selesai; tidak tampil di atas menu/toko/board/hasil atau pemberitahuan paket. Pemulihan/grip memakai notifikasi movement lama, tidak diduplikasi. Tidak ada panel permanen baru.
+
+## Source
+
+Baru shared ModuleScript ReplicatedStorage.PaketKilat.Shared.JourneyCoach29 dari src/JourneyCoach29.luau. Hanya client PaketKilatInput/src/PrototypeInput.client.luau diubah. Pasang helper sebelum client. Dua source disk/Edit cocok. Tidak mengubah server, hazard fisik, kontrak, hadiah, ledger, schema2 atau tuning. Rest27/Preview28 tetap.
+
+## Pengujian dan batas
+
+22assertion helper:15konteks/prioritas dan7geometri hazard (termasuk footprint diputar, ketinggian terpisah, mendekat/menjauh). Semua lolos, diulang setelah penyaring gerak menjauh diperketat.
+
+Desktop aktual: cap0/2 membimbing POS CAP; G OFF mengubah petunjuk untuk mengaktifkan Rute/cari POS BONUS; dekat barrier mendapat peringatan sebelum area benturan; posisi di atas footprint tidak mendapat peringatan barrier. Teks yang diperiksa muat.
+
+Satu fixture teleport turun dari level tinggi memicu benturan sungguhan dan membatalkan pengujian complete/lost/drop awal; driver sementara menghasilkanInvalidState. Hasil itu dikecualikan. Pengulangan dengan posisi normal tetap berhasil: cap1→cap2, kontrak kondisi70 gugur tetapi tetapCarrying/koin0, handlerDrop→Dropped, OutOfBounds→petunjukPulihkan. Cap/condition diatur langsung untuk kasus presentasi, bukan klaim cap dikoleksi/bonus dibayar.
+
+HP GalaxyA06 landscape800x360/Root705x280, LandscapeSensor/CoreUISafeInsets: teks notifikasi cap1/2, cap lengkap dan barrier TextFits. Pesan uji aktif30detik tidak ditimpa coach; setelah slot dibebaskan, cap1 tampil. untilTime tidak diperpanjang oleh snapshotmovement; setelah3detik tersembunyi. Menu terbuka menunda caplengkap hingga ditutup. Peringatan barrier sempat dibaca setelah expiry3detik (teks/jenis benar, visiblefalse); tidak dianggap bukti durasi tampil lebih lama. Bangku asli berhasil memberi kindrest/restingtrue.
+
+Fresh akhir Idle/koin0/history0/offers6/0paket; Coach tidak aktif diIdle dan onboardingFindDepot tetap. ConsoleBootstrap saja pada sesi bersih terakhir. AkhirEdit/default/HUDenabled/0paket/tanpaTemporaryCoach29, backup1source. Belum HPfisik/gamepad/multiplayer/profiling; pengujian posisi memakai fixture.
+
+Bukti verification/coach29-audit.json, coach29-desktop.jpg, coach29-phone.jpg, saved-coach29.json. git diff --check lolos (peringatanLF/CRLF saja).
+
+## Backup dan simpan
+
+Source asli: backups/coach29-sources/ dan ServerStorage.PaketKilat_PreCoach29. Baselinebinary backups/main_game.before-coach29.20261110.rbxl dan handoff.before-coach29.md berasal dari main_game di disk, bukan snapshot penuh AutoRecovery lain.
+
+Rollback parsial: pulihkan source client asli, hapus shared JourneyCoach29 dan attribute JourneyHelpRevision. Tidak ada map/profil yang perlu dipulihkan.
+
+**Simpan sesi AutoRecovery ini ke main_game.rbxl sebelum menutup Studio.** main_game saat diperiksa458926byte,2026-11-10T01:00:40.984Z (08:00:40WIB), memuatPreview28/Rest27/Stamp26; ContextCoach29 belum ada. Source lokal dan dokumen sudah disimpan.
+
+---
+
+# Arsip — Preview28: pilih pesanan dengan pratinjau rute
 
 10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik sebelumnya. Papan pesanan sekarang memisahkan memilih pekerjaan dan memulai perjalanan. Pengembangan lokal; tidak ada publikasi atau pemain luar.
 

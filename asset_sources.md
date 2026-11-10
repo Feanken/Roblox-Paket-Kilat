@@ -113,3 +113,8 @@ Memakai ulang mesh bangku ParkBench CreatorStore yang sudah dibersihkan pada pas
 ## Preview28 — 10 November 2026
 
 Sketsa rute memakai Frame/TextLabel/font bawaan Roblox dan polyline SafeRoutes08 yang sudah ada. Tidak ada aset gambar/model/audio baru, pencarian/impor/pembelian, upload atau publikasi.
+
+
+## Coach29 — 10 November 2026
+
+Menggunakan teks dan GUI bantuan/notifikasi yang sudah ada; tidak ada asset gambar/model/audio baru, impor, pembelian, upload atau publikasi. Geometri hazard dibaca untuk peringatan lokal tanpa mengubah mesh/posisi kota.
