@@ -1,4 +1,46 @@
-# Pembaruan TERBARU — Stamp26: panduan kontrak Pemburu cap
+# Pembaruan TERBARU — Rest27: bangku pemulihan (10 November 2026)
+
+Pemilik menyetujui perubahan pada Studio aktif main_game_AutoRecovery_0.rbxl, sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3. Iterasi ini membuat empat bangku publik berguna untuk mengatur stamina/genggaman. Pengembangan lokal saja; tidak ada publikasi atau uji pemain luar.
+
+## Perilaku
+
+Dekati bangku depot, plaza, pojok baca, atau utara. Tahan F selama .35detik pada prompt Beristirahat. Duduk memulihkan stamina dan genggaman2x laju biasa (default32/20 per detik, maksimum100). Waktu pesanan terus berjalan; kondisi paket tidak diperbaiki. Lompat untuk berdiri, lalu sprint tersedia lagi. Default tombol gamepadX dan prompt sentuh bawaan Roblox disediakan; gamepad/HP fisik belum diuji.
+
+Server memeriksa seat yang terdaftar, jarak≤8, profil aktif, humanoid hidup, kepemilikan Occupant dan SeatPart. Kursi biasa tidak mendapat bonus. Duduk membatalkan sprint pada server/client. Seat baru anchored/transparan/noncollision/CanTouchfalse: tidak mendudukkan pemain otomatis ketika tersenggol. Empat mesh bangku CreatorStore lama tetap utuh.
+
+HUD lama menampilkan Istirahat pada meter stamina; tombol sprint disembunyikan saat duduk. HP memakai ukuran meter lama tanpa panel permanen baru. Notifikasi masuk menjelaskan waktu tetap jalan/lompat untuk berdiri. Peringatan genggaman rendah tidak menimpa pesan istirahat.
+
+## Source dan konfigurasi
+
+Baru server ModuleScript RestStops27 dari src/RestStops27.luau. Diubah tiga source: MovementTuning, CourierMovement, CourierMovement.client (live PaketKilatMovement). Empat source sama persis antara disk/Edit Studio. src/InstallRestStops27.luau adalah migrasi Edit yang sudah dijalankan, membuat Map.RestStops27 dengan empatSeat. Pasang helper dan folder sebelum menjalankan movement baru.
+
+PK_RestRegenMultiplier lewat MovementTuning yang sudah ada, default2, clamp1..3. Nilai ditangkap saat karakter/pesanan baru seperti tuning movement lainnya; tidak diterapkan di tengah pesanan. Tidak menerbitkan config/eksperimen cloud. Profil schema2, ledger, harga/hadiah dan kontrak tidak diubah.
+
+## Pengujian
+
+GameId0/StudioMemory. Drain memakai Humanoid.MoveTo+sprintintent asli; posisi ke kursi menggunakan teleport fixture.
+- Kursi biasa: stamina51→67 dan genggaman61→71 dalam1.017s, restingfalse.
+- Kursi publik tanpa menyentuh batas100: stamina38→54 dan genggaman51→61 dalam.516s, restingtrue; sekitar2x sesuai angka snapshot yang dibulatkan.
+- Stamina/genggaman mencapai100 dan berhenti. Sprint ditolak ketika duduk. Seat tak dikenal dan jarak jauh ditolak.
+- KeempatSeat berhasil, jarak root-seat1.427stud. Kondisi fixture70 tetap70, recoveryCount0, koin0, startedAt pesanan tidak berubah.
+- Native F berhasil mendudukkan di depot; Space berdiri/restfalse/tombol sprint kembali. Screenshot desktop memperlihatkan pose di bangku tanpa mesh diubah.
+- GalaxyA06 landscape800x360,Root705x280: HUD Istirahat100/Pegang100 dan notifikasi TextFits, jumpbutton bawaan ada. LandscapeSensor/CoreUISafeInsets/IgnoreGuiInsetfalse. Pointer emulator ke JumpButton belum memberi hasil konsisten; jangan dianggap bukti sentuh fisik. Screenshot phone khusus cek teks/layout; kamera fixture teleport berada di geometri depot, bukan bukti kenyamanan kamera semua arah.
+- Ada perpindahan posisi/order di luar langkah fixture pada sesi lanjutan; dikecualikan dari bukti. Fresh server readIdle/coins0/history0/offers6; client kemudian sudahCarrying/1paket, jadi tidak diklaim seluruh snapshot client idle.
+- ConsoleBootstrap saja. AkhirEdit/default viewport/0paket/HUDenabled/tanpaTemporaryRest27; backup3source. Belum multiplayer, profiling, gamepad atau HP fisik.
+
+Bukti verification/rest27-audit.json, rest27-desktop.jpg, rest27-phone-layout.jpg, saved-rest27.json. git diff --check lolos (peringatan konversiLF/CRLF saja).
+
+## Backup, rollback, dan simpan
+
+Source asli pada backups/rest27-sources/ dan ServerStorage.PaketKilat_PreRest27. Binary lokal baseline backups/main_game.before-rest27.20261110.rbxl dan handoff.before-rest27.md. Binary berasal dari main_game di disk, bukan snapshot penuh perubahan AutoRecovery lain yang mungkin belum disimpan.
+
+Rollback parsial: pulihkan tiga source asli, hapus ModuleScript RestStops27, Map.RestStops27, dan attribute RestRevision. Tidak perlu migrasi data profil. Mesh bangku tidak diubah.
+
+**Simpan sesi AutoRecovery ini ke main_game.rbxl sebelum menutup Studio.** main_game di disk449312byte,2026-11-10T00:22:51.417Z (07:22:51WIB), sudah memuat City23/Contracts24/Status25/Stamp26; PublicBenches27 belum ada. Source lokal/dokumentasi sudah disimpan, perubahan bangku masih pada Edit Studio aktif.
+
+---
+
+# Arsip — Stamp26: panduan kontrak Pemburu cap
 
 Perbaikan lanjutan setelah Make It Better #23/Status25. Kode internal RouteStamps26. Kontrak eksplorasi sekarang memandu pemain menuju cap yang belum dikunjungi, lalu kembali ke rumah setelah dua cap lengkap. Tidak ada publikasi atau uji pemain luar.
 

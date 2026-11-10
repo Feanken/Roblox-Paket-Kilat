@@ -408,3 +408,12 @@ Kontrak eksplorasi menggunakan panduan jalan yang sudah ada untuk mengunjungi ca
 Kompas/header, billboard POS CAP dan highlight mengikuti satu target. Setelah cukup cap, kondisi gugur, Recover, atau panduan G dimatikan, kembali ke rumah. Saat Dropped, prioritas navigasi adalah paket. HUD mobile memakai baris progres lama; tidak ada panel permanen baru. Panduan tidak menggerakkan pemain, mengambil cap, atau memberikan hadiah. Koleksi dan bonus tetap server-owned, profil schema2 tidak berubah.
 
 Verifikasi: tujuh kasus planner; lima pos terhubung pada graf; perjalanan ke dua cap lalu antar dengan bonus16; ramp/jembatan diuji dari posisi fixture dekat kaki ramp; Drop/Pickup serta toggle; GalaxyA06 landscape Root705x280/teks muat. Tidak mengklaim seluruh jalur fisik, FPS, HP asli atau multiplayer teruji. Detail dan batas pada handoff.md serta verification/stamps26-audit.json.
+
+
+## Rest27 — bangku pemulihan (10 November 2026)
+
+Empat bangku CreatorStore yang sudah ada (depot/plaza/baca/utara) menjadi tempat istirahat. Tahan F .35detik pada prompt dekat bangku; duduk mempercepat regen stamina/genggaman2x, cap100. Waktu pesanan tetap berjalan dan kondisi paket tidak pulih. Lompat berdiri; sprint dibatalkan selama duduk. Ini pilihan pengaturan ritme sprint dengan biaya waktu perjalanan.
+
+Seat transparan noncollision/CanTouchfalse tidak otomatis menangkap pemain lewat. Server memvalidasi seat terdaftar, jarak, hidup/profil aktif, Occupant dan SeatPart; kursi lain memberi regen biasa. Tidak menambah reward/remote/profilefield. MovementTuning menangkap PK_RestRegenMultiplier default2/bounds1..3 saat karakter/order baru. HUD memakai meter lama dan satu notifikasi sementara.
+
+Keempat seat, pemulihan normal vs bonus, batas100, kondisi paket70 tidak sembuh, F masuk dan Space keluar diuji lokal. Layout HP muat; sentuh fisik/gamepad/multiplayer/kamera semua arah belum diverifikasi. Detail evidence/rollback pada handoff.md dan verification/rest27-audit.json.

@@ -372,7 +372,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] B24-10: peringatan genggaman≤25, rearm≥50; diverifikasi memakai snapshot uji.
 - [x] B24-11: tujuh kasus kontrak, ledger/history/overflow, pembelian tawaran dan payout Prioritas aktual lewat fixture; desktop tab/riwayat klik berhasil; HP layout muat.
 - [x] B24-12: fresh coins0/history0/gear0/offers6, consoleBootstrap saja, backup8source, Edit/default/HUDaktif/0paket/tanpa fixture.
-- [ ] B24-13: simpan SpecialContracts24 ke main_game.rbxl; save442913byte belum memuatnya.
+- [x] B24-13: main_game449312byte terverifikasi10November memuat SpecialContracts24.
 - [ ] B24-14: penilaian pemilik/balance dan input HP fisik. Publikasi/uji pemain luar ditunda sesuai arahan pemilik.
 
 ## Status25 — permintaan Make It Better #23
@@ -384,7 +384,7 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] S25-E: riwayat5pesanan muat di desktop/phone705x280; status aktif dan hint hasil muat; tab default dikembalikan0.
 - [x] S25-F: kontrak terlambat tetap dapat diantar, total40/base25/bonus0; freshcoins0/history0/offers6, consoleBootstrap saja.
 - [x] S25-G: source/dokumen/audit/screenshot tersimpan; Edit/default/HUDaktif/0paket/tanpa fixture, backup5source.
-- [ ] S25-H: File > Save to File untuk ClearStatus25; save442913byte masih belum memuat Contracts24/Status25.
+- [x] S25-H: main_game449312byte terverifikasi10November memuat ClearStatus25.
 - [ ] S25-I: penilaian pemilik dan HP touch fisik; publikasi/pemain luar tetap ditunda.
 
 
@@ -397,5 +397,20 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Periksa tujuh kasus planner, konektivitas lima pos, pengambilan dua cap + pengantaran, serta ramp/jembatan.
 - [x] Cek GalaxyA06 landscape, fresh sesi tanpa fixture, backup enam source dan kesamaan tujuh source disk/Studio.
 - [x] Simpan bukti dan perbarui design/handoff.
-- [ ] Pemilik: File > Save to File untuk memperbarui binary main_game.rbxl dari sesi Edit aktif.
+- [x] Stamp26 tersimpan: main_game449312byte terverifikasi10November memuat RouteStamps26.
 - [ ] Uji HP fisik/multiplayer/performa dan seluruh jalur; publikasi serta uji pemain luar tetap ditunda.
+
+
+## Rest27 — bangku publik berfungsi (10 November 2026)
+
+- [x] Konfirmasi pemilik untuk mengubah main_game_AutoRecovery_0.rbxl yang terbuka.
+- [x] Backup tiga source aktif dan baseline binary/handoff.
+- [x] Pasang empatSeat pada bangku lama tanpa mengubah mesh kota.
+- [x] Handler server untuk jarak/seat/profil/hidup/occupant, promptF/X bawaan.
+- [x] Regen2x bounded/ConfigService melalui tuning movement; timer/kondisi paket/reward tetap.
+- [x] Meter Istirahat dan pembatalan sprint saat duduk tanpa panel HUD permanen.
+- [x] Uji empatSeat, normal vs2x, cap100, F/Space desktop, kondisi70/coins0/startedAt tetap.
+- [x] Layout GalaxyA06 landscape muat; bukti dan batas input/kamera dicatat.
+- [x] Empat source disk/Edit cocok, akhirEdit/default/0paket/tanpafixture, diffcheck lolos.
+- [ ] Simpan sesi AutoRecovery yang disetujui ke main_game.rbxl; markerPublicBenches27 belum ada di binary.
+- [ ] Uji sentuh fisik/gamepad, kamera semua arah dan multiplayer; publikasi/pemain luar tetap ditunda.

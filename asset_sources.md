@@ -103,3 +103,8 @@ Librarybersih ServerStorage/PaketKilat_CreatorAssets09/10. Clone Map/Landscape09
 Pencarian MCP memakai scope creator_store, priceFilter free. Aset terpilih [Better Low Poly Fountain](https://create.roblox.com/store/asset/13782728612), creator ComputerLider123, mengembalikan isFree=true/priceCents0. Tidak ada pembelian. Salinan di ServerStorage.PaketKilat_CreatorAssets23.Fountain memakai whitelist render:17MeshPart/3SurfaceAppearance, tanpa Script Credits asal, particle/beam/attachment/weld atau lapisan Glass/Neon air yang berlebihan.17bagian dipakai statis pada plaza; warna/material air disederhanakan. Source CleanCityAssets23.luau; metadata verification/creator-assets23.json. Kandidat [Low Poly Fountain](https://create.roblox.com/store/asset/15758791593), BolletjeH, gratis saat diperiksa tetapi177Part/Union, tidak dipakai dan folder review dihapus.
 
 Bangku/lampu/semak memakai kembali template bersih dari library07/09 yang sudah ada, sesuai tabel sumber sebelumnya. Tidak mengunduh ulang atau membeli salinan baru. Fasad, pergola, pagar, planter, zebra cross dan lemari pojok baca dibuat dari primitive/font bawaan. Aset kota baru tercatat75preloadSuccess/0failure saat Play; ini bukan pengukuran performa HP fisik.
+
+
+## Rest27 — 10 November 2026
+
+Memakai ulang mesh bangku ParkBench CreatorStore yang sudah dibersihkan pada pass07/15/23. Tidak ada pencarian/impor/pembelian aset baru. Empat Seat transparan, ObjectValue dan ProximityPrompt dibuat dari kelas bawaan Roblox; mesh/material/posisi bangku tetap. Penempatan: Map.RestStops27; kode src/InstallRestStops27.luau dan src/RestStops27.luau.

@@ -1,0 +1,215 @@
+{
+  "revision": "PublicBenches27",
+  "date": "2026-11-10",
+  "studio": "6654bdf4-6d9a-4365-b5fc-cd30708a66d3",
+  "place": "main_game_AutoRecovery_0.rbxl",
+  "authorization": "Owner explicitly approved modifying the currently open AutoRecovery place.",
+  "config": {
+    "key": "PK_RestRegenMultiplier",
+    "default": 2,
+    "bounds": [
+      1,
+      3
+    ],
+    "lifecycle": "Captured through existing MovementTuning at character/order start; no cloud configs published."
+  },
+  "rates": {
+    "normal": "{\"before\":{\"gripMultiplier\":1,\"resting\":false,\"sprinting\":false,\"available\":true,\"stamina\":51,\"gripLevel\":0,\"exhausted\":false,\"grip\":61},\"seconds\":1.0165425999999798,\"after\":{\"gripMultiplier\":1,\"resting\":false,\"sprinting\":false,\"available\":true,\"stamina\":67,\"gripLevel\":0,\"exhausted\":false,\"grip\":71},\"approved\":false}",
+    "seat": "Workspace.PaketKilat.Map.RestStops27.Depot",
+    "capped": "{\"gripMultiplier\":1,\"resting\":true,\"sprinting\":false,\"available\":true,\"stamina\":100,\"gripLevel\":0,\"exhausted\":false,\"grip\":100}",
+    "grip": "GENGGAMAN 100 · lompat untuk berdiri",
+    "drained": "{\"gripMultiplier\":1,\"resting\":false,\"sprinting\":true,\"available\":true,\"stamina\":46,\"gripLevel\":0,\"exhausted\":false,\"grip\":58}",
+    "stamina": "ISTIRAHAT · stamina 100",
+    "approved": "{\"before\":{\"gripMultiplier\":1,\"resting\":true,\"sprinting\":false,\"available\":true,\"stamina\":84,\"gripLevel\":0,\"exhausted\":false,\"grip\":82},\"seconds\":0.8172773999999663,\"after\":{\"gripMultiplier\":1,\"resting\":true,\"sprinting\":false,\"available\":true,\"stamina\":100,\"gripLevel\":0,\"exhausted\":false,\"grip\":98},\"elapsed\":6.199294805526733,\"seat\":\"Depot\",\"status\":\"Carrying\",\"condition\":100,\"coins\":0}",
+    "rest": true,
+    "sprint": false
+  },
+  "uncapped": {
+    "before": {
+      "gripMultiplier": 1,
+      "resting": true,
+      "sprinting": false,
+      "available": true,
+      "stamina": 38,
+      "gripLevel": 0,
+      "exhausted": false,
+      "grip": 51
+    },
+    "seconds": 0.5164297000000033,
+    "after": {
+      "gripMultiplier": 1,
+      "resting": true,
+      "sprinting": false,
+      "available": true,
+      "stamina": 54,
+      "gripLevel": 0,
+      "exhausted": false,
+      "grip": 61
+    }
+  },
+  "allSeats": {
+    "recoveryCount": 0,
+    "resting": true,
+    "seats": [
+      {
+        "ok": true,
+        "resting": true,
+        "code": "Resting",
+        "seat": "Depot",
+        "distance": 1.4267578125
+      },
+      {
+        "ok": true,
+        "resting": true,
+        "code": "Resting",
+        "seat": "Plaza",
+        "distance": 1.4267578125
+      },
+      {
+        "ok": true,
+        "resting": true,
+        "code": "Resting",
+        "seat": "Reading",
+        "distance": 1.4267578125
+      },
+      {
+        "ok": true,
+        "resting": true,
+        "code": "Resting",
+        "seat": "North",
+        "distance": 1.4267578125
+      }
+    ],
+    "startedUnchanged": true,
+    "condition": 70,
+    "coins": 0
+  },
+  "keyboardExit": {
+    "sit": false,
+    "rest": false,
+    "sprintVisible": true
+  },
+  "desktopPrompt": {
+    "seat": "Depot",
+    "rest": true,
+    "promptEnabled": false
+  },
+  "phone": {
+    "config": {
+      "ok": true,
+      "name": "Samsung Galaxy A06",
+      "height": 360,
+      "orientation": "Enum.ScreenOrientation.LandscapeSensor",
+      "width": 800,
+      "ignoreInset": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    "layout": {
+      "noticeFits": true,
+      "gripFits": true,
+      "started": true,
+      "root": "705, 280",
+      "hudVisible": true,
+      "grip": "Pegang 100",
+      "jumpVisible": true,
+      "staminaFits": true,
+      "stamina": "Istirahat 100",
+      "jump": "Players.Afran300.PlayerGui.TouchGui.TouchControlFrame.JumpButton",
+      "rest": true,
+      "notice": "Pulih lebih cepat; waktu tetap jalan. Lompat untuk berdiri."
+    },
+    "attemptedPointerJump": {
+      "sit": true,
+      "seat": "Depot",
+      "rest": true,
+      "sprintVisible": false
+    }
+  },
+  "fresh": {
+    "rest": false,
+    "coins": 0,
+    "status": "Carrying",
+    "gui": true,
+    "packages": 1,
+    "server": "{\"history\":0,\"storage\":\"StudioMemory\",\"status\":\"Idle\",\"offers\":6,\"resting\":false,\"coins\":0}"
+  },
+  "final": {
+    "backup": 3,
+    "revision": "PublicBenches27",
+    "device": "default",
+    "seats": [
+      {
+        "reference": "Workspace.PaketKilat.Map.CreatorStore07.DepotBench",
+        "name": "Depot",
+        "canCollide": false,
+        "hold": 0.3499999940395355,
+        "anchored": true,
+        "canTouch": false,
+        "prompt": "F"
+      },
+      {
+        "reference": "Workspace.PaketKilat.Map.City23.Spaces.PlazaBenchWest",
+        "name": "Plaza",
+        "canCollide": false,
+        "hold": 0.3499999940395355,
+        "anchored": true,
+        "canTouch": false,
+        "prompt": "F"
+      },
+      {
+        "reference": "Workspace.PaketKilat.Map.City23.ReadingCorner.ReadingBench1",
+        "name": "Reading",
+        "canCollide": false,
+        "hold": 0.3499999940395355,
+        "anchored": true,
+        "canTouch": false,
+        "prompt": "F"
+      },
+      {
+        "reference": "Workspace.PaketKilat.Map.CityDecor15.Bench2",
+        "name": "North",
+        "canCollide": false,
+        "hold": 0.3499999940395355,
+        "anchored": true,
+        "canTouch": false,
+        "prompt": "F"
+      }
+    ],
+    "temporary": [],
+    "packages": 0,
+    "gui": true
+  },
+  "sourceChecks": {
+    "MovementTuning.luau": true,
+    "CourierMovement.luau": true,
+    "CourierMovement.client.luau": true,
+    "RestStops27.luau": true
+  },
+  "assertions": {
+    "unknownBenchRejected": true,
+    "tooFarRejected": true,
+    "ordinarySeatNoBonus": true,
+    "approvedBenchBlocksSprint": true,
+    "cap100": true,
+    "condition70Stayed70": true,
+    "startedAtUnchanged": true,
+    "recoveryCount0": true,
+    "noCoinsDuringRest": true
+  },
+  "limits": [
+    "GameId0/StudioMemory only",
+    "Positioning fixtures teleport to benches; drain uses real Humanoid movement and repeated server movement intent",
+    "Ordinary seat: +16 stamina/+10 grip in 1.017s. Approved: +16/+10 in .516s; rounded published stats.",
+    "F hold and Space release verified on desktop; mobile pointer jump did not consistently exit; physical touch/gamepad/multiplayer not verified",
+    "Phone screenshot verifies compact HUD text, not camera comfort: fixture teleport left camera inside depot geometry",
+    "Later session changed position/order beyond the fixtures; exclude later world/navigation behavior from feature evidence",
+    "Fresh server read was Idle/0coins/history0, later client read Carrying/1package; do not claim a fully idle client snapshot",
+    "Final Studio is Edit/default/0packages/no TemporaryRest27 scripts",
+    "No profiling or asset imports, no published player data or release"
+  ],
+  "evidence": [
+    "rest27-desktop.jpg",
+    "rest27-phone-layout.jpg",
+    "saved-rest27.json"
+  ]
+}

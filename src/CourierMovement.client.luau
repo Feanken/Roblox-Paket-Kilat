@@ -3,7 +3,7 @@ local CAS=game:GetService("ContextActionService") local RunService=game:GetServi
 local p=Players.LocalPlayer local shared=game.ReplicatedStorage:WaitForChild("PaketKilat")
 local Theme=require(shared.Shared.UITheme12)
 local intent=shared.Remotes:WaitForChild("MovementIntent") local ui=p:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
-local lowWarned=false local warnOrder
+local lowWarned=false local warnOrder local wasResting=false
 local state={} local wants=false local connections={}
 local function bind(event,fn)local c=event:Connect(fn)table.insert(connections,c)end
 local function send(value)wants=value intent:FireServer(value)end
@@ -33,13 +33,15 @@ bind(UIS.TextBoxFocused,function()send(false)end)
 bind(p.CharacterRemoving,function()send(false)end)
 local function render()
  local m=state.movement local alive=p.Character and p.Character:FindFirstChildOfClass("Humanoid")and p.Character.Humanoid.Health>0
+ local hum=p.Character and p.Character:FindFirstChildOfClass('Humanoid')
+ local seated=hum and hum.Sit
  local celebration=ui:FindFirstChild("DeliveryCelebration")
  local notice=ui:FindFirstChild("PackageNotice")
  local mobile=Theme.IsMobile(ui)
  local mobilePanel=mobile and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")or ui.Guide.Visible)
  local blocked=mobilePanel or not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
- if (blocked or m and m.exhausted) and wants then send(false)end
- b.Visible=not blocked
+ if (blocked or seated or m and m.exhausted) and wants then send(false)end
+ b.Visible=not blocked and not seated
  if mobile then
   local carrying=state.status=="Carrying"
   b.Parent=ui b.Size=UDim2.fromOffset(100,44)b.Position=UDim2.new(1,-270,1,-56)
@@ -50,7 +52,7 @@ local function render()
   for _,element in ipairs({stamina,grip})do element.Size=UDim2.fromOffset(104,16)element.TextSize=10 end
   for _,element in ipairs({staminaTrack,gripTrack})do element.Size=UDim2.fromOffset(104,3)end
   grip.Visible=carrying gripTrack.Visible=carrying
-  hud.Visible=not blocked and(not notice or not notice.Visible)and(carrying or wants or m and m.stamina<99)
+  hud.Visible=not blocked and(not notice or not notice.Visible)and(carrying or wants or m and(m.stamina<99 or m.resting))
  else
   b.Parent=hud b.Size=UDim2.fromOffset(84,44)b.Position=UDim2.new(1,-92,0,6)
   local width=math.min(352,math.max(300,ui.AbsoluteSize.X-300))
@@ -62,9 +64,15 @@ local function render()
   hud.Visible=not blocked and(not notice or not notice.Visible)
  end
  if not m then return end
+ hud:SetAttribute('Resting27',m.resting==true)
+ if m.resting and not wasResting then
+  ui:SetAttribute('MobileNoticeText18','Pulih lebih cepat; waktu tetap jalan. Lompat untuk berdiri.')
+  ui:SetAttribute('MobileNoticeUntil18',os.clock()+3)
+ end
+ wasResting=m.resting==true
  if warnOrder~=state.orderId then warnOrder=state.orderId lowWarned=false end
  if m.grip>=50 then lowWarned=false end
- if state.status=='Carrying'and m.grip<=25 and not lowWarned then
+ if state.status=='Carrying'and not m.resting and m.grip<=25 and not lowWarned then
   lowWarned=true
   ui:SetAttribute('MobileNoticeText18','Genggaman menipis. Lepas sprint agar pulih.')
   ui:SetAttribute('MobileNoticeUntil18',os.clock()+3)
@@ -75,6 +83,10 @@ local function render()
  grip.Text=state.status=="Carrying"and string.format("GENGGAMAN %d · %s",m.grip,state.packageType=="Rapuh"and "RAPUH"or "paket biasa")or "GENGGAMAN · pulih"
  if state.status=='Carrying'and m.grip<=25 then grip.Text='PELANKAN · genggaman '..m.grip end
  if mobile then stamina.Text="Lari "..m.stamina grip.Text="Pegang "..m.grip end
+ if m.resting then
+  stamina.Text=mobile and('Istirahat '..m.stamina)or('ISTIRAHAT · stamina '..m.stamina)
+  grip.Text=mobile and('Pegang '..m.grip)or('GENGGAMAN '..m.grip..' · lompat untuk berdiri')
+ end
  staminaFill.Size=UDim2.fromScale(m.stamina/100,1)gripFill.Size=UDim2.fromScale(m.grip/100,1)
  gripFill.BackgroundColor3=m.grip<=25 and Color3.fromRGB(255,130,81)or Color3.fromRGB(255,207,91)
 end
