@@ -1,0 +1,132 @@
+[
+  {
+    "candidateOnly": true,
+    "name": "STUDIO JAHIT",
+    "blockers": [],
+    "id": "OT01",
+    "district": "OldTown",
+    "supported": true,
+    "localPosition": [
+      -46.24000930786133,
+      1.0000001192092896,
+      44.19999694824219
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "POS & KERTAS",
+    "blockers": [],
+    "id": "OT02",
+    "district": "OldTown",
+    "supported": true,
+    "localPosition": [
+      -7.320001602172852,
+      1.0000001192092896,
+      43.19999694824219
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "KOPI TAMAN",
+    "blockers": [],
+    "id": "CV01",
+    "district": "CivicCentre",
+    "supported": true,
+    "localPosition": [
+      -67.78001403808594,
+      1.0000001192092896,
+      153.1999969482422
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "GALERI KOTA",
+    "blockers": [],
+    "id": "CV02",
+    "district": "CivicCentre",
+    "supported": true,
+    "localPosition": [
+      48.22001647949219,
+      1.0000001192092896,
+      153.1999969482422
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "KAFE PERSIMPANGAN",
+    "blockers": [],
+    "id": "CQ01",
+    "district": "BrickQuay",
+    "supported": true,
+    "localPosition": [
+      -330.36798095703125,
+      1.0000001192092896,
+      198.10848999023438
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "FLORIS SUDUT",
+    "blockers": [],
+    "id": "CQ02",
+    "district": "BrickQuay",
+    "supported": true,
+    "localPosition": [
+      -273.63214111328125,
+      1.0000001192092896,
+      202.89151000976562
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "BATA RECORDS",
+    "blockers": [],
+    "id": "CQ03",
+    "district": "BrickQuay",
+    "supported": true,
+    "localPosition": [
+      -390.3680419921875,
+      1.0000001192092896,
+      245.10848999023438
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "KIOS KORAN",
+    "blockers": [],
+    "id": "PK01",
+    "district": "CivicCentre",
+    "supported": true,
+    "localPosition": [
+      -81.2400131225586,
+      1.0000001192092896,
+      293.70001220703125
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "TEH TAMAN",
+    "blockers": [],
+    "id": "PK02",
+    "district": "CivicCentre",
+    "supported": true,
+    "localPosition": [
+      -15.24000358581543,
+      1.0000001192092896,
+      293.70001220703125
+    ]
+  },
+  {
+    "candidateOnly": true,
+    "name": "BUNGA KOTA",
+    "blockers": [],
+    "id": "PK03",
+    "district": "CivicCentre",
+    "supported": true,
+    "localPosition": [
+      61.760013580322266,
+      1.0000001192092896,
+      293.70001220703125
+    ]
+  }
+]

@@ -32,7 +32,7 @@ return table.freeze({
 	SpawnOffset=Vector3.new(0,4,0), RecoveryPlayerOffset=Vector3.new(0,3,0),
 	ImpactSpeed=55, ContactMargin=0.8, PhysicsSampleInterval=1/30,
 	PackageSize=Vector3.new(2.5,2,2), CarryOffset=CFrame.new(0,0,-2.5), DropOffset=CFrame.new(0,0,-4),
-	BoundsMin=Vector3.new(-126,-14,-55), BoundsMax=Vector3.new(136,96,154),
+	BoundsMin=Vector3.new(-138,-14,-55), BoundsMax=Vector3.new(145,96,154),
 	DestinationId="Rumah01", DestinationName="Rumah Bu Sari", PackageType="Biasa", PromptHoldDuration=0.15,
 	Hazards=table.freeze({
 		SampleInterval=0.05, SlipSamples=2, SlipMinimumSpeed=5,

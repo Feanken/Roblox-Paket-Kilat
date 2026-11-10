@@ -118,9 +118,14 @@ local function classify(x,z,roads,district)
  if rectHit(x,z,P.BridgeWalk)then return "Walk"end
  for _,r in roads do if rectHit(x,z,expanded(r,4))then return "Walk"end end
  if district=="CivicCentre"then
+  for _,q in P.CivicGreens36 or {}do if rectHit(x,z,q)and math.abs(z-232)>=3 then return "Grass"end end
   if rectHit(x,z,P.Park)and not(math.abs(x)<4 or math.abs(z-232)<3 or rectHit(x,z,{-20,6,219,245}))then return "Grass"end
   if x< -130 or x>137 or z>302 then return "Grass"end
- else if x< -436 or x> -172 or z<101 or z>299 then return "Grass"end end
+ else
+  local green=false for _,q in P.PocketGreens36 or {}do if rectHit(x,z,q)then green=true end end
+  if green then for _,q in P.PavedLots36 or {}do if rectHit(x,z,q)then green=false end end end
+  if green or x< -436 or x> -172 or z<101 or z>299 then return "Grass"end
+ end
  return "Paving"
 end
 function B.Surface(district)
@@ -135,6 +140,7 @@ function B.Surface(district)
  add(P.BridgeRoad)add(P.BridgeWalk)
  if district=="CivicCentre"then add(P.Park)add({-20,6,219,245})add({-4,4,151,310})add({-138,145,229,235})add({-130,137,151,302})
  else add({-436,-172,101,299})end
+ for _,set in {P.PocketGreens36 or {},P.PavedLots36 or {},P.CivicGreens36 or {}}do for _,rect in set do add(rect)end end
  xs,zs=unique(xs),unique(zs)
  local floor=Instance.new("Folder")floor.Name=district floor.Parent=root.Surface35
  local diagonal=P.Diagonal local normal=Vector2.new(-(diagonal.b-diagonal.a).Y,(diagonal.b-diagonal.a).X).Unit

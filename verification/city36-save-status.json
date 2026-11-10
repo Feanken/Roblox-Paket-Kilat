@@ -1,0 +1,15 @@
+{
+  "bytes": 619614,
+  "mtime": "2026-11-10T08:26:01.218Z",
+  "revision": true,
+  "sources": {
+    "CityRework36": true,
+    "CityInfill36": false,
+    "DistrictPlan35": true,
+    "DistrictBuilder35": true,
+    "Config": true,
+    "AudioProfile33": true
+  },
+  "latestSourcesSaved": false,
+  "saveRequired": true
+}

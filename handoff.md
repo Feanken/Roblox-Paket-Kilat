@@ -1,4 +1,50 @@
-# Pembaruan terbaru — District35: pusat kota dan Bata Quay
+# Pembaruan terbaru — City36: jalan keliling, penataan gedung dan infill
+
+10 November 2026. Dikerjakan di sesi main_game_AutoRecovery_0.rbxl/Studio6654bdf4-6d9a-4365-b5fc-cd30708a66d3 sesuai izin yang sudah ada. Akhir Edit, tanpa fixture tersisa. Sepuluh sasaran pada task_list menangani kerusakan, struktur jalan dan pengisian kota; tidak mengklaim peningkatan mutu/FPS numerik10x.
+
+## Hasil untuk pemain
+
+Kota lama sekarang punya jalan keliling barat/timur selebar10stud yang tersambung ke dua jalan melintang lama dan menuju jembatan. Floor dipartisi pada24bidang lama/approach menjadi98bidang pengganti, tanpa lapisan aspal lebar di atas lantai lain. Enam bidang aspal lama diselaraskan warna/tingginya.32parapet/cap/post pada sisi jalan diangkat ke backup dan diganti empat curb rendah dengan bukaan. Marka, zebra cross, lampu dan tiga papan jalan ditambahkan.
+
+Lima gedung komersial lama dipindah ke setback depan yang sama:frontZ46lokal. PosisiX berturut-turut18,48,78,-94,-64. Geometri dasar, facade23, detail32, papan courtyard serta dua sepeda/papan alat bengkel ikut dipindahkan. Lima rumah/titik tujuan tidak dipindah. Empat kantor baru milik pemilik tetap pada posisi, ukuran dan warna sebelum pengerjaan.
+
+Sepuluh bangunan mengisi lot yang tersedia:Studio Jahit dan Pos & Kertas di kota lama;Kopi Taman dan Galeri Kota di civic;Kafe Persimpangan,Floris Sudut,Bata Records pada lot segitiga Bata Quay;Kios Koran,Teh Taman,Bunga Kota pada boulevard taman. Bentuk1–3lantai mengikuti ukuran lot, terutama pavilion bersudut yang menghadap jalan diagonal. Roof slate kini tampak di antara coping tepi. Display usaha dibedakan:koran,teh/botol,cangkir,bunga,kain,parcel/kardus,artwork dan piringan hitam. Display/jendela belakang diparent ke gedung supaya ikut saat model dipindah.
+
+Tiga pocket lawn di Bata Quay dan dua buffer hijau civic mengganti sebagian paving kosong melalui partisi ulang, dengan forecourt dan crosspath tetap dipaving. Dua lampiran floor asli35 diarsip sebelum rebuild; luas44997+59784stud² dipertahankan. Tambahan32model dari library Creator Store yang sudah dibersihkan:11lampu,6pohon,5bangku,8semak,2sepeda. Ada tiga kelompok meja/kursi cafe dan dua outline loading bay; tidak menambahkan kendaraan atau layanan yang belum berfungsi.
+
+BackWall/BackWallRight/Roof depot yang miring diluruskan, collision roof legacy dinonaktifkan, ShopPoint dipulihkan ke local(-8,1.15,4).16tile-joint lama yang tampak seperti retakan melayang diarsip. Dua meja piknik lama dinaikkan.910156stud karena batas kaki terlihat masuk lantai. TamanTimur, beberapa pohon/bangku/pot dipindah keluar calon badan jalan.
+
+Terdapat10alamat CandidateOnly baru, total30dengan tahap35. Mereka belum menjadi order aktif dan bangunan masih eksterior solid. Lima tujuan lama, harga, hadiah, profil, receipt, audio musik dan perlengkapan tetap. Batas paket kota lama mengikuti fondasi x[-138,145]; civic utara/pulau ruko tetap di luar order aktif. Sumber ambience TamanTimur mengikuti relokasi ke local(115,3,80). Panduan konfigurasi Roblox dipakai; koordinat struktural ini harus ikut geometri, sehingga tidak dibuat eksperimen/config live.
+
+## Source dan backup
+
+Dua source baru src/CityRework36.luau dan CityInfill36.luau adalah authoring Edit-only di ServerStorage.PaketKilat_City36Authoring; tidak dipanggil Bootstrap. Empat source disesuaikan:DistrictPlan35/DistrictBuilder35 untuk partisi greens;Config untuk bounds;AudioProfile33 untuk offset taman. Enamsource cocok disk/Edit. CityRevision=CoherentCity36.
+
+Map.City36 berisi719BasePart/37MeshPart/118collider/0script/0light. Districts35 setelah partisi pocket menjadi2618Part/114mesh/1188collider; jumlah bertambah karena pemecahan poligon diagonal, bukan pengukuran FPS.17anchor lama cocok persis, empat OfficeBody cocok posisi/ukuran/warna.
+
+Backup disk:backups/city36/main_game.before-city36.rbxl,handoff.before.md dan empat source sebelum patch. Backup live ServerStorage.PaketKilat_PreCity36 menyimpan Snapshot17anchor/4office/atribut,63referensi transform/properti,74objek/folder di Archive dan4source lama. Archive mencakup16tilejoint,24floor,32parapet/cap/post dan2folder surface35. Terrain tidak ditulis. Jangan menjalankan Setup berulang di map aktif.
+
+Untuk rollback penuh gunakan binary baseline; untuk rollback bertahap hapus City36, kembalikan Archive ke OriginalParent36 dan pulihkan transform dari Changed serta empat source lama. Dua folder surface35 memakai suffix_Before36 di archive dan perlu nama aslinya saat dipulihkan. Catatan transform tidak menyimpan warna enam asphalt yang dinormalisasi; baseline binary diperlukan bila warna lama juga harus persis. Pertahankan edit pemilik yang dibuat sesudah baseline.
+
+## Verifikasi
+
+Audit10757sampel lantai(3420lama,3157civic,4180quay):0lubang/0tinggi salah, topY4478. Sembilan koridor×3offset bebas collider penghalang. Satu ray pada batas sambungan bridge memakai toleransi.005stud; area sekitarnya terdukung dan lintasan fisik lolos. Audit bidang native kota lama sebelum perapian approach tidak menemukan overlap di atas toleransi.006stud. Sepuluh marker pintu didukung floor dan volume akses bebas badan gedungnya.
+
+Sepuluh segmen rig server-owned lolos health100:jalan keliling barat/timur,dua belokan,akses toko buku,Pos & Kertas,diagonal,kios civic,toko tas danpickup. Dua sambungan loop diulang sesudah perapian aspal approach:keduanya sampai/health100/Asphalt. Titik awal tiapsegmen dipindah oleh fixture; ini bukan perjalanan pengantaran utuh. Rig dibersihkan lewat jalur sukses/error.
+
+Fixture Script normal pada StudioMemory menguji EquipCosmetic dari ShopPoint dan Start dari pickup. Paket tetapCarrying/outOfBoundsfalse padax-130 dan132; Cancel mengembalikanIdle tanpa mengubah koin. Karakter/anchor/velocity dikembalikan. Tidak memberi reward atau menulis profil persisten.37mesh instance/8content ID preloadSuccess; console final hanya Bootstrap.
+
+Pemeriksaan dekat menemukan teks papan baru gepeng karena SurfaceGui defaultFixedSize, meski PixelsPerStud diisi.22SurfaceGui diubah keSizingMode.PixelsPerStud dan source dikoreksi. Layout butuh satu frame setelah perubahan; tangkapan transisi yang sempat berukuran besar tidak dipakai. Tangkapan stabil menampilkan teks KAFE PERSIMPANGAN dengan rasio normal. Perbaikan ini visual, tidak memerlukan pengulangan seluruh tes gameplay.
+
+Bukti verification/city36-audit.json,city36-addresses.json,city36-save-status.json,city36-old-town.jpg,city36-corner-cafe.jpg. Harness tests/City36EditAudit.luau,City36Walk.fixture.server.luau,City36Services.fixture.server.luau. Service fixture dijalankan sebagai Script Play dengan StringValue hasil yang dibuat harness MCP terlebih dahulu. AkhirEdit/tanpaTemporaryCity36*. HP fisik/FPS/multiplayer/seluruh kombinasi avatar dan penilaian pemilik belum diklaim. Tidak menerbitkan atau mengundang pemain luar.
+
+## Status simpan
+
+File D:/YANG CORPORATE/Roblox/Game1/main_game.rbxl saat pemeriksaan berukuran619614byte,mtime2026-11-10T08:26:01.218Z(15:26:01WIB). Memuat City36 dan bangunan baru serta5dari6source akhir. CityInfill36 belum memuat koreksi rasio papan terakhir. Pemilik menjelaskan memakaiCtrl+S pada sesi AutoRecovery. Sudah diberi langkah File → Save to File As… ke folder Game1 dengan nama main_game.rbxl, Replace bila diminta. **Koreksi papan akhir masih membutuhkan SaveAs ke target proyek sampai verifikasi sumber semuanya cocok.** Source/SDD/bukti di disk sudah tersimpan. Jangan menganggap Ctrl+S pada AutoRecovery otomatis memperbarui file target.
+
+---
+
+# Arsip — District35: pusat kota dan Bata Quay
 
 10 November 2026. Diterapkan ke sesi main_game_AutoRecovery_0.rbxl, Studio6654bdf4-6d9a-4365-b5fc-cd30708a66d3, sesuai persetujuan pemilik. Akhir Edit, tanpa karakter uji/fixture tersisa. Map dahulu; pesanan aktif tetap lima tujuan lama. Tidak ada publikasi atau undangan pemain luar.
 

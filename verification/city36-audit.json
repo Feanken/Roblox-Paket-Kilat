@@ -1,0 +1,581 @@
+{
+  "edit": {
+    "anchors": [
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Depot.PickupPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah01.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RecoveryPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.PrototypeSpawn",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah02.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah03.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah04.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Rumah05.DestinationPoint",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos1",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos2",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos3",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos4",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.City13.Stations.Pos5",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.Depot",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.Plaza",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.Reading",
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.RestStops27.North",
+        "sizeDelta": 0
+      }
+    ],
+    "offices": [
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD01_Menara Kilat",
+        "colorDelta": 0,
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD02_Kantor Media",
+        "colorDelta": 0,
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD03_Bursa Kreatif",
+        "colorDelta": 0,
+        "sizeDelta": 0
+      },
+      {
+        "positionDelta": 0,
+        "path": "Workspace.PaketKilat.Map.Districts35.CivicCentre.CBD04_Balai Layanan",
+        "colorDelta": 0,
+        "sizeDelta": 0
+      }
+    ],
+    "shopPoint": {
+      "cf": [
+        15.999756813049316,
+        4478.14990234375,
+        126,
+        -1.0000001192092896,
+        0,
+        0,
+        0,
+        1.0000001192092896,
+        0,
+        0,
+        0,
+        -1
+      ],
+      "upDot": 1.0000001192092896,
+      "localY": 1.1499024629592896
+    },
+    "floors": {
+      "Quay": {
+        "wrongHeight": 0,
+        "samples": 4180,
+        "holes": 0,
+        "examples": []
+      },
+      "Civic": {
+        "wrongHeight": 0,
+        "samples": 3157,
+        "holes": 0,
+        "examples": []
+      },
+      "OldTown": {
+        "wrongHeight": 0,
+        "samples": 3420,
+        "holes": 0,
+        "examples": []
+      }
+    },
+    "lanes": [
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "OldSouth",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "OldNorth",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "OldSpine",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "WestLoop",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "EastLoop",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 1,
+        "blockers": [],
+        "name": "Bridge",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "QuayDiagonal",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "CivicWest",
+        "holes": 0
+      },
+      {
+        "exactEdgeMisses": 0,
+        "blockers": [],
+        "name": "CivicEast",
+        "holes": 0
+      }
+    ],
+    "oldSetbacks": [
+      {
+        "x": 18,
+        "name": "TOKO ROTI",
+        "frontZ": 46
+      },
+      {
+        "x": 48,
+        "name": "RUMAH SUSUN",
+        "frontZ": 46
+      },
+      {
+        "x": 78,
+        "name": "BENGKEL",
+        "frontZ": 46
+      },
+      {
+        "x": -94,
+        "name": "TOKO BUKU",
+        "frontZ": 46
+      },
+      {
+        "x": -64,
+        "name": "KANTOR KAMPUNG",
+        "frontZ": 46
+      }
+    ],
+    "addresses": [
+      {
+        "candidateOnly": true,
+        "name": "STUDIO JAHIT",
+        "blockers": [],
+        "id": "OT01",
+        "district": "OldTown",
+        "supported": true,
+        "localPosition": [
+          -46.24000930786133,
+          1.0000001192092896,
+          44.19999694824219
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "POS & KERTAS",
+        "blockers": [],
+        "id": "OT02",
+        "district": "OldTown",
+        "supported": true,
+        "localPosition": [
+          -7.320001602172852,
+          1.0000001192092896,
+          43.19999694824219
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "KOPI TAMAN",
+        "blockers": [],
+        "id": "CV01",
+        "district": "CivicCentre",
+        "supported": true,
+        "localPosition": [
+          -67.78001403808594,
+          1.0000001192092896,
+          153.1999969482422
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "GALERI KOTA",
+        "blockers": [],
+        "id": "CV02",
+        "district": "CivicCentre",
+        "supported": true,
+        "localPosition": [
+          48.22001647949219,
+          1.0000001192092896,
+          153.1999969482422
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "KAFE PERSIMPANGAN",
+        "blockers": [],
+        "id": "CQ01",
+        "district": "BrickQuay",
+        "supported": true,
+        "localPosition": [
+          -330.36798095703125,
+          1.0000001192092896,
+          198.10848999023438
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "FLORIS SUDUT",
+        "blockers": [],
+        "id": "CQ02",
+        "district": "BrickQuay",
+        "supported": true,
+        "localPosition": [
+          -273.63214111328125,
+          1.0000001192092896,
+          202.89151000976562
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "BATA RECORDS",
+        "blockers": [],
+        "id": "CQ03",
+        "district": "BrickQuay",
+        "supported": true,
+        "localPosition": [
+          -390.3680419921875,
+          1.0000001192092896,
+          245.10848999023438
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "KIOS KORAN",
+        "blockers": [],
+        "id": "PK01",
+        "district": "CivicCentre",
+        "supported": true,
+        "localPosition": [
+          -81.2400131225586,
+          1.0000001192092896,
+          293.70001220703125
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "TEH TAMAN",
+        "blockers": [],
+        "id": "PK02",
+        "district": "CivicCentre",
+        "supported": true,
+        "localPosition": [
+          -15.24000358581543,
+          1.0000001192092896,
+          293.70001220703125
+        ]
+      },
+      {
+        "candidateOnly": true,
+        "name": "BUNGA KOTA",
+        "blockers": [],
+        "id": "PK03",
+        "district": "CivicCentre",
+        "supported": true,
+        "localPosition": [
+          61.760013580322266,
+          1.0000001192092896,
+          293.70001220703125
+        ]
+      }
+    ],
+    "counts": {
+      "city36": {
+        "lights": 0,
+        "code": 0,
+        "colliders": 118,
+        "mesh": 37,
+        "parts": 719
+      },
+      "districts35": {
+        "lights": 0,
+        "code": 0,
+        "colliders": 1188,
+        "mesh": 114,
+        "parts": 2618
+      }
+    },
+    "ground": [
+      {
+        "name": "LoopLamp1",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp2",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp3",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp4",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp5",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp6",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp7",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp8",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp9",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp10",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "LoopLamp11",
+        "bboxGap": 0.00012874603271484375
+      },
+      {
+        "name": "InfillTree1",
+        "bboxGap": -0.00024366378784179688
+      },
+      {
+        "name": "InfillTree2",
+        "bboxGap": -0.00001811981201171875
+      },
+      {
+        "name": "InfillTree3",
+        "bboxGap": -0.00022459030151367188
+      },
+      {
+        "name": "InfillTree4",
+        "bboxGap": -0.00024366378784179688
+      },
+      {
+        "name": "InfillTree5",
+        "bboxGap": -0.00001811981201171875
+      },
+      {
+        "name": "InfillTree6",
+        "bboxGap": -0.00022459030151367188
+      },
+      {
+        "name": "CityBench1",
+        "bboxGap": -0.00009822845458984375
+      },
+      {
+        "name": "CityBench2",
+        "bboxGap": -0.00009822845458984375
+      },
+      {
+        "name": "CityBench3",
+        "bboxGap": -0.00009822845458984375
+      },
+      {
+        "name": "CityBench4",
+        "bboxGap": -0.00009822845458984375
+      },
+      {
+        "name": "CityBench5",
+        "bboxGap": -0.00009822845458984375
+      },
+      {
+        "name": "LowShrub1",
+        "bboxGap": -2.384185791015625e-7
+      },
+      {
+        "name": "LowShrub2",
+        "bboxGap": -2.384185791015625e-7
+      },
+      {
+        "name": "LowShrub3",
+        "bboxGap": -2.384185791015625e-7
+      },
+      {
+        "name": "LowShrub4",
+        "bboxGap": -2.384185791015625e-7
+      },
+      {
+        "name": "ParkedBicycle1",
+        "bboxGap": 0.00009775161743164062
+      },
+      {
+        "name": "ParkedBicycle2",
+        "bboxGap": 0.00009775161743164062
+      },
+      {
+        "name": "QuayShrub1",
+        "bboxGap": -0.0000978708267211914
+      },
+      {
+        "name": "QuayShrub2",
+        "bboxGap": -0.0000978708267211914
+      },
+      {
+        "name": "QuayShrub3",
+        "bboxGap": -0.0000978708267211914
+      },
+      {
+        "name": "QuayShrub4",
+        "bboxGap": -0.0000978708267211914
+      }
+    ]
+  },
+  "walk1": {
+    "content": [
+      {
+        "type": "text",
+        "text": "[{\"name\":\"WestLoop\",\"material\":\"Pavement\",\"elapsed\":6.184110900001542,\"localPosition\":[-129.9999542236328,3.970703601837158,133.8296356201172],\"health\":100,\"reached\":true},{\"name\":\"WestTurn\",\"material\":\"Asphalt\",\"elapsed\":1.6500451000028989,\"localPosition\":[-105.45118713378906,3.971191883087158,143.44190979003907],\"health\":100,\"reached\":true},{\"name\":\"EastLoop\",\"material\":\"Asphalt\",\"elapsed\":5.981607599998824,\"localPosition\":[132.0000457763672,3.971191883087158,131.23899841308595],\"health\":100,\"reached\":true},{\"name\":\"EastTurn\",\"material\":\"Asphalt\",\"elapsed\":1.533950900000491,\"localPosition\":[111.27913665771485,3.970703601837158,143.18609619140626],\"health\":100,\"reached\":true},{\"name\":\"BookshopAccess\",\"material\":\"Pavement\",\"elapsed\":0.9827816999968491,\"localPosition\":[-89.99991607666016,3.970703601837158,43.324928283691409],\"health\":100,\"reached\":true}]"
+      }
+    ],
+    "isError": false
+  },
+  "walk2": {
+    "content": [
+      {
+        "type": "text",
+        "text": "[{\"name\":\"NewPostShop\",\"material\":\"Pavement\",\"elapsed\":0.8670415000015055,\"localPosition\":[-7.319770812988281,3.971191883087158,41.76282501220703],\"health\":100,\"reached\":true},{\"name\":\"QuayDiagonal\",\"material\":\"Asphalt\",\"elapsed\":5.6838484999971119,\"localPosition\":[-341.8215026855469,3.970703601837158,227.15130615234376],\"health\":100,\"reached\":true},{\"name\":\"CivicKiosk\",\"material\":\"Pavement\",\"elapsed\":0.7841437999995833,\"localPosition\":[-15.039793014526368,3.970703601837158,292.9776611328125],\"health\":100,\"reached\":true},{\"name\":\"ShopPad\",\"material\":\"Plastic\",\"elapsed\":0.4171427000001131,\"localPosition\":[-8.000001907348633,4.454590320587158,5.428886413574219],\"health\":100,\"reached\":true},{\"name\":\"DepotPickup\",\"material\":\"SmoothPlastic\",\"elapsed\":0.647891199998412,\"localPosition\":[-2.000000238418579,4.460449695587158,-5.25775146484375],\"health\":100,\"reached\":true}]"
+      }
+    ],
+    "isError": false
+  },
+  "finalWalk": {
+    "content": [
+      {
+        "type": "text",
+        "text": "[{\"name\":\"WestJunction\",\"material\":\"Asphalt\",\"elapsed\":2.7346179999985908,\"localPosition\":[-129.99998474121095,3.970703601837158,143.17242431640626],\"health\":100,\"reached\":true},{\"name\":\"EastJunction\",\"material\":\"Asphalt\",\"elapsed\":2.768157499998779,\"localPosition\":[132.0000457763672,3.970703601837158,143.17247009277345],\"health\":100,\"reached\":true}]"
+      }
+    ],
+    "isError": false
+  },
+  "services": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"ok\":true,\"result\":{\"shop\":{\"ok\":true,\"code\":\"Equipped\"},\"storage\":\"StudioMemory\",\"started\":true,\"finalStatus\":\"Idle\",\"bounds\":[{\"status\":\"Carrying\",\"x\":-130,\"outOfBounds\":false},{\"status\":\"Carrying\",\"x\":132,\"outOfBounds\":false}],\"coinsUnchanged\":true}}"
+      }
+    ],
+    "isError": false
+  },
+  "preload": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"meshInstances\":37,\"status\":{\"rbxassetid://6905088205\":\"Success\",\"rbxassetid://6905087503\":\"Success\",\"rbxassetid://102240183850853\":\"Success\",\"rbxassetid://6905096244\":\"Success\",\"rbxassetid://7191451797\":\"Success\",\"rbxassetid://1278518815\":\"Success\",\"rbxassetid://1278519390\":\"Success\",\"rbxassetid://1278512125\":\"Success\"}}"
+      }
+    ],
+    "isError": false
+  },
+  "oldNativeOverlapBeforeApproachRefinement": {
+    "content": [
+      {
+        "type": "text",
+        "text": "[]"
+      }
+    ],
+    "isError": false
+  },
+  "surfaceGui": {
+    "count": 22,
+    "sizingMode": "PixelsPerStud",
+    "visualVerified": true
+  },
+  "sourceLiveMatches": true,
+  "limitations": [
+    "Segmented rig walks, not a complete player delivery",
+    "Service fixture used StudioMemory and awarded no coins",
+    "No physical-phone, FPS or multiplayer claim"
+  ]
+}

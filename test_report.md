@@ -101,3 +101,12 @@ Audit7337sampel area0lubang, tinggiY4478; luas44997+59784stud².11koridor×3offs
 Play awal:4segmen player lolos. Percobaan teleport client jauh gagal/tidak dipakai sebagai lulus karena Streaming/input; probe PlayerModule menghasilkan error harness. Rig server-owned sementara:6segmen(jembatan/3diagonal/avenue barat/depan ruko) lolos health100. FreshPlay setelah penggabungan lantai:2segmen jembatan/barat lolos, consoleBootstrap saja. RequestStreamAroundAsync mengonfirmasi dua area client tersedia;114mesh/11ID preloadSuccess. AkhirEdit/tanpafixture. Bukan pengujian perjalanan order penuh, HP fisik, FPS atau multiplayer.
 
 Source authoring3file cocokdisk/Edit, audit/alamat/owner override/status simpan dan3JPEG disimpan di verification/district35-*. Pemilik menyimpan ulang main_game555260byte/14:54:39WIB: District35/Upgrade34 dan ketiga source akhir cocok persis. Titik depot pada Edit sudah pulih; tidak ada save tertunda untuk tahap35. Tidak ada publikasi/pemain luar.
+
+
+## City36 — perbaikan dan pengisian kota (10 November 2026)
+
+10757sampel floor0lubang/0tinggi salah;9koridor×3offset bebas blocker.17anchor tidak berubah, empat OfficeBody edit pemilik cocok posisi/ukuran/warna.10calon pintu baru didukungfloor dan bebas body di volume akses. Audit nativefloor kota lama sebelum perapian approach0overlap>.006stud; satu exact-edge ray bridge memakai toleransi.005stud.
+
+Play:10segmen Humanoid server-owned sampai health100;2segmenjunction diulang setelah aspal approach dirapikan, keduanya sampai/Asphalt.37mesh/8content ID preloadSuccess,consoleBootstrap saja. ServicefixtureStudioMemory: tokoEquipCosmetic danStart berhasil, paketCarrying/outOfBoundsfalse dix-130/132,Cancel→Idle dan koin tidak berubah. Karakterdipulihkan,fixture dibersihkan,akhirEdit. Bukan perjalanan order utuh atau tes HPfisik/FPS/multiplayer.
+
+Teks papan sempat gepeng karena CanvasSizing default;22SurfaceGui diubah kePixelsPerStud. Tangkapan transisi yang membesar dibuang; capture stabil terbaca normal.6source disk/Edit cocok. Map utama619614byte sudahCity36,tetapi koreksi canvasCityInfill36 terakhir belum tersimpan pada target proyek; pengguna menjelaskanCtrl+S padaAutoRecovery. Statuslanjut pada verification/city36-save-status.json. Tidak ada publikasi/pemain luar.

@@ -8,7 +8,7 @@ local P={
  },
  Zones={
   {Name="KebunWarga",Id="rbxassetid://9112742473",Offset=Vector3.new(-62,3,1),Volume=.17,Min=8,Max=42,Phase=0},
-  {Name="TamanTimur",Id="rbxassetid://9112742473",Offset=Vector3.new(135,3,72),Volume=.14,Min=7,Max=35,Phase=11},
+  {Name="TamanTimur",Id="rbxassetid://9112742473",Offset=Vector3.new(115,3,80),Volume=.14,Min=7,Max=35,Phase=11},
   {Name="KebunPiknik",Id="rbxassetid://9112742473",Offset=Vector3.new(-60,3,101),Volume=.16,Min=7,Max=40,Phase=23},
   {Name="AirMancur",Id="rbxassetid://9120557315",Offset=Vector3.new(48,3,86),Volume=.21,Min=6,Max=34,Phase=4},
  },

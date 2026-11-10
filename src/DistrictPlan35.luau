@@ -14,5 +14,8 @@ local P={
   {"CBD04","Balai Layanan",116,230,34,30,58,90},
  },
  Shops={"Roti Kota","Kopi Kanal","Studio Kertas","Toko Kamera","Floris Jalan","Atelier Utara","Dapur Nusa","Buku Bata","Klinik Sehat","Kantor Arsitek","Kafe Sudut","Pasar Lokal","Rumah Desain","Kedai Pagi","Laundry Kota","Galeri Tepi Air","Toko Sepatu","Studio Musik","Farmasi Kota","Kantor Niaga","Toko Alat","Kedai Quay","Studio Foto","Kertas & Pena"},
+ PocketGreens36={{-362,-318,185,215},{-291,-253,184,216},{-411,-378,239,270}},
+ PavedLots36={{-351,-325,184,205},{-277,-255,195,218},{-410,-386,231,253}},
+ CivicGreens36={{-79,-62,202,264},{48,63,202,264}},
 }
 return P

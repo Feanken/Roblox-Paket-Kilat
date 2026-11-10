@@ -540,3 +540,18 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] D35-09: source/manifest/alamat/bukti/dokumen/simpan status.
 - [x] D35-10: pemilik simpan ulang main_game555260byte/14:54:39WIB; marker35/34 dan tiga source authoring akhir cocok.
 - [ ] D35-11: penilaian pemilik/HP fisik/FPS/multiplayer; rilis tetap ditunda.
+
+
+## City36 — perbaikan kota dan infill
+
+- [x] C36-00: inspeksi, backup binary/source/handoff dan spesifikasi.
+- [x] C36-01: perbaiki collision depot dan ShopPoint.
+- [x] C36-02: loop jalan kota lama, floor disjoint dan batas aman paket.
+- [x] C36-03: trotoar, bukaan curb, marka dan penyeberangan.
+- [x] C36-04: tata lima gedung beserta seluruh fasad/detail terkait.
+- [x] C36-05: infill komersial kota lama dan aksesnya.
+- [x] C36-06: frontage/kiosks civic dan fasilitas publik.
+- [x] C36-07: pavilion lot segitiga Bata Quay beserta calon alamat.
+- [x] C36-08: planting/props/wayfinding/grounding, metadata alamat dan audio taman.
+- [x] C36-09: audit geometry/anchor/corridor, Play fisik dan bukti visual/source.
+- [ ] C36-10: simpan hasil ke main_game.rbxl; penilaian pemilik terpisah.
