@@ -108,3 +108,8 @@ Bangku/lampu/semak memakai kembali template bersih dari library07/09 yang sudah 
 ## Rest27 — 10 November 2026
 
 Memakai ulang mesh bangku ParkBench CreatorStore yang sudah dibersihkan pada pass07/15/23. Tidak ada pencarian/impor/pembelian aset baru. Empat Seat transparan, ObjectValue dan ProximityPrompt dibuat dari kelas bawaan Roblox; mesh/material/posisi bangku tetap. Penempatan: Map.RestStops27; kode src/InstallRestStops27.luau dan src/RestStops27.luau.
+
+
+## Preview28 — 10 November 2026
+
+Sketsa rute memakai Frame/TextLabel/font bawaan Roblox dan polyline SafeRoutes08 yang sudah ada. Tidak ada aset gambar/model/audio baru, pencarian/impor/pembelian, upload atau publikasi.

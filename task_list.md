@@ -412,5 +412,19 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] Uji empatSeat, normal vs2x, cap100, F/Space desktop, kondisi70/coins0/startedAt tetap.
 - [x] Layout GalaxyA06 landscape muat; bukti dan batas input/kamera dicatat.
 - [x] Empat source disk/Edit cocok, akhirEdit/default/0paket/tanpafixture, diffcheck lolos.
-- [ ] Simpan sesi AutoRecovery yang disetujui ke main_game.rbxl; markerPublicBenches27 belum ada di binary.
+- [x] Rest27 tersimpan: main_game456270byte terverifikasi memuat PublicBenches27 pada Preview28.
 - [ ] Uji sentuh fisik/gamepad, kamera semua arah dan multiplayer; publikasi/pemain luar tetap ditunda.
+
+
+## Preview28 — pratinjau pekerjaan (10 November 2026)
+
+- [x] Backup source board aktif, binarybaseline dan handoff.
+- [x] Daftar pilih kiri/detail kanan dengan sketsa jalan, panjang rute dan marker depot/tujuan.
+- [x] Syarat Prioritas/Paket mulus/Pemburu cap eksplisit; dasar dan bonus dibedakan tanpa menjanjikan total.
+- [x] Pilih kartu tanpa membuat order; tombol Ambil mengirim offerid terpilih, fallback revisibaru.
+- [x] Tujuh pemeriksaan helper, seleksiIdle, tokenlamaOfferExpired dan penerimaanRumah02 sesuai pilihan.
+- [x] Layout kontrak/riwayat HP muat; temporary tab dipulihkan0 dan fixture dibersihkan.
+- [x] Dua source disk/Edit sama, freshIdle/koin0/history0/offers6, consoleBootstrap, akhirEdit/default/0paket.
+- [x] Simpan source, audit, gambar, design/handoff.
+- [ ] Simpan AutoRecovery ke main_game.rbxl untuk RoutePreview28; binary456270byte belum memuatnya.
+- [ ] Pemeriksaan sentuh/gamepad fisik dan multiplayer; publikasi/pemain luar ditunda.

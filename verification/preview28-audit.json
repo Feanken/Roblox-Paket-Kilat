@@ -1,0 +1,184 @@
+{
+  "revision": "RoutePreview28",
+  "date": "2026-11-10",
+  "place": "main_game_AutoRecovery_0.rbxl",
+  "studio": "6654bdf4-6d9a-4365-b5fc-cd30708a66d3",
+  "scope": "Client board and new shared pure presentation helper only. Server/ledger/profile/tuning unchanged.",
+  "checks": {
+    "routeLengthFollowsSegments": true,
+    "missingRoute": true,
+    "singlePointRoute": true,
+    "projectionFitsMap": true,
+    "emptyProjection": true,
+    "prioritySecondsVisible": true,
+    "exploreCountVisible": true
+  },
+  "selection": {
+    "route": "Biasa · 336 stud · rute dasar",
+    "status": "Idle",
+    "selected": "1:long",
+    "destination": "Rumah Pak Agus",
+    "coins": 0
+  },
+  "priority": {
+    "selected": "1:priority",
+    "fits": true,
+    "conditions": "Kondisi ≥95 · ≤45 dtk\nTanpa Pulihkan"
+  },
+  "expiredToken": {
+    "conditions": "Pilihan rute berikutnya.",
+    "selected": "2:regular",
+    "destination": "Rumah Pak Budi",
+    "server": "{\"ok\":false,\"code\":\"OfferExpired\",\"status\":\"Idle\",\"new\":\"2:priority\",\"coins\":0,\"old\":\"1:explore\"}"
+  },
+  "acceptance": {
+    "status": "Carrying",
+    "boardVisible": false,
+    "server": "{\"status\":\"Carrying\",\"destination\":\"Rumah02\",\"coins\":0}"
+  },
+  "phone": {
+    "config": {
+      "ok": true,
+      "name": "Samsung Galaxy A06",
+      "height": 360,
+      "orientation": "Enum.ScreenOrientation.LandscapeSensor",
+      "width": 800,
+      "ignoreInset": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    "contracts": {
+      "rootSize": "705, 280",
+      "boardSize": "620, 280",
+      "accept": true,
+      "fits": [
+        {
+          "text": "Pesanan",
+          "name": "Title",
+          "fits": true
+        },
+        {
+          "text": "*Bonus bersyarat. Peta/jarak dasar belum termasuk detour cap.",
+          "name": "Info",
+          "fits": true
+        },
+        {
+          "text": "Belum ada pengantaran. Ambil pesanan pertamamu.",
+          "name": "History24",
+          "fits": true
+        },
+        {
+          "text": "Prioritas",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "Rumah Bu Sari",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Paket mulus",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "Rumah Pak Budi",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Pemburu cap",
+          "name": "Name",
+          "fits": true
+        },
+        {
+          "text": "Rumah Pak Agus",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Rumah Bu Sari",
+          "name": "Destination",
+          "fits": true
+        },
+        {
+          "text": "Biasa · 157 stud · rute dasar",
+          "name": "RouteInfo",
+          "fits": true
+        },
+        {
+          "text": "Kondisi ≥95 · ≤45 dtk\nTanpa Pulihkan",
+          "name": "Conditions",
+          "fits": true
+        },
+        {
+          "text": "Dasar +25\nKontrak +14*",
+          "name": "Reward",
+          "fits": true
+        },
+        {
+          "text": "D",
+          "name": "Depot28",
+          "fits": true
+        },
+        {
+          "text": "T",
+          "name": "Target28",
+          "fits": true
+        }
+      ],
+      "selected": "1:priority",
+      "open": true,
+      "anchored": true
+    },
+    "history": {
+      "history": true,
+      "row": false,
+      "accept": false,
+      "preview": false,
+      "text": "1. Rumah Bu Sari · 2★ · +41 koin\nPemburu cap · 80/100 · 60.1s · Cap belum cukup\n2. Rumah Pak Budi · 2★ · +42 koin\nPemburu cap · 80/100 · 60.1s · Cap belum cukup\n3. Rumah Bu Rina · 2★ · +43 koin\nPemburu cap · 80/100 · 60.1s · Cap belum cukup\n4. Rumah Pak Agus · 2★ · +44 koin\nPemburu cap · 80/100 · 60.1s · Cap belum cukup\n5. Rumah Bu Dewi · 2★ · +45 koin\nPemburu cap · 80/100 · 60.1s · Cap belum cukup",
+      "open": true,
+      "fits": true
+    }
+  },
+  "fresh": {
+    "fits": true,
+    "history": false,
+    "restSeats": 4,
+    "preview": true,
+    "fresh": "{\"status\":\"Idle\",\"history\":0,\"offers\":6,\"coins\":0}",
+    "selected": "1:regular",
+    "packages": 0,
+    "text": "Dasar +25\nTanpa bonus kerja"
+  },
+  "final": {
+    "backup": 1,
+    "temporary": [],
+    "rest": "PublicBenches27",
+    "device": "default",
+    "revision": "RoutePreview28",
+    "packages": 0,
+    "gui": true
+  },
+  "sourcesMatch": {
+    "JobPreview28.luau": true,
+    "JobBoard17.client.luau": true
+  },
+  "limits": [
+    "No release or external playtest; GameId0/StudioMemory only",
+    "Distance is SafeRoutes08 road polyline length from depot, excludes stamp detours; no travel-time/reward-total guarantee",
+    "Acceptance tested current regular offer2:regular after refresh, resulting Rumah02/Carrying/coins0",
+    "Initial expired-token fixture returned TooFar while avatar moved; repeated at anchored depot and obtained OfferExpired",
+    "Phone pointer tab activation unreliable; contract/history layouts used temporary initial tabs1/2 and anchored position",
+    "History is a local five-row fixture; not five actual deliveries or rewards",
+    "Final initialtab0 restored; no temporary scripts/anchored characters remain after Stop",
+    "No physical touch/gamepad/multiplayer/performance profiling",
+    "Screenshots precede final shorter Indonesian cap-detour wording; final regular label Tanpa bonus kerja tested separately"
+  ],
+  "evidence": [
+    "preview28-desktop.jpg",
+    "preview28-phone.jpg",
+    "preview28-history-phone.jpg",
+    "saved-preview28.json"
+  ]
+}

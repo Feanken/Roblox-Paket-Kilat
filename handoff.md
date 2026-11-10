@@ -1,4 +1,40 @@
-# Pembaruan TERBARU — Rest27: bangku pemulihan (10 November 2026)
+# Pembaruan TERBARU — Preview28: pilih pesanan dengan pratinjau rute
+
+10 November 2026. Studio main_game_AutoRecovery_0.rbxl/sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3 tetap dipakai sesuai persetujuan pemilik sebelumnya. Papan pesanan sekarang memisahkan memilih pekerjaan dan memulai perjalanan. Pengembangan lokal; tidak ada publikasi atau pemain luar.
+
+## Perubahan
+
+Tiga kartu menjadi daftar pilihan di kiri, rincian dan sketsa jalan di kanan. Pemilihan hanya mengganti pratinjau; tombol Ambil pesanan mengirim offerid terpilih ke handler server lama. Tab Biasa/Kontrak/Riwayat dipertahankan, pilihan tiap tab diingat selama revisi offer sama. Offer baru mereset pilihan yang kedaluwarsa ke pekerjaan pertama pada tabnya.
+
+Rincian menampilkan tujuan, jenis paket, panjang polyline SafeRoutes08 dari depot, persyaratan dan hadiah dasar serta bonus pekerjaan/kontrak terpisah. Prioritas mencantumkan batas detik sebenarnya, Paket mulus kondisi minimum, Pemburu cap jumlah cap. Dasar25 tidak disebut total; bonus kondisi/waktu/cap/target lain tetap dihitung server saat tiba. Bonus kerja bergantung kondisi; kontrak harus memenuhi syarat.
+
+Sketsa memakai marker D (depot)/T (tujuan) serta jalan pilihan lebih gelap. Jarak adalah rute dasar, belum termasuk perjalanan ke pos cap. Bukan jarak garis lurus, ETA, atau jaminan jalur bebas rintangan. Contoh awal: RegulerRumah01≈157stud/LintasKotaRumah04≈336stud. Diagram hanya digambar ulang ketika offer/ukuran berubah, bukan setiap snapshot movement.
+
+Baru shared ModuleScript ReplicatedStorage.PaketKilat.Shared.JobPreview28 dari src/JobPreview28.luau. Hanya source client PaketKilatJobBoard17/src/JobBoard17.client.luau diubah. Pasang helper lebih dulu. Dua source disk/Edit cocok; tab akhir default0/Biasa. Server, ekonomi, harga, hadiah, profil schema2 dan ConfigService tidak berubah. Rest27 tetap empat bangku.
+
+## Pengujian dan batas
+
+Tujuh pemeriksaan helper: panjang segmen, routehilang, route1titik, titikproyeksi dalam batas, grafkosong, detikPrioritas dan jumlahcap. Semua lolos. Desktop memilih LintasKota mempertahankan Idle/koin0; rincian menjadi336stud. TabKontrak menunjukkan kondisi≥95/≤45dtk; Pemburu cap2/kondisi≥80. Label yang diperiksa TextFits.
+
+Sesi awal avatar berpindah saat uji, sehingga kasus tokenlama mendapatTooFar dan tidak dipakai sebagai bukti kedaluwarsa. Ulang dengan posisi di depot ditahan: server menolak1:explore denganOfferExpired, Idle/koin0, client memilih offerrevisi2. Tombol Ambil kemudian berhasil menerima2:regular, orderRumah02/Carrying/koin0 dan board tertutup. Tidak mengklaim bonus dibayar pada uji penerimaan ini.
+
+GalaxyA06 landscape800x360/Root705x280/board620x280: kontrak pertama dan seluruh label diperiksa muat. Riwayatfixture lima baris/sepuluh baris teks muat, detail/list disembunyikan dan tombol acceptnonaktif. Ini fixture riwayat sesi, bukan lima pengantaran/award. Pointer emulator tab belum konsisten; pemeriksaan layout menggunakan temporary initialtab1/2, lalu source final dikembalikan0. Physical touch/gamepad belum diuji.
+
+Fresh terakhir Idle/koin0/history0/offers6/0paket dan default1:regular; label Tanpa bonus kerja muat. ConsoleBootstrap saja. AkhirEdit/default viewport/HUDenabled/0paket/tanpaTemporaryPreview28, backup1source, empat bangku tetap. Tidak ada profiling atau multiplayer. Screenshot sebelum penggantian kata detour menjadi perjalanan ke pos cap; kondisi/angka sama. git diff --check lolos (peringatanLF/CRLF saja).
+
+Bukti verification/preview28-audit.json, preview28-desktop.jpg, preview28-phone.jpg, preview28-history-phone.jpg, saved-preview28.json.
+
+## Backup dan simpan
+
+Backup source asli pada backups/preview28-sources/ dan ServerStorage.PaketKilat_PrePreview28. Binary baseline backups/main_game.before-preview28.20261110.rbxl dan handoff.before-preview28.md. Binary dari main_game di disk, bukan snapshot penuh perubahan lain di AutoRecovery.
+
+Rollback parsial: pulihkan source board asli, hapus helperJobPreview28 dan attribute JobPreviewRevision. Tidak ada map geometry atau profil yang perlu dipulihkan.
+
+**Simpan sesi AutoRecovery ini ke main_game.rbxl sebelum menutup Studio.** main_game di disk456270byte,2026-11-10T00:40:51.216Z (07:40:51WIB), memuatRest27/Stamp26/Status25/Contracts24; RoutePreview28 belum ada. Source lokal dan dokumentasi sudah disimpan.
+
+---
+
+# Arsip — Rest27: bangku pemulihan (10 November 2026)
 
 Pemilik menyetujui perubahan pada Studio aktif main_game_AutoRecovery_0.rbxl, sesi6654bdf4-6d9a-4365-b5fc-cd30708a66d3. Iterasi ini membuat empat bangku publik berguna untuk mengatur stamina/genggaman. Pengembangan lokal saja; tidak ada publikasi atau uji pemain luar.
 

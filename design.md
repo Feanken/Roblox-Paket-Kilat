@@ -417,3 +417,12 @@ Empat bangku CreatorStore yang sudah ada (depot/plaza/baca/utara) menjadi tempat
 Seat transparan noncollision/CanTouchfalse tidak otomatis menangkap pemain lewat. Server memvalidasi seat terdaftar, jarak, hidup/profil aktif, Occupant dan SeatPart; kursi lain memberi regen biasa. Tidak menambah reward/remote/profilefield. MovementTuning menangkap PK_RestRegenMultiplier default2/bounds1..3 saat karakter/order baru. HUD memakai meter lama dan satu notifikasi sementara.
 
 Keempat seat, pemulihan normal vs bonus, batas100, kondisi paket70 tidak sembuh, F masuk dan Space keluar diuji lokal. Layout HP muat; sentuh fisik/gamepad/multiplayer/kamera semua arah belum diverifikasi. Detail evidence/rollback pada handoff.md dan verification/rest27-audit.json.
+
+
+## Preview28 — memilih rute sebelum menerima pesanan (10 November 2026)
+
+Papan pesanan menampilkan daftar tiga pekerjaan dan satu rincian terpilih. Rincian memperlihatkan jenis paket, panjang jalan dari polyline SafeRoutes08, sketsa D→T, syarat kontrak dengan angka waktu/kondisi/cap, hadiah dasar dan bonus bersyarat. Jarak merupakan rute dasar tanpa detourcap, bukan ETA atau jaminan hadiah total. Memilih kartu belum memulai order; tombol Ambil mengirim offerid saat ini ke server lama.
+
+Pilihan disimpan pertab Biasa/Kontrak selama revisi offer sama; revisi baru mengganti pilihan usang. Riwayat tetap lima pengantaran sesi. UI tidak menambah panel permanen saat berjalan. Helper JobPreview28 murni presentasi/geometry; ekonomi, kontrak, profil dan kota tetap.
+
+Desktop seleksi tidak membuat order, server tokenlama ditolak, penerimaan baru cocok dengan tujuan terpilih. Layout GalaxyA06/board620x280 dan riwayat10baris muat. Tab0 dipulihkan setelah fixture1/2; pointer emulator bukan bukti touch fisik. Detail pada handoff.md dan verification/preview28-audit.json.
