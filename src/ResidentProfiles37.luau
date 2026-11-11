@@ -23,5 +23,5 @@ walk("QuayNorthWalker","BrickQuay",{-326,240.3},{-204,240.3},14)
 walk("CanalWalker","BrickQuay",{-174.8,187},{-174.8,215},15,"Bag")
 stay("CafeGuest","BrickQuay",-349.2,201,-90,"Sit",16,"Cup")
 stay("RecordCafeGuest","BrickQuay",-408.7,251,-90,"Sit",17,"Cup")
-stay("FlorisVisitor","BrickQuay",-267,215,0,"Drink",18,"Cup")
+stay("FlorisVisitor","BrickQuay",-280,215,0,"Drink",18,"Cup")
 return P
