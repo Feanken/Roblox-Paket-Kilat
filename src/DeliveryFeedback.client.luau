@@ -194,6 +194,9 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    if tween then tween:Cancel() end
    scale.Scale=.88 tween=TweenService:Create(scale,TweenInfo.new(.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=1}) tween:Play()
   end
+ elseif code == "HardLanding" then
+  impact.Text = string.format("MENDARAT KERAS · kondisi %d/100", snapshot.condition or 0)
+  noticeExpires = os.clock() + 1.8
  elseif code=="Impact" or code=="Slip" or code=="Barrier" or code=="GripLost" then
   impact.Text=string.format("PAKET TERLEPAS  /  kondisi %d",snapshot.condition or 0)
   noticeExpires=os.clock()+2

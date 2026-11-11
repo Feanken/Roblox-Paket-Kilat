@@ -34,6 +34,7 @@ local messages = {
 	Cancelled = "Pesanan dibatalkan. Saldo tetap.",
  BatchCancelled="Borongan dihentikan. Kiriman selesai tetap dibayar.",
 	Impact = "Paket terbentur! Dekati paket atau pulihkan.",
+	HardLanding = "Pendaratan keras. Kondisi paket berkurang.",
  GripLost = "Genggaman habis! Ambil paket, lalu kurangi sprint.",
  CityStamp = "Cap bonus didapat! Koin dibayar saat paket sampai.",
 	OutOfBounds = "Paket jatuh. Pulihkan untuk kembali ke depot.",

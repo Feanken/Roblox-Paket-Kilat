@@ -158,7 +158,7 @@ CAS:BindAction("PKMusic33",function(_,state)
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.M)
 local delivered={}local deliveredOrder={}
-local codes={Start="Pickup",Pickup="Pickup",Drop="Drop",Impact="Impact",Slip="Impact",Barrier="Impact",GripLost="Impact",Recover="Recover",CityStamp="Stamp",Delivered="Delivered",Purchased="Success",GripUpgraded="Success",Equipped="Click"}
+local codes={Start="Pickup",Pickup="Pickup",Drop="Drop",Impact="Impact",HardLanding="Impact",Slip="Impact",Barrier="Impact",GripLost="Impact",Recover="Recover",CityStamp="Stamp",Delivered="Delivered",Purchased="Success",GripUpgraded="Success",Equipped="Click"}
 bind(shared.Remotes.StateChanged.OnClientEvent,function(snapshot,code)
  local name=codes[code]if not name then return end
  if code=="Delivered"then

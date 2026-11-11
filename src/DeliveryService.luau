@@ -236,16 +236,31 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 	Delivery.Publish(player, (action=='AcceptJob'or action=='AcceptRelay')and 'Start'or action)
 	return true, action
 end
-function Delivery.Impact(o, cause)
+local function applyDamage(o, amount, cause, drop)
 	if Delivery.orders[o.ownerUserId] ~= o or o.completionLocked or o.outOfBounds then return false end
 	local now = os.clock()
 	if now - o.lastDamageAt < C.DamageCooldown then return false end
 	if o.status ~= "Carrying" and o.status ~= "Dropped" then return false end
 	o.lastDamageAt = now
-	o.condition = math.clamp(o.condition - C.PackageTypes[o.packageType].ImpactDamage, 0, C.InitialCondition)
-	if o.status == "Carrying" then o.status = "Dropped"; P.Drop(o, root(o.player)) end
-	Delivery.Publish(o.player, cause or "Impact")
+	o.condition = math.clamp(o.condition - amount, 0, C.InitialCondition)
+	if drop and o.status == "Carrying" then
+		o.status = "Dropped"
+		P.Drop(o, root(o.player))
+	end
+	Delivery.Publish(o.player, cause)
 	return true
+end
+
+function Delivery.Impact(o, cause)
+	return applyDamage(o, C.PackageTypes[o.packageType].ImpactDamage, cause or "Impact", true)
+end
+
+function Delivery.Land(o, impactSpeed)
+	if o.status ~= "Carrying" then return false end
+	local spec = C.PackageTypes[o.packageType]
+	if impactSpeed >= C.LandingDropSpeed then return Delivery.Impact(o) end
+	if impactSpeed < spec.LandingSpeed then return false end
+	return applyDamage(o, spec.LandingDamage, "HardLanding", false)
 end
 function Delivery.OutOfBounds(o)
 	if o.outOfBounds or Delivery.orders[o.ownerUserId] ~= o then return end

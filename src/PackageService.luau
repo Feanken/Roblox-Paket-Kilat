@@ -100,23 +100,34 @@ function P.Start()
 				local char = o.player.Character
 				subject = char and char:FindFirstChild("HumanoidRootPart")
 				local hum = char and char:FindFirstChildOfClass("Humanoid")
-				if subject and hum then radius = hum.HipHeight + subject.Size.Y / 2 end
+				if subject and hum then
+					radius = hum.HipHeight + subject.Size.Y / 2
+					local leg = hum.RigType == Enum.HumanoidRigType.R6 and char:FindFirstChild("Left Leg")
+					if leg then radius += leg.Size.Y end
+				end
 			end
 			if not subject then continue end
 			local current, velocity = subject.Position, subject.AssemblyLinearVelocity
 			local sampleTime = os.clock()
 			if o.previousPosition and o.previousVelocity then
 				local previous = o.previousVelocity
-				local delta = current - o.previousPosition
-				local inferred = delta / math.max(sampleTime - (o.previousSampleAt or sampleTime), C.PhysicsSampleInterval)
-				if (o.status == "Carrying" and inferred.Y < previous.Y) or (o.status == "Dropped" and inferred.Magnitude > previous.Magnitude) then previous = inferred end
-				local speed = o.status == "Carrying" and math.max(0, -previous.Y) or previous.Magnitude
-				if speed >= C.ImpactSpeed then
-					local hit = delta.Magnitude > 0.01 and workspace:Raycast(o.previousPosition, delta + delta.Unit * (radius + C.ContactMargin), params)
-					local direction = o.status == "Carrying" and Vector3.new(0, -1, 0) or previous.Unit
-					hit = hit or workspace:Raycast(current, direction * (radius + C.ContactMargin), params)
-					if hit and -previous:Dot(hit.Normal) >= C.ImpactSpeed then
-						D.Impact(o)
+				if o.status == "Carrying" then
+					-- Real vertical velocity keeps position snaps from counting as falls.
+					local downwardSpeed = math.max(-previous.Y, -velocity.Y)
+					if downwardSpeed >= C.PackageTypes[o.packageType].LandingSpeed then
+						local hit = workspace:Raycast(current, -Vector3.yAxis * (radius + C.ContactMargin), params)
+						if hit and hit.Normal.Y >= .6 then
+							D.Land(o, downwardSpeed * hit.Normal.Y)
+						end
+					end
+				else
+					local delta = current - o.previousPosition
+					local inferred = delta / math.max(sampleTime - (o.previousSampleAt or sampleTime), C.PhysicsSampleInterval)
+					if inferred.Magnitude > previous.Magnitude then previous = inferred end
+					if previous.Magnitude >= C.ImpactSpeed then
+						local hit = delta.Magnitude > .01 and workspace:Raycast(o.previousPosition, delta + delta.Unit * (radius + C.ContactMargin), params)
+						hit = hit or workspace:Raycast(current, previous.Unit * (radius + C.ContactMargin), params)
+						if hit and -previous:Dot(hit.Normal) >= C.ImpactSpeed then D.Impact(o) end
 					end
 				end
 			end
