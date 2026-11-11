@@ -3,6 +3,7 @@ local player=game.Players.LocalPlayer
 local shared=game.ReplicatedStorage:WaitForChild('PaketKilat')local theme=require(shared.Shared.UITheme12)
 local config=require(shared.Shared.Config)local routes=require(shared.Shared.SafeRoutes08)
 local preview=require(shared.Shared:WaitForChild('JobPreview28'))
+local Story = require(shared.Shared:WaitForChild('CourierStory'))
 local root=player:WaitForChild('PlayerGui'):WaitForChild('PaketKilatUI'):WaitForChild('Root')
 local state,pendingUntil,noticeUntil,notice={},0,0,''
 local connections={}local function bind(signal,fn)local c=signal:Connect(fn)table.insert(connections,c)end
@@ -47,14 +48,17 @@ career.Parent = board
 local rank = text(career, "Rank", 0, 0, 0, 22, 16)
 local rankGoal = text(career, "RankGoal", 0, 22, 0, 18, 11)
 rankGoal.TextColor3 = theme.Muted
-local week = text(career, "Week", 0, 48, 0, 21, 14)
-local goals = text(career, "Goals", 0, 72, 0, 57, 12)
+local chapterTitle = text(career, "ChapterTitle", 0, 48, 0, 22, 14)
+local chapterNote = text(career, "ChapterNote", 0, 73, 0, 48, 12)
+chapterNote.TextYAlignment = Enum.TextYAlignment.Top
+local week = text(career, "Week", 0, 130, 0, 21, 14)
+local goals = text(career, "Goals", 0, 154, 0, 57, 12)
 goals.TextYAlignment = Enum.TextYAlignment.Top
-local access = text(career, "ExpressAccess", 0, 132, 0, 20, 11)
+local access = text(career, "ExpressAccess", 0, 214, 0, 20, 11)
 access.TextColor3 = theme.Muted
-local historyTitle = text(career, "HistoryTitle", 0, 164, 0, 20, 13)
+local historyTitle = text(career, "HistoryTitle", 0, 246, 0, 20, 13)
 historyTitle.Text = "Riwayat sesi"
-local history = text(career, "History24", 0, 186, 0, 0, 11)
+local history = text(career, "History24", 0, 268, 0, 0, 11)
 history.Font = Enum.Font.GothamMedium
 history.TextYAlignment = Enum.TextYAlignment.Top
 history.AutomaticSize = Enum.AutomaticSize.Y
@@ -64,9 +68,10 @@ end
 local function selected()
  if tab==3 then return nil end
  local first
+ local firstShift = tab == 0 and state.deliveryCount == 0
  for i=1,3 do local offer=offerAt(i)
   if offer then
-   if not first or not preview.Recommendation(state.career, first) and preview.Recommendation(state.career, offer) then first = offer end
+   if not first or not firstShift and not preview.Recommendation(state.career, first) and preview.Recommendation(state.career, offer) then first = offer end
    if selectedIds[tab] == offer.id then return offer end
   end
  end
@@ -187,11 +192,14 @@ render=function()
  career.Position = UDim2.fromOffset(16, contentY)
  career.Size = UDim2.fromOffset(width - 32, contentHeight)
  career.Visible = tab == 3
- for _, label in ipairs({rank, rankGoal, week, goals, access, historyTitle, history}) do
+ for _, label in ipairs({rank, rankGoal, chapterTitle, chapterNote, week, goals, access, historyTitle, history}) do
   label.Size = UDim2.fromOffset(width - 46, label.Size.Y.Offset)
  end
  if career.Visible and state.career then
   local progress = state.career
+  local chapter, number = Story.Chapter(progress.rank)
+  chapterTitle.Text = string.format("Bab %d · %s", number, chapter.title)
+  chapterNote.Text = chapter.note
   rank.Text = string.format("%s · %d kiriman", progress.rank, state.deliveryCount)
   rankGoal.Text = progress.nextRank and string.format("%d kiriman lagi ke %s · +%d koin", progress.nextRemaining, progress.nextRank, progress.nextRankBonus)
    or "Pangkat tertinggi tercapai."
@@ -245,8 +253,12 @@ render=function()
   elseif tab==0 then info.Text='*Bonus kerja mengikuti kondisi. Bonus lain dihitung saat tiba.'end
  end
  local recommendation = tab ~= 3 and preview.Recommendation(state.career, offer)
- if recommendation and near and os.clock() >= noticeUntil then
-  info.Text = "★ " .. recommendation .. " · kondisi ≥90 · tanpa Pulihkan"
+ if near and os.clock() >= noticeUntil then
+  if state.deliveryCount == 0 and offer and offer.destinationId == "Rumah01" and tab == 0 then
+   info.Text = "Kiriman pembuka · Temui Bu Sari untuk memulai cerita."
+  elseif recommendation then
+   info.Text = "★ " .. recommendation .. " · kondisi ≥90 · tanpa Pulihkan"
+  end
  end
  local showMap = expandedMap and tab ~= 3 and route ~= nil
  offers.Visible = tab ~= 3 and not showMap

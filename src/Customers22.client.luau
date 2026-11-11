@@ -6,6 +6,7 @@ local shared = game.ReplicatedStorage:WaitForChild("PaketKilat")
 local Config = require(shared.Shared.Config)
 local Theme = require(shared.Shared.UITheme12)
 local Dialogue=require(shared.Shared:WaitForChild('CustomerDialogue30'))
+local Story = require(shared.Shared:WaitForChild('CourierStory'))
 local map = workspace:WaitForChild("PaketKilat"):WaitForChild("Map")
 local ui = player:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI"):WaitForChild("Root")
 local folder = Instance.new("Folder")
@@ -120,7 +121,9 @@ local function blockedUI()
  return ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')or ui:GetAttribute('MobileMenuOpen18')or ui:GetAttribute('MobileTargetOpen18')or(toast and toast.Visible)
 end
 local function say(c,id,line)
- c.label.Text=Config.Routes[id].Name:gsub('^Rumah ','')..':\n'..line
+ local contact = Story.Contact(id)
+ local name = contact and contact.name or Config.Routes[id].Name:gsub("^Rumah ", "")
+ c.label.Text = name .. "\n" .. line
 end
 table.insert(connections, shared.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot, code)
 	state=snapshot

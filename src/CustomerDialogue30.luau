@@ -1,5 +1,6 @@
 -- Cosmetic dialogue only; delivery and payment remain server-owned.
 local Status=require(script.Parent.ContractStatus25)
+local Story = require(script.Parent.CourierStory)
 local M={}
 local greetings={
  CBD01='Selamat datang di Menara Kilat. Paket kantor bisa diantar di petak depan.',
@@ -22,7 +23,8 @@ function M.Greeting(id,s)
   local status=Status.Get(c,{condition=s.condition,duration=0,recoveryCount=s.recoveryCount or 0,stamps=b.count or 0})
   if status and status.code=='stamps'then return 'Kalau mengejar bonus cap, boleh keliling dulu. Aku menunggu.'end
  end
- return greetings[id]or 'Halo, kurir! Antar paket di petak tujuan, ya.'
+ local contact = Story.Contact(id)
+ return contact and contact.line or greetings[id]or 'Halo, kurir! Antar paket di petak tujuan, ya.'
 end
 function M.Reaction(result,hasRelay,count)
  local stars=result.rating and result.rating.stars or 1

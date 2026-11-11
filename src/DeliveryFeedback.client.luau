@@ -7,6 +7,7 @@ local remote=game.ReplicatedStorage:WaitForChild("PaketKilat").Remotes
 local ui=player:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
 local Theme=require(game.ReplicatedStorage.PaketKilat.Shared.UITheme12)
 local Config=require(game.ReplicatedStorage.PaketKilat.Shared.Config)
+local Story = require(game.ReplicatedStorage.PaketKilat.Shared:WaitForChild("CourierStory"))
 local state,shownOrder={},nil
 local connections={}
 local function connect(signal,fn) local c=signal:Connect(fn) table.insert(connections,c) return c end
@@ -227,7 +228,8 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    end
    if result.promotion then
     title.Text = "NAIK PANGKAT!"
-    ratingHint.Text = result.promotion
+    local chapter, number = Story.Chapter(result.promotion)
+    ratingHint.Text = string.format("Bab %d · %s", number, chapter.title)
    elseif (result.weeklyBonus or 0) > 0 then
     title.Text = "RUTE MINGGUAN SELESAI!"
    elseif result.isExpress and result.contractSucceeded then

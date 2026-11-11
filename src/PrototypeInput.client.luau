@@ -203,7 +203,7 @@ local function render()
  elseif state.status=="Carrying" then
 		card.Hint.Text=state.packageType=="Rapuh" and "RAPUH: benturan lebih merusak. Jaga paket!" or "Sprint lebih cepat; jaga meter genggaman paket."
 	elseif state.status=="Dropped" then card.Hint.Text="Ambil ulang, atau pulihkan (-20; tanpa rekor)."
-	else card.Hint.Text="Pilih kiriman rumah, kantor, atau ruko di depot." end
+	else card.Hint.Text="Pak Arman menunggu di depot. Pilih kiriman pertamamu." end
 	actions.Secondary.Visible=(state.status~="Idle" or relay~=nil) and synced and state.profileReady and not shopOpen
 	if not synced or not state.profileReady or shopOpen then button(actions.Primary,"",shopOpen and "Toko dibuka" or "Memuat profil...",false)
 	elseif state.status=="Idle" then
