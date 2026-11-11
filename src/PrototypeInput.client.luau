@@ -233,6 +233,7 @@ local function render()
   or (state.status=="Carrying"and(stampPosition or state.destinationPosition))
 	label.Enabled=synced and state.profileReady==true and markerTarget~=nil
 		and not shopOpen and not state.outOfBounds
+		and not ui:GetAttribute("JobBoardOpen17") and not ui:GetAttribute("AudioOpen33")
 		and (state.status~="Idle" or not near(idleTarget))
 	if label.Enabled then
 		marker.CFrame=CFrame.new(markerTarget)

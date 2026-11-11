@@ -49,13 +49,14 @@ function P.Recommendation(career, offer)
  end
  return nil
 end
-function P.Projector(routes,width,height)
+function P.Projector(routes,width,height,margin)
+ margin=margin or 8
  local minX,maxX,minZ,maxZ=math.huge,-math.huge,math.huge,-math.huge
  for _,points in pairs(routes)do for _,p in ipairs(points)do
   minX=math.min(minX,p.X)maxX=math.max(maxX,p.X)minZ=math.min(minZ,p.Z)maxZ=math.max(maxZ,p.Z)
  end end
  if minX==math.huge then return nil end
- local scale=math.min(math.max(1,width-16)/math.max(1,maxX-minX),math.max(1,height-16)/math.max(1,maxZ-minZ))
+ local scale=math.min(math.max(1,width-2*margin)/math.max(1,maxX-minX),math.max(1,height-2*margin)/math.max(1,maxZ-minZ))
  local x=(width-(maxX-minX)*scale)/2 local y=(height-(maxZ-minZ)*scale)/2
  return function(p)return Vector2.new(x+(p.X-minX)*scale,height-y-(p.Z-minZ)*scale)end
 end

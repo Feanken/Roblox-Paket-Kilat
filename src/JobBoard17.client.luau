@@ -25,10 +25,11 @@ offers.ScrollingDirection = Enum.ScrollingDirection.Y
 offers.ZIndex = 11
 offers.Parent = board
 local narrow = false
+local expandedMap = false
 local tab=0 local selectedIds={}local tabs={}local render
 for i,label in {'Biasa','Kontrak','Borongan','Karier'}do
  local b=Instance.new('TextButton')b.Name='Tab24_'..i;b.Text=label;b.ZIndex=12;b.TextSize=11;b.Parent=board;theme.ToolbarButton(b)
- bind(b.Activated,function()tab=i-1 offers.CanvasPosition=Vector2.zero render()end)tabs[i]=b
+ bind(b.Activated,function()tab=i-1 expandedMap=false offers.CanvasPosition=Vector2.zero render()end)tabs[i]=b
 end
 local career = Instance.new("ScrollingFrame")
 career.Name = "Career"
@@ -96,19 +97,48 @@ local conditions=text(panel,'Conditions',12,54,190,52,11)conditions.Font=Enum.Fo
 local reward=text(panel,'Reward',12,106,330,24,10)
 local diagram=Instance.new('Frame')diagram.Name='RouteMap28'diagram.BackgroundColor3=theme.Cream diagram.BorderSizePixel=0 diagram.ClipsDescendants=true diagram.ZIndex=12 diagram.Parent=panel rounded(diagram,8)
 local accept=Instance.new('TextButton')accept.Name='Accept28'accept.Text='Ambil pesanan'accept.ZIndex=12 accept.TextSize=12 accept.Parent=panel
+local mapToggle = Instance.new("TextButton")
+mapToggle.Name = "ExpandRoute"
+mapToggle.Text = "Lihat peta"
+mapToggle.ZIndex = 13
+mapToggle.Parent = panel
+theme.ToolbarButton(mapToggle)
+
+local mapView = Instance.new("Frame")
+mapView.Name = "ExpandedRoute"
+mapView.BackgroundTransparency = 1
+mapView.ZIndex = 11
+mapView.Visible = false
+mapView.Parent = board
+local mapCaption = text(mapView, "Caption", 0, 0, 0, 22, 12)
+mapCaption.TextTruncate = Enum.TextTruncate.AtEnd
+local mapBack = Instance.new("TextButton")
+mapBack.Name = "BackToOffers"
+mapBack.Text = "Kembali ke pesanan"
+mapBack.ZIndex = 13
+mapBack.Parent = mapView
+theme.ToolbarButton(mapBack)
+bind(mapToggle.Activated, function() expandedMap = true render() end)
+bind(mapBack.Activated, function() expandedMap = false render() end)
+
 local drawKey
 local function draw(offer,w,h)
- local key=(offer and offer.id or '')..':'..w..':'..h
+ local key=(offer and offer.id or '')..':'..w..':'..h..':'..tostring(expandedMap)
  if key==drawKey then return end drawKey=key
  for _,v in diagram:GetChildren()do if v:IsA('GuiObject')then v:Destroy()end end
- local project=preview.Projector(routes,w,h)if not project then return end
+ local route=offer and preview.OfferRoute(routes,offer)
+ if not route then return end
+ local project=preview.Projector({route.points},w,h,expandedMap and 18 or 10)
  local function line(a,b,color,thickness,z)
   a,b=project(a),project(b)local d=b-a
   local f=Instance.new('Frame')f.AnchorPoint=Vector2.new(.5,.5)f.Position=UDim2.fromOffset((a.X+b.X)/2,(a.Y+b.Y)/2)
   f.Size=UDim2.fromOffset(d.Magnitude,thickness)f.Rotation=math.deg(math.atan2(d.Y,d.X))f.BackgroundColor3=color f.BorderSizePixel=0 f.ZIndex=z f.Parent=diagram
  end
- for _,path in pairs(routes)do for i=1,#path-1 do line(path[i],path[i+1],theme.Line,2,12)end end
- local route=offer and preview.OfferRoute(routes,offer)if not route then return end
+ if expandedMap then
+  for _,path in pairs(routes) do
+   for i=1,#path-1 do line(path[i],path[i+1],theme.Line,2,12) end
+  end
+ end
  for i=1,#route.points-1 do line(route.points[i],route.points[i+1],theme.Ink,3,13)end
  local markers={{point=route.points[1],text='D'}}
  if offer.isBatch then for i,id in ipairs(offer.batchDestinations)do local path=routes[id]table.insert(markers,{point=path[#path],text=tostring(i)})end
@@ -218,10 +248,33 @@ render=function()
  if recommendation and near and os.clock() >= noticeUntil then
   info.Text = "★ " .. recommendation .. " · kondisi ≥90 · tanpa Pulihkan"
  end
- local active=open and tab~=3 and near and hum and hum.Health>0 and offer~=nil and os.clock()>=pendingUntil
+ local showMap = expandedMap and tab ~= 3 and route ~= nil
+ offers.Visible = tab ~= 3 and not showMap
+ mapView.Visible = showMap
+ mapToggle.Visible = route ~= nil
+ local mapButtonWidth = 90
+ if route then
+  mapToggle.Position = UDim2.fromOffset(right - mapButtonWidth - 12, 132)
+  mapToggle.Size = UDim2.fromOffset(mapButtonWidth, 44)
+  accept.Size = UDim2.fromOffset(right - mapButtonWidth - 32, 44)
+ end
+ if showMap then
+  mapView.Position = UDim2.fromOffset(12, contentY)
+  mapView.Size = UDim2.fromOffset(bodyWidth, contentHeight)
+  mapCaption.Size = UDim2.fromOffset(bodyWidth, 22)
+  mapCaption.Text = destination.Text .. " · " .. distance
+  mapBack.Position = UDim2.new(0, 0, 1, -44)
+  mapBack.Size = UDim2.fromOffset(bodyWidth, 44)
+  diagram.Parent = mapView
+  diagram.Position = UDim2.fromOffset(0, 25)
+  diagram.Size = UDim2.fromOffset(bodyWidth, math.max(1, contentHeight - 75))
+ else
+  diagram.Parent = panel
+ end
+ local active=open and not showMap and tab~=3 and near and hum and hum.Health>0 and offer~=nil and os.clock()>=pendingUntil
  accept.Active=active==true accept.AutoButtonColor=active==true accept.Text=os.clock()<pendingUntil and 'Menyiapkan...'or(offer and offer.isBatch and 'Ambil 3 kiriman'or 'Ambil pesanan')
  theme.Action(accept,active==true,false)
- if open and tab~=3 then draw(offer,mapWidth,72)end
+ if tab ~= 3 then draw(offer, diagram.Size.X.Offset, diagram.Size.Y.Offset) end
 end
 bind(shared.Remotes.StateChanged.OnClientEvent,function(s,code)
  state=s
@@ -231,7 +284,10 @@ bind(shared.Remotes.StateChanged.OnClientEvent,function(s,code)
 end)
 local openedFromResult = false
 bind(root:GetAttributeChangedSignal("JobBoardOpen17"), function()
- if not root:GetAttribute("JobBoardOpen17") then offers.CanvasPosition = Vector2.zero end
+ if not root:GetAttribute("JobBoardOpen17") then
+  offers.CanvasPosition = Vector2.zero
+  expandedMap = false
+ end
  if root:GetAttribute("JobBoardOpen17") and root:GetAttribute("OpenCareerFromResult") then
   root:SetAttribute("OpenCareerFromResult", nil)
   career.CanvasPosition = Vector2.zero
