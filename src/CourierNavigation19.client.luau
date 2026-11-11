@@ -42,6 +42,12 @@ local function render()
   for _,p in ipairs(route:GetChildren())do local step=p:GetAttribute('RouteStep19')or 0 if p.Transparency<1 and step<=3 and step>index then selected,index=p,step end end
   if selected then directionTarget=selected.Position mode='route'remaining=route:GetAttribute('RemainingDistance19')or remaining end
  end
+ local rejoin=mode=="route" and route:GetAttribute("RejoinPosition")
+ if rejoin then
+  directionTarget=rejoin
+  remaining=flat(rejoin-root.Position).Magnitude
+  mode="rejoin"
+ end
  if ready then
   previousBearing, previousTarget = nil, nil
   arrow.Text='✓'arrow.Rotation=0 arrow.TextColor3=Color3.fromRGB(57,151,127)
@@ -54,7 +60,7 @@ local function render()
   local angle=math.deg(math.atan2(delta:Dot(right),delta:Dot(forward)))
   local turn = mode == "route" and kind ~= "cap" and turnLabels[route:GetAttribute("TurnDirection") or ""]
   local turnDistance = turn and route:GetAttribute("TurnDistance")
-  local targetKey = kind .. ":" .. (state.orderId or "")
+  local targetKey = kind .. ":" .. mode .. ":" .. (state.orderId or "")
   if previousTarget == targetKey and previousBearing then
    local deltaAngle = (angle - previousBearing + 180) % 360 - 180
    previousBearing = (previousBearing + deltaAngle * .52 + 180) % 360 - 180
@@ -64,7 +70,9 @@ local function render()
   arrow.Text = "▲"
   arrow.Rotation = previousBearing
   arrow.TextColor3 = turnDistance and Color3.fromRGB(31, 124, 108) or theme.Gold
-  if turnDistance then
+  if rejoin then
+   card.Title.Text=string.format("Ke jalur · %d stud",math.ceil(remaining))
+  elseif turnDistance then
    card.Title.Text = turnDistance <= 4 and turn.near or string.format("%s · %d stud", turn.far, math.ceil(turnDistance))
   else
    card.Title.Text = string.format(kind == "cap" and "Cap · %d stud" or "%d stud", math.ceil(remaining))

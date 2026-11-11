@@ -22,11 +22,18 @@ function L.Bind(player)
 	local b = {characterConnections = {}, playerConnections = {}}
 	L.bindings[player] = b
  if T then T:Begin(player) end
+ local function interrupt()
+  local order=D.orders[player.UserId]
+  if order then
+   b.resumeCode=order.storyChapter and "RespawnStory" or order.isBatch and "RespawnBatch" or "RespawnOrder"
+  end
+  D.Cancel(player,"Cancelled")
+ end
 	local function character(char)
 		if L.bindings[player] ~= b or player.Character ~= char then return end
 		b.character = char
 		disconnect(b.characterConnections)
-		D.Cancel(player, "Respawned")
+  if D.orders[player.UserId] then interrupt() end
 		local function group(v) if v:IsA("BasePart") then v.CollisionGroup = "PKCharacters" end end
 		for _,v in ipairs(char:GetDescendants()) do group(v) end
 		table.insert(b.characterConnections, char.DescendantAdded:Connect(group))
@@ -34,17 +41,20 @@ function L.Bind(player)
 		local r = char:WaitForChild("HumanoidRootPart", 10)
 		if not hum or not r or L.bindings[player] ~= b or player.Character ~= char or player.Parent ~= Players then return end
 		table.insert(b.characterConnections, hum.Died:Connect(function()
-			if b.character == char and player.Character == char then D.Cancel(player, "Cancelled") end
+			if b.character == char and player.Character == char then interrupt() end
 		end))
 		char:PivotTo(W.Map.PrototypeSpawn.CFrame + C.SpawnOffset)
   K.Apply(player)
+  local code=b.resumeCode or "Respawned"
+  b.resumeCode=nil
+  D.Publish(player,code)
 	end
 	table.insert(b.playerConnections, player.CharacterAdded:Connect(character))
 	table.insert(b.playerConnections, player.CharacterRemoving:Connect(function(char)
 		if b.character ~= char then return end
 		b.character = nil
 		disconnect(b.characterConnections)
-		D.Cancel(player, "Cancelled")
+  if D.orders[player.UserId] or D.relayOffers[player.UserId] then interrupt() end
 	end))
 	if player.Character then task.spawn(character, player.Character) end
  task.spawn(function()

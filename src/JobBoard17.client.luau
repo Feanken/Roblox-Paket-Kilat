@@ -189,7 +189,7 @@ local function draw(offer,w,h)
  for _,v in diagram:GetChildren()do if v:IsA('GuiObject')then v:Destroy()end end
  local route=offer and preview.OfferRoute(routes,offer)
  if not route then return end
- local project=preview.Projector({route.points},w,h,expandedMap and 18 or 10)
+ local project=preview.Projector(expandedMap and routes or {route.points},w,h,expandedMap and 18 or 10)
  local function line(a,b,color,thickness,z)
   a,b=project(a),project(b)local d=b-a
   local f=Instance.new('Frame')f.AnchorPoint=Vector2.new(.5,.5)f.Position=UDim2.fromOffset((a.X+b.X)/2,(a.Y+b.Y)/2)
@@ -301,7 +301,14 @@ render=function()
   row.frame.Position=UDim2.fromOffset(0,(i-1)*64)row.frame.Size=UDim2.fromOffset(left,56)
   row.name.Size=UDim2.fromOffset(left-20,19)row.dest.Size=UDim2.fromOffset(left-20,19)
   row.frame.BackgroundColor3=chosen and theme.Gold or theme.Soft row.outline.Color=chosen and theme.Ink or theme.Line
-  row.name.Text=o and ((preview.Recommendation(state.career,o) and '★ ' or '')..o.name) or 'Memuat...'row.name.TextTruncate=Enum.TextTruncate.AtEnd row.dest.Text=o and(o.isBatch and('3 kiriman · finish +'..o.jobBonus)or o.destinationName)or ''
+  row.name.Text=o and ((preview.Recommendation(state.career,o) and '★ ' or '')..o.name) or 'Memuat...'row.name.TextTruncate=Enum.TextTruncate.AtEnd row.dest.Text=""
+  if o then
+   local rowRoute=preview.OfferRoute(routes,o)
+   local length=rowRoute and string.format(" · %d stud",math.round(rowRoute.distance)) or ""
+   row.dest.Text=(o.isBatch and "3 kiriman" or o.destinationName)..length
+  end
+  row.dest.TextTruncate=Enum.TextTruncate.AtEnd
+  row.dest.TextWrapped=false
  end
  panel.Position=UDim2.fromOffset(narrow and 0 or left+8,offerPanelY)panel.Size=UDim2.fromOffset(right,184)
  destination.Size=UDim2.fromOffset(right-24,22)meta.Size=UDim2.fromOffset(right-24,18)
@@ -325,13 +332,13 @@ render=function()
  if not offer then
   reward.Text = ""
  elseif offer.storyChapter then
-  reward.Text = string.format("Dasar +%d\nBab cerita +%d", config.BaseReward, offer.storyBonus)
+  reward.Text = string.format("Dasar + cerita: %d koin", config.BaseReward + offer.storyBonus)
  elseif offer.isBatch then
-  reward.Text = string.format("Dasar +%d/kiriman\nFinish maks. +%d*", config.BaseReward, offer.jobBonus)
+  reward.Text = string.format("%d koin per kiriman\nBonus akhir maks. +%d", config.BaseReward, offer.jobBonus)
  elseif not offer.contract and offer.jobBonus == 0 then
-  reward.Text = string.format("Dasar +%d\nTanpa bonus kerja", config.BaseReward)
+  reward.Text = string.format("Dasar: %d koin", config.BaseReward)
  else
-  reward.Text = string.format("Dasar +%d\n%s +%d*", config.BaseReward, offer.contract and "Kontrak" or "Kerja maks.", offer.jobBonus)
+  reward.Text = string.format("Dasar: %d koin\n%s +%d", config.BaseReward, offer.contract and "Bonus jika lolos" or "Bonus maks.", offer.jobBonus)
  end
  if near and os.clock()>=noticeUntil then
   if tab==2 then info.Text='*Finish mengikuti kondisi terendah; memakai Pulihkan menggugurkan bonus.'
@@ -352,6 +359,9 @@ render=function()
   end
  end
  local showMap = expandedMap and tab ~= 3 and route ~= nil
+ title.Text = showMap and "Peta rute" or "Pesanan"
+ info.Visible = not showMap
+ for _, button in ipairs(tabs) do button.Visible = not showMap end
  offers.Visible = tab ~= 3 and not showMap
  mapView.Visible = showMap
  mapToggle.Visible = route ~= nil
@@ -362,16 +372,17 @@ render=function()
   accept.Size = UDim2.fromOffset(right - mapButtonWidth - 32, 44)
  end
  if showMap then
-  mapView.Position = UDim2.fromOffset(12, contentY)
-  mapView.Size = UDim2.fromOffset(bodyWidth, contentHeight)
+  local mapHeight=math.max(1,height-60)
+  mapView.Position = UDim2.fromOffset(12, 50)
+  mapView.Size = UDim2.fromOffset(bodyWidth, mapHeight)
   mapCaption.Size = UDim2.fromOffset(bodyWidth, 22)
-  mapCaption.Text = offer.isBatch and ("Depot → 1 → 2 → 3 · " .. distance)
-   or ("Depot → " .. destination.Text .. " · " .. distance)
+  mapCaption.Text = offer.isBatch and ("D Depot → 1 → 2 → 3 · " .. distance)
+   or ("D Depot → T " .. destination.Text .. " · " .. distance)
   mapBack.Position = UDim2.new(0, 0, 1, -44)
   mapBack.Size = UDim2.fromOffset(bodyWidth, 44)
   diagram.Parent = mapView
   diagram.Position = UDim2.fromOffset(0, 25)
-  diagram.Size = UDim2.fromOffset(bodyWidth, math.max(1, contentHeight - 75))
+  diagram.Size = UDim2.fromOffset(bodyWidth, math.max(1, mapHeight - 75))
  else
   diagram.Parent = panel
  end

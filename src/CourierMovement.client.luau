@@ -1,5 +1,6 @@
 local Players=game:GetService("Players") local UIS=game:GetService("UserInputService")
 local CAS=game:GetService("ContextActionService") local RunService=game:GetService("RunService")
+local TweenService=game:GetService("TweenService") local Debris=game:GetService("Debris")
 local p=Players.LocalPlayer local shared=game.ReplicatedStorage:WaitForChild("PaketKilat")
 local Theme=require(shared.Shared.UITheme12)
 local intent=shared.Remotes:WaitForChild("MovementIntent") local ui=p:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
@@ -7,6 +8,43 @@ local lowWarned=false local warnOrder local wasResting=false
 local state={} local wants=false local connections={}
 local function bind(event,fn)local c=event:Connect(fn)table.insert(connections,c)end
 local function send(value)wants=value intent:FireServer(value)end
+local lastStaminaTarget = -1
+local staminaTween = nil
+local lastGripTarget = -1
+local lastGripColor = nil
+local gripTween = nil
+
+local function spawnSprintDust()
+ local char = p.Character
+ local hrp = char and (char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso"))
+ if not hrp then return end
+ local att = Instance.new("Attachment")
+ att.Position = Vector3.new(0, -2.4, 0)
+ att.Parent = hrp
+ local emitter = Instance.new("ParticleEmitter")
+ emitter.Name = "SprintDust"
+ emitter.Texture = "rbxasset://textures/particles/smoke_main.dds"
+ emitter.Color = ColorSequence.new(Color3.fromRGB(230, 220, 205))
+ emitter.Size = NumberSequence.new({
+  NumberSequenceKeypoint.new(0, 0.25),
+  NumberSequenceKeypoint.new(0.5, 0.55),
+  NumberSequenceKeypoint.new(1, 0.8)
+ })
+ emitter.Transparency = NumberSequence.new({
+  NumberSequenceKeypoint.new(0, 0.4),
+  NumberSequenceKeypoint.new(0.6, 0.7),
+  NumberSequenceKeypoint.new(1, 1)
+ })
+ emitter.Speed = NumberRange.new(2, 5)
+ emitter.SpreadAngle = Vector2.new(45, 45)
+ emitter.Lifetime = NumberRange.new(0.3, 0.5)
+ emitter.Rate = 0
+ emitter.Acceleration = Vector3.new(0, 2, 0)
+ emitter.Parent = att
+ emitter:Emit(3)
+ Debris:AddItem(att, 0.6)
+end
+
 local b=Instance.new("TextButton") b.Name="SprintToggle" b.Size=UDim2.fromOffset(84,44) b.Position=UDim2.new(1,-98,0,64)
 b.BackgroundColor3=Color3.fromRGB(33,91,91) b.TextColor3=Color3.fromRGB(255,234,191) b.Font=Enum.Font.GothamBold b.TextSize=12 b.BorderSizePixel=0 b.Parent=ui
 local corner=Instance.new("UICorner")corner.CornerRadius=UDim.new(0,9)corner.Parent=b
@@ -98,19 +136,52 @@ local function render()
   stamina.Text=mobile and('Istirahat '..m.stamina)or('ISTIRAHAT · stamina '..m.stamina)
   grip.Text=mobile and('Pegang '..m.grip)or('GENGGAMAN '..m.grip..' · lompat untuk berdiri')
  end
- staminaFill.Size=UDim2.fromScale(m.stamina/100,1)gripFill.Size=UDim2.fromScale(m.grip/100,1)
- gripFill.BackgroundColor3=(m.grip<=25 or m.dropInSeconds and m.dropInSeconds<=2) and Color3.fromRGB(255,130,81)or Color3.fromRGB(255,207,91)
+   local targetStaminaScale = math.clamp(m.stamina/100, 0, 1)
+  if math.abs(lastStaminaTarget - targetStaminaScale) > 0.005 then
+   lastStaminaTarget = targetStaminaScale
+   if staminaTween then staminaTween:Cancel() end
+   staminaTween = TweenService:Create(staminaFill, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    Size = UDim2.fromScale(targetStaminaScale, 1)
+   })
+   staminaTween:Play()
+  end
+  local targetGripScale = math.clamp(m.grip/100, 0, 1)
+  local targetGripColor = (m.grip<=25 or m.dropInSeconds and m.dropInSeconds<=2) and Color3.fromRGB(255,130,81) or Color3.fromRGB(255,207,91)
+  if math.abs(lastGripTarget - targetGripScale) > 0.005 or lastGripColor ~= targetGripColor then
+   lastGripTarget = targetGripScale
+   lastGripColor = targetGripColor
+   if gripTween then gripTween:Cancel() end
+   gripTween = TweenService:Create(gripFill, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    Size = UDim2.fromScale(targetGripScale, 1),
+    BackgroundColor3 = targetGripColor
+   })
+   gripTween:Play()
+  end
 end
 bind(shared.Remotes.StateChanged.OnClientEvent,function(snapshot,code)
  state=snapshot
  if wants and (code=="GripLost" or code=="Respawned" or code=="Cancelled")then send(false)end
  render()
 end)
-local elapsed=0 local refresh=0
+local elapsed=0 local refresh=0 local dustTimer=0
 bind(RunService.Heartbeat,function(dt)
  elapsed+=dt refresh+=dt
  if elapsed>=.1 then elapsed=0 render()end
  if refresh>=.4 then refresh=0 if wants then intent:FireServer(true)end end
+ if wants then
+  local hum = p.Character and p.Character:FindFirstChildOfClass("Humanoid")
+  if hum and hum.MoveDirection.Magnitude > 0.1 and hum.FloorMaterial ~= Enum.Material.Air then
+   dustTimer += dt
+   if dustTimer >= 0.16 then
+    dustTimer = 0
+    spawnSprintDust()
+   end
+  else
+   dustTimer = 0
+  end
+ else
+  dustTimer = 0
+ end
 end)
 bind(script.Destroying,function()intent:FireServer(false)for _,c in ipairs(connections)do c:Disconnect()end CAS:UnbindAction("PKSprint")b:Destroy()hud:Destroy()end)
 task.delay(.9,function()if script.Parent then shared.Remotes.ActionRequest:FireServer("Sync")end end)

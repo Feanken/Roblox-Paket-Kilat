@@ -24,8 +24,11 @@ Theme.Static(ui)
 local catalog=shop:WaitForChild("Catalog")
 local feedback, feedbackUntil = "", 0
 local confirmRecoveryUntil = 0
+local reopenStory = false
 local cancelOrderId
 local cancelPendingUntil = 0
+local currentFillTarget, currentFillColor = -1, nil
+local fillTween = nil
 
 local function orderButton(parent, name, text)
  local b=Instance.new("TextButton")
@@ -114,6 +117,9 @@ local messages = {
  StoryChanged = "Bab cerita sudah berubah. Lihat kiriman berikutnya di depot.",
 	NotAlive = "Menunggu muncul kembali di depot...",
 	Respawned = "Siap! Ambil pesanan di depot.",
+ RespawnStory = "Kembali di depot. Ambil ulang bab yang sedang kamu jalankan.",
+ RespawnBatch = "Borongan terhenti. Koin dari kiriman yang selesai tetap tersimpan.",
+ RespawnOrder = "Kiriman terhenti. Ambil pesanan lagi di depot.",
 	Cancelled = "Pesanan dibatalkan. Saldo tetap.",
  BatchCancelled="Borongan dihentikan. Kiriman selesai tetap dibayar.",
 	Impact = "Paket terbentur! Dekati paket atau pulihkan.",
@@ -156,6 +162,51 @@ markerText.Size, markerText.BackgroundColor3 = UDim2.fromScale(1,1), Theme.Ink
 markerText.BackgroundTransparency, markerText.TextColor3 = 0.08, Theme.Gold
 markerText.Font, markerText.TextSize, markerText.TextWrapped = Enum.Font.GothamBold, 15, true
 markerText.Parent = label
+Instance.new("UICorner",markerText).CornerRadius=UDim.new(0,8)
+
+local handoffMarker=Instance.new("Part")
+handoffMarker.Name="PaketKilat_LocalHandoff"
+handoffMarker.Shape=Enum.PartType.Cylinder
+handoffMarker.Size=Vector3.new(.08,4,4)
+handoffMarker.Material=Enum.Material.Neon
+handoffMarker.Anchored=true
+handoffMarker.CanCollide=false
+handoffMarker.CanTouch=false
+handoffMarker.CanQuery=false
+handoffMarker.CastShadow=false
+handoffMarker.Archivable=false
+handoffMarker.Transparency=1
+handoffMarker.Parent=marker
+
+local handoffParams=RaycastParams.new()
+handoffParams.RespectCanCollide=true
+handoffParams.IgnoreWater=true
+local placedAt
+local function showHandoff(point, ready)
+ if not point then
+  handoffMarker.Transparency=1
+  placedAt=nil
+  return
+ end
+ if placedAt~=point then
+  local excluded={marker}
+  local active=workspace.PaketKilat:FindFirstChild("ActivePackages")
+  if active then table.insert(excluded,active) end
+  for _,other in ipairs(Players:GetPlayers()) do
+   if other.Character then table.insert(excluded,other.Character) end
+  end
+  handoffParams.FilterDescendantsInstances=excluded
+  local hit=workspace:Raycast(point+Vector3.yAxis,-Vector3.yAxis*6,handoffParams)
+  if not hit or hit.Normal.Y<.8 then
+   handoffMarker.Transparency=1
+   return
+  end
+  handoffMarker.CFrame=CFrame.new(hit.Position+Vector3.yAxis*.08)*CFrame.Angles(0,0,math.pi/2)
+  placedAt=point
+ end
+ handoffMarker.Color=ready and Color3.fromRGB(109,236,175) or Theme.Gold
+ handoffMarker.Transparency=ready and .28 or .55
+end
 -- Audio33 owns sounds; keep this visual response so cues are never played twice.
 local function cue(name)
  local stroke=card:FindFirstChildWhichIsA("UIStroke")
@@ -268,14 +319,27 @@ local function render()
  local nextChapter = state.story and state.story.offer
  local firstDelivery = state.deliveryCount == 0
  local nearDepot = near(state.depotPosition)
+ local activePackage=state.orderId and ownPackage()
+ local canDeliver=state.status=="Carrying" and near(state.destinationPosition) and activePackage~=nil
+  and (activePackage.Position-state.destinationPosition).Magnitude<=C.PackageDeliveryDistance
 	local condition=state.condition or (last and last.condition) or 0
  card.ConditionTrack.Visible = state.status ~= "Idle" or relay ~= nil or last ~= nil
-	card.ConditionTrack.Fill.Size=UDim2.fromScale(math.clamp(condition/100,0,1),1)
-	card.ConditionTrack.Fill.BackgroundColor3=condition>40 and Color3.fromRGB(57,151,127) or Color3.fromRGB(213,126,54)
- if relay then
-  card.ConditionTrack.Fill.Size=UDim2.fromScale(math.clamp((relay.expiresAt-workspace:GetServerTimeNow())/math.max(1,relay.expiresAt-(relay.offeredAt or relay.expiresAt-60)),0,1),1)
-  card.ConditionTrack.Fill.BackgroundColor3=Theme.Gold
- end
+	local targetScale = math.clamp(condition/100,0,1)
+	local targetColor = condition>40 and Color3.fromRGB(57,151,127) or Color3.fromRGB(213,126,54)
+	if relay then
+		targetScale = math.clamp((relay.expiresAt-workspace:GetServerTimeNow())/math.max(1,relay.expiresAt-(relay.offeredAt or relay.expiresAt-60)),0,1)
+		targetColor = Theme.Gold
+	end
+	if math.abs(currentFillTarget - targetScale) > 0.005 or currentFillColor ~= targetColor then
+		currentFillTarget = targetScale
+		currentFillColor = targetColor
+		if fillTween then fillTween:Cancel() end
+		fillTween = TweenService:Create(card.ConditionTrack.Fill, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.fromScale(targetScale, 1),
+			BackgroundColor3 = targetColor
+		})
+		fillTween:Play()
+	end
 	if state.status=="Dropped" then
   card.Destination.Text = state.atRecovery and "Paket menunggu di depot" or state.outOfBounds and "Paket keluar jalur" or "Paket terlepas"
   card.ConditionText.Text = string.format("Kondisi %d/100 · %s",condition,state.atRecovery and "Ambil ulang" or state.outOfBounds and "Pulihkan paket" or "Ikuti penanda")
@@ -327,7 +391,7 @@ local function render()
  elseif state.status == "Carrying" and storyChapter then
   card.Hint.Text = firstDelivery and "Ikuti penanda tujuan. Berjalan menjaga genggaman." or storyChapter.brief
   if firstDelivery and not storyChapter.careBonus and Theme.IsMobile(ui) then
-   card.ConditionText.Text = near(state.destinationPosition) and "Tekan Antar paket" or string.format("%d/100 · Ikuti penanda", condition)
+   card.ConditionText.Text = canDeliver and "Tekan Antar paket" or string.format("%d/100 · Ikuti penanda", condition)
   end
  elseif state.status == "Idle" and nextChapter then
   card.Hint.Text = nearDepot and nextChapter.description or "Ambil kiriman cerita berikutnya di depot."
@@ -355,10 +419,10 @@ local function render()
   end
   if relay then button(actions.Secondary,'SkipRelay','Lewati titipan',aliveRoot()~=nil,'Q') end
 	elseif state.status=="Carrying" then
-		button(actions.Primary,"Deliver",near(state.destinationPosition) and "Antar paket" or "Ke tujuan",near(state.destinationPosition),"E")
+		button(actions.Primary,"Deliver",canDeliver and "Antar paket" or "Ke titik serah",canDeliver,"E")
 		button(actions.Secondary,"Drop",C.Labels.Drop,aliveRoot()~=nil,"Q")
 	elseif state.status=="Dropped" then
-		local p=ownPackage()
+		local p=activePackage
 		local canPickup=p~=nil and not state.outOfBounds and near(p.Position)
 		button(actions.Primary,"Pickup",canPickup and C.Labels.Pickup or "Ke paket",canPickup,"E")
 		local remaining=math.max(0,C.RecoveryCooldown-(workspace:GetServerTimeNow()-(state.lastRecoveryAt or -100)))
@@ -375,7 +439,7 @@ local function render()
 	end
 	actions.Primary.Visible=not Theme.IsMobile(ui)or actions.Primary:GetAttribute("ActionEnabled")==true
  if Theme.IsMobile(ui)then actions.Secondary.Position=UDim2.fromOffset(0,actions.Primary.Visible and 52 or 0)end
- local dropped=state.status=="Dropped" and ownPackage() or nil
+ local dropped=state.status=="Dropped" and activePackage or nil
 	local idleTarget=relay and not near(state.depotPosition) and relay.pickupPosition or state.depotPosition
  local routeFolder=workspace:FindFirstChild('PaketKilatLocalSafeRoute')
  local guidedStamp=state.status=='Carrying'and state.stampNavigation and routeFolder and routeFolder:GetAttribute('GuidedStampId26')
@@ -385,16 +449,28 @@ local function render()
 		or (state.status=="Dropped"and not state.outOfBounds and(dropped and dropped.Position or state.packagePosition))
   or (state.status=="Carrying"and(stampPosition or state.destinationPosition))
 	label.Enabled=synced and state.profileReady==true and markerTarget~=nil
-		and not shopOpen and not state.outOfBounds
+		and not cancelOverlay.Visible and not shopOpen and not state.outOfBounds
 		and not ui:GetAttribute("JobBoardOpen17") and not ui:GetAttribute("AudioOpen33")
 		and (state.status~="Idle" or not near(idleTarget))
+ local showPoint=false
 	if label.Enabled then
 		marker.CFrame=CFrame.new(markerTarget)
 		local root=aliveRoot()
 		local distance=root and math.floor((root.Position-markerTarget).Magnitude+.5) or 0
 		local title=stampPosition and "POS CAP"or state.status=="Idle" and (relay and not near(state.depotPosition)and 'TITIPAN' or "DEPOT") or state.status=="Dropped" and (state.atRecovery and "PETAK PEMULIHAN" or "PAKETMU") or state.destinationName
-		markerText.Text=string.format("%s\n%d stud · %s",title,distance,state.status=="Dropped" and "Ambil ulang" or state.status=="Idle" and "Ambil pesanan" or stampPosition and "Lewati untuk cap"or "Antar ke sini")
+  local destination=state.status=="Carrying" and not stampPosition
+  local route=destination and C.Routes[state.destinationId]
+  local subtitle=state.status=="Dropped" and "Ambil ulang" or state.status=="Idle" and "Ambil pesanan" or stampPosition and "Lewati untuk cap" or "Titik serah"
+  if destination and canDeliver then
+   subtitle="Siap diserahkan"
+  elseif route and distance<=55 then
+   subtitle=route.Landmark or subtitle
+  end
+  markerText.TextColor3=destination and canDeliver and Color3.fromRGB(109,236,175) or Theme.Gold
+  markerText.Text=string.format("%s\n%d stud · %s",title,distance,subtitle)
+  showPoint=destination and distance<=55
 	end
+ showHandoff(showPoint and state.destinationPosition or nil,canDeliver)
  local r=aliveRoot()local hazardKind,nearest
  if r and state.status=='Carrying'and not(state.movement and state.movement.resting)then
   local hum=r.Parent:FindFirstChildOfClass('Humanoid')
@@ -408,7 +484,7 @@ local function render()
    end
   end
  end
- local coach=Coach.Get(state,{alive=r~=nil,canPickup=dropped and not state.outOfBounds and near(dropped.Position),nearDestination=near(state.destinationPosition),guidedStamp=guidedStamp,routeEnabled=ui:FindFirstChild('RouteToggle')and ui.RouteToggle:GetAttribute('RouteEnabled'),contractStatus=contractStatus,hazard=hazardKind})
+ local coach=Coach.Get(state,{alive=r~=nil,canPickup=dropped and not state.outOfBounds and near(dropped.Position),nearDestination=canDeliver,guidedStamp=guidedStamp,routeEnabled=ui:FindFirstChild('RouteToggle')and ui.RouteToggle:GetAttribute('RouteEnabled'),contractStatus=contractStatus,hazard=hazardKind})
  ui:SetAttribute('JourneyHintKind29',coach and coach.kind)
  if hintOrder~=state.orderId then hintOrder=state.orderId seenHints={}end
  local celebration=ui:FindFirstChild('DeliveryCelebration')
@@ -435,7 +511,14 @@ local function activate(b)
    end
    confirmRecoveryUntil=0
   end
-  if action=="Start"then ui:SetAttribute("JobBoardOpen17",not ui:GetAttribute("JobBoardOpen17"))return end
+  if action=="Start" then
+   if reopenStory then
+    ui:SetAttribute("OpenStoryFromResult",true)
+    reopenStory=false
+   end
+   ui:SetAttribute("JobBoardOpen17",not ui:GetAttribute("JobBoardOpen17"))
+   return
+  end
   if action=='AcceptRelay'or action=='SkipRelay'then local offer=currentRelay()if offer then RS.Remotes.ActionRequest:FireServer(action,offer.id)end return end
 		RS.Remotes.ActionRequest:FireServer(action,state.orderId,action=="Deliver" and state.destinationId or nil)
 	end
@@ -494,6 +577,12 @@ RS.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot,code)
   confirmRecoveryUntil=0
  end
 	state,synced = snapshot,true
+ if code=="RespawnStory" then reopenStory=true end
+ if snapshot.status=="Carrying" then reopenStory=false end
+ if code=="RespawnStory" or code=="RespawnBatch" or code=="RespawnOrder" then
+  ui:SetAttribute("MobileNoticeText18",messages[code])
+  ui:SetAttribute("MobileNoticeUntil18",os.clock()+5)
+ end
 	ui:SetAttribute("Status",state.status)
  ui:SetAttribute("ProfileReady",state.profileReady)
  ui:SetAttribute("ProfileStatus",state.profileStatus)

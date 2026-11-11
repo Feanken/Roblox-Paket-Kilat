@@ -2,6 +2,7 @@
 local Players=game:GetService("Players")
 local TweenService=game:GetService("TweenService")
 local RunService=game:GetService("RunService")
+local Debris=game:GetService("Debris")
 local player=Players.LocalPlayer
 local remote=game.ReplicatedStorage:WaitForChild("PaketKilat").Remotes
 local ui=player:WaitForChild("PlayerGui"):WaitForChild("PaketKilatUI").Root
@@ -14,6 +15,70 @@ local function connect(signal,fn) local c=signal:Connect(fn) table.insert(connec
 local function text(parent,name,size,pos,value,fontSize)
  local t=Instance.new("TextLabel") t.Name=name t.Size=size t.Position=pos t.BackgroundTransparency=1
  t.Text=value t.TextColor3=Color3.fromRGB(247,239,217) t.Font=Enum.Font.GothamBold t.TextSize=fontSize t.Parent=parent return t
+end
+local function spawnDeliveryConfetti()
+ local char = player.Character
+ local hrp = char and (char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso"))
+ if not hrp then return end
+ local att = Instance.new("Attachment")
+ att.Position = Vector3.new(0, 1.5, 0)
+ att.Parent = hrp
+ local emitter = Instance.new("ParticleEmitter")
+ emitter.Name = "CelebrationConfetti"
+ emitter.Texture = "rbxasset://textures/particles/sparkles_main.dds"
+ emitter.Color = ColorSequence.new({
+  ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 225, 90)),
+  ColorSequenceKeypoint.new(0.5, Color3.fromRGB(70, 220, 180)),
+  ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
+ })
+ emitter.Size = NumberSequence.new({
+  NumberSequenceKeypoint.new(0, 0.4),
+  NumberSequenceKeypoint.new(0.5, 0.8),
+  NumberSequenceKeypoint.new(1, 0)
+ })
+ emitter.Transparency = NumberSequence.new({
+  NumberSequenceKeypoint.new(0, 0),
+  NumberSequenceKeypoint.new(0.8, 0.1),
+  NumberSequenceKeypoint.new(1, 1)
+ })
+ emitter.Speed = NumberRange.new(10, 18)
+ emitter.SpreadAngle = Vector2.new(65, 65)
+ emitter.Lifetime = NumberRange.new(1.0, 1.6)
+ emitter.Rate = 0
+ emitter.Acceleration = Vector3.new(0, -12, 0)
+ emitter.Parent = att
+ emitter:Emit(32)
+ Debris:AddItem(att, 2.5)
+end
+local function spawnImpactPuff()
+ local char = player.Character
+ local hrp = char and (char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso"))
+ if not hrp then return end
+ local att = Instance.new("Attachment")
+ att.Position = Vector3.new(0, -1.8, 0)
+ att.Parent = hrp
+ local emitter = Instance.new("ParticleEmitter")
+ emitter.Name = "ImpactPuff"
+ emitter.Texture = "rbxasset://textures/particles/smoke_main.dds"
+ emitter.Color = ColorSequence.new(Color3.fromRGB(225, 210, 190))
+ emitter.Size = NumberSequence.new({
+  NumberSequenceKeypoint.new(0, 0.4),
+  NumberSequenceKeypoint.new(0.5, 1.2),
+  NumberSequenceKeypoint.new(1, 1.8)
+ })
+ emitter.Transparency = NumberSequence.new({
+  NumberSequenceKeypoint.new(0, 0.3),
+  NumberSequenceKeypoint.new(0.6, 0.6),
+  NumberSequenceKeypoint.new(1, 1)
+ })
+ emitter.Speed = NumberRange.new(5, 10)
+ emitter.SpreadAngle = Vector2.new(180, 20)
+ emitter.Lifetime = NumberRange.new(0.4, 0.7)
+ emitter.Rate = 0
+ emitter.Acceleration = Vector3.new(0, 2, 0)
+ emitter.Parent = att
+ emitter:Emit(14)
+ Debris:AddItem(att, 1.0)
 end
 local toast=Instance.new("Frame") toast.Name="DeliveryCelebration" toast.AnchorPoint=Vector2.new(.5,.5)
 toast.Position=UDim2.fromScale(.5,.5) toast.Size=UDim2.fromOffset(330,212)
@@ -228,6 +293,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
     handoffNext.Text = snapshot.destinationName or "Lanjut ke tujuan berikut"
     handoffExpires = os.clock() + 5
     refresh()
+    spawnDeliveryConfetti()
     return
    end
    expires = os.clock() + 5
@@ -277,13 +343,16 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
 
    if tween then tween:Cancel() end
    scale.Scale=.88 tween=TweenService:Create(scale,TweenInfo.new(.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=1}) tween:Play()
+   spawnDeliveryConfetti()
   end
  elseif code == "HardLanding" then
   impact.Text = string.format("MENDARAT KERAS · kondisi %d/100", snapshot.condition or 0)
   noticeExpires = os.clock() + 1.8
+   spawnImpactPuff()
  elseif code=="Impact" or code=="Slip" or code=="Barrier" or code=="GripLost" then
   impact.Text=string.format("PAKET TERLEPAS  /  kondisi %d",snapshot.condition or 0)
   noticeExpires=os.clock()+2
+   spawnImpactPuff()
  elseif code=="Recover" then
   impact.Text="Paket kembali ke petak pemulihan" noticeExpires=os.clock()+2
  elseif code=="Start" or code=="RelaySkipped" or code=="Respawned" or code=="Cancelled" or code=="BatchCancelled" then

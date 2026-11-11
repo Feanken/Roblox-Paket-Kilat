@@ -53,6 +53,7 @@ local function hide()
  folder:SetAttribute("RemainingDistance19", nil)
  folder:SetAttribute("GuidedStampId26", nil)
  folder:SetAttribute("GuidedStampPosition26", nil)
+ folder:SetAttribute("RejoinPosition", nil)
  folder:SetAttribute("TurnDirection", nil)
  folder:SetAttribute("TurnDistance", nil)
 end
@@ -103,7 +104,9 @@ local function refresh()
  local remaining=best+(points[bestSegment+1]-cursor).Magnitude
  for i=bestSegment+1,#points-1 do remaining+=(points[i+1]-points[i]).Magnitude end
  folder:SetAttribute('RemainingDistance19',remaining)
- if best <= 14 then
+ if best > 14 then
+  folder:SetAttribute("RejoinPosition",cursor)
+ else
   local turn, distance, position = Paths.NextTurn(points, bestSegment, cursor, 32)
   if turn then
    folder:SetAttribute("TurnDirection", turn)
