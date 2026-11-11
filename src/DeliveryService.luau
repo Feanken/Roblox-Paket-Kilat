@@ -133,7 +133,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 	if type(action) ~= "string" or #action > 16
 		or (orderId ~= nil and (type(orderId) ~= "string" or #orderId > 64))
 		or (destinationId ~= nil and (type(destinationId) ~= "string" or #destinationId > 64)) then return false, "InvalidArguments" end
-	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true, AcceptJob=true, BuyGrip=true, AcceptRelay=true, SkipRelay=true, AcceptBatch=true, CancelBatch=true}
+	local allowed = {Start = true, Pickup = true, Drop = true, Recover = true, Sync = true, Deliver = true, BuyCosmetic=true, EquipCosmetic=true, AcceptJob=true, BuyGrip=true, AcceptRelay=true, SkipRelay=true, AcceptBatch=true, CancelBatch=true, CancelOrder=true}
 	if not allowed[action] then return false, "UnknownAction" end
 	if (action=="Start" or action=="Sync") and orderId~=nil then return false,"InvalidArguments" end
 	if (action == "Deliver" and type(destinationId) ~= "string") or (action ~= "Deliver" and destinationId ~= nil) then return false, "InvalidArguments" end
@@ -152,11 +152,15 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
   Delivery.batches[player.UserId]=b Delivery.relayOffers[player.UserId]=nil
   startBatchLeg(player,b,nil)E.AdvanceAssignment(player)Delivery.Publish(player,'Start')return true,'Start'
  end
- if action=='CancelBatch'then
-  if arity and arity~=2 then return false,'InvalidArguments'end
+ if action=="CancelBatch" or action=="CancelOrder" then
+  if arity and arity~=2 then return false,"InvalidArguments" end
   local o=Delivery.orders[player.UserId]
-  if not o or not o.isBatch or o.orderId~=orderId or o.completionLocked then return false,'NotOwnerOrStale'end
-  Delivery.Cancel(player,'BatchCancelled')return true,'BatchCancelled'
+  if not o or o.orderId~=orderId or o.completionLocked or (action=="CancelBatch" and not o.isBatch) then
+   return false,"NotOwnerOrStale"
+  end
+  local code=o.isBatch and "BatchCancelled" or "Cancelled"
+  Delivery.Cancel(player,code)
+  return true,code
  end
  if action=='SkipRelay' then
   if arity and arity~=2 then return false,'InvalidArguments' end

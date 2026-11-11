@@ -168,7 +168,7 @@ local function refresh()
  stopBatch.AutoButtonColor = handoff.Visible
  ui.TopCard.Visible=not toast.Visible and not shopOpen
  ui.StorageStatus.Visible=not toast.Visible and not shopOpen and(not Theme.IsMobile(ui)or ui.StorageStatus:GetAttribute("Alert18")==true)
- ui.Actions.Visible=not shopOpen and not toast.Visible and(not mobile or not (ui:GetAttribute("MobileTargetOpen18") or ui:GetAttribute("MobileMenuOpen18")))
+ ui.Actions.Visible=not ui:GetAttribute("OrderOptionsOpen") and not shopOpen and not toast.Visible and(not mobile or not (ui:GetAttribute("MobileTargetOpen18") or ui:GetAttribute("MobileMenuOpen18")))
  local backdrop=ui:FindFirstChild("ShopBackdrop")if backdrop then backdrop.Visible=ui.Shop.Visible end
  impact.Visible=os.clock()<noticeExpires and not shopOpen
  local p=ownPackage()

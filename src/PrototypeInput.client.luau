@@ -24,6 +24,84 @@ Theme.Static(ui)
 local catalog=shop:WaitForChild("Catalog")
 local feedback, feedbackUntil = "", 0
 local confirmRecoveryUntil = 0
+local cancelOrderId
+local cancelPendingUntil = 0
+
+local function orderButton(parent, name, text)
+ local b=Instance.new("TextButton")
+ b.Name, b.Text, b.Parent=name,text,parent
+ b.ZIndex=parent==ui and 4 or 32
+ Theme.ToolbarButton(b)
+ return b
+end
+
+local cancelToggle=orderButton(ui,"OrderOptions","Akhiri [X]")
+cancelToggle.Visible=false
+local cancelOverlay=Instance.new("Frame")
+cancelOverlay.Name="CancelOrderDialog"
+cancelOverlay.Size=UDim2.fromScale(1,1)
+cancelOverlay.BackgroundColor3=Theme.Ink
+cancelOverlay.BackgroundTransparency=.4
+cancelOverlay.Active=true
+cancelOverlay.Visible=false
+cancelOverlay.ZIndex=30
+cancelOverlay.Parent=ui
+local cancelPanel=Instance.new("Frame")
+cancelPanel.AnchorPoint=Vector2.new(.5,.5)
+cancelPanel.Position=UDim2.fromScale(.5,.5)
+cancelPanel.BackgroundColor3=Theme.Cream
+cancelPanel.BorderSizePixel=0
+cancelPanel.ZIndex=31
+cancelPanel.Parent=cancelOverlay
+Instance.new("UICorner",cancelPanel).CornerRadius=UDim.new(0,14)
+
+local cancelMessage=Instance.new("TextLabel")
+cancelMessage.Name="Summary"
+cancelMessage.BackgroundTransparency=1
+cancelMessage.Position=UDim2.fromOffset(14,10)
+cancelMessage.Size=UDim2.new(1,-28,0,80)
+cancelMessage.TextColor3=Theme.Ink
+cancelMessage.TextSize=14
+cancelMessage.TextWrapped=true
+cancelMessage.Font=Enum.Font.GothamMedium
+cancelMessage.ZIndex=32
+cancelMessage.Parent=cancelPanel
+local keepOrder=orderButton(cancelPanel,"KeepOrder","Lanjut antar")
+local confirmCancel=orderButton(cancelPanel,"ConfirmCancel","Akhiri pesanan")
+Theme.Action(keepOrder,true,false)
+Theme.Action(confirmCancel,true,true)
+for index,b in ipairs({keepOrder,confirmCancel}) do
+ b.Position=UDim2.new((index-1)*.5,index==1 and 12 or 4,0,100)
+ b.Size=UDim2.new(.5,-16,0,44)
+end
+
+local function setCancelOpen(value)
+ cancelOrderId=value and state.orderId or nil
+ cancelPendingUntil=0
+ cancelOverlay.Visible=cancelOrderId~=nil
+ ui:SetAttribute("OrderOptionsOpen",cancelOverlay.Visible)
+ if cancelOverlay.Visible then
+  confirmRecoveryUntil=0
+  ui:SetAttribute("MobileMenuOpen18",false)
+  ui:SetAttribute("MobileTargetOpen18",false)
+ end
+end
+
+local function canOpenCancel()
+ local gallery=ui:FindFirstChild("GalleryReader")
+ return state.profileReady==true and state.orderId~=nil and (state.status=="Carrying" or state.status=="Dropped")
+  and not shopOpen and not ui:GetAttribute("JobBoardOpen17") and not ui:GetAttribute("AudioOpen33")
+  and not (gallery and gallery.Visible)
+end
+cancelToggle.Activated:Connect(function()
+ if canOpenCancel() then setCancelOpen(true) end
+end)
+keepOrder.Activated:Connect(function() setCancelOpen(false) end)
+confirmCancel.Activated:Connect(function()
+ if not cancelOrderId or cancelOrderId~=state.orderId or os.clock()<cancelPendingUntil then return end
+ cancelPendingUntil=os.clock()+.8
+ RS.Remotes.ActionRequest:FireServer("CancelOrder",cancelOrderId)
+end)
 local messages = {
 	TooFar = "Dekati titik tujuan atau paket terlebih dahulu.",
 	WrongDestination = "Ini bukan tujuan pesananmu.",
@@ -120,6 +198,24 @@ local function bestText(value)
 end
 local function render()
 	local w=ui.AbsoluteSize.X
+ local mobile=Theme.IsMobile(ui)
+ local available=canOpenCancel()
+ if cancelOrderId and not available then setCancelOpen(false) end
+ cancelToggle.Visible=available and not cancelOverlay.Visible and (not mobile or ui:GetAttribute("MobileMenuOpen18")==true)
+ cancelToggle.Position=mobile and UDim2.new(1,-120,0,162) or UDim2.new(1,-190,0,(ui.AbsoluteSize.Y<500 and 12 or 20)+50)
+ cancelToggle.Size=UDim2.fromOffset(mobile and 96 or 84,44)
+ cancelToggle.Text=mobile and "Akhiri rute" or "Akhiri [X]"
+ if cancelOverlay.Visible then
+  cancelPanel.Size=UDim2.fromOffset(math.min(360,w-24),156)
+  local consequence=state.batch and "Koin dari kiriman yang sudah sampai tetap tersimpan."
+   or state.storyChapter and "Bab ini bisa diambil ulang di depot. Koin yang sudah didapat tetap tersimpan."
+   or "Paket aktif dikembalikan. Koin yang sudah didapat tetap tersimpan."
+  cancelMessage.Text=string.format("Akhiri kiriman ke %s?\n%s",state.destinationName,consequence)
+  local pending=os.clock()<cancelPendingUntil
+  confirmCancel.Text=pending and "Memproses..." or "Akhiri pesanan"
+  confirmCancel.Active=not pending
+  Theme.Action(confirmCancel,not pending,true)
+ end
  local relay=currentRelay()
  ui:SetAttribute('RelayAvailable21',relay~=nil)
  local onboarding=state.onboarding or {stage="FindDepot"}
@@ -127,7 +223,7 @@ local function render()
  guide.FPS.Visible=guideManual or perfShowing
  guide.Hint.Size=UDim2.new(1,(guideManual or perfShowing) and -124 or -70,1,-12)
  guide.Size=UDim2.fromOffset(math.min(C.Onboarding.Width,math.max(260,w-290)),C.Onboarding.Height)
- guide.Visible=not ui:GetAttribute("AudioOpen33")and not(Theme.IsMobile(ui)and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")))and not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not Theme.IsMobile(ui)and not guideDismissed and onboarding.stage~="Complete")
+ guide.Visible=not cancelOverlay.Visible and not ui:GetAttribute("AudioOpen33")and not(Theme.IsMobile(ui)and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")))and not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not Theme.IsMobile(ui)and not guideDismissed and onboarding.stage~="Complete")
  local guideStage=state.status=="Dropped" and "Dropped" or onboarding.stage
  guide.Hint.Text=perfShowing and (ui:GetAttribute("PerfText") or "Mengukur FPS...") or (C.Onboarding[guideStage] or C.Onboarding.FindDepot)
  if relay and not perfShowing then guide.Hint.Text='Ada titipan di rumah ini. Ambil untuk lanjut, atau Lewati untuk kembali ke depot.' end
@@ -329,7 +425,7 @@ local function render()
  end
 end
 local function activate(b)
-	if not shopOpen and not ui:GetAttribute("AudioOpen33") and state.profileReady and b:GetAttribute("ActionEnabled") then
+	if not cancelOverlay.Visible and not shopOpen and not ui:GetAttribute("AudioOpen33") and state.profileReady and b:GetAttribute("ActionEnabled") then
 		local action=b:GetAttribute("Action")
   if action=="Recover" and not state.outOfBounds then
    if os.clock()>=confirmRecoveryUntil then
@@ -356,9 +452,17 @@ ui.ShopToggle.Activated:Connect(function()ui:SetAttribute("MobileMenuOpen18",fal
 shop.Close.Activated:Connect(function() shopOpen=false render() end)
 CAS:BindAction("PKShop",function(_,input)
  if UIS:GetFocusedTextBox()then return Enum.ContextActionResult.Pass end
- if input==Enum.UserInputState.Begin then shopOpen=not shopOpen render() end
+ if input==Enum.UserInputState.Begin and not cancelOverlay.Visible then shopOpen=not shopOpen render() end
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.B)
+CAS:BindAction("PKCancelOrder",function(_,input)
+ if UIS:GetFocusedTextBox() or not canOpenCancel() then return Enum.ContextActionResult.Pass end
+ if input==Enum.UserInputState.Begin then
+  setCancelOpen(not cancelOverlay.Visible)
+  render()
+ end
+ return Enum.ContextActionResult.Sink
+end,false,Enum.KeyCode.X)
 for _,id in ipairs(C.CosmeticOrder) do
  local actionButton=catalog[id].Action
  actionButton.Activated:Connect(function()
@@ -385,6 +489,7 @@ CAS:BindAction("PKRecover",function(_,s)
 	return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.R)
 RS.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot,code)
+ if cancelOrderId and (snapshot.orderId~=cancelOrderId or not snapshot.profileReady) then setCancelOpen(false) end
  if snapshot.orderId~=state.orderId or snapshot.status~="Dropped" or snapshot.atRecovery then
   confirmRecoveryUntil=0
  end
@@ -406,6 +511,7 @@ RS.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot,code)
 	elseif code == "Delivered" then feedbackUntil=0 end
 	render()
 end)
+player.CharacterRemoving:Connect(function() setCancelOpen(false) end)
 player.CharacterAdded:Connect(function()
 	task.delay(0.5,function() RS.Remotes.ActionRequest:FireServer("Sync") end)
 end)

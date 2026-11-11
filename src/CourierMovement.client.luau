@@ -40,7 +40,7 @@ local function render()
  local mobile=Theme.IsMobile(ui)
  local mobilePanel=mobile and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")or ui.Guide.Visible)
  local gallery=ui:FindFirstChild("GalleryReader")
- local blocked=(gallery and gallery.Visible) or ui:GetAttribute("AudioOpen33")==true or mobilePanel or not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
+ local blocked=ui:GetAttribute("OrderOptionsOpen") or (gallery and gallery.Visible) or ui:GetAttribute("AudioOpen33")==true or mobilePanel or not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
  if (blocked or seated or m and m.exhausted) and wants then send(false)end
  b.Visible=not blocked and not seated
  if mobile then
