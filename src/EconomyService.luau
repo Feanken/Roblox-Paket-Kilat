@@ -1,5 +1,6 @@
 -- Persistent validated profile references; order ledger remains session-only.
 local Challenges=require(script.Parent.SessionChallenges16)
+local Career=require(script.Parent.CourierCareer)
 local Offers=require(script.Parent.JobOffers17)
 local Tuning=require(script.Parent.MovementTuning)
 local Contracts=require(script.Parent.Contracts24)
@@ -62,6 +63,7 @@ function E.Snapshot(player)
   local p=s.profile
   out.coins=p.coins out.deliveryCount=p.deliveryCount
   out.challenge=Challenges.Snapshot(s.challenge)
+  out.career=Career.Snapshot(p,os.time())
   out.gear=E.GearQuote(player)
   out.qualityRun=table.clone(s.qualityRun)
   out.recentDeliveries={}
@@ -130,6 +132,11 @@ function E.Award(player,order,now)
  result.batchBonus=Batch.Bonus(order,C.InitialCondition)result.total+=result.batchBonus
  local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
  result.challengeBonus=challengeBonus result.challengeName=challengeName result.total+=challengeBonus
+ local nextWeek, weeklyBonus, promotion, rankBonus=Career.Advance(p,result,os.time())
+ result.weeklyBonus=weeklyBonus
+ result.promotion=promotion
+ result.rankBonus=rankBonus
+ result.total+=weeklyBonus+rankBonus
  if order.isBatch then result.batchEarned=(order.batchEarned or 0)+result.total result.batchDuration=math.max(0,now-order.batchStartedAt)end
  result.rating=Rating.Evaluate(result,order.targetSeconds or route.TargetSeconds,s.ratingTuning)
  local nextRun=Rating.Advance(s.qualityRun,result.rating)
@@ -142,6 +149,7 @@ function E.Award(player,order,now)
 	s.creditedOrders[order.orderId]=true
 	p.coins+=result.total
 	p.deliveryCount+=1
+	p.careerWeek=nextWeek
 	if newRecord then p.bestTimes[key]=duration end
 	result.bestTime=p.bestTimes[key]
  table.insert(s.history,1,{destinationName=result.destinationName,total=result.total,stars=result.rating.stars,duration=result.duration,condition=result.condition,jobName=result.jobName,contractBonus=result.contractBonus,contractReason=result.isBatch and ('Borongan '..result.batchIndex..'/'..result.batchTotal)or result.contractStatus and result.contractStatus.reason})

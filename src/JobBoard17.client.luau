@@ -16,11 +16,35 @@ local title=text(board,'Title',16,12,160,24,18)title.Text='Pesanan'
 local info=text(board,'Info',16,54,500,18,11)info.Font=Enum.Font.GothamMedium
 local close=Instance.new('TextButton')close.Name='Close'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-52,0,8)close.Text='×'close.ZIndex=12 close.Parent=board theme.ToolbarButton(close)close.TextSize=21
 local tab=0 local selectedIds={}local tabs={}local render
-for i,label in {'Biasa','Kontrak','Borongan','Riwayat'}do
+for i,label in {'Biasa','Kontrak','Borongan','Karier'}do
  local b=Instance.new('TextButton')b.Name='Tab24_'..i;b.Text=label;b.ZIndex=12;b.TextSize=11;b.Parent=board;theme.ToolbarButton(b)
  bind(b.Activated,function()tab=i-1 render()end)tabs[i]=b
 end
-local history=text(board,'History24',16,78,588,176,11)history.Font=Enum.Font.GothamMedium history.TextYAlignment=Enum.TextYAlignment.Top
+local career = Instance.new("ScrollingFrame")
+career.Name = "Career"
+career.Position = UDim2.fromOffset(16, 78)
+career.BackgroundTransparency = 1
+career.BorderSizePixel = 0
+career.ScrollBarThickness = 5
+career.ScrollBarImageColor3 = theme.Muted
+career.ScrollingDirection = Enum.ScrollingDirection.Y
+career.AutomaticCanvasSize = Enum.AutomaticSize.Y
+career.CanvasSize = UDim2.fromOffset(0, 0)
+career.ZIndex = 11
+career.Visible = false
+career.Parent = board
+local rank = text(career, "Rank", 0, 0, 0, 22, 16)
+local rankGoal = text(career, "RankGoal", 0, 22, 0, 18, 11)
+rankGoal.TextColor3 = theme.Muted
+local week = text(career, "Week", 0, 48, 0, 21, 14)
+local goals = text(career, "Goals", 0, 72, 0, 57, 12)
+goals.TextYAlignment = Enum.TextYAlignment.Top
+local historyTitle = text(career, "HistoryTitle", 0, 138, 0, 20, 13)
+historyTitle.Text = "Riwayat sesi"
+local history = text(career, "History24", 0, 160, 0, 0, 11)
+history.Font = Enum.Font.GothamMedium
+history.TextYAlignment = Enum.TextYAlignment.Top
+history.AutomaticSize = Enum.AutomaticSize.Y
 local function offerAt(i)
  return tab==2 and state.batchOffers and state.batchOffers[i]or tab<2 and state.jobOffers and state.jobOffers[tab*3+i]or nil
 end
@@ -85,14 +109,35 @@ render=function()
  local width=math.min(620,root.AbsoluteSize.X-24)local left=math.clamp(math.floor(width*.32),146,198)local right=width-left-32
  board.Size=UDim2.fromOffset(width,280)title.Size=UDim2.fromOffset(width-380,24)info.Size=UDim2.fromOffset(width-32,18)
  for i,b in tabs do b.Position=UDim2.fromOffset(width-354+(i-1)*74,6)b.Size=UDim2.fromOffset(70,44)theme.Action(b,true,tab~=i-1)end
- history.Size=UDim2.fromOffset(width-32,176)history.Visible=tab==3 panel.Visible=tab~=3
+ career.Size = UDim2.fromOffset(width - 32, 190)
+ career.Visible = tab == 3
+ panel.Visible = tab ~= 3
+ for _, label in ipairs({rank, rankGoal, week, goals, historyTitle, history}) do
+  label.Size = UDim2.fromOffset(width - 46, label.Size.Y.Offset)
+ end
+ if career.Visible and state.career then
+  local progress = state.career
+  rank.Text = string.format("%s · %d kiriman", progress.rank, state.deliveryCount)
+  rankGoal.Text = progress.nextRank and string.format("%d kiriman lagi ke %s · +%d koin", progress.nextRemaining, progress.nextRank, progress.nextRankBonus)
+   or "Pangkat tertinggi tercapai."
+  week.Text = string.format("%s · %d/3 · %s%d koin", progress.weeklyName, progress.completed,
+   progress.completed == 3 and "diterima +" or "+", progress.weeklyBonus)
+  local checklist = {}
+  for _, goal in ipairs(progress.goals) do
+   table.insert(checklist, (goal.done and "✓ " or "○ ") .. goal.label)
+  end
+  goals.Text = table.concat(checklist, "\n")
+ end
  local lines={}
  for i,v in state.recentDeliveries or {}do table.insert(lines,string.format('%d. %s · %d★ · +%d koin\n%s · %d/100 · %.1fs · %s',i,v.destinationName,v.stars,v.total,v.jobName or 'Pesanan',v.condition or 0,v.duration or 0,v.contractReason or 'Tanpa kontrak'))end
  history.Text=#lines>0 and table.concat(lines,'\n')or 'Belum ada pengantaran. Ambil pesanan pertamamu.'
  local char=player.Character local hum=char and char:FindFirstChildOfClass('Humanoid')local r=char and char:FindFirstChild('HumanoidRootPart')
  local near=r and state.depotPosition and(r.Position-state.depotPosition).Magnitude<=config.ActionDistance
  info.Text=os.clock()<noticeUntil and notice or near and 'Pilih pekerjaan untuk melihat jalur dan syaratnya.'or 'Dekati depot untuk mengambil pesanan.'
- if tab==3 then info.Text='Lima pengantaran terakhir · sesi ini saja'end
+ if tab == 3 and state.career then
+  local hours = math.max(1, math.ceil((state.career.resetAt - workspace:GetServerTimeNow()) / 3600))
+  info.Text = string.format("Mingguan · kondisi ≥90 · tanpa Pulihkan · ganti dalam %d jam", hours)
+ end
  local offer=selected()board:SetAttribute('SelectedOffer28',offer and offer.id)
  for i,row in ipairs(rows)do
   local o=offerAt(i)local chosen=o and offer and o.id==offer.id

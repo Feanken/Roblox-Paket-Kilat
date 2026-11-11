@@ -176,7 +176,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    if result.contractKind then ratingHint.Text=result.contractSucceeded and ('Kontrak berhasil · bonus +'..result.contractBonus)or ('Kontrak: '..(result.contractStatus and result.contractStatus.reason or 'syarat belum terpenuhi'))end
    streak.Text=string.format('Rapi beruntun %d · terbaik sesi %d',result.cleanStreak or 0,result.bestCleanStreak or 0)
    local extras={}
-   for _,item in ipairs({{'Cap',result.routeBonus},{'Kerja',result.jobBonus},{'Target',result.challengeBonus},{'Kontrak',result.contractBonus},{'Borongan',result.batchBonus}})do if(item[2]or 0)>0 then table.insert(extras,item[1]..' +'..item[2])end end
+   for _,item in ipairs({{'Cap',result.routeBonus},{'Kerja',result.jobBonus},{'Target',result.challengeBonus},{'Kontrak',result.contractBonus},{'Borongan',result.batchBonus},{'Pangkat',result.rankBonus},{'Mingguan',result.weeklyBonus}})do if(item[2]or 0)>0 then table.insert(extras,item[1]..' +'..item[2])end end
    detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\n%s',result.baseReward,result.conditionBonus,result.timeBonus,#extras>0 and table.concat(extras,' · ')or result.isBatch and result.batchIndex<result.batchTotal and 'Bonus finish dinilai setelah 3 kiriman.'or 'Tanpa bonus tambahan')
    if result.isBatch then
     title.Text = result.batchInterrupted and "BORONGAN TERHENTI" or "BORONGAN SELESAI!"
@@ -186,6 +186,12 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    end
    if not result.isBatch and (result.challengeBonus or 0)>0 then
     title.Text="TARGET TERCAPAI!"
+   end
+   if result.promotion then
+    title.Text = "NAIK PANGKAT!"
+    ratingHint.Text = result.promotion
+   elseif (result.weeklyBonus or 0) > 0 then
+    title.Text = "RUTE MINGGUAN SELESAI!"
    end
    detail.TextWrapped=true
    detail.TextSize=11

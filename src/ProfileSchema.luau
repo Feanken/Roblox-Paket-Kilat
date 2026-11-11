@@ -6,7 +6,7 @@ function S.Copy(v)
 	local t={} for k,x in pairs(v) do t[k]=S.Copy(x) end return t
 end
 function S.Default()
-	return {schemaVersion=2,coins=0,deliveryCount=0,ownedCosmetics={TasStandar=true},equippedCosmetic="TasStandar",bestTimes={},upgrades={Grip=0}}
+	return {schemaVersion=3,coins=0,deliveryCount=0,careerWeek={week=0,mask=0},ownedCosmetics={TasStandar=true},equippedCosmetic="TasStandar",bestTimes={},upgrades={Grip=0}}
 end
 function S.Validate(raw,C)
 	if type(raw)~="table" then return nil,"InvalidProfile" end
@@ -21,7 +21,15 @@ function S.Validate(raw,C)
 		p.bestTimes=p.bestTimes or {}
 	end
 	if p.schemaVersion==1 then p.schemaVersion=2 p.upgrades={Grip=0}end
- if p.schemaVersion~=2 then return nil,"UnsupportedSchema" end
+ if p.schemaVersion==2 then
+  p.schemaVersion=3
+  p.careerWeek={week=0,mask=0}
+ end
+ if p.schemaVersion~=3 then return nil,"UnsupportedSchema" end
+ local career=p.careerWeek
+ if type(career)~="table" or not integer(career.week) or not integer(career.mask) or career.mask>7 then
+  return nil,"InvalidCareer"
+ end
  if type(p.upgrades)~="table"or not integer(p.upgrades.Grip)or p.upgrades.Grip>3 then return nil,"InvalidUpgrades"end
  for id in pairs(p.upgrades)do if id~="Grip"then return nil,"UnknownUpgrade"end end
 	if not integer(p.coins) or not integer(p.deliveryCount) then return nil,"InvalidCounters" end
@@ -38,7 +46,7 @@ function S.Validate(raw,C)
 		if not C.Routes[goal] or not C.PackageTypes[kind] or not finite(seconds) or seconds<=0 then return nil,"InvalidRecord" end
 		best[key]=seconds
 	end
-	return {schemaVersion=2,coins=p.coins,deliveryCount=p.deliveryCount,ownedCosmetics=owned,equippedCosmetic=p.equippedCosmetic,bestTimes=best,upgrades={Grip=p.upgrades.Grip}}
+	return {schemaVersion=3,coins=p.coins,deliveryCount=p.deliveryCount,careerWeek={week=career.week,mask=career.mask},ownedCosmetics=owned,equippedCosmetic=p.equippedCosmetic,bestTimes=best,upgrades={Grip=p.upgrades.Grip}}
 end
 function S.Decode(raw,C)
 	if raw==nil then return S.Default(),0 end
