@@ -1,5 +1,7 @@
 -- Konfigurasi gameplay lokal T11-T15. Tidak ada layanan daring/pembelian.
 local routes = {
+	CBD01 = {Name="Menara Kilat", Landmark="Pusat kota · pintu utama", Offset=Vector3.new(-38,0,168), TargetSeconds=65, DepotJobOnly=true},
+	BQ10 = {Name="Kantor Arsitek", Landmark="Bata Quay · ruko bata", Offset=Vector3.new(-223.8,0,186.2), TargetSeconds=100, DepotJobOnly=true},
 	Rumah01 = {Name="Rumah Bu Sari", Landmark="Biru · pot bunga", Offset=Vector3.new(100,0,0), TargetSeconds=45},
 	Rumah02 = {Name="Rumah Pak Budi", Landmark="Oranye · warung", Offset=Vector3.new(-100,0,0), TargetSeconds=45},
 	Rumah03 = {Name="Rumah Bu Rina", Landmark="Ungu · kebun", Offset=Vector3.new(0,0,120), TargetSeconds=35},
@@ -14,7 +16,7 @@ end
 return table.freeze({
  Onboarding=table.freeze({Width=430,Height=66,
   FindDepot="1/3 · Dekati DEPOT, lalu Ambil pesanan.",
-  Deliver="2/3 · Ikuti TUJUAN. Dekati petak rumah, lalu Antar.",
+  Deliver="2/3 · Ikuti TUJUAN. Dekati titik serah, lalu Antar.",
   Dropped="Paket lepas: Ambil ulang, atau Pulihkan (-20 kondisi).",
   ReturnDepot="3/3 · Berhasil! Kembali ke DEPOT untuk pesanan kedua.",
   Complete="Siap! Pilih rute, jaga paket, dan terus antar.",
@@ -32,7 +34,7 @@ return table.freeze({
 	SpawnOffset=Vector3.new(0,4,0), RecoveryPlayerOffset=Vector3.new(0,3,0),
 	ImpactSpeed=55, ContactMargin=0.8, PhysicsSampleInterval=1/30,
 	PackageSize=Vector3.new(2.5,2,2), CarryOffset=CFrame.new(0,0,-2.5), DropOffset=CFrame.new(0,0,-4),
-	BoundsMin=Vector3.new(-138,-14,-55), BoundsMax=Vector3.new(145,96,154),
+	BoundsMin=Vector3.new(-445,-14,-55), BoundsMax=Vector3.new(145,96,310),
 	DestinationId="Rumah01", DestinationName="Rumah Bu Sari", PackageType="Biasa", PromptHoldDuration=0.15,
 	Hazards=table.freeze({
 		SampleInterval=0.05, SlipSamples=2, SlipMinimumSpeed=5,

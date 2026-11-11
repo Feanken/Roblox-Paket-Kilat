@@ -8,9 +8,11 @@ function R.Make(config, map, completed, deliveryNumber, id, now, tuning)
 	local sourceId = completed.destinationId
 	local source = map:FindFirstChild(sourceId)
 	local pickup = source and source:FindFirstChild("DestinationPoint")
-	if not pickup or not config.Routes[sourceId] then return nil end
+	local sourceRoute = config.Routes[sourceId]
+	if not pickup or not sourceRoute or sourceRoute.DepotJobOnly then return nil end
 	local candidates = {}
-	for destinationId in pairs(config.Routes) do
+	for destinationId, route in pairs(config.Routes) do
+		if route.DepotJobOnly then continue end
 		local house = map:FindFirstChild(destinationId)
 		local point = house and house:FindFirstChild("DestinationPoint")
 		local path = point and Paths.Between(Routes, sourceId, destinationId)

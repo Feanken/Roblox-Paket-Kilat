@@ -31,12 +31,12 @@ function S.Validate(raw,C)
 		owned[id]=true
 	end
 	if not owned.TasStandar or type(p.equippedCosmetic)~="string" or not owned[p.equippedCosmetic] then return nil,"InvalidEquipment" end
-	local best={} local count=0
+	local best={}
 	for key,seconds in pairs(p.bestTimes) do
 		if type(key)~="string" or #key>64 then return nil,"InvalidRecordKey" end
 		local goal,kind=key:match("^([^|]+)|([^|]+)$")
 		if not C.Routes[goal] or not C.PackageTypes[kind] or not finite(seconds) or seconds<=0 then return nil,"InvalidRecord" end
-		count+=1 if count>10 then return nil,"TooManyRecords" end best[key]=seconds
+		best[key]=seconds
 	end
 	return {schemaVersion=2,coins=p.coins,deliveryCount=p.deliveryCount,ownedCosmetics=owned,equippedCosmetic=p.equippedCosmetic,bestTimes=best,upgrades={Grip=p.upgrades.Grip}}
 end
