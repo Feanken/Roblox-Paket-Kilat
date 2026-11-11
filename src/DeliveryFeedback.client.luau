@@ -389,7 +389,16 @@ connect(relayButton.Activated, function()
 end)
 connect(close.Activated, dismissResult)
 local elapsed=0
-connect(RunService.Heartbeat,function(dt) elapsed+=dt if elapsed>=.1 then elapsed=0 refresh() end end)
+local pulseTime = 0
+connect(RunService.Heartbeat,function(dt)
+ pulseTime += dt
+ if highlight and highlight.Enabled then
+  highlight.FillTransparency = 0.72 + 0.16 * math.sin(pulseTime * 3.5)
+  highlight.OutlineTransparency = 0.05 + 0.15 * math.sin(pulseTime * 3.5)
+ end
+ elapsed+=dt
+ if elapsed>=.1 then elapsed=0 refresh() end
+end)
 connect(player.CharacterAdded,function() expires, noticeExpires, handoffExpires = 0, 0, 0 highlight.Enabled=false end)
 connect(script.Destroying,function()
  for _,c in ipairs(connections) do c:Disconnect() end

@@ -29,6 +29,8 @@ local cancelOrderId
 local cancelPendingUntil = 0
 local currentFillTarget, currentFillColor = -1, nil
 local fillTween = nil
+local lastDisplayedCoins = nil
+local coinScaleTween = nil
 
 local function orderButton(parent, name, text)
  local b=Instance.new("TextButton")
@@ -279,7 +281,22 @@ local function render()
  guide.Hint.Text=perfShowing and (ui:GetAttribute("PerfText") or "Mengukur FPS...") or (C.Onboarding[guideStage] or C.Onboarding.FindDepot)
  if relay and not perfShowing then guide.Hint.Text='Ada titipan di rumah ini. Ambil untuk lanjut, atau Lewati untuk kembali ke depot.' end
 	Theme.Layout(ui,guideManual or perfShowing)
-	card.Coins.Text=state.profileReady and string.format("%d koin",state.coins) or "— koin"
+	local targetCoinsText = state.profileReady and string.format("%d koin", state.coins) or "-- koin"
+	if card.Coins.Text ~= targetCoinsText then
+		card.Coins.Text = targetCoinsText
+		if state.profileReady and lastDisplayedCoins ~= nil and state.coins > lastDisplayedCoins then
+			local coinScale = card.Coins:FindFirstChildOfClass("UIScale")
+			if not coinScale then
+				coinScale = Instance.new("UIScale")
+				coinScale.Parent = card.Coins
+			end
+			coinScale.Scale = 1.25
+			if coinScaleTween then coinScaleTween:Cancel() end
+			coinScaleTween = TweenService:Create(coinScale, TweenInfo.new(0.35, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Scale = 1})
+			coinScaleTween:Play()
+		end
+		if state.profileReady then lastDisplayedCoins = state.coins end
+	end
  if Theme.IsMobile(ui)then card.Coins.TextSize=#card.Coins.Text>11 and 10 or 12 end
  ui.StorageStatus.Size=UDim2.fromOffset(card.Size.X.Offset,20)
  if not state.profileReady then
