@@ -4,9 +4,10 @@ local DistrictDeliveries = {}
 local destinations = {
 	{id = "CBD01", color = Color3.fromRGB(225, 163, 72)},
 	{id = "BQ10", color = Color3.fromRGB(69, 174, 163)},
+	{id = "BQ16", color = Color3.fromRGB(69, 174, 163)},
 }
 
-function DistrictDeliveries.Build()
+function DistrictDeliveries.Build(addressId)
 	assert(not game:GetService("RunService"):IsRunning(), "Run in Studio Edit")
 
 	local map = workspace.PaketKilat.Map
@@ -17,6 +18,7 @@ function DistrictDeliveries.Build()
 
 	for _, destination in ipairs(destinations) do
 		local id = destination.id
+		if addressId and id ~= addressId then continue end
 		assert(not map:FindFirstChild(id), "Delivery already installed: " .. id)
 		local address = candidates:FindFirstChild(id)
 		assert(address and address:IsA("BasePart"), "Missing district address: " .. id)
@@ -29,8 +31,8 @@ function DistrictDeliveries.Build()
 
 		local pad = Instance.new("Part")
 		pad.Name = "DestinationPoint"
-		pad.Size = Vector3.new(4.5, 0.08, 3.3)
-		pad.CFrame = CFrame.new(surface.Position + Vector3.yAxis * 0.045)
+		pad.Size = Vector3.new(3.3, 0.08, 4.5)
+		pad.CFrame = CFrame.new(surface.Position + Vector3.yAxis * 0.045) * CFrame.Angles(0, -math.pi / 2, 0)
 		pad.Color = destination.color
 		pad.Material = Enum.Material.SmoothPlastic
 		pad.Anchored = true
@@ -55,12 +57,13 @@ function DistrictDeliveries.Build()
 		label.Font = Enum.Font.GothamBold
 		label.TextColor3 = Color3.fromRGB(19, 45, 48)
 		label.TextScaled = true
-		label.Text = "ANTAR\n" .. id
+		label.Text = "SERAH\nPAKET"
 		label.Parent = face
 
 		models[#models + 1] = model
 	end
 
+	assert(#models > 0, "Unknown district address: " .. tostring(addressId))
 	for _, model in ipairs(models) do
 		model.Parent = map
 	end

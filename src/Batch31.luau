@@ -3,7 +3,7 @@ local B={}
 local catalog={
  {name='Putaran Pasar',ids={'Rumah01','Rumah03','Rumah04'},types={'Biasa','Biasa','Rapuh'}},
  {name='Lintas Kampung',ids={'Rumah02','Rumah05','Rumah03'},types={'Biasa','Rapuh','Biasa'}},
- {name='Dua Sisi Kota',ids={'Rumah01','Rumah02','Rumah05'},types={'Rapuh','Biasa','Biasa'}},
+ {name='Lintas Distrik',ids={'CBD01','BQ10','BQ16'},types={'Biasa','Rapuh','Biasa'}},
 }
 function B.Offers(seed,bonus,C)
  local out={}

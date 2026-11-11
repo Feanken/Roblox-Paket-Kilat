@@ -1,6 +1,7 @@
 -- Konfigurasi gameplay lokal T11-T15. Tidak ada layanan daring/pembelian.
 local routes = {
 	CBD01 = {Name="Menara Kilat", Landmark="Pusat kota · pintu utama", Offset=Vector3.new(-38,0,168), TargetSeconds=65, DepotJobOnly=true},
+	BQ16 = {Name="Galeri Tepi Air", Landmark="Bata Quay · galeri", Offset=Vector3.new(-223.8,0,243.7), TargetSeconds=110, DepotJobOnly=true},
 	BQ10 = {Name="Kantor Arsitek", Landmark="Bata Quay · ruko bata", Offset=Vector3.new(-223.8,0,186.2), TargetSeconds=100, DepotJobOnly=true},
 	Rumah01 = {Name="Rumah Bu Sari", Landmark="Biru · pot bunga", Offset=Vector3.new(100,0,0), TargetSeconds=45},
 	Rumah02 = {Name="Rumah Pak Budi", Landmark="Oranye · warung", Offset=Vector3.new(-100,0,0), TargetSeconds=45},

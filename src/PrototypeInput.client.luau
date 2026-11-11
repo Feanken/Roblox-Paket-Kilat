@@ -23,7 +23,7 @@ Theme.Static(ui)
 local feedback, feedbackUntil = "", 0
 local messages = {
 	TooFar = "Dekati titik tujuan atau paket terlebih dahulu.",
-	WrongDestination = "Rumah ini bukan tujuan pesananmu.",
+	WrongDestination = "Ini bukan tujuan pesananmu.",
 	NotOwnerOrStale = "Paket ini bukan pesanan aktifmu.",
 	OrderActive = "Selesaikan pesanan yang sedang aktif.",
 	InvalidState = "Aksi belum tersedia untuk paket ini.",
@@ -39,7 +39,7 @@ local messages = {
 	OutOfBounds = "Paket jatuh. Pulihkan untuk kembali ke depot.",
 	Recover = "Pulih (-20). Ambil ulang; perjalanan tanpa rekor.",
 	Drop = "Paket dilepas. Dekati untuk mengambil ulang.",
-	Pickup = "Paket dibawa kembali. Ayo ke rumah tujuan!",
+	Pickup = "Paket dibawa kembali. Lanjut ke tujuan!",
 	Start = "Pesanan diambil. Ikuti penanda tujuan.",
 	Slip = "Licin! Paket terlepas. Ambil ulang atau pulihkan.",
 	Barrier = "Terkena penghalang! Ambil ulang atau pulihkan.",
@@ -202,7 +202,7 @@ local function render()
  elseif state.status=="Carrying" then
 		card.Hint.Text=state.packageType=="Rapuh" and "RAPUH: benturan lebih merusak. Jaga paket!" or "Sprint lebih cepat; jaga meter genggaman paket."
 	elseif state.status=="Dropped" then card.Hint.Text="Ambil ulang, atau pulihkan (-20; tanpa rekor)."
-	else card.Hint.Text="Lima rumah, dua jenis paket. Ambil di depot." end
+	else card.Hint.Text="Pilih kiriman rumah, kantor, atau ruko di depot." end
 	actions.Secondary.Visible=(state.status~="Idle" or relay~=nil) and synced and state.profileReady and not shopOpen
 	if not synced or not state.profileReady or shopOpen then button(actions.Primary,"",shopOpen and "Toko dibuka" or "Memuat profil...",false)
 	elseif state.status=="Idle" then
@@ -210,7 +210,7 @@ local function render()
   else button(actions.Primary,"Start",near(state.depotPosition) and "Pilih pesanan" or "Ke depot",near(state.depotPosition),"E") end
   if relay then button(actions.Secondary,'SkipRelay','Lewati titipan',aliveRoot()~=nil,'Q') end
 	elseif state.status=="Carrying" then
-		button(actions.Primary,"Deliver",near(state.destinationPosition) and "Antar paket" or "Ke rumah",near(state.destinationPosition),"E")
+		button(actions.Primary,"Deliver",near(state.destinationPosition) and "Antar paket" or "Ke tujuan",near(state.destinationPosition),"E")
 		button(actions.Secondary,"Drop",C.Labels.Drop,aliveRoot()~=nil,"Q")
 	elseif state.status=="Dropped" then
 		local p=ownPackage()
