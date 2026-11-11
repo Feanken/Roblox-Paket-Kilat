@@ -65,10 +65,11 @@ local function refresh()
  button.Visible=not ui:GetAttribute("AudioOpen33") and not (result and result.Visible) and not (gallery and gallery.Visible) and state.profileReady==true and not ui.Shop.Visible and not ui:GetAttribute('JobBoardOpen17')and(not Theme.IsMobile(ui)or ui:GetAttribute("MobileMenuOpen18")==true)
  button:SetAttribute("RouteEnabled",enabled)
  local char=p.Character local root=char and char:FindFirstChild("HumanoidRootPart") local hum=char and char:FindFirstChildOfClass("Humanoid")
- local returning=state.status=="Idle" and state.lastResult~=nil
+ local recovering=state.status=="Dropped" and state.atRecovery and not state.outOfBounds
+ local returning=state.status=="Idle" and state.lastResult~=nil or recovering
  local offer=state.status=='Idle'and state.relayOffer
  if offer and workspace:GetServerTimeNow()<offer.expiresAt then hide()return end
- local id=state.status=="Carrying" and state.destinationId or returning and state.lastResult.destinationId
+ local id=(state.status=="Carrying" or recovering) and state.destinationId or returning and state.lastResult and state.lastResult.destinationId
  local offsets=id and Paths.Between(routes,state.status=='Carrying'and state.sourceId or nil,id)
  hide()
  if not enabled or not state.profileReady or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')or state.outOfBounds or not root or not hum or hum.Health<=0 or not offsets or not state.depotPosition then return end

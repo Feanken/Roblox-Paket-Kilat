@@ -19,6 +19,9 @@ function M.Get(s,c)
   return {kind=kind,text=text,alert=alert==true,announce=announce==true}
  end
  if s.status=='Dropped'then
+  if s.atRecovery then
+   return hint('recoveryPoint',c.canPickup and 'Pilih Ambil ulang untuk melanjutkan.' or 'Paket menunggu di petak pemulihan depot. Ikuti penanda.',true,true)
+  end
   if s.outOfBounds then return hint('recover','Paket keluar jalur. Pulihkan ke depot (-20 kondisi).',true,true)end
   return hint('dropped',c.canPickup and 'Pilih Ambil ulang. Pulihkan mengurangi kondisi paket.'or 'Ikuti PAKETMU untuk mengambil ulang. Pulihkan mengurangi kondisi.',true,true)
  end

@@ -23,6 +23,7 @@ local hazards=workspace:WaitForChild('PaketKilat'):WaitForChild('Map'):WaitForCh
 Theme.Static(ui)
 local catalog=shop:WaitForChild("Catalog")
 local feedback, feedbackUntil = "", 0
+local confirmRecoveryUntil = 0
 local messages = {
 	TooFar = "Dekati titik tujuan atau paket terlebih dahulu.",
 	WrongDestination = "Ini bukan tujuan pesananmu.",
@@ -30,6 +31,7 @@ local messages = {
 	OrderActive = "Selesaikan pesanan yang sedang aktif.",
 	InvalidState = "Aksi belum tersedia untuk paket ini.",
 	RecoveryCooldown = "Pemulihan masih menunggu jeda.",
+	AlreadyRecovered = "Paket sudah menunggu di petak pemulihan depot.",
  OfferExpired = "Daftar pesanan diperbarui. Pilih ulang di depot.",
  StoryChanged = "Bab cerita sudah berubah. Lihat kiriman berikutnya di depot.",
 	NotAlive = "Menunggu muncul kembali di depot...",
@@ -41,7 +43,7 @@ local messages = {
  GripLost = "Genggaman habis! Ambil paket, lalu kurangi sprint.",
  CityStamp = "Cap bonus didapat! Koin dibayar saat paket sampai.",
 	OutOfBounds = "Paket jatuh. Pulihkan untuk kembali ke depot.",
-	Recover = "Pulih (-20). Ambil ulang; perjalanan tanpa rekor.",
+	Recover = "Paket menunggu di petak pemulihan depot. Ambil ulang untuk lanjut.",
 	Drop = "Paket dilepas. Dekati untuk mengambil ulang.",
 	Pickup = "Paket dibawa kembali. Lanjut ke tujuan!",
 	Start = "Pesanan diambil. Ikuti penanda tujuan.",
@@ -178,7 +180,10 @@ local function render()
   card.ConditionTrack.Fill.Size=UDim2.fromScale(math.clamp((relay.expiresAt-workspace:GetServerTimeNow())/math.max(1,relay.expiresAt-(relay.offeredAt or relay.expiresAt-60)),0,1),1)
   card.ConditionTrack.Fill.BackgroundColor3=Theme.Gold
  end
-	if state.status=="Idle" then
+	if state.status=="Dropped" then
+  card.Destination.Text = state.atRecovery and "Paket menunggu di depot" or state.outOfBounds and "Paket keluar jalur" or "Paket terlepas"
+  card.ConditionText.Text = string.format("Kondisi %d/100 · %s",condition,state.atRecovery and "Ambil ulang" or state.outOfBounds and "Pulihkan paket" or "Ikuti penanda")
+	elseif state.status=="Idle" then
 		card.Destination.Text=relay and ('Titipan → '..relay.destinationName) or last and ("Selesai · "..last.destinationName) or "Pilih pesanan di depot"
 		card.ConditionText.Text=relay and string.format('%s · %d dtk',near(relay.pickupPosition)and 'Ambil di sini' or 'Titipan tersedia',math.max(0,math.ceil(relay.expiresAt-workspace:GetServerTimeNow()))) or last and string.format("%s · %d/100 · %.1f dtk",last.packageType,last.condition,last.duration)
 			or "3 pilihan · pilih risiko dan tujuan"
@@ -239,7 +244,10 @@ local function render()
   card.Hint.Text=string.format("Pos bonus %d/%d · +%d koin\n%s",b.count,b.limit,b.total,b.count>=b.limit and "Cap lengkap! Antar paketmu."or "Opsional: lewati penanda emas di jalan.")
  elseif state.status=="Carrying" then
 		card.Hint.Text=state.packageType=="Rapuh" and "RAPUH: benturan lebih merusak. Jaga paket!" or "Sprint lebih cepat; jaga meter genggaman paket."
-	elseif state.status=="Dropped" then card.Hint.Text="Ambil ulang, atau pulihkan (-20; tanpa rekor)."
+	elseif state.status=="Dropped" then
+  card.Hint.Text=state.atRecovery and "Kembali ke petak pemulihan dan ambil paketmu."
+   or state.outOfBounds and "Pulihkan untuk memindahkan paket ke depot."
+   or "Ambil ulang untuk lanjut. Pulihkan mengurangi kondisi dan menggugurkan rekor."
 	else card.Hint.Text="Buka tab Cerita di depot untuk kiriman pameran." end
 	actions.Secondary.Visible=(state.status~="Idle" or relay~=nil) and synced and state.profileReady and not shopOpen
 	if not synced or not state.profileReady or shopOpen then button(actions.Primary,"",shopOpen and "Toko dibuka" or "Memuat profil...",false)
@@ -258,7 +266,16 @@ local function render()
 		local canPickup=p~=nil and not state.outOfBounds and near(p.Position)
 		button(actions.Primary,"Pickup",canPickup and C.Labels.Pickup or "Ke paket",canPickup,"E")
 		local remaining=math.max(0,C.RecoveryCooldown-(workspace:GetServerTimeNow()-(state.lastRecoveryAt or -100)))
-		button(actions.Secondary,"Recover",remaining>0 and string.format("Pulihkan (%d)",math.ceil(remaining)) or C.Labels.Recover,remaining<=0 and aliveRoot()~=nil,"R")
+  local loss=math.min(condition,C.RecoveryPenalty)
+  local confirming=os.clock()<confirmRecoveryUntil
+  local caption=remaining>0 and string.format("Tunggu %d dtk",math.ceil(remaining))
+   or confirming and "Konfirmasi"
+   or string.format("Pulihkan (−%d)",loss)
+		button(actions.Secondary,"Recover",caption,not state.atRecovery and remaining<=0 and aliveRoot()~=nil,"R")
+  if state.atRecovery then actions.Secondary.Visible=false end
+  if confirming then
+   card.ConditionText.Text=string.format("−%d kondisi · rekor gugur",loss)
+  end
 	end
 	actions.Primary.Visible=not Theme.IsMobile(ui)or actions.Primary:GetAttribute("ActionEnabled")==true
  if Theme.IsMobile(ui)then actions.Secondary.Position=UDim2.fromOffset(0,actions.Primary.Visible and 52 or 0)end
@@ -279,7 +296,7 @@ local function render()
 		marker.CFrame=CFrame.new(markerTarget)
 		local root=aliveRoot()
 		local distance=root and math.floor((root.Position-markerTarget).Magnitude+.5) or 0
-		local title=stampPosition and "POS CAP"or state.status=="Idle" and (relay and not near(state.depotPosition)and 'TITIPAN' or "DEPOT") or state.status=="Dropped" and "PAKETMU" or state.destinationName
+		local title=stampPosition and "POS CAP"or state.status=="Idle" and (relay and not near(state.depotPosition)and 'TITIPAN' or "DEPOT") or state.status=="Dropped" and (state.atRecovery and "PETAK PEMULIHAN" or "PAKETMU") or state.destinationName
 		markerText.Text=string.format("%s\n%d stud · %s",title,distance,state.status=="Dropped" and "Ambil ulang" or state.status=="Idle" and "Ambil pesanan" or stampPosition and "Lewati untuk cap"or "Antar ke sini")
 	end
  local r=aliveRoot()local hazardKind,nearest
@@ -314,6 +331,14 @@ end
 local function activate(b)
 	if not shopOpen and not ui:GetAttribute("AudioOpen33") and state.profileReady and b:GetAttribute("ActionEnabled") then
 		local action=b:GetAttribute("Action")
+  if action=="Recover" and not state.outOfBounds then
+   if os.clock()>=confirmRecoveryUntil then
+    confirmRecoveryUntil=os.clock()+4
+    render()
+    return
+   end
+   confirmRecoveryUntil=0
+  end
   if action=="Start"then ui:SetAttribute("JobBoardOpen17",not ui:GetAttribute("JobBoardOpen17"))return end
   if action=='AcceptRelay'or action=='SkipRelay'then local offer=currentRelay()if offer then RS.Remotes.ActionRequest:FireServer(action,offer.id)end return end
 		RS.Remotes.ActionRequest:FireServer(action,state.orderId,action=="Deliver" and state.destinationId or nil)
@@ -360,6 +385,9 @@ CAS:BindAction("PKRecover",function(_,s)
 	return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.R)
 RS.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot,code)
+ if snapshot.orderId~=state.orderId or snapshot.status~="Dropped" or snapshot.atRecovery then
+  confirmRecoveryUntil=0
+ end
 	state,synced = snapshot,true
 	ui:SetAttribute("Status",state.status)
  ui:SetAttribute("ProfileReady",state.profileReady)
@@ -372,7 +400,7 @@ RS.Remotes.StateChanged.OnClientEvent:Connect(function(snapshot,code)
 	if code=="Start" or code=="Pickup" then cue("Pickup")
 	elseif code=="Impact" or code=="Slip" or code=="Barrier" or code=="GripLost" then cue("Impact")
 	elseif code=="Delivered" then cue("Delivered") end
-	local mobileErrors={TooFar=true,WrongDestination=true,NotOwnerOrStale=true,OrderActive=true,InvalidState=true,NotAlive=true,ProfileUnavailable=true,InsufficientCoins=true,NotOwned=true,OfferExpired=true,InvalidArguments=true,UpgradeChanged=true,UpgradeMaxed=true,RelayExpired=true}
+	local mobileErrors={AlreadyRecovered=true,RecoveryCooldown=true,TooFar=true,WrongDestination=true,NotOwnerOrStale=true,OrderActive=true,InvalidState=true,NotAlive=true,ProfileUnavailable=true,InsufficientCoins=true,NotOwned=true,OfferExpired=true,InvalidArguments=true,UpgradeChanged=true,UpgradeMaxed=true,RelayExpired=true}
  if mobileErrors[code]then ui:SetAttribute("MobileNoticeText18",messages[code]or "Aksi belum tersedia.")ui:SetAttribute("MobileNoticeUntil18",os.clock()+3)end
  if messages[code] then feedback,feedbackUntil = messages[code],os.clock()+3
 	elseif code == "Delivered" then feedbackUntil=0 end

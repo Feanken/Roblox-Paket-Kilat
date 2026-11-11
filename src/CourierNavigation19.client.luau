@@ -33,11 +33,11 @@ local function render()
   target,kind=state.destinationPosition,'tujuan'
   local stamp=route and route:GetAttribute('GuidedStampId26')
   if state.stampNavigation and stamp and not(state.routeBonus and state.routeBonus.visited[stamp])then target,kind=route:GetAttribute('GuidedStampPosition26'),'cap'end
- elseif state.status=='Dropped'and not state.outOfBounds then local p=ownPackage()target,kind=p and p.Position or state.packagePosition,'paket'end
+ elseif state.status=='Dropped'and not state.outOfBounds then local p=ownPackage()target,kind=p and p.Position or state.packagePosition,state.atRecovery and 'pemulihan' or 'paket'end
  if not target then ui:SetAttribute('NavigationMode19',state.status=='Dropped'and 'recover'or 'hidden')ui:SetAttribute('NavigationDistance19',nil)card.Title.Text=state.status=='Dropped'and 'Pulihkan paket'or 'PAKET KILAT'return end
  local distance=(root.Position-target).Magnitude local ready=distance<=(kind=='cap'and state.routeBonus.radius or config.ActionDistance)
  local directionTarget=target local remaining=flat(target-root.Position).Magnitude local mode='direct'
- if not ready and state.status~='Dropped'and kind~='titipan'and route and(route:GetAttribute('VisibleDots')or 0)>0 then
+ if not ready and kind~='paket' and kind~='titipan'and route and(route:GetAttribute('VisibleDots')or 0)>0 then
   local selected,index=nil,0
   for _,p in ipairs(route:GetChildren())do local step=p:GetAttribute('RouteStep19')or 0 if p.Transparency<1 and step<=3 and step>index then selected,index=p,step end end
   if selected then directionTarget=selected.Position mode='route'remaining=route:GetAttribute('RemainingDistance19')or remaining end
@@ -45,7 +45,7 @@ local function render()
  if ready then
   previousBearing, previousTarget = nil, nil
   arrow.Text='✓'arrow.Rotation=0 arrow.TextColor3=Color3.fromRGB(57,151,127)
-  card.Title.Text=kind=='cap'and 'Lewati pos'or kind=='depot'and 'Pilih pesanan'or kind=='titipan'and 'Ambil titipan'or kind=='paket'and 'Ambil ulang'or 'Siap diantar'
+  card.Title.Text=kind=='cap'and 'Lewati pos'or kind=='depot'and 'Pilih pesanan'or kind=='titipan'and 'Ambil titipan'or (kind=='paket' or kind=='pemulihan') and 'Ambil ulang'or 'Siap diantar'
  else
   local camera=workspace.CurrentCamera local forward=flat(camera and camera.CFrame.LookVector or root.CFrame.LookVector)
   if forward.Magnitude<.001 then forward=flat(root.CFrame.LookVector)end

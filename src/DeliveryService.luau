@@ -61,7 +61,7 @@ function Delivery.Snapshot(player)
 	snapshot.destinationPosition=point and point.Position
 	local o = Delivery.orders[player.UserId]
 	if o then
-		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus","isRelay","isBatch","sourceId","contract","storyChapter"}) do snapshot[key] = o[key] end
+		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","atRecovery","outOfBounds","jobName","jobBonus","isRelay","isBatch","sourceId","contract","storyChapter"}) do snapshot[key] = o[key] end
 		snapshot.destinationName=C.Routes[o.destinationId].Name
   snapshot.packagePosition=o.package and o.package.Parent and o.package.Position or nil
 		local point=destinationPoint(o.destinationId)
@@ -211,6 +211,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			if o.status ~= "Dropped" then return false, "InvalidState" end
 			if o.outOfBounds or not o.package or not o.package.Parent or not near(player, o.package.Position) then return false, "TooFar" end
 			o.status = "Carrying"
+			o.atRecovery = nil
 			P.Carry(o, root(player))
 		elseif action == "Drop" then
 			if o.status ~= "Carrying" then return false, "InvalidState" end
@@ -218,6 +219,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			P.Drop(o, root(player))
 		elseif action == "Recover" then
 			if o.status ~= "Dropped" then return false, "InvalidState" end
+			if o.atRecovery and not o.outOfBounds then return false, "AlreadyRecovered" end
 			if now - o.lastRecoveryClock < C.RecoveryCooldown then return false, "RecoveryCooldown" end
 			o.lastRecoveryClock, o.lastRecoveryAt = now, workspace:GetServerTimeNow()
 			o.recoveryCount += 1
@@ -225,6 +227,7 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
 			o.outOfBounds = false
 			if H then H.Clear(player) end
 			P.Recover(o)
+			o.atRecovery = true
    if T then T:Recovered(player,o) end
 			local r = root(player)
 			local relative = W.Map.DepotPad.CFrame:PointToObjectSpace(r.Position)
@@ -268,6 +271,7 @@ function Delivery.OutOfBounds(o)
 	if o.outOfBounds or Delivery.orders[o.ownerUserId] ~= o then return end
 	if o.status == "Carrying" then o.status = "Dropped"; P.Drop(o, root(o.player)) end
 	o.outOfBounds = true
+	o.atRecovery = nil
 	P.Hold(o)
 	Delivery.Publish(o.player, "OutOfBounds")
 end
