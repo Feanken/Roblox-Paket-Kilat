@@ -15,10 +15,20 @@ end
 local title=text(board,'Title',16,12,160,24,18)title.Text='Pesanan'
 local info=text(board,'Info',16,54,500,18,11)info.Font=Enum.Font.GothamMedium
 local close=Instance.new('TextButton')close.Name='Close'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-52,0,8)close.Text='×'close.ZIndex=12 close.Parent=board theme.ToolbarButton(close)close.TextSize=21
+local offers = Instance.new("ScrollingFrame")
+offers.Name = "Offers"
+offers.BackgroundTransparency = 1
+offers.BorderSizePixel = 0
+offers.ScrollBarThickness = 4
+offers.ScrollBarImageColor3 = theme.Muted
+offers.ScrollingDirection = Enum.ScrollingDirection.Y
+offers.ZIndex = 11
+offers.Parent = board
+local narrow = false
 local tab=0 local selectedIds={}local tabs={}local render
 for i,label in {'Biasa','Kontrak','Borongan','Karier'}do
  local b=Instance.new('TextButton')b.Name='Tab24_'..i;b.Text=label;b.ZIndex=12;b.TextSize=11;b.Parent=board;theme.ToolbarButton(b)
- bind(b.Activated,function()tab=i-1 render()end)tabs[i]=b
+ bind(b.Activated,function()tab=i-1 offers.CanvasPosition=Vector2.zero render()end)tabs[i]=b
 end
 local career = Instance.new("ScrollingFrame")
 career.Name = "Career"
@@ -63,14 +73,23 @@ local function selected()
 end
 local rows={}
 for i=1,3 do
- local card=Instance.new('TextButton')card.Name='Offer'..i card.Text=''card.AutoButtonColor=false card.BorderSizePixel=0 card.ZIndex=11 card.Parent=board rounded(card,10)
+ local card=Instance.new('TextButton')card.Name='Offer'..i card.Text=''card.AutoButtonColor=false card.BorderSizePixel=0 card.ZIndex=11 card.Parent=offers rounded(card,10)
  local outline=Instance.new('UIStroke')outline.Thickness=2 outline.ApplyStrokeMode=Enum.ApplyStrokeMode.Border outline.Parent=card
  local name=text(card,'Name',10,5,180,19,13)
  local dest=text(card,'Destination',10,27,180,19,11)dest.Font=Enum.Font.GothamMedium
  rows[i]={frame=card,name=name,dest=dest,outline=outline}
- bind(card.Activated,function()local o=offerAt(i)if o and tab~=3 then selectedIds[tab]=o.id render()end end)
+ bind(card.Activated, function()
+  local offer = offerAt(i)
+  if not offer or tab == 3 then return end
+  selectedIds[tab] = offer.id
+  render()
+  if narrow then
+   local maxScroll = math.max(0, offers.CanvasSize.Y.Offset - offers.AbsoluteWindowSize.Y)
+   offers.CanvasPosition = Vector2.new(0, math.min(192, maxScroll))
+  end
+ end)
 end
-local panel=Instance.new('Frame')panel.Name='Preview28'panel.BackgroundColor3=theme.Soft panel.BorderSizePixel=0 panel.ZIndex=11 panel.Parent=board rounded(panel,12)
+local panel=Instance.new('Frame')panel.Name='Preview28'panel.BackgroundColor3=theme.Soft panel.BorderSizePixel=0 panel.ZIndex=11 panel.Parent=offers rounded(panel,12)
 local destination=text(panel,'Destination',12,7,330,22,15)
 local meta=text(panel,'RouteInfo',12,31,330,18,11)meta.TextColor3=theme.Muted meta.Font=Enum.Font.GothamMedium
 local conditions=text(panel,'Conditions',12,54,190,52,11)conditions.Font=Enum.Font.GothamMedium conditions.TextYAlignment=Enum.TextYAlignment.Top
@@ -111,12 +130,33 @@ render=function()
  if root.Shop.Visible or state.status~='Idle'or not state.profileReady then open=false root:SetAttribute('JobBoardOpen17',false)end
  board.Visible=open backdrop.Visible=open
  local camera=workspace.CurrentCamera if camera then backdrop.Position=UDim2.fromOffset(-root.AbsolutePosition.X,-root.AbsolutePosition.Y)backdrop.Size=UDim2.fromOffset(camera.ViewportSize.X,camera.ViewportSize.Y)end
- local width=math.min(620,root.AbsoluteSize.X-24)local left=math.clamp(math.floor(width*.32),146,198)local right=width-left-32
- board.Size=UDim2.fromOffset(width,280)title.Size=UDim2.fromOffset(width-380,24)info.Size=UDim2.fromOffset(width-32,18)
- for i,b in tabs do b.Position=UDim2.fromOffset(width-354+(i-1)*74,6)b.Size=UDim2.fromOffset(70,44)theme.Action(b,true,tab~=i-1)end
- career.Size = UDim2.fromOffset(width - 32, 190)
+ if not open then return end
+ local width = math.max(1, math.min(620, root.AbsoluteSize.X - 24))
+ narrow = width < 480
+ local contentY = narrow and 140 or 76
+ local height = math.max(1, math.min(narrow and 524 or 280, root.AbsoluteSize.Y - 16))
+ local contentHeight = math.max(1, height - contentY - 10)
+ local bodyWidth = width - 24
+ local left = narrow and bodyWidth - 8 or math.clamp(math.floor(width * .32), 146, 198)
+ local right = narrow and left or bodyWidth - left - 16
+ board.Size = UDim2.fromOffset(width, height)
+ title.Size = UDim2.fromOffset(narrow and width - 76 or width - 380, 24)
+ info.Position = UDim2.fromOffset(16, narrow and 105 or 52)
+ info.Size = UDim2.fromOffset(width - 32, narrow and 32 or 22)
+ local tabWidth = narrow and (width - 48) / 4 or 70
+ for i, button in ipairs(tabs) do
+  local x = narrow and 12 + (i - 1) * (tabWidth + 8) or width - 354 + (i - 1) * 74
+  button.Position = UDim2.fromOffset(x, narrow and 56 or 6)
+  button.Size = UDim2.fromOffset(tabWidth, 44)
+  theme.Action(button, true, tab ~= i - 1)
+ end
+ offers.Position = UDim2.fromOffset(12, contentY)
+ offers.Size = UDim2.fromOffset(bodyWidth, contentHeight)
+ offers.CanvasSize = UDim2.fromOffset(0, narrow and 376 or 184)
+ offers.Visible = tab ~= 3
+ career.Position = UDim2.fromOffset(16, contentY)
+ career.Size = UDim2.fromOffset(width - 32, contentHeight)
  career.Visible = tab == 3
- panel.Visible = tab ~= 3
  for _, label in ipairs({rank, rankGoal, week, goals, access, historyTitle, history}) do
   label.Size = UDim2.fromOffset(width - 46, label.Size.Y.Offset)
  end
@@ -149,12 +189,12 @@ render=function()
  for i,row in ipairs(rows)do
   local o=offerAt(i)local chosen=o and offer and o.id==offer.id
   row.frame.Visible=tab~=3 row.frame.Active=open and o~=nil
-  row.frame.Position=UDim2.fromOffset(12,76+(i-1)*64)row.frame.Size=UDim2.fromOffset(left,56)
+  row.frame.Position=UDim2.fromOffset(0,(i-1)*64)row.frame.Size=UDim2.fromOffset(left,56)
   row.name.Size=UDim2.fromOffset(left-20,19)row.dest.Size=UDim2.fromOffset(left-20,19)
   row.frame.BackgroundColor3=chosen and theme.Gold or theme.Soft row.outline.Color=chosen and theme.Ink or theme.Line
   row.name.Text=o and ((preview.Recommendation(state.career,o) and '★ ' or '')..o.name) or 'Memuat...'row.name.TextTruncate=Enum.TextTruncate.AtEnd row.dest.Text=o and(o.isBatch and('3 kiriman · finish +'..o.jobBonus)or o.destinationName)or ''
  end
- panel.Position=UDim2.fromOffset(left+20,76)panel.Size=UDim2.fromOffset(right,184)
+ panel.Position=UDim2.fromOffset(narrow and 0 or left+8,narrow and 192 or 0)panel.Size=UDim2.fromOffset(right,184)
  destination.Size=UDim2.fromOffset(right-24,22)meta.Size=UDim2.fromOffset(right-24,18)
  local mapWidth=math.min(124,math.floor(right*.36))
  conditions.Size=UDim2.fromOffset(right-mapWidth-34,52)
@@ -191,6 +231,7 @@ bind(shared.Remotes.StateChanged.OnClientEvent,function(s,code)
 end)
 local openedFromResult = false
 bind(root:GetAttributeChangedSignal("JobBoardOpen17"), function()
+ if not root:GetAttribute("JobBoardOpen17") then offers.CanvasPosition = Vector2.zero end
  if root:GetAttribute("JobBoardOpen17") and root:GetAttribute("OpenCareerFromResult") then
   root:SetAttribute("OpenCareerFromResult", nil)
   career.CanvasPosition = Vector2.zero
