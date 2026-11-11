@@ -32,9 +32,23 @@ Theme.Result(toast)
 title.Size=UDim2.new(1,-76,0,20)
 reward.Position=UDim2.fromOffset(12,72)reward.Size=UDim2.new(1,-24,0,34)reward.TextSize=32
 detail.Position=UDim2.fromOffset(12,110)detail.Size=UDim2.new(1,-24,0,30)detail.TextSize=11
-nextStep.Position=UDim2.fromOffset(12,174)nextStep.Size=UDim2.new(1,-24,0,26)
+nextStep.Position=UDim2.fromOffset(12,168)nextStep.Size=UDim2.new(1,-24,0,24)
 stars.TextColor3=Theme.Ink streak.TextColor3=Theme.Muted ratingHint.TextColor3=Theme.Muted
 local close=Instance.new('TextButton')close.Name='Close22'close.Text='×'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-48,0,4)close.ZIndex=22 close.Parent=toast Theme.ToolbarButton(close)close.TextSize=22
+local function resultButton(name, caption)
+ local button = Instance.new("TextButton")
+ button.Name = name
+ button.Text = caption
+ button.ZIndex = 22
+ button.Parent = toast
+ Theme.ToolbarButton(button)
+ button.TextSize = 11
+ return button
+end
+
+local careerButton = resultButton("OpenCareer", "Karier")
+local depotButton = resultButton("ReturnToDepot", "Ke depot")
+local relayButton = resultButton("ContinueRelay", "Ambil titipan")
 local impact=Instance.new("TextLabel") impact.Name="PackageNotice" impact.AnchorPoint=Vector2.new(.5,0)
 impact.Position=UDim2.fromScale(.5,.06) impact.Size=UDim2.fromOffset(310,36) impact.Visible=false
 impact.BackgroundColor3=Color3.fromRGB(106,52,42) impact.TextColor3=Color3.fromRGB(255,234,201)
@@ -87,10 +101,34 @@ local function ownPackage()
   if p:GetAttribute("ownerUserId")==player.UserId and p:GetAttribute("orderId")==state.orderId then return p end
  end end
 end
+local function currentRelay()
+ local offer = state.status == "Idle" and state.relayOffer
+ return offer and workspace:GetServerTimeNow() < offer.expiresAt and offer or nil
+end
+
+local function nearRelay(offer)
+ local character = player.Character
+ local rootPart = character and character:FindFirstChild("HumanoidRootPart")
+ return rootPart and (rootPart.Position - offer.pickupPosition).Magnitude <= Config.ActionDistance
+end
+
 local function refresh()
  local width,height=ui.AbsoluteSize.X,ui.AbsoluteSize.Y
  local mobile = Theme.IsMobile(ui)
- toast.Size = UDim2.fromOffset(math.min(330, math.max(260, width - 40)), 212)
+ local resultWidth = math.min(342, math.max(220, width - 20))
+ local offer = currentRelay()
+ local interrupted = state.lastResult and state.lastResult.batchInterrupted
+ local hasNote = offer or interrupted
+ toast.Size = UDim2.fromOffset(resultWidth, hasNote and 252 or 228)
+ local buttonWidth = (resultWidth - (offer and 40 or 32)) / (offer and 3 or 2)
+ for index, button in ipairs({careerButton, depotButton, relayButton}) do
+  button.Position = UDim2.fromOffset(12 + (index - 1) * (buttonWidth + 8), hasNote and 198 or 174)
+  button.Size = UDim2.fromOffset(buttonWidth, 44)
+ end
+ relayButton.Visible = offer ~= nil
+ relayButton.Text = offer and nearRelay(offer) and "Ambil titipan" or "Ke titipan"
+ nextStep.Text = offer and ("Titipan ke " .. offer.destinationName)
+  or interrupted and "Alamat berikutnya belum tersedia." or ""
  handoff.Size = UDim2.fromOffset(math.min(294, width - 24), 52)
  handoff.Position = UDim2.new(.5, 0, 1, mobile and -76 or -142)
  if countTotal>0 then reward.Text=string.format('+%d KOIN',math.floor(countTotal*math.clamp((os.clock()-countFrom)/.65,0,1)))end
@@ -99,7 +137,7 @@ local function refresh()
  impact.Size=UDim2.fromOffset(math.min(310,width-32),36)
  local boardOpen=ui:GetAttribute('JobBoardOpen17')==true
  local shopOpen=ui.Shop.Visible or boardOpen or ui:GetAttribute('AudioOpen33')==true
- toast.Visible=os.clock()<expires and not shopOpen
+ toast.Visible=os.clock()<expires and not shopOpen and state.status=="Idle"
  local noticeActive = os.clock() < noticeExpires
  local mobileOverlay = mobile and (ui.Guide.Visible or ui:GetAttribute("MobileMenuOpen18") or ui:GetAttribute("MobileTargetOpen18"))
  handoff.Visible = os.clock() < handoffExpires and state.batch ~= nil and state.orderId == handoffOrder
@@ -197,8 +235,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    end
    detail.TextWrapped=true
    detail.TextSize=11
-   nextStep.Text=snapshot.relayOffer and 'Ada titipan di sini · lanjut antar atau kembali ke depot' or "Kembali ke depot · pilih pesanan berikutnya"
-   if result.isBatch then nextStep.Text=result.batchInterrupted and 'Borongan terhenti: tujuan berikut tidak tersedia.'or snapshot.batch and('Berikut: '..snapshot.destinationName)or(snapshot.relayOffer and 'Selesai! Ambil titipan, atau kembali ke depot.'or 'Tiga kiriman tuntas. Kembali ke depot untuk pesanan baru.')end
+
    if tween then tween:Cancel() end
    scale.Scale=.88 tween=TweenService:Create(scale,TweenInfo.new(.25,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{Scale=1}) tween:Play()
   end
@@ -210,7 +247,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
   noticeExpires=os.clock()+2
  elseif code=="Recover" then
   impact.Text="Paket kembali ke petak pemulihan" noticeExpires=os.clock()+2
- elseif code=="Start" or code=="Respawned" or code=="Cancelled" or code=="BatchCancelled" then
+ elseif code=="Start" or code=="RelaySkipped" or code=="Respawned" or code=="Cancelled" or code=="BatchCancelled" then
   expires, noticeExpires, handoffExpires = 0, 0, 0
  end
  refresh()
@@ -220,7 +257,28 @@ connect(stopBatch.Activated, function()
   remote.ActionRequest:FireServer("CancelBatch", handoffOrder)
  end
 end)
-connect(close.Activated,function()toast:SetAttribute('DismissedOrder22',shownOrder)expires=0 refresh()end)
+local function dismissResult()
+ toast:SetAttribute("DismissedOrder22", shownOrder)
+ expires = 0
+ refresh()
+end
+connect(careerButton.Activated, function()
+ if not toast.Visible then return end
+ dismissResult()
+ ui:SetAttribute("OpenCareerFromResult", true)
+ ui:SetAttribute("JobBoardOpen17", true)
+end)
+connect(depotButton.Activated, function()
+ if not toast.Visible then return end
+ local offer = currentRelay()
+ if offer then remote.ActionRequest:FireServer("SkipRelay", offer.id) else dismissResult() end
+end)
+connect(relayButton.Activated, function()
+ local offer = currentRelay()
+ if not toast.Visible or not offer then return end
+ if nearRelay(offer) then remote.ActionRequest:FireServer("AcceptRelay", offer.id) else dismissResult() end
+end)
+connect(close.Activated, dismissResult)
 local elapsed=0
 connect(RunService.Heartbeat,function(dt) elapsed+=dt if elapsed>=.1 then elapsed=0 refresh() end end)
 connect(player.CharacterAdded,function() expires, noticeExpires, handoffExpires = 0, 0, 0 highlight.Enabled=false end)

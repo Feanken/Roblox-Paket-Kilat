@@ -189,7 +189,17 @@ bind(shared.Remotes.StateChanged.OnClientEvent,function(s,code)
  elseif code=='TooFar'then notice='Dekati depot untuk mengambil pesanan.'noticeUntil=os.clock()+3 end
  render()
 end)
-bind(root:GetAttributeChangedSignal('JobBoardOpen17'),render)
+local openedFromResult = false
+bind(root:GetAttributeChangedSignal("JobBoardOpen17"), function()
+ if root:GetAttribute("JobBoardOpen17") and root:GetAttribute("OpenCareerFromResult") then
+  root:SetAttribute("OpenCareerFromResult", nil)
+  career.CanvasPosition = Vector2.zero
+  tab, openedFromResult = 3, true
+ elseif not root:GetAttribute("JobBoardOpen17") and openedFromResult then
+  tab, openedFromResult = 0, false
+ end
+ render()
+end)
 local elapsed=0 bind(game:GetService('RunService').Heartbeat,function(dt)elapsed+=dt if elapsed>=.1 then elapsed=0 render()end end)
 bind(script.Destroying,function()for _,c in ipairs(connections)do c:Disconnect()end board:Destroy()backdrop:Destroy()end)
 render()
