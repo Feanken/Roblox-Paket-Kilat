@@ -12,12 +12,14 @@ menu.Activated:Connect(function()local open=not root:GetAttribute('MobileMenuOpe
 target.Activated:Connect(function()root:SetAttribute('MobileTargetOpen18',not root:GetAttribute('MobileTargetOpen18'))root:SetAttribute('MobileMenuOpen18',false)end)
 local function render()
  local mobile=theme.IsMobile(root)local result=root:FindFirstChild('DeliveryCelebration')
- local blocked=root.Shop.Visible or root:GetAttribute('JobBoardOpen17')or root:GetAttribute('AudioOpen33')or(result and result.Visible)
+ local gallery=root:FindFirstChild('GalleryReader')
+ local blocked=(gallery and gallery.Visible)or root.Shop.Visible or root:GetAttribute('JobBoardOpen17')or root:GetAttribute('AudioOpen33')or(result and result.Visible)
  if blocked or not mobile then root:SetAttribute('MobileMenuOpen18',false)root:SetAttribute('MobileTargetOpen18',false)end
  local open=root:GetAttribute('MobileMenuOpen18')==true
  menu.Visible=mobile and not blocked panel.Visible=mobile and open and not blocked target.Visible=panel.Visible
  notice.Text=root:GetAttribute('MobileNoticeText18')or ''
- notice.Visible=mobile and not blocked and not open and os.clock()<(root:GetAttribute('MobileNoticeUntil18')or 0)
+ notice.Size=UDim2.fromOffset(math.max(1, math.min(330, root.AbsoluteSize.X - 24)), 36)
+ notice.Visible=mobile and not blocked and not open and not root:GetAttribute('MobileTargetOpen18') and os.clock()<(root:GetAttribute('MobileNoticeUntil18')or 0)
  theme.ToolbarLayout(root)
  local world=workspace:FindFirstChild('PaketKilat')local map=world and world:FindFirstChild('Map')
  local depot=map and map:FindFirstChild('Depot')

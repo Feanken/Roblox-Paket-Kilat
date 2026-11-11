@@ -91,7 +91,14 @@ function Career.Advance(profile, result, now)
 		end
 	end
 	local bonus = mask ~= COMPLETE_MASK and newMask == COMPLETE_MASK and WEEK_BONUS or 0
-	return {week = week, mask = newMask}, bonus, promotion and promotion.name, promotion and promotion.bonus or 0
+	local progress
+ if newMask ~= mask then
+  progress = 0
+  for i = 1, #circuit.goals do
+   if bit32.btest(newMask, bit32.lshift(1, i - 1)) then progress += 1 end
+  end
+ end
+ return {week = week, mask = newMask}, bonus, promotion and promotion.name, promotion and promotion.bonus or 0, progress
 end
 
 return Career

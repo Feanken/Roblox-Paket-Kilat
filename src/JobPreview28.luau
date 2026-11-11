@@ -30,22 +30,23 @@ function P.Conditions(offer)
  return offer.description or ''
 end
 -- Suggestions describe the existing offers and do not affect eligibility or payment.
+function P.MatchesGoal(goal, offer)
+ if not goal or goal.done or not offer then return false end
+ if goal.destination then
+  if offer.isBatch then return table.find(offer.batchDestinations, goal.destination) ~= nil end
+  return offer.destinationId == goal.destination
+ end
+ if goal.packageType then
+  if offer.isBatch then return table.find(offer.packageTypes, goal.packageType) ~= nil end
+  return offer.packageType == goal.packageType
+ end
+ if goal.contract then return offer.contract ~= nil end
+ return goal.batch == true and offer.isBatch == true
+end
+
 function P.Recommendation(career, offer)
- if not career or not offer then return nil end
- for _, goal in ipairs(career.goals or {}) do
-  if goal.done then continue end
-  local matches = goal.packageType and offer.packageType == goal.packageType
-   or goal.contract and offer.contract ~= nil
-   or goal.batch and offer.isBatch == true
-  if goal.destination then
-   if offer.isBatch then
-    matches = table.find(offer.batchDestinations, goal.destination) ~= nil
-   else matches = offer.destinationId == goal.destination end
-  end
-  if goal.packageType and offer.isBatch then
-   matches = table.find(offer.packageTypes, goal.packageType) ~= nil
-  end
-  if matches then return goal.label end
+ for _, goal in ipairs(career and career.goals or {}) do
+  if P.MatchesGoal(goal, offer) then return goal.label end
  end
  return nil
 end

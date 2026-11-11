@@ -160,6 +160,7 @@ local function render()
  local firstDelivery = state.deliveryCount == 0
  local nearDepot = near(state.depotPosition)
 	local condition=state.condition or (last and last.condition) or 0
+ card.ConditionTrack.Visible = state.status ~= "Idle" or relay ~= nil or last ~= nil
 	card.ConditionTrack.Fill.Size=UDim2.fromScale(math.clamp(condition/100,0,1),1)
 	card.ConditionTrack.Fill.BackgroundColor3=condition>40 and Color3.fromRGB(57,151,127) or Color3.fromRGB(213,126,54)
  if relay then

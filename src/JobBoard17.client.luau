@@ -49,13 +49,12 @@ local rank = text(career, "Rank", 0, 0, 0, 22, 16)
 local rankGoal = text(career, "RankGoal", 0, 22, 0, 18, 11)
 rankGoal.TextColor3 = theme.Muted
 local week = text(career, "Week", 0, 48, 0, 21, 14)
-local goals = text(career, "Goals", 0, 72, 0, 57, 12)
-goals.TextYAlignment = Enum.TextYAlignment.Top
-local access = text(career, "ExpressAccess", 0, 132, 0, 20, 11)
+local goalButtons = {}
+local access = text(career, "ExpressAccess", 0, 230, 0, 22, 11)
 access.TextColor3 = theme.Muted
-local historyTitle = text(career, "HistoryTitle", 0, 164, 0, 20, 13)
+local historyTitle = text(career, "HistoryTitle", 0, 260, 0, 20, 13)
 historyTitle.Text = "Riwayat sesi"
-local history = text(career, "History24", 0, 186, 0, 0, 11)
+local history = text(career, "History24", 0, 282, 0, 0, 11)
 history.Font = Enum.Font.GothamMedium
 history.TextYAlignment = Enum.TextYAlignment.Top
 history.AutomaticSize = Enum.AutomaticSize.Y
@@ -75,10 +74,20 @@ end)
 storyComplete.TextYAlignment = Enum.TextYAlignment.Top
 storyComplete.Visible = false
 
-local function offerAt(i)
- if tab == STORY_TAB then return i == 1 and state.story and state.story.offer or nil end
- if i == 4 then return tab == 0 and state.jobOffers and state.jobOffers[7] or nil end
- return tab==2 and state.batchOffers and state.batchOffers[i]or tab<2 and state.jobOffers and state.jobOffers[tab*3+i]or nil
+local function offerAt(i, category)
+ category = category or tab
+ if category == STORY_TAB then return i == 1 and state.story and state.story.offer or nil end
+ if i == 4 then return category == 0 and state.jobOffers and state.jobOffers[7] or nil end
+ return category==2 and state.batchOffers and state.batchOffers[i]or category<2 and state.jobOffers and state.jobOffers[category*3+i]or nil
+end
+
+local function offerForGoal(goal)
+ for category = 0, 2 do
+  for i = 1, category == 0 and 4 or 3 do
+   local offer = offerAt(i, category)
+   if preview.MatchesGoal(goal, offer) then return offer, category end
+  end
+ end
 end
 
 local function rowCount()
@@ -99,6 +108,34 @@ local function selected()
  end
  selectedIds[tab]=first and first.id return first
 end
+local function scrollToPreview()
+ if not narrow then return end
+ local maxScroll = math.max(0, offers.CanvasSize.Y.Offset - offers.AbsoluteWindowSize.Y)
+ offers.CanvasPosition = Vector2.new(0, math.min(rowCount() * 64, maxScroll))
+end
+
+for i = 1, 3 do
+ local button = Instance.new("TextButton")
+ button.Name = "WeeklyGoal" .. i
+ button.Position = UDim2.fromOffset(0, 72 + (i - 1) * 50)
+ button.TextWrapped = true
+ button.ZIndex = 12
+ button.Parent = career
+ theme.ToolbarButton(button)
+ goalButtons[i] = button
+ bind(button.Activated, function()
+  if not career.Visible then return end
+  local progress = state.career
+  local offer, category = offerForGoal(progress and progress.goals[i])
+  if not offer then return end
+  tab, expandedMap = category, false
+  selectedIds[category] = offer.id
+  offers.CanvasPosition = Vector2.zero
+  render()
+  scrollToPreview()
+ end)
+end
+
 local rows={}
 for i=1,4 do
  local card=Instance.new('TextButton')card.Name='Offer'..i card.Text=''card.AutoButtonColor=false card.BorderSizePixel=0 card.ZIndex=11 card.Parent=offers rounded(card,10)
@@ -111,10 +148,7 @@ for i=1,4 do
   if not offer or tab == 3 then return end
   selectedIds[tab] = offer.id
   render()
-  if narrow then
-   local maxScroll = math.max(0, offers.CanvasSize.Y.Offset - offers.AbsoluteWindowSize.Y)
-   offers.CanvasPosition = Vector2.new(0, math.min(rowCount() * 64, maxScroll))
-  end
+  scrollToPreview()
  end)
 end
 local panel=Instance.new('Frame')panel.Name='Preview28'panel.BackgroundColor3=theme.Soft panel.BorderSizePixel=0 panel.ZIndex=11 panel.Parent=offers rounded(panel,12)
@@ -190,7 +224,7 @@ render=function()
  if not open then return end
  local width = math.max(1, math.min(620, root.AbsoluteSize.X - 24))
  narrow = width < 545
- local contentY = narrow and 140 or 76
+ local contentY = narrow and 124 or 76
  local height = math.max(1, math.min(narrow and 524 or 280, root.AbsoluteSize.Y - 16))
  local contentHeight = math.max(1, height - contentY - 10)
  local bodyWidth = width - 24
@@ -201,11 +235,11 @@ render=function()
  local tabsWidth = #tabs * tabWidth + (#tabs - 1) * 8
  local tabStart = narrow and 12 or width - 60 - tabsWidth
  title.Size = UDim2.fromOffset(narrow and width - 76 or tabStart - 24, 24)
- info.Position = UDim2.fromOffset(16, narrow and 105 or 52)
- info.Size = UDim2.fromOffset(width - 32, narrow and 32 or 22)
+ info.Position = UDim2.fromOffset(16, narrow and 94 or 52)
+ info.Size = UDim2.fromOffset(width - 32, narrow and 28 or 22)
  for i, button in ipairs(tabs) do
   local x = tabStart + (i - 1) * (tabWidth + 8)
-  button.Position = UDim2.fromOffset(x, narrow and 56 or 6)
+  button.Position = UDim2.fromOffset(x, narrow and 48 or 6)
   button.Size = UDim2.fromOffset(tabWidth, 44)
   theme.Action(button, true, tab ~= i - 1)
  end
@@ -226,7 +260,7 @@ render=function()
  career.Position = UDim2.fromOffset(16, contentY)
  career.Size = UDim2.fromOffset(width - 32, contentHeight)
  career.Visible = tab == 3
- for _, label in ipairs({rank, rankGoal, week, goals, access, historyTitle, history}) do
+ for _, label in ipairs({rank, rankGoal, week, access, historyTitle, history}) do
   label.Size = UDim2.fromOffset(width - 46, label.Size.Y.Offset)
  end
  if career.Visible and state.career then
@@ -236,11 +270,16 @@ render=function()
    or "Pangkat tertinggi tercapai."
   week.Text = string.format("%s · %d/3 · %s%d koin", progress.weeklyName, progress.completed,
    progress.completed == 3 and "diterima +" or "+", progress.weeklyBonus)
-  local checklist = {}
-  for _, goal in ipairs(progress.goals) do
-   table.insert(checklist, (goal.done and "✓ " or "○ ") .. goal.label)
+  for i, button in ipairs(goalButtons) do
+   local goal = progress.goals[i]
+   local offer = offerForGoal(goal)
+   button.Visible = goal ~= nil
+   button.Size = UDim2.fromOffset(width - 46, 44)
+   button.Text = goal and ((goal.done and "✓ " or "○ ") .. goal.label .. (offer and "  →" or "")) or ""
+   button.Active = offer ~= nil
+   button.AutoButtonColor = button.Active
+   theme.Action(button, button.Active, true)
   end
-  goals.Text = table.concat(checklist, "\n")
   access.Text = progress.expressUnlocked and "Ekspres Distrik tersedia di tab Kontrak"
    or string.format("Ekspres Distrik terbuka setelah %d kiriman lagi", progress.expressRemaining)
  end

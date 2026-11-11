@@ -16,7 +16,7 @@ local function text(parent,name,size,pos,value,fontSize)
  t.Text=value t.TextColor3=Color3.fromRGB(247,239,217) t.Font=Enum.Font.GothamBold t.TextSize=fontSize t.Parent=parent return t
 end
 local toast=Instance.new("Frame") toast.Name="DeliveryCelebration" toast.AnchorPoint=Vector2.new(.5,.5)
-toast.Position=UDim2.fromScale(.5,.48) toast.Size=UDim2.fromOffset(330,212)
+toast.Position=UDim2.fromScale(.5,.5) toast.Size=UDim2.fromOffset(330,212)
 toast.BackgroundColor3=Color3.fromRGB(25,76,73) toast.BorderSizePixel=0 toast.Visible=false toast.ZIndex=20 toast.Active=false toast.Parent=ui
 local corner=Instance.new("UICorner") corner.CornerRadius=UDim.new(0,16) corner.Parent=toast
 local stroke=Instance.new("UIStroke") stroke.Color=Color3.fromRGB(241,198,99) stroke.Thickness=2 stroke.Parent=toast
@@ -33,6 +33,9 @@ Theme.Result(toast)
 title.Size=UDim2.new(1,-76,0,20)
 reward.Position=UDim2.fromOffset(12,72)reward.Size=UDim2.new(1,-24,0,34)reward.TextSize=32
 detail.Position=UDim2.fromOffset(12,110)detail.Size=UDim2.new(1,-24,0,30)detail.TextSize=11
+reward.BackgroundTransparency=0
+reward.BackgroundColor3=Theme.Soft
+Instance.new("UICorner", reward).CornerRadius=UDim.new(0, 9)
 nextStep.Position=UDim2.fromOffset(12,168)nextStep.Size=UDim2.new(1,-24,0,24)
 stars.TextColor3=Theme.Ink streak.TextColor3=Theme.Muted ratingHint.TextColor3=Theme.Muted
 local close=Instance.new('TextButton')close.Name='Close22'close.Text='×'close.Size=UDim2.fromOffset(44,44)close.Position=UDim2.new(1,-48,0,4)close.ZIndex=22 close.Parent=toast Theme.ToolbarButton(close)close.TextSize=22
@@ -120,10 +123,26 @@ local function refresh()
  local offer = currentRelay()
  local interrupted = state.lastResult and state.lastResult.batchInterrupted
  local hasNote = offer or interrupted
- toast.Size = UDim2.fromOffset(resultWidth, hasNote and 252 or 228)
+ local compact = height < 280
+ local buttonY = compact and (hasNote and 154 or 134) or (hasNote and 198 or 174)
+ toast.Size = UDim2.fromOffset(resultWidth, buttonY + 52)
+ title.Position = UDim2.fromOffset(12, compact and 6 or 12)
+ stars.Position = UDim2.fromOffset(12, compact and 25 or 32)
+ stars.TextSize = compact and 14 or 18
+ ratingHint.Position = UDim2.fromOffset(12, compact and 44 or 54)
+ reward.Position = UDim2.fromOffset(12, compact and 59 or 72)
+ reward.Size = UDim2.new(1,-24,0,compact and 28 or 34)
+ reward.TextSize = compact and 23 or 32
+ detail.Position = UDim2.fromOffset(12, compact and 89 or 110)
+ detail.Size = UDim2.new(1,-24,0,compact and 26 or 30)
+ streak.Position = UDim2.fromOffset(12, compact and 115 or 145)
+ streak.Size = UDim2.new(1,-24,0,compact and 18 or 20)
+ nextStep.Position = UDim2.fromOffset(12, compact and 133 or 168)
+ nextStep.Size = UDim2.new(1,-24,0,compact and 19 or 24)
+ nextStep.Visible = hasNote and true or false
  local buttonWidth = (resultWidth - (offer and 40 or 32)) / (offer and 3 or 2)
  for index, button in ipairs({careerButton, depotButton, relayButton}) do
-  button.Position = UDim2.fromOffset(12 + (index - 1) * (buttonWidth + 8), hasNote and 198 or 174)
+  button.Position = UDim2.fromOffset(12 + (index - 1) * (buttonWidth + 8), buttonY)
   button.Size = UDim2.fromOffset(buttonWidth, 44)
  end
  careerButton.Text = state.lastResult and state.lastResult.storyChapter and "Cerita" or "Karier"
@@ -138,7 +157,8 @@ local function refresh()
  impact.Position=UDim2.new(.5,0,0,math.min(216,height*.59))
  impact.Size=UDim2.fromOffset(math.min(310,width-32),36)
  local boardOpen=ui:GetAttribute('JobBoardOpen17')==true
- local shopOpen=ui.Shop.Visible or boardOpen or ui:GetAttribute('AudioOpen33')==true
+ local gallery=ui:FindFirstChild("GalleryReader")
+ local shopOpen=ui.Shop.Visible or boardOpen or ui:GetAttribute('AudioOpen33')==true or (gallery and gallery.Visible)
  toast.Visible=os.clock()<expires and not shopOpen and state.status=="Idle"
  local noticeActive = os.clock() < noticeExpires
  local mobileOverlay = mobile and (ui.Guide.Visible or ui:GetAttribute("MobileMenuOpen18") or ui:GetAttribute("MobileTargetOpen18"))
@@ -148,7 +168,7 @@ local function refresh()
  stopBatch.AutoButtonColor = handoff.Visible
  ui.TopCard.Visible=not toast.Visible and not shopOpen
  ui.StorageStatus.Visible=not toast.Visible and not shopOpen and(not Theme.IsMobile(ui)or ui.StorageStatus:GetAttribute("Alert18")==true)
- ui.Actions.Visible=not shopOpen and not toast.Visible and(not Theme.IsMobile(ui)or not ui:GetAttribute("MobileTargetOpen18"))
+ ui.Actions.Visible=not shopOpen and not toast.Visible and(not mobile or not (ui:GetAttribute("MobileTargetOpen18") or ui:GetAttribute("MobileMenuOpen18")))
  local backdrop=ui:FindFirstChild("ShopBackdrop")if backdrop then backdrop.Visible=ui.Shop.Visible end
  impact.Visible=os.clock()<noticeExpires and not shopOpen
  local p=ownPackage()
@@ -248,6 +268,9 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
     title.Text = "RUTE MINGGUAN SELESAI!"
    elseif result.isExpress and result.contractSucceeded then
     title.Text = "EKSPRES BERHASIL!"
+   end
+   if result.weeklyProgress and not result.storyChapter then
+    streak.Text = string.format("Target mingguan · %d/3 selesai", result.weeklyProgress)
    end
    detail.TextWrapped=true
    detail.TextSize=11

@@ -39,18 +39,25 @@ local function render()
  local notice=ui:FindFirstChild("PackageNotice")
  local mobile=Theme.IsMobile(ui)
  local mobilePanel=mobile and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")or ui.Guide.Visible)
- local blocked=mobilePanel or not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
+ local gallery=ui:FindFirstChild("GalleryReader")
+ local blocked=(gallery and gallery.Visible) or ui:GetAttribute("AudioOpen33")==true or mobilePanel or not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
  if (blocked or seated or m and m.exhausted) and wants then send(false)end
  b.Visible=not blocked and not seated
  if mobile then
   local carrying=state.status=="Carrying"
   b.Parent=ui b.Size=UDim2.fromOffset(100,44)b.Position=UDim2.new(1,-270,1,-56)
-  hud.AnchorPoint=Vector2.new(0,0)hud.Size=UDim2.fromOffset(carrying and 238 or 118,32)
-  hud.Position=UDim2.fromOffset(12,ui.StorageStatus:GetAttribute("Alert18")and 124 or 100)
-  stamina.Position=UDim2.fromOffset(8,2)grip.Position=UDim2.fromOffset(126,2)
-  staminaTrack.Position=UDim2.fromOffset(8,23)gripTrack.Position=UDim2.fromOffset(126,23)
-  for _,element in ipairs({stamina,grip})do element.Size=UDim2.fromOffset(104,16)element.TextSize=10 end
-  for _,element in ipairs({staminaTrack,gripTrack})do element.Size=UDim2.fromOffset(104,3)end
+  local hudWidth = carrying and math.max(118, math.min(Theme.MobileCardWidth(ui), ui.AbsoluteSize.X - 138)) or 118
+  local meterWidth = carrying and math.floor((hudWidth - 24) / 2) or 102
+  hud.AnchorPoint=Vector2.new(0,0)hud.Size=UDim2.fromOffset(hudWidth,32)
+  hud.Position=UDim2.fromOffset(12,ui.StorageStatus:GetAttribute("Alert18")and 116 or 90)
+  stamina.Position=UDim2.fromOffset(8,2)grip.Position=UDim2.fromOffset(16+meterWidth,2)
+  staminaTrack.Position=UDim2.fromOffset(8,23)gripTrack.Position=UDim2.fromOffset(16+meterWidth,23)
+  for _,element in ipairs({stamina,grip})do
+   element.Size=UDim2.fromOffset(meterWidth,16)
+   element.TextSize=10
+   element.TextTruncate=Enum.TextTruncate.AtEnd
+  end
+  for _,element in ipairs({staminaTrack,gripTrack})do element.Size=UDim2.fromOffset(meterWidth,3)end
   grip.Visible=carrying gripTrack.Visible=carrying
   hud.Visible=not blocked and(not notice or not notice.Visible)and(carrying or wants or m and(m.stamina<99 or m.resting))
  else

@@ -60,7 +60,9 @@ local function flat(v) return Vector3.new(v.X,0,v.Z) end
 local function refresh()
  Theme.ToolbarLayout(ui)
  button.Text=UIS.TouchEnabled and (enabled and "Rute: ON" or "Rute: OFF") or (enabled and "Rute [G]" or "Rute OFF [G]")
- button.Visible=state.profileReady==true and not ui.Shop.Visible and not ui:GetAttribute('JobBoardOpen17')and(not Theme.IsMobile(ui)or ui:GetAttribute("MobileMenuOpen18")==true)
+ local result=ui:FindFirstChild("DeliveryCelebration")
+ local gallery=ui:FindFirstChild("GalleryReader")
+ button.Visible=not ui:GetAttribute("AudioOpen33") and not (result and result.Visible) and not (gallery and gallery.Visible) and state.profileReady==true and not ui.Shop.Visible and not ui:GetAttribute('JobBoardOpen17')and(not Theme.IsMobile(ui)or ui:GetAttribute("MobileMenuOpen18")==true)
  button:SetAttribute("RouteEnabled",enabled)
  local char=p.Character local root=char and char:FindFirstChild("HumanoidRootPart") local hum=char and char:FindFirstChildOfClass("Humanoid")
  local returning=state.status=="Idle" and state.lastResult~=nil

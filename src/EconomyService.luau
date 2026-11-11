@@ -158,7 +158,8 @@ function E.Award(player,order,now)
  result.batchBonus=Batch.Bonus(order,C.InitialCondition)result.total+=result.batchBonus
  local nextChallenge,challengeBonus,challengeName=Challenges.Preview(s.challenge,result)
  result.challengeBonus=challengeBonus result.challengeName=challengeName result.total+=challengeBonus
- local nextWeek, weeklyBonus, promotion, rankBonus=Career.Advance(p,result,os.time())
+ local nextWeek, weeklyBonus, promotion, rankBonus, weeklyProgress=Career.Advance(p,result,os.time())
+ result.weeklyProgress=weeklyProgress
  result.weeklyBonus=weeklyBonus
  result.promotion=promotion
  result.rankBonus=rankBonus

@@ -18,18 +18,24 @@ end
 function T.IsMobile(ui)
  return game:GetService("UserInputService").TouchEnabled and (ui.AbsoluteSize.X<1000 or ui.AbsoluteSize.Y<600)
 end
+function T.MobileCardWidth(ui)
+ return math.clamp(ui.AbsoluteSize.X - 112, 160, 238)
+end
+
 function T.ToolbarLayout(ui)
  local mobile=T.IsMobile(ui)
  local open=ui:GetAttribute("MobileMenuOpen18")==true
+ local result=ui:FindFirstChild("DeliveryCelebration")
+ local gallery=ui:FindFirstChild("GalleryReader")
  local blocked=ui.Shop.Visible or ui:GetAttribute("JobBoardOpen17")==true
+  or ui:GetAttribute("AudioOpen33")==true or (result and result.Visible) or (gallery and gallery.Visible)
  for i,name in ipairs({"RouteToggle","HelpToggle","ShopToggle","AudioToggle33"})do
   local b=ui:FindFirstChild(name)
   if b then
    b.Size=UDim2.fromOffset(mobile and 96 or 84,44)
    b.Position=mobile and UDim2.new(1,-228+((i-1)%2)*108,0,66+math.floor((i-1)/2)*48)or UDim2.new(1,name=="AudioToggle33"and -98 or -282+(i-1)*92,0,(ui.AbsoluteSize.Y<500 and 12 or 20)+(name=="AudioToggle33"and 50 or 0))
-   if name~="RouteToggle"then b.Visible=not mobile or open and not blocked end
-   if name=="AudioToggle33"then local result=ui:FindFirstChild("DeliveryCelebration")b.Visible=(not mobile or open)and not blocked and not(result and result.Visible)end
-   if mobile then b.ZIndex=4 end
+   if name~="RouteToggle" then b.Visible=(not mobile or open) and not blocked end
+   b.ZIndex=mobile and 4 or 2
   end
  end
 end
@@ -61,16 +67,17 @@ function T.Layout(ui,manual)
  local divider=card:FindFirstChild("Divider")if divider then divider.Visible=not mobile end
  local pill=card:FindFirstChild("CoinBadge")
  if mobile then
-  card.Size=UDim2.fromOffset(238,84)card.Position=UDim2.fromOffset(12,8)
+  card.Size=UDim2.fromOffset(T.MobileCardWidth(ui),78)card.Position=UDim2.fromOffset(12,8)
   card.Title.Position=UDim2.fromOffset(10,8)card.Title.Size=UDim2.fromOffset(110,16)card.Title.TextSize=10
   card.Coins.Position=UDim2.new(1,-95,0,5)card.Coins.Size=UDim2.fromOffset(82,22)card.Coins.TextSize=12
   if pill then pill.Size=UDim2.fromOffset(88,22)pill.Position=UDim2.new(1,-98,0,5)end
   card.Destination.Position=UDim2.fromOffset(10,31)card.Destination.Size=UDim2.new(1,-20,0,20)card.Destination.TextSize=14
-  card.ConditionText.Position=UDim2.fromOffset(10,52)card.ConditionText.Size=UDim2.new(1,-20,0,18)card.ConditionText.TextSize=10
-  card.ConditionTrack.Position=UDim2.fromOffset(10,75)card.ConditionTrack.Size=UDim2.new(1,-20,0,3)
-  ui.StorageStatus.Position=UDim2.fromOffset(12,96)
-  ui.Actions.AnchorPoint=Vector2.new(1,0)ui.Actions.Position=UDim2.new(1,-12,0,96)ui.Actions.Size=UDim2.fromOffset(152,96)
-  ui.Actions.Primary.Size=UDim2.fromOffset(152,44)ui.Actions.Secondary.Size=UDim2.fromOffset(152,44)ui.Actions.Secondary.Position=UDim2.fromOffset(0,52)
+  card.ConditionText.Position=UDim2.fromOffset(10,49)card.ConditionText.Size=UDim2.new(1,-20,0,18)card.ConditionText.TextSize=10
+  card.ConditionTrack.Position=UDim2.fromOffset(10,69)card.ConditionTrack.Size=UDim2.new(1,-20,0,3)
+  ui.StorageStatus.Position=UDim2.fromOffset(12,90)
+  local actionWidth = ui.AbsoluteSize.X < 430 and 112 or 140
+  ui.Actions.AnchorPoint=Vector2.new(1,0)ui.Actions.Position=UDim2.new(1,-12,0,90)ui.Actions.Size=UDim2.fromOffset(actionWidth,96)
+  ui.Actions.Primary.Size=UDim2.fromOffset(actionWidth,44)ui.Actions.Secondary.Size=UDim2.fromOffset(actionWidth,44)ui.Actions.Secondary.Position=UDim2.fromOffset(0,52)
  else
   card.Title.TextSize=11 card.Coins.TextSize=14 card.ConditionText.TextSize=11
   card.ConditionText.Size=UDim2.new(1,-28,0,20)card.ConditionTrack.Size=UDim2.new(1,-28,0,4)
@@ -96,6 +103,12 @@ function T.Static(ui)
  label(card.Coins,T.Ink,14,Enum.Font.GothamBold)card.Coins.TextXAlignment=Enum.TextXAlignment.Center card.Coins.ZIndex=3
  local pill=card:FindFirstChild("CoinBadge")or Instance.new("Frame")pill.Name="CoinBadge"pill.Size=UDim2.fromOffset(94,25)pill.Position=UDim2.new(1,-105,0,10)pill.BackgroundColor3=T.Gold pill.BorderSizePixel=0 pill.ZIndex=1 pill.Parent=card round(pill,9)
  label(card.Destination,T.Ink,18,Enum.Font.GothamBold)label(card.ConditionText,T.Muted,11)
+ for _, field in ipairs({card.Destination, card.ConditionText, card.Title}) do
+  field.TextWrapped=false
+  field.TextTruncate=Enum.TextTruncate.AtEnd
+ end
+ round(card.ConditionTrack,3)
+ round(card.ConditionTrack.Fill,3)
  label(card.Hint,T.Muted,11)card.ConditionTrack.BackgroundColor3=T.Line
  local divider=card:FindFirstChild("Divider")or Instance.new("Frame")divider.Name="Divider"divider.Size=UDim2.new(1,-28,0,1)divider.Position=UDim2.fromOffset(14,39)divider.BackgroundColor3=T.Line divider.BorderSizePixel=0 divider.Parent=card
  T.ToolbarButton(ui.HelpToggle)T.ToolbarButton(ui.ShopToggle)
