@@ -174,7 +174,7 @@ bind(shared.Remotes.StateChanged.OnClientEvent,function(snapshot,code)
   local id=snapshot.lastResult and snapshot.lastResult.orderId
   if not id or delivered[id]then return end delivered[id]=true table.insert(deliveredOrder,id)
   local result=snapshot.lastResult
-  if result.promotion or (result.weeklyBonus or 0) > 0 then name="Career"
+  if result.storyFinished or result.promotion or (result.weeklyBonus or 0) > 0 then name="Career"
   elseif result.rating and result.rating.stars==3 or result.isBatch and result.batchIndex==result.batchTotal then name="Excellent"end
   if #deliveredOrder>20 then delivered[table.remove(deliveredOrder,1)]=nil end
  end

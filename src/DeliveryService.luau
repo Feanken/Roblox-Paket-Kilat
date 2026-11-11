@@ -31,6 +31,7 @@ local function relayOffer(player)
 end
 local function createOrder(player,assignment,options)
  local o={orderId=HttpService:GenerateGUID(false),ownerUserId=player.UserId,packageType=assignment.PackageType,destinationId=assignment.DestinationId,status='Carrying',condition=C.InitialCondition,startedAt=workspace:GetServerTimeNow(),rewardProcessed=false,completionLocked=false,recoveryCount=0,lastRecoveryAt=-1,lastRecoveryClock=-math.huge,lastDamageAt=-math.huge,outOfBounds=false,player=player,jobName=assignment.name or 'Reguler',jobBonus=assignment.JobBonus or 0,contract=assignment.Contract and table.clone(assignment.Contract)}
+ o.storyChapter = assignment.StoryChapter
  for key,value in pairs(options or {})do o[key]=value end
  Delivery.orders[player.UserId]=o P.Create(o)P.Carry(o,root(player))
  if T then T:OrderStarted(player,o)end
@@ -60,7 +61,7 @@ function Delivery.Snapshot(player)
 	snapshot.destinationPosition=point and point.Position
 	local o = Delivery.orders[player.UserId]
 	if o then
-		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus","isRelay","isBatch","sourceId","contract"}) do snapshot[key] = o[key] end
+		for _,key in ipairs({"orderId","ownerUserId","packageType","destinationId","status","condition","startedAt","rewardProcessed","completionLocked","recoveryCount","lastRecoveryAt","outOfBounds","jobName","jobBonus","isRelay","isBatch","sourceId","contract","storyChapter"}) do snapshot[key] = o[key] end
 		snapshot.destinationName=C.Routes[o.destinationId].Name
   snapshot.packagePosition=o.package and o.package.Parent and o.package.Position or nil
 		local point=destinationPoint(o.destinationId)
@@ -118,7 +119,7 @@ function Delivery.Complete(player, orderId, destinationId)
    Delivery.batches[player.UserId]=nil
   end
  end
- if not Delivery.orders[player.UserId]then
+ if not Delivery.orders[player.UserId] and not o.storyChapter then
   Delivery.relayOffers[player.UserId]=Relay.Make(C,W.Map,o,E.Snapshot(player).deliveryCount,HttpService:GenerateGUID(false),workspace:GetServerTimeNow(),Tuning.Get())
  end
 	Delivery.Publish(player, "Delivered")
@@ -198,10 +199,11 @@ function Delivery.Handle(player, action, orderId, destinationId, arity)
    if action=='AcceptJob'then assignment=E.ResolveOffer(player,orderId)if not assignment then return false,'OfferExpired'end end
   end
 
+  if not destinationPoint(assignment.DestinationId) then return false, "UnavailableDestination" end
   local options=relay and {isRelay=true,sourceId=relay.sourceId,targetSeconds=relay.targetSeconds}or nil
   o=createOrder(player,assignment,options)
   Delivery.relayOffers[player.UserId]=nil
-  if not relay then E.AdvanceAssignment(player)end
+  if not relay and not assignment.StoryChapter then E.AdvanceAssignment(player)end
 	else
 		if not o or o.ownerUserId ~= player.UserId or o.orderId ~= orderId then return false, "NotOwnerOrStale" end
 		if o.completionLocked then return false, "CompletionLocked" end

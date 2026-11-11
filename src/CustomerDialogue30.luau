@@ -18,6 +18,8 @@ local reactions={
  {'Wah, rapi dan cepat! Terima kasih.','Cepat sekali! Paketnya juga tetap rapi.','Mantap, paket tiba tepat waktu dan utuh!'},
 }
 function M.Greeting(id,s)
+ local chapter = s.storyChapter and Story.Chapter(s.storyChapter)
+ if chapter and chapter.destinationId == id then return chapter.greeting end
  local c=s.contract local b=s.routeBonus or {}
  if c and c.kind=='explore'then
   local status=Status.Get(c,{condition=s.condition,duration=0,recoveryCount=s.recoveryCount or 0,stamps=b.count or 0})
@@ -27,6 +29,8 @@ function M.Greeting(id,s)
  return contact and contact.line or greetings[id]or 'Halo, kurir! Antar paket di petak tujuan, ya.'
 end
 function M.Reaction(result,hasRelay,count)
+ local chapter = result.storyChapter and Story.Chapter(result.storyChapter)
+ if chapter then return chapter.receipt end
  local stars=result.rating and result.rating.stars or 1
  stars=math.clamp(math.floor(stars),1,3)
  local pool=reactions[stars]local line=pool[((count or 1)-1)%#pool+1]

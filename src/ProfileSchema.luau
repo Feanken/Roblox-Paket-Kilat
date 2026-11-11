@@ -1,3 +1,4 @@
+local Story = require(game.ReplicatedStorage.PaketKilat.Shared.CourierStory)
 local S={}
 local function finite(n) return type(n)=="number" and n==n and math.abs(n)<math.huge end
 local function integer(n) return finite(n) and n>=0 and n<=1000000000 and n%1==0 end
@@ -6,7 +7,7 @@ function S.Copy(v)
 	local t={} for k,x in pairs(v) do t[k]=S.Copy(x) end return t
 end
 function S.Default()
-	return {schemaVersion=3,coins=0,deliveryCount=0,careerWeek={week=0,mask=0},ownedCosmetics={TasStandar=true},equippedCosmetic="TasStandar",bestTimes={},upgrades={Grip=0}}
+	return {schemaVersion=4,coins=0,deliveryCount=0,storyCompleted=0,careerWeek={week=0,mask=0},ownedCosmetics={TasStandar=true},equippedCosmetic="TasStandar",bestTimes={},upgrades={Grip=0}}
 end
 function S.Validate(raw,C)
 	if type(raw)~="table" then return nil,"InvalidProfile" end
@@ -25,7 +26,12 @@ function S.Validate(raw,C)
   p.schemaVersion=3
   p.careerWeek={week=0,mask=0}
  end
- if p.schemaVersion~=3 then return nil,"UnsupportedSchema" end
+ if p.schemaVersion == 3 then
+  p.schemaVersion = 4
+  p.storyCompleted = 0
+ end
+ if p.schemaVersion ~= 4 then return nil, "UnsupportedSchema" end
+ if not integer(p.storyCompleted) or p.storyCompleted > Story.Count then return nil, "InvalidStory" end
  local career=p.careerWeek
  if type(career)~="table" or not integer(career.week) or not integer(career.mask) or career.mask>7 then
   return nil,"InvalidCareer"
@@ -46,7 +52,7 @@ function S.Validate(raw,C)
 		if not C.Routes[goal] or not C.PackageTypes[kind] or not finite(seconds) or seconds<=0 then return nil,"InvalidRecord" end
 		best[key]=seconds
 	end
-	return {schemaVersion=3,coins=p.coins,deliveryCount=p.deliveryCount,careerWeek={week=career.week,mask=career.mask},ownedCosmetics=owned,equippedCosmetic=p.equippedCosmetic,bestTimes=best,upgrades={Grip=p.upgrades.Grip}}
+	return {schemaVersion=4,coins=p.coins,deliveryCount=p.deliveryCount,storyCompleted=p.storyCompleted,careerWeek={week=career.week,mask=career.mask},ownedCosmetics=owned,equippedCosmetic=p.equippedCosmetic,bestTimes=best,upgrades={Grip=p.upgrades.Grip}}
 end
 function S.Decode(raw,C)
 	if raw==nil then return S.Default(),0 end

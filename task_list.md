@@ -570,3 +570,17 @@ Perubahan visual tidak menyelesaikan T22/T23 atau mengizinkan deploy. Detail di 
 - [x] C37-08: Play, jalan, inspeksi visual dan pengukuran runtime yang tersedia.
 - [ ] C37-09: source/dokumen/bukti dan status simpan yang terverifikasi.
 - [ ] C37-10: simpan finalStudio ke main_game.rbxl dan penilaian pemilik.
+
+## Kiriman Pameran Foto Kampung
+
+- [x] Susun lima bab yang menghubungkan Bu Sari, Maya, Raka, Bu Dewi, dan Nisa melalui kiriman pameran.
+- [x] Tambahkan tab Cerita dengan isi paket, tujuan, jenis paket, bonus bab, dan pratinjau rute.
+- [x] Arahkan pemain baru ke kiriman pembuka dan jaga kelima tab tetap muat di layar sempit.
+- [x] Tampilkan label muatan pada paket serta dialog penerima untuk tiap bab.
+- [x] Simpan progres cerita di profil dan migrasikan profil lama dengan koin, pangkat, perlengkapan, dan rekor yang sudah dimiliki.
+- [x] Bayar bonus bab saat penyerahan sah dan tolak pesanan bab yang belum tersedia atau sudah selesai.
+- [x] Tambahkan akses ke bab berikutnya dari panel hasil serta bunyi saat pameran dibuka.
+- [x] Tempatkan tiga panel pameran di depan Galeri Tepi Air dengan ruang bebas di sekitar titik serah.
+- [x] Buka ilustrasi pameran untuk pemain yang menyelesaikan kiriman terakhir.
+- [x] Uji lima serah terima, tampilan papan sempit, simpan dan muat ulang melalui penyimpanan uji, serta pesanan biasa dan titipan setelah tamat.
+- [x] Verifikasi 12 skrip yang diperbarui dan objek panel pameran di main_game.rbxl.

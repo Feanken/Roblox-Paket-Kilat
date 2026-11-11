@@ -7,6 +7,7 @@ local ContentProvider = game:GetService("ContentProvider")
 local player = Players.LocalPlayer
 local RS = game:GetService("ReplicatedStorage"):WaitForChild("PaketKilat")
 local C = require(RS.Shared.Config)
+local Story = require(RS.Shared:WaitForChild("CourierStory"))
 local Theme = require(RS.Shared.UITheme12)
 local ContractStatus=require(RS.Shared.ContractStatus25)
 local Coach=require(RS.Shared:WaitForChild('JourneyCoach29'))
@@ -29,6 +30,7 @@ local messages = {
 	InvalidState = "Aksi belum tersedia untuk paket ini.",
 	RecoveryCooldown = "Pemulihan masih menunggu jeda.",
  OfferExpired = "Daftar pesanan diperbarui. Pilih ulang di depot.",
+ StoryChanged = "Bab cerita sudah berubah. Lihat kiriman berikutnya di depot.",
 	NotAlive = "Menunggu muncul kembali di depot...",
 	Respawned = "Siap! Ambil pesanan di depot.",
 	Cancelled = "Pesanan dibatalkan. Saldo tetap.",
@@ -154,6 +156,9 @@ local function render()
   Theme.Action(b,b.Active,false)
  end
 	local last,nextOrder=state.lastResult,state.nextOrder
+ local nextChapter = state.story and state.story.offer
+ local firstDelivery = state.deliveryCount == 0
+ local nearDepot = near(state.depotPosition)
 	local condition=state.condition or (last and last.condition) or 0
 	card.ConditionTrack.Fill.Size=UDim2.fromScale(math.clamp(condition/100,0,1),1)
 	card.ConditionTrack.Fill.BackgroundColor3=condition>40 and Color3.fromRGB(57,151,127) or Color3.fromRGB(213,126,54)
@@ -165,6 +170,10 @@ local function render()
 		card.Destination.Text=relay and ('Titipan → '..relay.destinationName) or last and ("Selesai · "..last.destinationName) or "Pilih pesanan di depot"
 		card.ConditionText.Text=relay and string.format('%s · %d dtk',near(relay.pickupPosition)and 'Ambil di sini' or 'Titipan tersedia',math.max(0,math.ceil(relay.expiresAt-workspace:GetServerTimeNow()))) or last and string.format("%s · %d/100 · %.1f dtk",last.packageType,last.condition,last.duration)
 			or "3 pilihan · pilih risiko dan tujuan"
+  if not relay and nextChapter then
+   card.Destination.Text = firstDelivery and "Kiriman pertama" or string.format("Lanjut cerita · Bab %d", nextChapter.storyChapter)
+   card.ConditionText.Text = nearDepot and nextChapter.destinationName or "Ikuti penanda ke depot"
+  end
 	else
 		card.Destination.Text=state.destinationName or C.DestinationName
 		card.ConditionText.Text=state.isRelay and string.format('Titipan · %d/100',condition) or string.format("%s · %d/100 · Rekor %s",state.packageType,condition,bestText(state.currentBestTime))
@@ -184,6 +193,15 @@ local function render()
   end
  end
  if Theme.IsMobile(ui)and state.batch and state.status~='Idle'then card.ConditionText.Text=string.format('%s · %d/100 · sisa %d',state.packageType,condition,state.batch.remaining)end
+ local storyChapter = state.storyChapter and Story.Chapter(state.storyChapter)
+ if storyChapter and state.status == "Carrying" then
+  card.ConditionText.Text = string.format("%s · %d/100 · Bab %d", state.packageType, condition, state.storyChapter)
+  if storyChapter.careBonus then
+   card.ConditionText.Text = state.recoveryCount and state.recoveryCount > 0
+    and string.format("%d/100 · bonus gugur", condition)
+    or string.format("%d/100 · ≥%d untuk +%d", condition, storyChapter.careCondition, storyChapter.careBonus)
+  end
+ end
  if os.clock()<feedbackUntil then card.Hint.Text=feedback
  elseif state.batch then
   local b=state.batch local next=b.stops[b.index+1]
@@ -193,6 +211,13 @@ local function render()
    or string.format('KONTRAK · bonus +%d saat diantar\n%s',state.contract.reward,contractStatus.short)
 
 	elseif relay then card.Hint.Text='Pelanggan punya titipan ke rumah lain. Opsional: satu perjalanan lagi, tanpa kembali ke depot.'
+ elseif state.status == "Carrying" and storyChapter then
+  card.Hint.Text = firstDelivery and "Ikuti penanda tujuan. Berjalan menjaga genggaman." or storyChapter.brief
+  if firstDelivery and not storyChapter.careBonus and Theme.IsMobile(ui) then
+   card.ConditionText.Text = near(state.destinationPosition) and "Tekan Antar paket" or string.format("%d/100 · Ikuti penanda", condition)
+  end
+ elseif state.status == "Idle" and nextChapter then
+  card.Hint.Text = nearDepot and nextChapter.description or "Ambil kiriman cerita berikutnya di depot."
 	elseif state.status=="Idle" and last then
 		local record=last.recordReason=='BatchRoute'and 'Borongan · rekor depot tetap'or last.recordReason=='RelayRoute' and 'Titipan selesai · rekor depot tetap' or not last.recordEligible and "Tanpa rekor: paket dipulihkan"
 			or (last.newRecord and ("REKOR BARU: "..bestText(last.bestTime)) or ("Terbaik: "..bestText(last.bestTime)))
@@ -203,12 +228,15 @@ local function render()
  elseif state.status=="Carrying" then
 		card.Hint.Text=state.packageType=="Rapuh" and "RAPUH: benturan lebih merusak. Jaga paket!" or "Sprint lebih cepat; jaga meter genggaman paket."
 	elseif state.status=="Dropped" then card.Hint.Text="Ambil ulang, atau pulihkan (-20; tanpa rekor)."
-	else card.Hint.Text="Pak Arman menunggu di depot. Pilih kiriman pertamamu." end
+	else card.Hint.Text="Buka tab Cerita di depot untuk kiriman pameran." end
 	actions.Secondary.Visible=(state.status~="Idle" or relay~=nil) and synced and state.profileReady and not shopOpen
 	if not synced or not state.profileReady or shopOpen then button(actions.Primary,"",shopOpen and "Toko dibuka" or "Memuat profil...",false)
 	elseif state.status=="Idle" then
   if relay and not near(state.depotPosition) then button(actions.Primary,'AcceptRelay',near(relay.pickupPosition)and 'Ambil titipan' or 'Ke titipan',near(relay.pickupPosition),'E')
-  else button(actions.Primary,"Start",near(state.depotPosition) and "Pilih pesanan" or "Ke depot",near(state.depotPosition),"E") end
+  else
+   local depotLabel = firstDelivery and nextChapter and "Kiriman pertama" or "Pilih pesanan"
+   button(actions.Primary,"Start",nearDepot and depotLabel or "Ke depot",nearDepot,"E")
+  end
   if relay then button(actions.Secondary,'SkipRelay','Lewati titipan',aliveRoot()~=nil,'Q') end
 	elseif state.status=="Carrying" then
 		button(actions.Primary,"Deliver",near(state.destinationPosition) and "Antar paket" or "Ke tujuan",near(state.destinationPosition),"E")

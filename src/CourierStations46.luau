@@ -2,7 +2,7 @@
 local Stations = {}
 
 local stops = {
-	{id = "Depot", side = -6, forward = 6, yaw = 180, color = Color3.fromRGB(31, 90, 82), title = "PAPAN KURIR", subtitle = "Pesanan · Karier"},
+	{id = "Depot", side = -6, forward = 6, yaw = 180, color = Color3.fromRGB(31, 90, 82), title = "PAPAN KURIR", subtitle = "Pesanan · Cerita"},
 	{id = "CBD01", side = -4.5, yaw = 0, color = Color3.fromRGB(144, 97, 34), title = "SERAH PAKET", subtitle = "Menara Kilat"},
 	{id = "BQ10", side = 4.5, yaw = 0, color = Color3.fromRGB(30, 91, 88), title = "SERAH PAKET", subtitle = "Kantor Arsitek"},
 	{id = "BQ16", side = 4.5, yaw = 0, color = Color3.fromRGB(49, 83, 119), title = "SERAH PAKET", subtitle = "Galeri Tepi Air"},

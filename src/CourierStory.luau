@@ -1,12 +1,41 @@
 local Story = {}
 
 local chapters = {
-	{rank = "Kurir Pemula", title = "Surat dari Depot", note = "Pak Arman mempercayakan kiriman pertamamu. Bu Sari sedang mengumpulkan foto lama kampung."},
-	{rank = "Kurir Kampung", title = "Album yang Belum Lengkap", note = "Foto warga terkumpul. Maya di Menara Kilat membantu menyiapkan arsip untuk dipamerkan."},
-	{rank = "Kurir Kota", title = "Di Seberang Kanal", note = "Raka menyiapkan denah pameran di Bata Quay. Antar kiriman ke sana lewat Jembatan Kanal."},
-	{rank = "Kurir Lintas Distrik", title = "Menjelang Pameran", note = "Nisa menyusun foto dan cerita warga di galeri. Kiriman dari kedua sisi kanal mulai berdatangan."},
-	{rank = "Kurir Andalan", title = "Pintu Galeri Terbuka", note = "Pameran sudah dibuka. Warga bisa melihat foto kampung dan bertemu tetangga dari seberang kanal."},
+	{
+		title = "Surat dari Depot", destinationId = "Rumah01", packageType = "Biasa", cargo = "Album kampung", bonus = 20,
+		brief = "Bu Sari menyimpan foto sebelum jembatan dibangun. Antar album kosong untuk foto-fotonya.",
+		greeting = "Album yang kutunggu! Foto sebelum jembatan dibangun sudah kusiapkan.",
+		receipt = "Album sudah kuterima. Tolong lanjutkan pengarsipan bersama Maya.",
+	},
+	{
+		title = "Album yang Belum Lengkap", destinationId = "CBD01", packageType = "Rapuh", cargo = "Cetakan foto", bonus = 25,
+		brief = "Bawa cetakan foto warga ke Maya di Menara Kilat.",
+		careCondition = 90, careBonus = 10,
+		greeting = "Foto-foto itu akan kuberi tanggal dan nama jalan. Terima kasih sudah menjaganya.",
+		receipt = "Cetakan sudah kuterima. Raka menunggu denah untuk menentukan tempat pajangan.",
+	},
+	{
+		title = "Di Seberang Kanal", destinationId = "BQ10", packageType = "Biasa", cargo = "Denah pameran", bonus = 30,
+		brief = "Ikuti jalan ke jembatan kanal, lalu serahkan denah pameran kepada Raka.",
+		greeting = "Aku perlu denah itu untuk menyediakan ruang bagi cerita dari kedua sisi kanal.",
+		receipt = "Denahnya sudah sampai. Kini Bu Dewi bisa membagikan undangan ke warga.",
+	},
+	{
+		title = "Menjelang Pameran", destinationId = "Rumah05", packageType = "Biasa", cargo = "Undangan warga", bonus = 25,
+		brief = "Titipkan undangan pembukaan kepada Bu Dewi.",
+		greeting = "Warga menunggu undangannya. Banyak yang belum pernah datang ke galeri.",
+		receipt = "Undangan akan kubagikan. Tinggal bingkai foto yang perlu sampai ke Nisa.",
+	},
+	{
+		title = "Pintu Galeri Terbuka", destinationId = "BQ16", packageType = "Rapuh", cargo = "Bingkai pameran", bonus = 45,
+		brief = "Serahkan bingkai kepada Nisa untuk membuka pameran.",
+		careCondition = 95, careBonus = 15,
+		greeting = "Bingkai itu kiriman terakhir. Setelah ini, pameran foto kampung bisa dibuka.",
+		receipt = "Pameran sudah terbuka. Lihat tiga panel foto di depan galeri.",
+	},
 }
+for _, chapter in ipairs(chapters) do table.freeze(chapter) end
+Story.Count = #chapters
 
 local people = {
 	Rumah01 = {name = "Bu Sari", line = "Foto kampungku sudah siap. Ada yang dari sebelum jembatan dibangun."},
@@ -19,11 +48,23 @@ local people = {
 	BQ16 = {name = "Nisa", line = "Selamat datang di galeri. Kami punya satu dinding untuk cerita dari tiap sisi kanal."},
 }
 
-function Story.Chapter(rank)
-	for index, chapter in ipairs(chapters) do
-		if chapter.rank == rank then return chapter, index end
-	end
-	return chapters[1], 1
+function Story.Chapter(index)
+	return chapters[index]
+end
+
+function Story.Offer(completed)
+	local index = completed + 1
+	local chapter = chapters[index]
+	if not chapter then return nil end
+	return {
+		id = "pameran:" .. index,
+		name = chapter.title,
+		DestinationId = chapter.destinationId,
+		PackageType = chapter.packageType,
+		JobBonus = 0,
+		StoryChapter = index,
+		description = chapter.brief,
+	}
 end
 
 function Story.Contact(destination)

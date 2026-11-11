@@ -7,6 +7,7 @@ local Contracts=require(script.Parent.Contracts24)
 local Gear=require(script.Parent.Gear20)
 local Rating=require(script.Parent.DeliveryRating22)
 local Batch=require(game.ReplicatedStorage.PaketKilat.Shared.Batch31)
+local Story = require(game.ReplicatedStorage.PaketKilat.Shared.CourierStory)
 local E={sessions={}}
 local C,Data
 local function copy(value) return value and table.clone(value) or nil end
@@ -45,6 +46,9 @@ function E.PeekBatchOffers(player)
 end
 function E.ResolveOffer(player,id)
  for _,offer in ipairs(E.PeekOffers(player))do if offer.id==id then return offer end end
+ local session = E.sessions[player.UserId]
+ local storyOffer = session and Story.Offer(session.profile.storyCompleted)
+ if storyOffer and storyOffer.id == id then return storyOffer end
 end
 local function invalidateOffers(s)
  s.offerRevision += 1
@@ -68,6 +72,18 @@ function E.Snapshot(player)
   out.coins=p.coins out.deliveryCount=p.deliveryCount
   out.challenge=Challenges.Snapshot(s.challenge)
   out.career=Career.Snapshot(p,os.time())
+  out.story = {completed = p.storyCompleted, total = Story.Count}
+  local storyOffer = Story.Offer(p.storyCompleted)
+  if storyOffer then
+   local chapter = Story.Chapter(storyOffer.StoryChapter)
+   out.story.offer = {
+    id = storyOffer.id, name = storyOffer.name, destinationId = storyOffer.DestinationId,
+    destinationName = C.Routes[storyOffer.DestinationId].Name, packageType = storyOffer.PackageType,
+    storyChapter = storyOffer.StoryChapter, storyBonus = chapter.bonus, cargo = chapter.cargo,
+    description = storyOffer.description,
+    careCondition = chapter.careCondition, careBonus = chapter.careBonus,
+   }
+  end
   out.gear=E.GearQuote(player)
   out.qualityRun=table.clone(s.qualityRun)
   out.recentDeliveries={}
@@ -107,6 +123,11 @@ function E.Award(player,order,now)
 	if order.ownerUserId~=player.UserId or not order.completionLocked or order.status~="Delivered" then return false,"InvalidState" end
 	local route=C.Routes[order.destinationId]
 	if not route or not C.PackageTypes[order.packageType] then return false,"WrongDestination" end
+	local chapter = order.storyChapter and Story.Chapter(order.storyChapter)
+	if order.storyChapter and (not chapter or order.storyChapter ~= p.storyCompleted + 1
+		or chapter.destinationId ~= order.destinationId or chapter.packageType ~= order.packageType) then
+		return false, "StoryChanged"
+	end
 	local duration=math.max(0.001,now-order.startedAt)
 	local condition=math.clamp(order.condition,0,C.InitialCondition)
 	local conditionBonus=math.floor(C.ConditionBonus*condition/C.InitialCondition)
@@ -142,6 +163,17 @@ function E.Award(player,order,now)
  result.promotion=promotion
  result.rankBonus=rankBonus
  result.total+=weeklyBonus+rankBonus
+ if chapter then
+  result.storyChapter = order.storyChapter
+  result.storyBonus = chapter.bonus
+  result.storyFinished = order.storyChapter == Story.Count
+  result.total += chapter.bonus
+  if chapter.careBonus then
+   result.storyCareTarget = chapter.careCondition
+   result.storyCareBonus = condition >= chapter.careCondition and order.recoveryCount == 0 and chapter.careBonus or 0
+   result.total += result.storyCareBonus
+  end
+ end
  if order.isBatch then result.batchEarned=(order.batchEarned or 0)+result.total result.batchDuration=math.max(0,now-order.batchStartedAt)end
  result.rating=Rating.Evaluate(result,order.targetSeconds or route.TargetSeconds,s.ratingTuning)
  local nextRun=Rating.Advance(s.qualityRun,result.rating)
@@ -157,6 +189,7 @@ function E.Award(player,order,now)
 	p.deliveryCount+=1
 	if not hadExpress and Career.HasExpress(p.deliveryCount) then invalidateOffers(s) end
 	p.careerWeek=nextWeek
+	if result.storyChapter then p.storyCompleted = result.storyChapter end
 	if newRecord then p.bestTimes[key]=duration end
 	result.bestTime=p.bestTimes[key]
  table.insert(s.history,1,{destinationName=result.destinationName,total=result.total,stars=result.rating.stars,duration=result.duration,condition=result.condition,jobName=result.jobName,contractBonus=result.contractBonus,contractReason=result.isBatch and ('Borongan '..result.batchIndex..'/'..result.batchTotal)or result.contractStatus and result.contractStatus.reason})

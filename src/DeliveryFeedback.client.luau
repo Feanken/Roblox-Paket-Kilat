@@ -126,6 +126,7 @@ local function refresh()
   button.Position = UDim2.fromOffset(12 + (index - 1) * (buttonWidth + 8), hasNote and 198 or 174)
   button.Size = UDim2.fromOffset(buttonWidth, 44)
  end
+ careerButton.Text = state.lastResult and state.lastResult.storyChapter and "Cerita" or "Karier"
  relayButton.Visible = offer ~= nil
  relayButton.Text = offer and nearRelay(offer) and "Ambil titipan" or "Ke titipan"
  nextStep.Text = offer and ("Titipan ke " .. offer.destinationName)
@@ -160,6 +161,9 @@ local function refresh()
   for _,face in ipairs({"ShippingFront","ShippingBack"}) do
    local gui=p:FindFirstChild(face)
    local handling=gui and gui:FindFirstChild("Handling",true)
+   local brand = gui and gui:FindFirstChild("Brand", true)
+   local chapter = state.storyChapter and Story.Chapter(state.storyChapter)
+   if brand then brand.Text = chapter and string.upper(chapter.cargo) or "PAKET KILAT!" end
    if handling then handling.Text=state.packageType=="Rapuh" and "RAPUH  /  JAGA BENTURAN" or "KIRIM DENGAN HATI" end
   end
  end
@@ -215,7 +219,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    if result.contractKind then ratingHint.Text=result.contractSucceeded and ('Kontrak berhasil · bonus +'..result.contractBonus)or ('Kontrak: '..(result.contractStatus and result.contractStatus.reason or 'syarat belum terpenuhi'))end
    streak.Text=string.format('Rapi beruntun %d · terbaik sesi %d',result.cleanStreak or 0,result.bestCleanStreak or 0)
    local extras={}
-   for _,item in ipairs({{'Cap',result.routeBonus},{'Kerja',result.jobBonus},{'Target',result.challengeBonus},{'Kontrak',result.contractBonus},{'Borongan',result.batchBonus},{'Pangkat',result.rankBonus},{'Mingguan',result.weeklyBonus}})do if(item[2]or 0)>0 then table.insert(extras,item[1]..' +'..item[2])end end
+   for _,item in ipairs({{'Cap',result.routeBonus},{'Kerja',result.jobBonus},{'Target',result.challengeBonus},{'Kontrak',result.contractBonus},{'Borongan',result.batchBonus},{'Pangkat',result.rankBonus},{'Mingguan',result.weeklyBonus},{'Cerita',result.storyBonus},{'Jaga paket',result.storyCareBonus}})do if(item[2]or 0)>0 then table.insert(extras,item[1]..' +'..item[2])end end
    detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\n%s',result.baseReward,result.conditionBonus,result.timeBonus,#extras>0 and table.concat(extras,' · ')or result.isBatch and result.batchIndex<result.batchTotal and 'Bonus finish dinilai setelah 3 kiriman.'or 'Tanpa bonus tambahan')
    if result.isBatch then
     title.Text = result.batchInterrupted and "BORONGAN TERHENTI" or "BORONGAN SELESAI!"
@@ -226,10 +230,20 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    if not result.isBatch and (result.challengeBonus or 0)>0 then
     title.Text="TARGET TERCAPAI!"
    end
-   if result.promotion then
+   if result.storyChapter then
+    local chapter = Story.Chapter(result.storyChapter)
+    title.Text = result.storyFinished and "PAMERAN DIBUKA!" or "BAB CERITA SELESAI!"
+    ratingHint.Text = string.format("Bab %d · %s", result.storyChapter, chapter.title)
+    local nextOffer = snapshot.story and snapshot.story.offer
+    streak.Text = nextOffer and ("Berikutnya di depot · " .. nextOffer.name) or "Lihat panel foto di depan galeri."
+    if result.storyCareTarget then
+     stars.Text = result.storyCareBonus > 0 and ("★ Jaga paket +" .. result.storyCareBonus)
+      or result.recoveryCount > 0 and "Bonus gugur · paket dipulihkan"
+      or string.format("Kondisi %d/100 · target %d", result.condition, result.storyCareTarget)
+    end
+   elseif result.promotion then
     title.Text = "NAIK PANGKAT!"
-    local chapter, number = Story.Chapter(result.promotion)
-    ratingHint.Text = string.format("Bab %d · %s", number, chapter.title)
+    ratingHint.Text = result.promotion
    elseif (result.weeklyBonus or 0) > 0 then
     title.Text = "RUTE MINGGUAN SELESAI!"
    elseif result.isExpress and result.contractSucceeded then
@@ -267,7 +281,8 @@ end
 connect(careerButton.Activated, function()
  if not toast.Visible then return end
  dismissResult()
- ui:SetAttribute("OpenCareerFromResult", true)
+ local storyResult = state.lastResult and state.lastResult.storyChapter
+ ui:SetAttribute(storyResult and "OpenStoryFromResult" or "OpenCareerFromResult", true)
  ui:SetAttribute("JobBoardOpen17", true)
 end)
 connect(depotButton.Activated, function()

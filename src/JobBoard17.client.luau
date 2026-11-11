@@ -3,7 +3,6 @@ local player=game.Players.LocalPlayer
 local shared=game.ReplicatedStorage:WaitForChild('PaketKilat')local theme=require(shared.Shared.UITheme12)
 local config=require(shared.Shared.Config)local routes=require(shared.Shared.SafeRoutes08)
 local preview=require(shared.Shared:WaitForChild('JobPreview28'))
-local Story = require(shared.Shared:WaitForChild('CourierStory'))
 local root=player:WaitForChild('PlayerGui'):WaitForChild('PaketKilatUI'):WaitForChild('Root')
 local state,pendingUntil,noticeUntil,notice={},0,0,''
 local connections={}local function bind(signal,fn)local c=signal:Connect(fn)table.insert(connections,c)end
@@ -27,8 +26,9 @@ offers.ZIndex = 11
 offers.Parent = board
 local narrow = false
 local expandedMap = false
+local CAREER_TAB, STORY_TAB = 3, 4
 local tab=0 local selectedIds={}local tabs={}local render
-for i,label in {'Biasa','Kontrak','Borongan','Karier'}do
+for i,label in {'Biasa','Kontrak','Borongan','Karier','Cerita'}do
  local b=Instance.new('TextButton')b.Name='Tab24_'..i;b.Text=label;b.ZIndex=12;b.TextSize=11;b.Parent=board;theme.ToolbarButton(b)
  bind(b.Activated,function()tab=i-1 expandedMap=false offers.CanvasPosition=Vector2.zero render()end)tabs[i]=b
 end
@@ -48,25 +48,29 @@ career.Parent = board
 local rank = text(career, "Rank", 0, 0, 0, 22, 16)
 local rankGoal = text(career, "RankGoal", 0, 22, 0, 18, 11)
 rankGoal.TextColor3 = theme.Muted
-local chapterTitle = text(career, "ChapterTitle", 0, 48, 0, 22, 14)
-local chapterNote = text(career, "ChapterNote", 0, 73, 0, 48, 12)
-chapterNote.TextYAlignment = Enum.TextYAlignment.Top
-local week = text(career, "Week", 0, 130, 0, 21, 14)
-local goals = text(career, "Goals", 0, 154, 0, 57, 12)
+local week = text(career, "Week", 0, 48, 0, 21, 14)
+local goals = text(career, "Goals", 0, 72, 0, 57, 12)
 goals.TextYAlignment = Enum.TextYAlignment.Top
-local access = text(career, "ExpressAccess", 0, 214, 0, 20, 11)
+local access = text(career, "ExpressAccess", 0, 132, 0, 20, 11)
 access.TextColor3 = theme.Muted
-local historyTitle = text(career, "HistoryTitle", 0, 246, 0, 20, 13)
+local historyTitle = text(career, "HistoryTitle", 0, 164, 0, 20, 13)
 historyTitle.Text = "Riwayat sesi"
-local history = text(career, "History24", 0, 268, 0, 0, 11)
+local history = text(career, "History24", 0, 186, 0, 0, 11)
 history.Font = Enum.Font.GothamMedium
 history.TextYAlignment = Enum.TextYAlignment.Top
 history.AutomaticSize = Enum.AutomaticSize.Y
+local storyComplete = text(offers, "StoryComplete", 0, 4, 0, 74, 14)
+storyComplete.Text = "Pameran Foto Kampung terbuka\nLihat tiga panel di depan Galeri Tepi Air, Bata Quay."
+storyComplete.TextYAlignment = Enum.TextYAlignment.Top
+storyComplete.Visible = false
+
 local function offerAt(i)
+ if tab == STORY_TAB then return i == 1 and state.story and state.story.offer or nil end
  return tab==2 and state.batchOffers and state.batchOffers[i]or tab<2 and state.jobOffers and state.jobOffers[tab*3+i]or nil
 end
 local function selected()
- if tab==3 then return nil end
+ if tab == STORY_TAB then return offerAt(1) end
+ if tab == CAREER_TAB then return nil end
  local first
  local firstShift = tab == 0 and state.deliveryCount == 0
  for i=1,3 do local offer=offerAt(i)
@@ -91,7 +95,7 @@ for i=1,3 do
   render()
   if narrow then
    local maxScroll = math.max(0, offers.CanvasSize.Y.Offset - offers.AbsoluteWindowSize.Y)
-   offers.CanvasPosition = Vector2.new(0, math.min(192, maxScroll))
+   offers.CanvasPosition = Vector2.new(0, math.min(tab == STORY_TAB and 64 or 192, maxScroll))
   end
  end)
 end
@@ -167,7 +171,7 @@ render=function()
  local camera=workspace.CurrentCamera if camera then backdrop.Position=UDim2.fromOffset(-root.AbsolutePosition.X,-root.AbsolutePosition.Y)backdrop.Size=UDim2.fromOffset(camera.ViewportSize.X,camera.ViewportSize.Y)end
  if not open then return end
  local width = math.max(1, math.min(620, root.AbsoluteSize.X - 24))
- narrow = width < 480
+ narrow = width < 545
  local contentY = narrow and 140 or 76
  local height = math.max(1, math.min(narrow and 524 or 280, root.AbsoluteSize.Y - 16))
  local contentHeight = math.max(1, height - contentY - 10)
@@ -175,31 +179,36 @@ render=function()
  local left = narrow and bodyWidth - 8 or math.clamp(math.floor(width * .32), 146, 198)
  local right = narrow and left or bodyWidth - left - 16
  board.Size = UDim2.fromOffset(width, height)
- title.Size = UDim2.fromOffset(narrow and width - 76 or width - 380, 24)
+ local tabWidth = narrow and (width - 56) / #tabs or 68
+ local tabsWidth = #tabs * tabWidth + (#tabs - 1) * 8
+ local tabStart = narrow and 12 or width - 60 - tabsWidth
+ title.Size = UDim2.fromOffset(narrow and width - 76 or tabStart - 24, 24)
  info.Position = UDim2.fromOffset(16, narrow and 105 or 52)
  info.Size = UDim2.fromOffset(width - 32, narrow and 32 or 22)
- local tabWidth = narrow and (width - 48) / 4 or 70
  for i, button in ipairs(tabs) do
-  local x = narrow and 12 + (i - 1) * (tabWidth + 8) or width - 354 + (i - 1) * 74
+  local x = tabStart + (i - 1) * (tabWidth + 8)
   button.Position = UDim2.fromOffset(x, narrow and 56 or 6)
   button.Size = UDim2.fromOffset(tabWidth, 44)
   theme.Action(button, true, tab ~= i - 1)
  end
  offers.Position = UDim2.fromOffset(12, contentY)
  offers.Size = UDim2.fromOffset(bodyWidth, contentHeight)
- offers.CanvasSize = UDim2.fromOffset(0, narrow and 376 or 184)
- offers.Visible = tab ~= 3
+ local storyTab = tab == STORY_TAB
+ local offerPanelY = narrow and (storyTab and 64 or 192) or 0
+ local finished = storyTab and state.story and state.story.completed == state.story.total
+ offers.CanvasSize = UDim2.fromOffset(0, finished and 74 or offerPanelY + 184)
+ offers.Visible = tab ~= CAREER_TAB
+ storyComplete.Visible = finished == true
+ storyComplete.Size = UDim2.fromOffset(bodyWidth - 8, 74)
+ panel.Visible = not finished
  career.Position = UDim2.fromOffset(16, contentY)
  career.Size = UDim2.fromOffset(width - 32, contentHeight)
  career.Visible = tab == 3
- for _, label in ipairs({rank, rankGoal, chapterTitle, chapterNote, week, goals, access, historyTitle, history}) do
+ for _, label in ipairs({rank, rankGoal, week, goals, access, historyTitle, history}) do
   label.Size = UDim2.fromOffset(width - 46, label.Size.Y.Offset)
  end
  if career.Visible and state.career then
   local progress = state.career
-  local chapter, number = Story.Chapter(progress.rank)
-  chapterTitle.Text = string.format("Bab %d · %s", number, chapter.title)
-  chapterNote.Text = chapter.note
   rank.Text = string.format("%s · %d kiriman", progress.rank, state.deliveryCount)
   rankGoal.Text = progress.nextRank and string.format("%d kiriman lagi ke %s · +%d koin", progress.nextRemaining, progress.nextRank, progress.nextRankBonus)
    or "Pangkat tertinggi tercapai."
@@ -226,13 +235,14 @@ render=function()
  local offer=selected()board:SetAttribute('SelectedOffer28',offer and offer.id)
  for i,row in ipairs(rows)do
   local o=offerAt(i)local chosen=o and offer and o.id==offer.id
-  row.frame.Visible=tab~=3 row.frame.Active=open and o~=nil
+  row.frame.Visible = tab ~= CAREER_TAB and (not storyTab or o ~= nil)
+  row.frame.Active = open and o ~= nil
   row.frame.Position=UDim2.fromOffset(0,(i-1)*64)row.frame.Size=UDim2.fromOffset(left,56)
   row.name.Size=UDim2.fromOffset(left-20,19)row.dest.Size=UDim2.fromOffset(left-20,19)
   row.frame.BackgroundColor3=chosen and theme.Gold or theme.Soft row.outline.Color=chosen and theme.Ink or theme.Line
   row.name.Text=o and ((preview.Recommendation(state.career,o) and '★ ' or '')..o.name) or 'Memuat...'row.name.TextTruncate=Enum.TextTruncate.AtEnd row.dest.Text=o and(o.isBatch and('3 kiriman · finish +'..o.jobBonus)or o.destinationName)or ''
  end
- panel.Position=UDim2.fromOffset(narrow and 0 or left+8,narrow and 192 or 0)panel.Size=UDim2.fromOffset(right,184)
+ panel.Position=UDim2.fromOffset(narrow and 0 or left+8,offerPanelY)panel.Size=UDim2.fromOffset(right,184)
  destination.Size=UDim2.fromOffset(right-24,22)meta.Size=UDim2.fromOffset(right-24,18)
  local mapWidth=math.min(124,math.floor(right*.36))
  conditions.Size=UDim2.fromOffset(right-mapWidth-34,52)
@@ -243,20 +253,40 @@ render=function()
  destination.Text=offer and(offer.isBatch and offer.name or offer.destinationName)or 'Pilih pekerjaan'
  local distance=route and(string.format('%d stud',math.floor(route.distance+.5)))or 'Jalur belum tersedia'
  meta.Text=offer and(offer.packageType..' · '..distance..(preview.Recommendation(state.career,offer) and ' · mingguan' or ''))or ''
+ if storyTab and offer then
+  meta.Text = offer.cargo .. " · " .. offer.packageType .. " · " .. distance
+ end
  conditions.Text=offer and preview.Conditions(offer)or ''
+ if offer and offer.careBonus then
+  conditions.Text = string.format("Bonus +%d · kondisi akhir ≥%d · tanpa Pulihkan", offer.careBonus, offer.careCondition)
+ end
  if offer and offer.isBatch then local stops={}for i,id in ipairs(offer.batchDestinations)do stops[i]=i..'. '..config.Routes[id].Name..(offer.packageTypes[i]=='Rapuh'and ' · rapuh'or '')end conditions.Text=table.concat(stops,'\n')end
- reward.Text=offer and(not offer.contract and offer.jobBonus==0 and string.format('Dasar +%d\nTanpa bonus kerja',config.BaseReward)or string.format('Dasar +%d\n%s +%d*',config.BaseReward,offer.contract and 'Kontrak'or 'Kerja maks.',offer.jobBonus))or ''
- if offer and offer.isBatch then reward.Text=string.format('Dasar +%d/kiriman\nFinish maks. +%d*',config.BaseReward,offer.jobBonus)end
+ if not offer then
+  reward.Text = ""
+ elseif offer.storyChapter then
+  reward.Text = string.format("Dasar +%d\nBab cerita +%d", config.BaseReward, offer.storyBonus)
+ elseif offer.isBatch then
+  reward.Text = string.format("Dasar +%d/kiriman\nFinish maks. +%d*", config.BaseReward, offer.jobBonus)
+ elseif not offer.contract and offer.jobBonus == 0 then
+  reward.Text = string.format("Dasar +%d\nTanpa bonus kerja", config.BaseReward)
+ else
+  reward.Text = string.format("Dasar +%d\n%s +%d*", config.BaseReward, offer.contract and "Kontrak" or "Kerja maks.", offer.jobBonus)
+ end
  if near and os.clock()>=noticeUntil then
   if tab==2 then info.Text='*Finish mengikuti kondisi terendah; memakai Pulihkan menggugurkan bonus.'
   elseif tab==1 then info.Text='*Bonus bersyarat. Jarak belum termasuk perjalanan ke pos cap.'
   elseif tab==0 then info.Text='*Bonus kerja mengikuti kondisi. Bonus lain dihitung saat tiba.'end
  end
  local recommendation = tab ~= 3 and preview.Recommendation(state.career, offer)
- if near and os.clock() >= noticeUntil then
-  if state.deliveryCount == 0 and offer and offer.destinationId == "Rumah01" and tab == 0 then
-   info.Text = "Kiriman pembuka · Temui Bu Sari untuk memulai cerita."
-  elseif recommendation then
+ if os.clock() >= noticeUntil then
+  if storyTab and state.story then
+   if finished then
+    info.Text = string.format("%d/%d kiriman pameran selesai", state.story.completed, state.story.total)
+   elseif offer then
+    local actionHint = near and "Pameran Foto Kampung" or "Kembali ke depot untuk mengambil paket"
+    info.Text = string.format("Bab %d/%d · %s", offer.storyChapter, state.story.total, actionHint)
+   end
+  elseif near and recommendation then
    info.Text = "★ " .. recommendation .. " · kondisi ≥90 · tanpa Pulihkan"
   end
  end
@@ -274,7 +304,8 @@ render=function()
   mapView.Position = UDim2.fromOffset(12, contentY)
   mapView.Size = UDim2.fromOffset(bodyWidth, contentHeight)
   mapCaption.Size = UDim2.fromOffset(bodyWidth, 22)
-  mapCaption.Text = destination.Text .. " · " .. distance
+  mapCaption.Text = offer.isBatch and ("Depot → 1 → 2 → 3 · " .. distance)
+   or ("Depot → " .. destination.Text .. " · " .. distance)
   mapBack.Position = UDim2.new(0, 0, 1, -44)
   mapBack.Size = UDim2.fromOffset(bodyWidth, 44)
   diagram.Parent = mapView
@@ -284,7 +315,17 @@ render=function()
   diagram.Parent = panel
  end
  local active=open and not showMap and tab~=3 and near and hum and hum.Health>0 and offer~=nil and os.clock()>=pendingUntil
- accept.Active=active==true accept.AutoButtonColor=active==true accept.Text=os.clock()<pendingUntil and 'Menyiapkan...'or(offer and offer.isBatch and 'Ambil 3 kiriman'or 'Ambil pesanan')
+ accept.Active = active == true
+ accept.AutoButtonColor = accept.Active
+ if os.clock() < pendingUntil then
+  accept.Text = "Menyiapkan..."
+ elseif offer and offer.storyChapter then
+  accept.Text = "Ambil paket cerita"
+ elseif offer and offer.isBatch then
+  accept.Text = "Ambil 3 kiriman"
+ else
+  accept.Text = "Ambil pesanan"
+ end
  theme.Action(accept,active==true,false)
  if tab ~= 3 then draw(offer, diagram.Size.X.Offset, diagram.Size.Y.Offset) end
 end
@@ -294,18 +335,25 @@ bind(shared.Remotes.StateChanged.OnClientEvent,function(s,code)
  elseif code=='TooFar'then notice='Dekati depot untuk mengambil pesanan.'noticeUntil=os.clock()+3 end
  render()
 end)
-local openedFromResult = false
+local openedOnce = false
+local returnTab
 bind(root:GetAttributeChangedSignal("JobBoardOpen17"), function()
- if not root:GetAttribute("JobBoardOpen17") then
+ if root:GetAttribute("JobBoardOpen17") then
+  if root:GetAttribute("OpenStoryFromResult") then
+   root:SetAttribute("OpenStoryFromResult", nil)
+   tab, returnTab = STORY_TAB, STORY_TAB
+  elseif root:GetAttribute("OpenCareerFromResult") then
+   root:SetAttribute("OpenCareerFromResult", nil)
+   career.CanvasPosition = Vector2.zero
+   tab, returnTab = CAREER_TAB, 0
+  elseif not openedOnce and state.story and state.story.offer then
+   tab = STORY_TAB
+  end
+  openedOnce = true
+ else
   offers.CanvasPosition = Vector2.zero
   expandedMap = false
- end
- if root:GetAttribute("JobBoardOpen17") and root:GetAttribute("OpenCareerFromResult") then
-  root:SetAttribute("OpenCareerFromResult", nil)
-  career.CanvasPosition = Vector2.zero
-  tab, openedFromResult = 3, true
- elseif not root:GetAttribute("JobBoardOpen17") and openedFromResult then
-  tab, openedFromResult = 0, false
+  if returnTab then tab, returnTab = returnTab, nil end
  end
  render()
 end)

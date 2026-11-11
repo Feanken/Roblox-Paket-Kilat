@@ -58,6 +58,9 @@ function P.Projector(routes,width,height,margin)
  if minX==math.huge then return nil end
  local scale=math.min(math.max(1,width-2*margin)/math.max(1,maxX-minX),math.max(1,height-2*margin)/math.max(1,maxZ-minZ))
  local x=(width-(maxX-minX)*scale)/2 local y=(height-(maxZ-minZ)*scale)/2
- return function(p)return Vector2.new(x+(p.X-minX)*scale,height-y-(p.Z-minZ)*scale)end
+ -- Use the same orientation as the city signs and the overhead view.
+ return function(p)
+  return Vector2.new(x + (maxX - p.X) * scale, height - y - (p.Z - minZ) * scale)
+ end
 end
 return P

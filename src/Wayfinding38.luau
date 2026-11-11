@@ -59,16 +59,22 @@ local function rectangle(parent, color, position, size, zIndex)
 end
 
 local function drawMap(gui, hereX, hereZ)
-    local map = rectangle(gui, water, UDim2.fromScale(.04, .19), UDim2.fromScale(.92, .63))
-    map.ClipsDescendants = true
+    local background = rectangle(gui, water, UDim2.fromScale(.04, .19), UDim2.fromScale(.92, .63))
+    background.Name = "DistrictMap"
+    background.ClipsDescendants = true
 
+    -- Match the overhead city view. Local X increases toward the left of that view.
+    local pixelHeight = 7 * 48 * .63
+    local pixelSize = Vector2.new(pixelHeight * 620 / 362, pixelHeight)
+    local map = rectangle(background, water, UDim2.fromScale(.5, .5), UDim2.fromOffset(pixelSize.X, pixelSize.Y))
+    map.AnchorPoint = Vector2.new(.5, .5)
     local function point(x, z)
-        return Vector2.new((x + 460) / 620, (322 - z) / 362)
+        return Vector2.new((160 - x) / 620, (322 - z) / 362)
     end
 
     local function area(x1, z1, x2, z2, color)
-        local corner = point(x1, z2)
-        local size = point(x2, z1) - corner
+        local corner = point(x2, z2)
+        local size = point(x1, z1) - corner
         rectangle(map, color, UDim2.fromScale(corner.X, corner.Y), UDim2.fromScale(size.X, size.Y), 2)
     end
 
@@ -77,7 +83,6 @@ local function drawMap(gui, hereX, hereZ)
     area(-62, 202, 48, 266, Color3.fromRGB(65, 105, 75))
 
     -- Size and rotation use canvas pixels so diagonal roads keep their angle.
-    local pixelSize = Vector2.new(12 * 48 * .92, 7 * 48 * .63)
     local segments = {
         {-130,28,132,28}, {-130,144,132,144}, {-130,28,-130,144},
         {132,28,132,144}, {-24,28,-24,144},
@@ -100,7 +105,7 @@ local function drawMap(gui, hereX, hereZ)
         {"KOTA LAMA", 40, 82},
         {"TAMAN KOTA", -6, 250},
         {"BATA QUAY", -306, 262},
-        {"JEMBATAN", -149, 218},
+        {"JEMBATAN", -149, 121},
     } do
         local position = point(marker[2], marker[3])
         local title = label(map, marker[1], UDim2.fromScale(position.X, position.Y), UDim2.fromOffset(88, 18), cream, 4)
@@ -109,6 +114,9 @@ local function drawMap(gui, hereX, hereZ)
         title.BackgroundTransparency = .12
     end
 
+    local bridge = point(-149, 144)
+    local bridgeMark = rectangle(map, gold, UDim2.fromScale(bridge.X, bridge.Y), UDim2.fromOffset(5, 5), 4)
+    bridgeMark.AnchorPoint = Vector2.new(.5, .5)
     local position = point(hereX, hereZ)
     local marker = rectangle(map, gold, UDim2.fromScale(position.X, position.Y), UDim2.fromOffset(13, 13), 5)
     marker.AnchorPoint = Vector2.new(.5, .5)
@@ -117,6 +125,21 @@ local function drawMap(gui, hereX, hereZ)
     outline.Color = ink
     outline.Thickness = 2
     outline.Parent = marker
+end
+
+function Wayfinding.RefreshMaps()
+    assert(not game:GetService("RunService"):IsRunning(), "Run in Studio Edit")
+    local map = workspace.PaketKilat.Map
+    local basis = map.DepotPad.CFrame
+    for _, name in {"Depot", "Taman", "BataQuay"} do
+        local board = map.Wayfinding38[name].Board
+        local gui = board:FindFirstChildOfClass("SurfaceGui")
+        local previous = assert(gui:FindFirstChildOfClass("Frame"), "Missing map on " .. name)
+        local here = basis:PointToObjectSpace(board.Position)
+        drawMap(gui, here.X, here.Z)
+        previous:Destroy()
+    end
+    return 3
 end
 
 function Wayfinding.Build()
