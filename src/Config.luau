@@ -20,7 +20,7 @@ return table.freeze({
   Deliver="2/3 · Ikuti TUJUAN. Dekati titik serah, lalu Antar.",
   Dropped="Paket lepas: Ambil ulang, atau Pulihkan (-20 kondisi).",
   ReturnDepot="3/3 · Berhasil! Kembali ke DEPOT untuk pesanan kedua.",
-  Complete="Siap! Pilih rute, jaga paket, dan terus antar.",
+  Complete="Di depot, buka Karier untuk melihat pangkat dan target mingguan.",
  }),
  Performance=table.freeze({Duration=60,SlowFrameSeconds=0.1}),
 	ActionDistance=12, RequestCooldown=0.2, RecoveryCooldown=5,

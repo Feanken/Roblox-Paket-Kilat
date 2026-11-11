@@ -10,6 +10,8 @@ local P={
   {Name="KebunWarga",Id="rbxassetid://9112742473",Offset=Vector3.new(-62,3,1),Volume=.17,Min=8,Max=42,Phase=0},
   {Name="TamanTimur",Id="rbxassetid://9112742473",Offset=Vector3.new(115,3,80),Volume=.14,Min=7,Max=35,Phase=11},
   {Name="KebunPiknik",Id="rbxassetid://9112742473",Offset=Vector3.new(-60,3,101),Volume=.16,Min=7,Max=40,Phase=23},
+  {Name="AirMancurTamanKota",Id="rbxassetid://9120557315",Offset=Vector3.new(-9,3,232),Volume=.19,Min=8,Max=46,Phase=7},
+  {Name="KanalBata",Id="rbxassetid://9120557315",Offset=Vector3.new(-152,2,159),Volume=.13,Min=6,Max=43,Phase=17},
   {Name="AirMancur",Id="rbxassetid://9120557315",Offset=Vector3.new(48,3,86),Volume=.21,Min=6,Max=34,Phase=4},
  },
  Cues={
@@ -18,6 +20,7 @@ local P={
   Impact={Id="rbxassetid://9113579352",Volume=.38,Speed=1,Cooldown=.65,Fallback="rbxasset://sounds/action_jump_land.mp3"},
   Delivered={Id="rbxassetid://1839881844",Volume=.34,Speed=1,Cooldown=.6,Fallback="rbxasset://sounds/volume_slider.ogg",Important=true,DuckSeconds=5.5},
   Excellent={Id="rbxassetid://1836860398",Volume=.31,Speed=1,Cooldown=.6,Fallback="rbxasset://sounds/volume_slider.ogg",Important=true,DuckSeconds=5.8},
+  Career={Id="rbxassetid://9126073001",Volume=.31,Speed=.92,Cooldown=.6,Fallback="rbxasset://sounds/volume_slider.ogg",Important=true,DuckSeconds=2.5},
   Stamp={Id="rbxassetid://9126073001",Volume=.16,Speed=1.4,Cooldown=.3,Fallback="rbxasset://sounds/volume_slider.ogg"},
   Recover={Id="rbxasset://sounds/volume_slider.ogg",Volume=.17,Speed=.85,Cooldown=.4},
   Click={Id="rbxasset://sounds/volume_slider.ogg",Volume=.07,Speed=1.9,Cooldown=.07},

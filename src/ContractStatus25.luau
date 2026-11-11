@@ -19,7 +19,7 @@ function M.Get(c,s)
  if c.kind=='explore'and s.stamps<c.stamps then
   return result('stamps',false,false,'Cap belum cukup',string.format('Cap %d/%d · bonus +%d',s.stamps,c.stamps,c.reward))
  end
- local short=c.kind=='priority'and string.format('Prioritas %ds · +%d',math.max(0,math.ceil(c.seconds-s.duration)),c.reward)
+ local short=c.kind=='priority'and string.format('%s %ds · +%d',c.express and 'Ekspres' or 'Prioritas',math.max(0,math.ceil(c.seconds-s.duration)),c.reward)
   or c.kind=='perfect'and string.format('Mulus %d · +%d',c.condition,c.reward)or 'Cap lengkap · antar paket'
  return result('ready',true,false,'Syarat terpenuhi',short)
 end

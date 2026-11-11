@@ -40,7 +40,7 @@ local function cue(name)
  if not running or not s or clock-(cueClocks[name]or -math.huge)<spec.Cooldown then return end
  cueClocks[name]=clock
  if spec.Important then
-  for _,key in {"Stamp","Impact","Success","Delivered","Excellent"}do if key~=name and cues[key]then cues[key]:Stop()end end
+  for _,key in {"Stamp","Impact","Success","Delivered","Excellent","Career"}do if key~=name and cues[key]then cues[key]:Stop()end end
   duckUntil=clock+(spec.DuckSeconds or 1.6)
  elseif name=="Impact"then duckUntil=clock+.8 end
  if s.IsLoaded and levels.Effects>0 then
@@ -166,7 +166,8 @@ bind(shared.Remotes.StateChanged.OnClientEvent,function(snapshot,code)
   local id=snapshot.lastResult and snapshot.lastResult.orderId
   if not id or delivered[id]then return end delivered[id]=true table.insert(deliveredOrder,id)
   local result=snapshot.lastResult
-  if result.rating and result.rating.stars==3 or result.isBatch and result.batchIndex==result.batchTotal then name="Excellent"end
+  if result.promotion or (result.weeklyBonus or 0) > 0 then name="Career"
+  elseif result.rating and result.rating.stars==3 or result.isBatch and result.batchIndex==result.batchTotal then name="Excellent"end
   if #deliveredOrder>20 then delivered[table.remove(deliveredOrder,1)]=nil end
  end
  cue(name)

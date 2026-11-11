@@ -35,7 +35,7 @@ function E.PeekAssignment(player)
 end
 function E.PeekOffers(player)
  local s=E.sessions[player.UserId]if not s then return {}end
- if not s.offers then s.offers=Offers.Build(C,s.nextOrderIndex,s.offerRevision,Tuning.Get())end
+ if not s.offers then s.offers=Offers.Build(C,s.nextOrderIndex,s.offerRevision,Tuning.Get(),Career.HasExpress(s.profile.deliveryCount))end
  return s.offers
 end
 function E.PeekBatchOffers(player)
@@ -46,10 +46,14 @@ end
 function E.ResolveOffer(player,id)
  for _,offer in ipairs(E.PeekOffers(player))do if offer.id==id then return offer end end
 end
+local function invalidateOffers(s)
+ s.offerRevision += 1
+ s.offers, s.batchOffers = nil, nil
+end
 function E.AdvanceAssignment(player)
 	local s=E.sessions[player.UserId]
 	s.nextOrderIndex=s.nextOrderIndex%#C.OrderSchedule+1
- s.offerRevision+=1 s.offers=nil s.batchOffers=nil
+ invalidateOffers(s)
 end
 function E.GetBest(player,destinationId,packageType)
 	local s=E.sessions[player.UserId]
@@ -126,6 +130,7 @@ function E.Award(player,order,now)
  local stamps=require(script.Parent.CityBonus13).Snapshot(order)
  result.contractBonus,result.contractSucceeded,result.contractStatus=Contracts.Evaluate(order.contract,result,stamps and stamps.count or 0)
  result.contractKind=order.contract and order.contract.kind
+ result.isExpress=order.contract and order.contract.express==true or false
  result.total+=result.contractBonus
  result.isBatch=order.isBatch==true result.batchIndex=order.batchIndex result.batchTotal=order.batchTotal result.batchName=order.batchName
  result.batchBonusEligible=order.isBatch and not order.batchRecovered and order.recoveryCount==0 or false
@@ -148,7 +153,9 @@ function E.Award(player,order,now)
  order.rewardProcessed=true
 	s.creditedOrders[order.orderId]=true
 	p.coins+=result.total
+	local hadExpress = Career.HasExpress(p.deliveryCount)
 	p.deliveryCount+=1
+	if not hadExpress and Career.HasExpress(p.deliveryCount) then invalidateOffers(s) end
 	p.careerWeek=nextWeek
 	if newRecord then p.bestTimes[key]=duration end
 	result.bestTime=p.bestTimes[key]

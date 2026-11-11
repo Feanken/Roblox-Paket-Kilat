@@ -192,6 +192,8 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
     ratingHint.Text = result.promotion
    elseif (result.weeklyBonus or 0) > 0 then
     title.Text = "RUTE MINGGUAN SELESAI!"
+   elseif result.isExpress and result.contractSucceeded then
+    title.Text = "EKSPRES BERHASIL!"
    end
    detail.TextWrapped=true
    detail.TextSize=11

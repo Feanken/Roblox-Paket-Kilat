@@ -39,9 +39,11 @@ rankGoal.TextColor3 = theme.Muted
 local week = text(career, "Week", 0, 48, 0, 21, 14)
 local goals = text(career, "Goals", 0, 72, 0, 57, 12)
 goals.TextYAlignment = Enum.TextYAlignment.Top
-local historyTitle = text(career, "HistoryTitle", 0, 138, 0, 20, 13)
+local access = text(career, "ExpressAccess", 0, 132, 0, 20, 11)
+access.TextColor3 = theme.Muted
+local historyTitle = text(career, "HistoryTitle", 0, 164, 0, 20, 13)
 historyTitle.Text = "Riwayat sesi"
-local history = text(career, "History24", 0, 160, 0, 0, 11)
+local history = text(career, "History24", 0, 186, 0, 0, 11)
 history.Font = Enum.Font.GothamMedium
 history.TextYAlignment = Enum.TextYAlignment.Top
 history.AutomaticSize = Enum.AutomaticSize.Y
@@ -112,7 +114,7 @@ render=function()
  career.Size = UDim2.fromOffset(width - 32, 190)
  career.Visible = tab == 3
  panel.Visible = tab ~= 3
- for _, label in ipairs({rank, rankGoal, week, goals, historyTitle, history}) do
+ for _, label in ipairs({rank, rankGoal, week, goals, access, historyTitle, history}) do
   label.Size = UDim2.fromOffset(width - 46, label.Size.Y.Offset)
  end
  if career.Visible and state.career then
@@ -127,6 +129,8 @@ render=function()
    table.insert(checklist, (goal.done and "✓ " or "○ ") .. goal.label)
   end
   goals.Text = table.concat(checklist, "\n")
+  access.Text = progress.expressUnlocked and "Ekspres Distrik tersedia di tab Kontrak"
+   or string.format("Ekspres Distrik terbuka setelah %d kiriman lagi", progress.expressRemaining)
  end
  local lines={}
  for i,v in state.recentDeliveries or {}do table.insert(lines,string.format('%d. %s · %d★ · +%d koin\n%s · %d/100 · %.1fs · %s',i,v.destinationName,v.stars,v.total,v.jobName or 'Pesanan',v.condition or 0,v.duration or 0,v.contractReason or 'Tanpa kontrak'))end

@@ -4,11 +4,12 @@ local WEEK_SECONDS = 7 * 24 * 60 * 60
 local MONDAY_OFFSET = 3 * 24 * 60 * 60
 local WEEK_BONUS = 90
 local COMPLETE_MASK = 7
+local EXPRESS_UNLOCK = 12
 
 local ranks = {
 	{count = 0, name = "Kurir Pemula", bonus = 0},
 	{count = 3, name = "Kurir Kampung", bonus = 30},
-	{count = 12, name = "Kurir Kota", bonus = 60},
+	{count = EXPRESS_UNLOCK, name = "Kurir Kota", bonus = 60},
 	{count = 30, name = "Kurir Lintas Distrik", bonus = 120},
 	{count = 60, name = "Kurir Andalan", bonus = 200},
 }
@@ -50,6 +51,10 @@ local function matches(goal, result)
 	return result.isBatch and result.batchIndex == result.batchTotal and result.batchBonusEligible
 end
 
+function Career.HasExpress(deliveryCount)
+	return deliveryCount >= EXPRESS_UNLOCK
+end
+
 function Career.Snapshot(profile, now)
 	local rank, nextRank = currentRank(profile.deliveryCount)
 	local week, mask, circuit = currentWeek(profile.careerWeek, now)
@@ -61,6 +66,8 @@ function Career.Snapshot(profile, now)
 	end
 	return {
 		rank = rank.name,
+		expressUnlocked = Career.HasExpress(profile.deliveryCount),
+		expressRemaining = math.max(0, EXPRESS_UNLOCK - profile.deliveryCount),
 		nextRank = nextRank and nextRank.name,
 		nextRemaining = nextRank and nextRank.count - profile.deliveryCount,
 		nextRankBonus = nextRank and nextRank.bonus,
