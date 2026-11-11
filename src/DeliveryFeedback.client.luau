@@ -45,9 +45,39 @@ local highlight=Instance.new("Highlight") highlight.Name="PaketKilatLocalFocus"
 highlight.DepthMode=Enum.HighlightDepthMode.Occluded highlight.FillTransparency=.85
 highlight.OutlineTransparency=.1 highlight.FillColor=Color3.fromRGB(255,208,96)
 highlight.OutlineColor=Color3.fromRGB(255,208,96) highlight.Parent=workspace
-local continueBatch=Instance.new('TextButton')continueBatch.Name='ContinueBatch31'continueBatch.Text='Lanjut kirim'continueBatch.ZIndex=22 continueBatch.Parent=toast Theme.ToolbarButton(continueBatch)Theme.Action(continueBatch,true,false)
-local stopBatch=Instance.new('TextButton')stopBatch.Name='StopBatch31'stopBatch.Text='Cukup dulu'stopBatch.ZIndex=22 stopBatch.Parent=toast Theme.ToolbarButton(stopBatch)
-local expires,noticeExpires=0,0
+local handoff = Instance.new("Frame")
+handoff.Name = "BatchHandoff"
+handoff.AnchorPoint = Vector2.new(.5, 1)
+handoff.BackgroundColor3 = Theme.Cream
+handoff.BorderSizePixel = 0
+handoff.ZIndex = 20
+handoff.Visible = false
+handoff.Parent = ui
+corner:Clone().Parent = handoff
+local handoffStroke = stroke:Clone()
+handoffStroke.Thickness = 1
+handoffStroke.Parent = handoff
+
+local handoffReward = text(handoff, "Reward", UDim2.new(1, -102, 0, 16), UDim2.fromOffset(12, 7), "", 10)
+local handoffNext = text(handoff, "Next", UDim2.new(1, -102, 0, 22), UDim2.fromOffset(12, 23), "", 12)
+for _, label in ipairs({handoffReward, handoffNext}) do
+ label.TextXAlignment = Enum.TextXAlignment.Left
+ label.TextTruncate = Enum.TextTruncate.AtEnd
+ label.ZIndex = 21
+end
+handoffReward.TextColor3 = Theme.Muted
+handoffNext.TextColor3 = Theme.Ink
+
+local stopBatch = Instance.new("TextButton")
+stopBatch.Name = "StopBatch31"
+stopBatch.Text = "Akhiri"
+stopBatch.Position = UDim2.new(1, -80, 0, 4)
+stopBatch.Size = UDim2.fromOffset(76, 44)
+stopBatch.ZIndex = 22
+stopBatch.Parent = handoff
+Theme.ToolbarButton(stopBatch)
+local expires, noticeExpires, handoffExpires = 0, 0, 0
+local handoffOrder
 local countFrom,countTotal=0,0
 local tween
 local function ownPackage()
@@ -59,11 +89,10 @@ local function ownPackage()
 end
 local function refresh()
  local width,height=ui.AbsoluteSize.X,ui.AbsoluteSize.Y
- local batchActive=state.batch~=nil and state.lastResult and state.lastResult.isBatch and state.status~='Idle'
- toast.Size=UDim2.fromOffset(math.min(330,math.max(260,width-40)),batchActive and 260 or 212)
- local bw=(toast.Size.X.Offset-32)/2
- continueBatch.Position=UDim2.fromOffset(12,204)continueBatch.Size=UDim2.fromOffset(bw,44)
- stopBatch.Position=UDim2.fromOffset(20+bw,204)stopBatch.Size=UDim2.fromOffset(bw,44)
+ local mobile = Theme.IsMobile(ui)
+ toast.Size = UDim2.fromOffset(math.min(330, math.max(260, width - 40)), 212)
+ handoff.Size = UDim2.fromOffset(math.min(294, width - 24), 52)
+ handoff.Position = UDim2.new(.5, 0, 1, mobile and -76 or -142)
  if countTotal>0 then reward.Text=string.format('+%d KOIN',math.floor(countTotal*math.clamp((os.clock()-countFrom)/.65,0,1)))end
  -- Keep transient notices below the upper HUD on short landscape screens.
  impact.Position=UDim2.new(.5,0,0,math.min(216,height*.59))
@@ -71,8 +100,12 @@ local function refresh()
  local boardOpen=ui:GetAttribute('JobBoardOpen17')==true
  local shopOpen=ui.Shop.Visible or boardOpen or ui:GetAttribute('AudioOpen33')==true
  toast.Visible=os.clock()<expires and not shopOpen
- continueBatch.Visible=toast.Visible and batchActive==true stopBatch.Visible=continueBatch.Visible
- stopBatch.Active=stopBatch.Visible and state.orderId~=nil
+ local noticeActive = os.clock() < noticeExpires
+ local mobileOverlay = mobile and (ui.Guide.Visible or ui:GetAttribute("MobileMenuOpen18") or ui:GetAttribute("MobileTargetOpen18"))
+ handoff.Visible = os.clock() < handoffExpires and state.batch ~= nil and state.orderId == handoffOrder
+  and state.status == "Carrying" and not toast.Visible and not shopOpen and not noticeActive and not mobileOverlay
+ stopBatch.Active = handoff.Visible
+ stopBatch.AutoButtonColor = handoff.Visible
  ui.TopCard.Visible=not toast.Visible and not shopOpen
  ui.StorageStatus.Visible=not toast.Visible and not shopOpen and(not Theme.IsMobile(ui)or ui.StorageStatus:GetAttribute("Alert18")==true)
  ui.Actions.Visible=not shopOpen and not toast.Visible and(not Theme.IsMobile(ui)or not ui:GetAttribute("MobileTargetOpen18"))
@@ -122,7 +155,19 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
   -- Delivered uses the server order ID/result. Replay failures never trigger this branch.
   local key=result.orderId or snapshot.orderId or (tostring(result.destinationName)..":"..tostring(result.duration)..":"..tostring(snapshot.deliveryCount))
   if key~=shownOrder then
-   shownOrder=key expires=os.clock()+5 noticeExpires=0
+   shownOrder = key
+   noticeExpires, handoffExpires = 0, 0
+   if result.isBatch and snapshot.batch and snapshot.status == "Carrying" and snapshot.orderId
+    and result.batchIndex < result.batchTotal then
+    expires = 0
+    handoffOrder = snapshot.orderId
+    handoffReward.Text = string.format("Kiriman %d/%d · +%d koin", result.batchIndex, result.batchTotal, result.total)
+    handoffNext.Text = snapshot.destinationName or "Lanjut ke tujuan berikut"
+    handoffExpires = os.clock() + 5
+    refresh()
+    return
+   end
+   expires = os.clock() + 5
    title.Text=result.newRecord and "REKOR BARU!"or result.rating and result.rating.stars==3 and "KIRIMAN SEMPURNA!"or "PENGANTARAN BERHASIL"
    countFrom=os.clock()countTotal=result.total reward.Text='+0 KOIN'
    local rating=result.rating
@@ -134,8 +179,9 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    for _,item in ipairs({{'Cap',result.routeBonus},{'Kerja',result.jobBonus},{'Target',result.challengeBonus},{'Kontrak',result.contractBonus},{'Borongan',result.batchBonus}})do if(item[2]or 0)>0 then table.insert(extras,item[1]..' +'..item[2])end end
    detail.Text=string.format('Dasar %d · Kondisi %d · Waktu %d\n%s',result.baseReward,result.conditionBonus,result.timeBonus,#extras>0 and table.concat(extras,' · ')or result.isBatch and result.batchIndex<result.batchTotal and 'Bonus finish dinilai setelah 3 kiriman.'or 'Tanpa bonus tambahan')
    if result.isBatch then
-    title.Text=result.batchIndex==result.batchTotal and 'BORONGAN SELESAI!'or('KIRIMAN '..result.batchIndex..'/'..result.batchTotal)
-    ratingHint.Text=result.batchIndex<result.batchTotal and 'Kiriman berikutnya sudah di tas.'or result.batchBonusEligible and('Bonus finish +'..result.batchBonus)or 'Bonus finish gugur: dipulihkan.'
+    title.Text = result.batchInterrupted and "BORONGAN TERHENTI" or "BORONGAN SELESAI!"
+    ratingHint.Text = result.batchInterrupted and "Kiriman ini tetap dibayar."
+     or result.batchBonusEligible and ("Bonus akhir +" .. result.batchBonus) or "Bonus akhir gugur: paket dipulihkan."
     streak.Text=string.format('Borongan +%d terkumpul · %.1f dtk',result.batchEarned,result.batchDuration)
    end
    if not result.isBatch and (result.challengeBonus or 0)>0 then
@@ -154,20 +200,23 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
  elseif code=="Recover" then
   impact.Text="Paket kembali ke petak pemulihan" noticeExpires=os.clock()+2
  elseif code=="Start" or code=="Respawned" or code=="Cancelled" or code=="BatchCancelled" then
-  expires=0 noticeExpires=0
+  expires, noticeExpires, handoffExpires = 0, 0, 0
  end
  refresh()
 end)
-connect(continueBatch.Activated,function()expires=0 refresh()end)
-connect(stopBatch.Activated,function()if state.batch and state.orderId then remote.ActionRequest:FireServer('CancelBatch',state.orderId)end end)
+connect(stopBatch.Activated, function()
+ if handoff.Visible and state.batch and state.orderId == handoffOrder then
+  remote.ActionRequest:FireServer("CancelBatch", handoffOrder)
+ end
+end)
 connect(close.Activated,function()toast:SetAttribute('DismissedOrder22',shownOrder)expires=0 refresh()end)
 local elapsed=0
 connect(RunService.Heartbeat,function(dt) elapsed+=dt if elapsed>=.1 then elapsed=0 refresh() end end)
-connect(player.CharacterAdded,function() expires=0 noticeExpires=0 highlight.Enabled=false end)
+connect(player.CharacterAdded,function() expires, noticeExpires, handoffExpires = 0, 0, 0 highlight.Enabled=false end)
 connect(script.Destroying,function()
  for _,c in ipairs(connections) do c:Disconnect() end
  if tween then tween:Cancel() end
- highlight:Destroy() toast:Destroy() impact:Destroy()
+ highlight:Destroy() toast:Destroy() impact:Destroy() handoff:Destroy()
 end)
 -- Request the current authoritative state if initial events preceded this script.
 task.delay(.6,function() if script.Parent then remote.ActionRequest:FireServer("Sync") end end)
