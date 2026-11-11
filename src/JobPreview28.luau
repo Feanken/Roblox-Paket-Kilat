@@ -29,6 +29,26 @@ function P.Conditions(offer)
  end
  return offer.description or ''
 end
+-- Suggestions describe the existing offers and do not affect eligibility or payment.
+function P.Recommendation(career, offer)
+ if not career or not offer then return nil end
+ for _, goal in ipairs(career.goals or {}) do
+  if goal.done then continue end
+  local matches = goal.packageType and offer.packageType == goal.packageType
+   or goal.contract and offer.contract ~= nil
+   or goal.batch and offer.isBatch == true
+  if goal.destination then
+   if offer.isBatch then
+    matches = table.find(offer.batchDestinations, goal.destination) ~= nil
+   else matches = offer.destinationId == goal.destination end
+  end
+  if goal.packageType and offer.isBatch then
+   matches = table.find(offer.packageTypes, goal.packageType) ~= nil
+  end
+  if matches then return goal.label end
+ end
+ return nil
+end
 function P.Projector(routes,width,height)
  local minX,maxX,minZ,maxZ=math.huge,-math.huge,math.huge,-math.huge
  for _,points in pairs(routes)do for _,p in ipairs(points)do

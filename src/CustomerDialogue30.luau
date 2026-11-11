@@ -2,6 +2,9 @@
 local Status=require(script.Parent.ContractStatus25)
 local M={}
 local greetings={
+ CBD01='Selamat datang di Menara Kilat. Paket kantor bisa diantar di petak depan.',
+ BQ10='Paket gambar untuk studio kami? Antar di sini, ya.',
+ BQ16='Selamat datang di galeri! Aku menunggu kirimanmu.',
  Rumah01='Halo, kurir! Paketnya boleh diantar di sini.',
  Rumah02='Halo! Aku tunggu paketnya di depan warung.',
  Rumah03='Paket untukku? Aku sudah menunggu!',
@@ -27,6 +30,7 @@ function M.Reaction(result,hasRelay,count)
  local pool=reactions[stars]local line=pool[((count or 1)-1)%#pool+1]
  if result.isBatch then line=result.batchIndex<result.batchTotal and 'Paketku sudah kuterima. Semangat untuk kiriman berikutnya!'or 'Semua kiriman borongan selesai. Terima kasih, kurir!'end
  if result.contractSucceeded then line='Targetmu tercapai! Paketnya sudah kuterima.'end
+ if result.isExpress and result.contractSucceeded then line='Paket ekspres tiba tepat waktu. Terima kasih sudah menjaganya!'end
  if hasRelay then line..=' Ada titipan lagi.'end
  return line
 end

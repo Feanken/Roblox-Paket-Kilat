@@ -54,7 +54,10 @@ local function selected()
  if tab==3 then return nil end
  local first
  for i=1,3 do local offer=offerAt(i)
-  if offer then first=first or offer;if selectedIds[tab]==offer.id then return offer end end
+  if offer then
+   if not first or not preview.Recommendation(state.career, first) and preview.Recommendation(state.career, offer) then first = offer end
+   if selectedIds[tab] == offer.id then return offer end
+  end
  end
  selectedIds[tab]=first and first.id return first
 end
@@ -149,7 +152,7 @@ render=function()
   row.frame.Position=UDim2.fromOffset(12,76+(i-1)*64)row.frame.Size=UDim2.fromOffset(left,56)
   row.name.Size=UDim2.fromOffset(left-20,19)row.dest.Size=UDim2.fromOffset(left-20,19)
   row.frame.BackgroundColor3=chosen and theme.Gold or theme.Soft row.outline.Color=chosen and theme.Ink or theme.Line
-  row.name.Text=o and o.name or 'Memuat...'row.dest.Text=o and(o.isBatch and('3 kiriman · finish +'..o.jobBonus)or o.destinationName)or ''
+  row.name.Text=o and ((preview.Recommendation(state.career,o) and '★ ' or '')..o.name) or 'Memuat...'row.name.TextTruncate=Enum.TextTruncate.AtEnd row.dest.Text=o and(o.isBatch and('3 kiriman · finish +'..o.jobBonus)or o.destinationName)or ''
  end
  panel.Position=UDim2.fromOffset(left+20,76)panel.Size=UDim2.fromOffset(right,184)
  destination.Size=UDim2.fromOffset(right-24,22)meta.Size=UDim2.fromOffset(right-24,18)
@@ -161,7 +164,7 @@ render=function()
  local route=offer and preview.OfferRoute(routes,offer)
  destination.Text=offer and(offer.isBatch and offer.name or offer.destinationName)or 'Pilih pekerjaan'
  local distance=route and(string.format('%d stud',math.floor(route.distance+.5)))or 'Jalur belum tersedia'
- meta.Text=offer and(offer.packageType..' · '..distance..' · rute dasar')or ''
+ meta.Text=offer and(offer.packageType..' · '..distance..(preview.Recommendation(state.career,offer) and ' · mingguan' or ''))or ''
  conditions.Text=offer and preview.Conditions(offer)or ''
  if offer and offer.isBatch then local stops={}for i,id in ipairs(offer.batchDestinations)do stops[i]=i..'. '..config.Routes[id].Name..(offer.packageTypes[i]=='Rapuh'and ' · rapuh'or '')end conditions.Text=table.concat(stops,'\n')end
  reward.Text=offer and(not offer.contract and offer.jobBonus==0 and string.format('Dasar +%d\nTanpa bonus kerja',config.BaseReward)or string.format('Dasar +%d\n%s +%d*',config.BaseReward,offer.contract and 'Kontrak'or 'Kerja maks.',offer.jobBonus))or ''
@@ -170,6 +173,10 @@ render=function()
   if tab==2 then info.Text='*Finish mengikuti kondisi terendah; memakai Pulihkan menggugurkan bonus.'
   elseif tab==1 then info.Text='*Bonus bersyarat. Jarak belum termasuk perjalanan ke pos cap.'
   elseif tab==0 then info.Text='*Bonus kerja mengikuti kondisi. Bonus lain dihitung saat tiba.'end
+ end
+ local recommendation = tab ~= 3 and preview.Recommendation(state.career, offer)
+ if recommendation and near and os.clock() >= noticeUntil then
+  info.Text = "★ " .. recommendation .. " · kondisi ≥90 · tanpa Pulihkan"
  end
  local active=open and tab~=3 and near and hum and hum.Health>0 and offer~=nil and os.clock()>=pendingUntil
  accept.Active=active==true accept.AutoButtonColor=active==true accept.Text=os.clock()<pendingUntil and 'Menyiapkan...'or(offer and offer.isBatch and 'Ambil 3 kiriman'or 'Ambil pesanan')

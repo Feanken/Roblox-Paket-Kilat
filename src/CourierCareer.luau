@@ -61,7 +61,8 @@ function Career.Snapshot(profile, now)
 	local goals, completed = {}, 0
 	for i, goal in ipairs(circuit.goals) do
 		local done = bit32.btest(mask, bit32.lshift(1, i - 1))
-		goals[i] = {label = goal.label, done = done}
+		goals[i] = {label = goal.label, done = done, destination = goal.destination,
+			packageType = goal.packageType, contract = goal.contract, batch = goal.batch}
 		if done then completed += 1 end
 	end
 	return {

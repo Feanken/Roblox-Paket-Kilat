@@ -9,7 +9,14 @@ local function get(player)
 end
 function M.Snapshot(player)
  local s=get(player)
- return {stamina=math.floor(s.stamina+.5),grip=math.floor(s.grip+.5),sprinting=s.sprinting,resting=s.resting==true,exhausted=s.exhausted,gripLevel=s.gripLevel or 0,gripMultiplier=s.gripMultiplier or 1,available=E~=nil and E.Has(player)}
+ local order = D and D.orders[player.UserId]
+ local dropInSeconds
+ if s.sprinting and s.moving and order and order.status == "Carrying" and not order.outOfBounds then
+  local drain = (order.packageType == "Rapuh" and s.tuning.FragileGripDrain or s.tuning.GripDrain) * (s.gripMultiplier or 1)
+  local seconds = s.grip / drain
+  if seconds <= s.stamina / s.tuning.StaminaDrain then dropInSeconds = seconds end
+ end
+ return {dropInSeconds=dropInSeconds,stamina=math.floor(s.stamina+.5),grip=math.floor(s.grip+.5),sprinting=s.sprinting,resting=s.resting==true,exhausted=s.exhausted,gripLevel=s.gripLevel or 0,gripMultiplier=s.gripMultiplier or 1,available=E~=nil and E.Has(player)}
 end
 function M.Intent(player,...)
  local wants=...
@@ -42,6 +49,7 @@ local function tickPlayer(player,dt)
  local regen=s.resting and s.tuning.RestRegenMultiplier or 1
  local sprint=s.wants and os.clock()<s.lease and not s.exhausted
  local moving=Vector3.new(root.AssemblyLinearVelocity.X,0,root.AssemblyLinearVelocity.Z).Magnitude>2
+ s.moving=moving
  if sprint and moving then
   s.stamina=math.max(0,s.stamina-s.tuning.StaminaDrain*dt)
   if s.stamina<=0 then s.exhausted=true sprint=false s.wants=false s.lease=0 end

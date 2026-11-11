@@ -158,8 +158,16 @@ CAS:BindAction("PKMusic33",function(_,state)
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.M)
 local delivered={}local deliveredOrder={}
+local gripWarned, gripOrder = false, nil
 local codes={Start="Pickup",Pickup="Pickup",Drop="Drop",Impact="Impact",HardLanding="Impact",Slip="Impact",Barrier="Impact",GripLost="Impact",Recover="Recover",CityStamp="Stamp",Delivered="Delivered",Purchased="Success",GripUpgraded="Success",Equipped="Click"}
 bind(shared.Remotes.StateChanged.OnClientEvent,function(snapshot,code)
+ local movement = snapshot.movement
+ if gripOrder ~= snapshot.orderId then gripOrder, gripWarned = snapshot.orderId, false end
+ if movement and movement.grip >= 50 then gripWarned = false end
+ if movement and movement.dropInSeconds and movement.dropInSeconds <= 1.5 and not gripWarned then
+  gripWarned = true
+  cue("GripWarning")
+ end
  local name=codes[code]if not name then return end
  if code=="Delivered"then
   if panel.Visible then open(false)end

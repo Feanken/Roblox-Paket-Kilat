@@ -83,12 +83,16 @@ local function render()
  grip.Text=state.status=="Carrying"and string.format("GENGGAMAN %d · %s",m.grip,state.packageType=="Rapuh"and "RAPUH"or "paket biasa")or "GENGGAMAN · pulih"
  if state.status=='Carrying'and m.grip<=25 then grip.Text='PELANKAN · genggaman '..m.grip end
  if mobile then stamina.Text="Lari "..m.stamina grip.Text="Pegang "..m.grip end
+ if m.dropInSeconds and m.dropInSeconds <= 2 then
+  grip.Text = mobile and string.format("Lepas sprint %.1fs", m.dropInSeconds)
+   or string.format("LEPAS SPRINT · paket terlepas %.1f dtk", m.dropInSeconds)
+ end
  if m.resting then
   stamina.Text=mobile and('Istirahat '..m.stamina)or('ISTIRAHAT · stamina '..m.stamina)
   grip.Text=mobile and('Pegang '..m.grip)or('GENGGAMAN '..m.grip..' · lompat untuk berdiri')
  end
  staminaFill.Size=UDim2.fromScale(m.stamina/100,1)gripFill.Size=UDim2.fromScale(m.grip/100,1)
- gripFill.BackgroundColor3=m.grip<=25 and Color3.fromRGB(255,130,81)or Color3.fromRGB(255,207,91)
+ gripFill.BackgroundColor3=(m.grip<=25 or m.dropInSeconds and m.dropInSeconds<=2) and Color3.fromRGB(255,130,81)or Color3.fromRGB(255,207,91)
 end
 bind(shared.Remotes.StateChanged.OnClientEvent,function(snapshot,code)
  state=snapshot

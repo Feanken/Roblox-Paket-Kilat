@@ -22,6 +22,7 @@ local P={
   Excellent={Id="rbxassetid://1836860398",Volume=.31,Speed=1,Cooldown=.6,Fallback="rbxasset://sounds/volume_slider.ogg",Important=true,DuckSeconds=5.8},
   Career={Id="rbxassetid://9126073001",Volume=.31,Speed=.92,Cooldown=.6,Fallback="rbxasset://sounds/volume_slider.ogg",Important=true,DuckSeconds=2.5},
   Stamp={Id="rbxassetid://9126073001",Volume=.16,Speed=1.4,Cooldown=.3,Fallback="rbxasset://sounds/volume_slider.ogg"},
+  GripWarning={Id="rbxasset://sounds/volume_slider.ogg",Volume=.13,Speed=.8,Cooldown=3},
   Recover={Id="rbxasset://sounds/volume_slider.ogg",Volume=.17,Speed=.85,Cooldown=.4},
   Click={Id="rbxasset://sounds/volume_slider.ogg",Volume=.07,Speed=1.9,Cooldown=.07},
   Success={Id="rbxassetid://9126073001",Volume=.18,Speed=1.15,Cooldown=.3,Fallback="rbxasset://sounds/volume_slider.ogg"},

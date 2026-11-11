@@ -35,13 +35,16 @@ local function create(id, index)
 	end
 	local skin = index % 2 == 0 and Color3.fromRGB(177, 124, 91) or Color3.fromRGB(208, 155, 114)
 	local ink = Color3.fromRGB(41, 49, 53)
-	piece("Torso", Vector3.new(1.5, 1.7, .8), palette[index])
+	piece("Torso", Vector3.new(1.5, 1.7, .8), palette[(index - 1) % #palette + 1])
 	piece("Head", Vector3.new(1.12, 1.12, 1.06), skin, Enum.PartType.Ball)
 	for _, side in {"Left", "Right"} do
 		piece(side .. "Arm", Vector3.new(.45, 1.6, .55), skin)
 		piece(side .. "Leg", Vector3.new(.58, 1.6, .65), ink)
 	end
 	piece("Hair", Vector3.new(1.18, .28, 1.1), Color3.fromRGB(68, 49, 39))
+ if Config.Routes[id].DepotJobOnly then
+  piece("Badge", Vector3.new(.28, .38, .06), Color3.fromRGB(247, 224, 168))
+ end
 	if index % 2 == 1 then
 		piece("BackHair", Vector3.new(1.12, .85, .3), Color3.fromRGB(68, 49, 39))
 		piece("Bun", Vector3.new(.55, .55, .55), Color3.fromRGB(68, 49, 39), Enum.PartType.Ball)
@@ -71,6 +74,12 @@ local function create(id, index)
 	customers[id] = {model = model, parts = parts, bubble = bubble, label = label, untilTime = 0, greetingUntil=0, nextGround = 0}
 end
 for index = 1, 5 do create(string.format("Rumah%02d", index), index) end
+local districtAddresses = {}
+for id, route in pairs(Config.Routes) do
+ if route.DepotJobOnly then table.insert(districtAddresses, id) end
+end
+table.sort(districtAddresses)
+for index, id in ipairs(districtAddresses) do create(id, index + 5) end
 
 local ray = RaycastParams.new()
 ray.FilterType = Enum.RaycastFilterType.Include
@@ -90,6 +99,14 @@ local function ground(point)
 		if hit and hit.Normal.Y > .9 and math.abs(hit.Position.Y - point.Position.Y) < 1.5 then
 			local position = Vector3.new(at.X, hit.Position.Y + .03, at.Z)
 			local clear = true
+   local stations = map:FindFirstChild("CourierStations46")
+   if stations then
+    for _, station in ipairs(stations:GetChildren()) do
+     local base = station:FindFirstChild("Base")
+     local delta = base and position - base.Position
+     if delta and Vector2.new(delta.X, delta.Z).Magnitude < 2.4 then clear = false break end
+    end
+   end
 			for _, p in workspace:GetPartBoundsInBox(CFrame.new(position + Vector3.new(0, 2.3, 0)), Vector3.new(2.5, 4.4, 1.5), overlap) do
 				if p.CanCollide then clear = false break end
 			end
@@ -147,7 +164,7 @@ table.insert(connections, RunService.Heartbeat:Connect(function(dt)
 		end
 		local body=house and house:FindFirstChild('Body')local door=house and house:FindFirstChild('Door')
 		local outward=body and door and Vector3.new(door.Position.X-body.Position.X,0,door.Position.Z-body.Position.Z)
-		local idleDirection=outward and outward.Magnitude>.1 and outward.Unit or point and point.CFrame.LookVector
+		local idleDirection=outward and outward.Magnitude>.1 and outward.Unit or Config.Routes[id].DepotJobOnly and map.DepotPad.CFrame.LookVector or point and point.CFrame.LookVector
 		local visible = root and point and c.base and (root.Position - c.base).Magnitude < 65
 		if c.visible ~= (visible == true) then
 			c.visible = visible == true
@@ -187,6 +204,7 @@ table.insert(connections, RunService.Heartbeat:Connect(function(dt)
 			local cf = CFrame.lookAt(c.base, c.base + direction)
 			local p = c.parts
 			p.Torso.CFrame = cf * CFrame.new(0, 2.45, 0)
+   if p.Badge then p.Badge.CFrame = cf * CFrame.new(-.4, 2.7, -.44) end
 			p.Head.CFrame = cf * CFrame.new(0, 3.9, 0)
 			p.Hair.CFrame = cf * CFrame.new(0, 4.36, 0)
 			if p.Bun then
