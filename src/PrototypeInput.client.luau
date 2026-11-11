@@ -21,6 +21,7 @@ local guideDismissed,guideManual=false,false
 local hintOrder local seenHints={}
 local hazards=workspace:WaitForChild('PaketKilat'):WaitForChild('Map'):WaitForChild('Expansion'):WaitForChild('Hazards')
 Theme.Static(ui)
+local catalog=shop:WaitForChild("Catalog")
 local feedback, feedbackUntil = "", 0
 local messages = {
 	TooFar = "Dekati titik tujuan atau paket terlebih dahulu.",
@@ -143,17 +144,27 @@ local function render()
  end
  Theme.Storage(ui.StorageStatus,state)
  shop.Visible=shopOpen
- shop.Size=UDim2.fromOffset(math.min(620,w-24),272)
+ shop.Size=UDim2.fromOffset(math.max(1,math.min(620,w-24)),math.max(1,math.min(292,ui.AbsoluteSize.Y-12)))
  ui.ShopToggle.Text=UIS.TouchEnabled and "Toko" or "Toko [B]"
- shop.Info.Text=os.clock()<feedbackUntil and feedback or(ui:GetAttribute("ShopTab20")=="gear"and "Upgrade dengan koin. Beli saat tidak membawa paket."or "Beli/pakai tas dekat depot. Pilih model tasmu.")
- for _,id in ipairs(C.CosmeticOrder) do
-  local b=shop[id].Action
-  local owned=state.ownedCosmetics and state.ownedCosmetics[id]
-  local equipped=state.equippedCosmetic==id
-  b.Text=equipped and "Dipakai" or owned and "Pakai" or ("Beli "..C.Cosmetics[id].Price)
-  b.Active=state.profileReady==true and not equipped
-  b.AutoButtonColor=b.Active
-  Theme.Action(b,b.Active,false)
+ if shopOpen then
+  local depot=workspace.PaketKilat.Map:FindFirstChild("Depot")
+  local shopPoint=depot and depot:FindFirstChild("ShopPoint")
+  local inRange=shopPoint~=nil and near(shopPoint.Position)
+  local coins=state.coins or 0
+  ui:SetAttribute("ShopInRange",inRange)
+  shop.Info.Text=os.clock()<feedbackUntil and feedback
+   or (not inRange and "Dekati toko tas di depot untuk membeli atau memakai.")
+   or string.format("Saldo %d koin · %s",coins,ui:GetAttribute("ShopTab20")=="gear" and "Upgrade genggaman" or "Model tas")
+  for _,id in ipairs(C.CosmeticOrder) do
+   local b=catalog[id].Action
+   local owned=state.ownedCosmetics and state.ownedCosmetics[id]
+   local equipped=state.equippedCosmetic==id
+   local price=C.Cosmetics[id].Price
+   b.Text=equipped and "Dipakai" or owned and "Pakai" or string.format("%d koin",price)
+   b.Active=state.profileReady==true and inRange and not equipped and (owned==true or coins>=price)
+   b.AutoButtonColor=b.Active
+   Theme.Action(b,b.Active,owned==true)
+  end
  end
 	local last,nextOrder=state.lastResult,state.nextOrder
  local nextChapter = state.story and state.story.offer
@@ -324,8 +335,9 @@ CAS:BindAction("PKShop",function(_,input)
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.B)
 for _,id in ipairs(C.CosmeticOrder) do
- shop[id].Action.Activated:Connect(function()
-  if not state.profileReady or state.equippedCosmetic==id then return end
+ local actionButton=catalog[id].Action
+ actionButton.Activated:Connect(function()
+  if not shopOpen or not actionButton.Active then return end
   local owned=state.ownedCosmetics and state.ownedCosmetics[id]
   RS.Remotes.ActionRequest:FireServer(owned and "EquipCosmetic" or "BuyCosmetic",id)
  end)

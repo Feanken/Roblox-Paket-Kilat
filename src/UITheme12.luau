@@ -122,11 +122,25 @@ function T.Static(ui)
  label(shop.Title,T.Ink,19,Enum.Font.GothamBold)shop.Title.Text="Perlengkapan kurir"
  T.ToolbarButton(shop.Close)shop.Close.Text="×"shop.Close.TextSize=21
  label(shop.Info,T.Muted,11)
+ local catalog=Instance.new("ScrollingFrame")
+ catalog.Name="Catalog"
+ catalog.BackgroundTransparency=1
+ catalog.BorderSizePixel=0
+ catalog.ScrollBarThickness=4
+ catalog.ScrollBarImageColor3=T.Muted
+ catalog.ScrollingDirection=Enum.ScrollingDirection.Y
+ catalog.ZIndex=11
  for _,id in ipairs({"TasStandar","TasMerah","TasBiru","TasHijau"})do
-  local row=shop[id]row.BackgroundColor3=T.Soft round(row,10)
-  label(row:FindFirstChild("Name"),T.Ink,14,Enum.Font.GothamMedium)
+  local row=shop[id]
+  row.BackgroundColor3=T.Soft
+  round(row,10)
+  local name=row:FindFirstChild("Name")
+  label(name,T.Ink,13,Enum.Font.GothamBold)
+  name.TextTruncate=Enum.TextTruncate.AtEnd
   T.Action(row.Action,true,false)
+  row.Parent=catalog
  end
+ catalog.Parent=shop
  T.Layout(ui,false)
 end
 function T.Result(toast)
