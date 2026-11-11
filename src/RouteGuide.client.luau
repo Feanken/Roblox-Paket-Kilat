@@ -11,12 +11,29 @@ local state={} local enabled=true local connections={}
 local function bind(signal,fn) local c=signal:Connect(fn) table.insert(connections,c) end
 local folder=Instance.new("Folder") folder.Name="PaketKilatLocalSafeRoute" folder.Parent=workspace
 local dots={}
-for i=1,16 do
- local d=Instance.new("Part") d.Name="RouteDot" d.Shape=Enum.PartType.Cylinder d.Size=Vector3.new(.08,.85,.85)
- d.Anchored=true d.CanCollide=false d.CanQuery=false d.CanTouch=false d.CastShadow=false
- d:SetAttribute("RouteStep19",i)
- d.Material=Enum.Material.Neon d.Color=Color3.fromRGB(255,205,88) d.Transparency=1 d.Archivable=false d.Parent=folder dots[i]=d
+local function newDot(name, size, color)
+ local dot = Instance.new("Part")
+ dot.Name = name
+ dot.Shape = Enum.PartType.Cylinder
+ dot.Size = size
+ dot.Color = color
+ dot.Anchored = true
+ dot.CanCollide = false
+ dot.CanQuery = false
+ dot.CanTouch = false
+ dot.CastShadow = false
+ dot.Material = Enum.Material.Neon
+ dot.Transparency = 1
+ dot.Archivable = false
+ dot.Parent = folder
+ return dot
 end
+for i = 1, 16 do
+ local dot = newDot("RouteDot", Vector3.new(.08, .85, .85), Color3.fromRGB(255, 205, 88))
+ dot:SetAttribute("RouteStep19", i)
+ dots[i] = dot
+end
+local turnCue = newDot("UpcomingTurn", Vector3.new(.10, 1.65, 1.65), Color3.fromRGB(120, 243, 211))
 local button=Instance.new("TextButton") button.Name="RouteToggle" button.Size=UDim2.fromOffset(84,44)
 button.Position=UDim2.new(1,-282,0,12) button.BorderSizePixel=0 button.Font=Enum.Font.GothamBold button.TextSize=12
 button.TextColor3=Color3.fromRGB(246,237,211) button.BackgroundColor3=Color3.fromRGB(33,91,91) button.Parent=ui
@@ -29,7 +46,16 @@ CAS:BindAction("PKSafeRoute",function(_,action)
  if action==Enum.UserInputState.Begin then toggle() end
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.G)
-local function hide() for _,dot in ipairs(dots) do dot.Transparency=1 end folder:SetAttribute("VisibleDots",0)folder:SetAttribute("RemainingDistance19",nil)folder:SetAttribute("GuidedStampId26",nil)folder:SetAttribute("GuidedStampPosition26",nil) end
+local function hide()
+ for _, dot in ipairs(dots) do dot.Transparency = 1 end
+ turnCue.Transparency = 1
+ folder:SetAttribute("VisibleDots", 0)
+ folder:SetAttribute("RemainingDistance19", nil)
+ folder:SetAttribute("GuidedStampId26", nil)
+ folder:SetAttribute("GuidedStampPosition26", nil)
+ folder:SetAttribute("TurnDirection", nil)
+ folder:SetAttribute("TurnDistance", nil)
+end
 local function flat(v) return Vector3.new(v.X,0,v.Z) end
 local function refresh()
  Theme.ToolbarLayout(ui)
@@ -74,6 +100,15 @@ local function refresh()
  local remaining=best+(points[bestSegment+1]-cursor).Magnitude
  for i=bestSegment+1,#points-1 do remaining+=(points[i+1]-points[i]).Magnitude end
  folder:SetAttribute('RemainingDistance19',remaining)
+ if best <= 14 then
+  local turn, distance, position = Paths.NextTurn(points, bestSegment, cursor, 32)
+  if turn then
+   folder:SetAttribute("TurnDirection", turn)
+   folder:SetAttribute("TurnDistance", distance)
+   turnCue.CFrame = CFrame.new(position + Vector3.yAxis * .15) * CFrame.Angles(0, 0, math.pi / 2)
+   turnCue.Transparency = .12
+  end
+ end
  local segment=bestSegment local count=0
  for _,dot in ipairs(dots) do
   local step=5

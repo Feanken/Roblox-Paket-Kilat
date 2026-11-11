@@ -23,4 +23,31 @@ function P.Length(points)
 	for i = 1, #points - 1 do length += (points[i + 1] - points[i]).Magnitude end
 	return length
 end
+-- Classify bends along the remaining route, independent of the camera bearing.
+function P.NextTurn(points, segment, cursor, maxDistance)
+	local incoming
+	local distance = 0
+	for i = segment, #points - 1 do
+		local step = points[i + 1] - points[i]
+		local flat = Vector3.new(step.X, 0, step.Z)
+		local length = flat.Magnitude
+		if length <= .01 then continue end
+
+		local direction = flat / length
+		if incoming then
+			local angle = math.deg(math.atan2(incoming:Cross(direction).Y, incoming:Dot(direction)))
+			if math.abs(angle) >= 28 then
+				local turn = math.abs(angle) >= 150 and "back" or (angle > 0 and "left" or "right")
+				return turn, distance, points[i]
+			end
+		end
+
+		local start = i == segment and cursor or points[i]
+		local rest = points[i + 1] - start
+		distance += Vector3.new(rest.X, 0, rest.Z).Magnitude
+		if distance > maxDistance then return nil end
+		incoming = direction
+	end
+	return nil
+end
 return P

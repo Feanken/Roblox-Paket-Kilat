@@ -6,6 +6,12 @@ local ui=player:WaitForChild('PlayerGui'):WaitForChild('PaketKilatUI'):WaitForCh
 local card=ui.TopCard local state={}local connections={}
 ui:SetAttribute('NavigationHeader19',true)
 local arrow=Instance.new('TextLabel')arrow.Name='NavigationArrow19'arrow.Size=UDim2.fromOffset(20,20)arrow.BackgroundTransparency=1 arrow.Text='▲'arrow.Font=Enum.Font.GothamBold arrow.TextSize=18 arrow.TextColor3=theme.Gold arrow.Visible=false arrow.Parent=card
+local turnLabels = {
+ left = {near = "Belok kiri", far = "Kiri"},
+ right = {near = "Belok kanan", far = "Kanan"},
+ back = {near = "Putar balik", far = "Putar"},
+}
+local previousBearing, previousTarget
 local function flat(v)return Vector3.new(v.X,0,v.Z)end
 local function ownPackage()
  local w=workspace:FindFirstChild('PaketKilat')local f=w and w:FindFirstChild('ActivePackages')
@@ -37,6 +43,7 @@ local function render()
   if selected then directionTarget=selected.Position mode='route'remaining=route:GetAttribute('RemainingDistance19')or remaining end
  end
  if ready then
+  previousBearing, previousTarget = nil, nil
   arrow.Text='✓'arrow.Rotation=0 arrow.TextColor3=Color3.fromRGB(57,151,127)
   card.Title.Text=kind=='cap'and 'Lewati pos'or kind=='depot'and 'Pilih pesanan'or kind=='titipan'and 'Ambil titipan'or kind=='paket'and 'Ambil ulang'or 'Siap diantar'
  else
@@ -45,8 +52,23 @@ local function render()
   if forward.Magnitude<.001 then forward=Vector3.new(0,0,-1)end
   forward=forward.Unit local right=Vector3.new(-forward.Z,0,forward.X)local delta=flat(directionTarget-root.Position)
   local angle=math.deg(math.atan2(delta:Dot(right),delta:Dot(forward)))
-  arrow.Text='▲'arrow.Rotation=angle arrow.TextColor3=theme.Gold
-  card.Title.Text=string.format(kind=='cap'and 'Cap · %d stud'or '%d stud',math.ceil(remaining))
+  local turn = mode == "route" and kind ~= "cap" and turnLabels[route:GetAttribute("TurnDirection") or ""]
+  local turnDistance = turn and route:GetAttribute("TurnDistance")
+  local targetKey = kind .. ":" .. (state.orderId or "")
+  if previousTarget == targetKey and previousBearing then
+   local deltaAngle = (angle - previousBearing + 180) % 360 - 180
+   previousBearing = (previousBearing + deltaAngle * .52 + 180) % 360 - 180
+  else
+   previousBearing, previousTarget = angle, targetKey
+  end
+  arrow.Text = "▲"
+  arrow.Rotation = previousBearing
+  arrow.TextColor3 = turnDistance and Color3.fromRGB(31, 124, 108) or theme.Gold
+  if turnDistance then
+   card.Title.Text = turnDistance <= 4 and turn.near or string.format("%s · %d stud", turn.far, math.ceil(turnDistance))
+  else
+   card.Title.Text = string.format(kind == "cap" and "Cap · %d stud" or "%d stud", math.ceil(remaining))
+  end
   ui:SetAttribute('NavigationBearing19',angle)
  end
  arrow.Visible=true ui:SetAttribute('NavigationMode19',ready and 'ready'or mode)ui:SetAttribute('NavigationTarget19',kind)ui:SetAttribute('NavigationDistance19',remaining)
