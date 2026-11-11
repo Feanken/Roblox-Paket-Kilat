@@ -8,6 +8,14 @@ function M.Build(config,index,revision,tuning,expressUnlocked)
   {id=revision..':long',name='Lintas Kanal',DestinationId='BQ10',PackageType='Biasa',JobBonus=math.floor(tuning.JobLongBonus),description='Seberangi kanal, lalu cari Kantor Arsitek.'},
  }
  for _,v in require(script.Parent.Contracts24).Build(config,index,revision,tuning,expressUnlocked)do table.insert(offers,v)end
+ table.insert(offers, {
+  id = revision .. ":gallery",
+  name = "Kiriman Galeri",
+  DestinationId = "BQ16",
+  PackageType = "Rapuh",
+  JobBonus = math.floor(tuning.JobLongBonus),
+  description = "Antar perlengkapan pameran ke Galeri Tepi Air.",
+ })
  return offers
 end
 return M

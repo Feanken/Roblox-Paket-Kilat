@@ -60,20 +60,38 @@ history.Font = Enum.Font.GothamMedium
 history.TextYAlignment = Enum.TextYAlignment.Top
 history.AutomaticSize = Enum.AutomaticSize.Y
 local storyComplete = text(offers, "StoryComplete", 0, 4, 0, 74, 14)
-storyComplete.Text = "Pameran Foto Kampung terbuka\nLihat tiga panel di depan Galeri Tepi Air, Bata Quay."
+storyComplete.Text = "Pameran Foto Kampung terbuka\nPilih Baca panel di depan Galeri Tepi Air, Bata Quay."
+local weeklyButton = Instance.new("TextButton")
+weeklyButton.Name = "OpenWeeklyGoals"
+weeklyButton.Text = "Lihat target mingguan"
+weeklyButton.ZIndex = 12
+weeklyButton.Parent = offers
+theme.ToolbarButton(weeklyButton)
+bind(weeklyButton.Activated, function()
+ tab = CAREER_TAB
+ career.CanvasPosition = Vector2.zero
+ render()
+end)
 storyComplete.TextYAlignment = Enum.TextYAlignment.Top
 storyComplete.Visible = false
 
 local function offerAt(i)
  if tab == STORY_TAB then return i == 1 and state.story and state.story.offer or nil end
+ if i == 4 then return tab == 0 and state.jobOffers and state.jobOffers[7] or nil end
  return tab==2 and state.batchOffers and state.batchOffers[i]or tab<2 and state.jobOffers and state.jobOffers[tab*3+i]or nil
+end
+
+local function rowCount()
+ if tab == STORY_TAB then return 1 end
+ if tab == 0 and offerAt(4) then return 4 end
+ return 3
 end
 local function selected()
  if tab == STORY_TAB then return offerAt(1) end
  if tab == CAREER_TAB then return nil end
  local first
  local firstShift = tab == 0 and state.deliveryCount == 0
- for i=1,3 do local offer=offerAt(i)
+ for i=1,rowCount() do local offer=offerAt(i)
   if offer then
    if not first or not firstShift and not preview.Recommendation(state.career, first) and preview.Recommendation(state.career, offer) then first = offer end
    if selectedIds[tab] == offer.id then return offer end
@@ -82,7 +100,7 @@ local function selected()
  selectedIds[tab]=first and first.id return first
 end
 local rows={}
-for i=1,3 do
+for i=1,4 do
  local card=Instance.new('TextButton')card.Name='Offer'..i card.Text=''card.AutoButtonColor=false card.BorderSizePixel=0 card.ZIndex=11 card.Parent=offers rounded(card,10)
  local outline=Instance.new('UIStroke')outline.Thickness=2 outline.ApplyStrokeMode=Enum.ApplyStrokeMode.Border outline.Parent=card
  local name=text(card,'Name',10,5,180,19,13)
@@ -95,7 +113,7 @@ for i=1,3 do
   render()
   if narrow then
    local maxScroll = math.max(0, offers.CanvasSize.Y.Offset - offers.AbsoluteWindowSize.Y)
-   offers.CanvasPosition = Vector2.new(0, math.min(tab == STORY_TAB and 64 or 192, maxScroll))
+   offers.CanvasPosition = Vector2.new(0, math.min(rowCount() * 64, maxScroll))
   end
  end)
 end
@@ -194,9 +212,13 @@ render=function()
  offers.Position = UDim2.fromOffset(12, contentY)
  offers.Size = UDim2.fromOffset(bodyWidth, contentHeight)
  local storyTab = tab == STORY_TAB
- local offerPanelY = narrow and (storyTab and 64 or 192) or 0
+ local rowHeight = rowCount() * 64
+ local offerPanelY = narrow and rowHeight or 0
  local finished = storyTab and state.story and state.story.completed == state.story.total
- offers.CanvasSize = UDim2.fromOffset(0, finished and 74 or offerPanelY + 184)
+ offers.CanvasSize = UDim2.fromOffset(0, finished and 126 or math.max(rowHeight, offerPanelY + 184))
+ weeklyButton.Visible = finished == true
+ weeklyButton.Position = UDim2.fromOffset(0, 76)
+ weeklyButton.Size = UDim2.fromOffset(math.min(bodyWidth - 8, 220), 44)
  offers.Visible = tab ~= CAREER_TAB
  storyComplete.Visible = finished == true
  storyComplete.Size = UDim2.fromOffset(bodyWidth - 8, 74)
@@ -235,7 +257,7 @@ render=function()
  local offer=selected()board:SetAttribute('SelectedOffer28',offer and offer.id)
  for i,row in ipairs(rows)do
   local o=offerAt(i)local chosen=o and offer and o.id==offer.id
-  row.frame.Visible = tab ~= CAREER_TAB and (not storyTab or o ~= nil)
+  row.frame.Visible = tab ~= CAREER_TAB and i <= rowCount() and (not storyTab or o ~= nil)
   row.frame.Active = open and o ~= nil
   row.frame.Position=UDim2.fromOffset(0,(i-1)*64)row.frame.Size=UDim2.fromOffset(left,56)
   row.name.Size=UDim2.fromOffset(left-20,19)row.dest.Size=UDim2.fromOffset(left-20,19)
