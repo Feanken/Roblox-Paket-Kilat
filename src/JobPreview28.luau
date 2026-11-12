@@ -10,13 +10,16 @@ end
 function P.OfferRoute(routes,offer)
  if not offer then return nil end
  if not offer.isBatch then return P.Route(routes,offer.destinationId)end
- local points={}local source
+ local points={}
+ local legDistances={}
+ local source
  for _,id in ipairs(offer.batchDestinations)do
   local leg=Paths.Between(routes,source,id)if not leg then return nil end
   for i,v in ipairs(leg)do if #points==0 or i>1 then table.insert(points,v)end end
+  table.insert(legDistances,Paths.Length(leg))
   source=id
  end
- return {points=points,distance=Paths.Length(points)}
+ return {points=points,distance=Paths.Length(points),legDistances=legDistances}
 end
 function P.Conditions(offer)
  if offer.isBatch then return '3 kiriman berurutan\nBonus finish: tanpa Pulihkan'end

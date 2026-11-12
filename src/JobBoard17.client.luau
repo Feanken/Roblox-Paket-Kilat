@@ -224,13 +224,36 @@ mapView.Visible = false
 mapView.Parent = board
 local mapCaption = text(mapView, "Caption", 0, 0, 0, 22, 12)
 mapCaption.TextTruncate = Enum.TextTruncate.AtEnd
+local stopLegend=Instance.new("ScrollingFrame")
+stopLegend.Name="StopLegend"
+stopLegend.BackgroundTransparency=1
+stopLegend.BorderSizePixel=0
+stopLegend.ScrollingDirection=Enum.ScrollingDirection.Y
+stopLegend.ScrollBarThickness=3
+stopLegend.ZIndex=12
+stopLegend.Visible=false
+stopLegend.Parent=mapView
+local legendRows={}
+for index=1,3 do
+ local row=text(stopLegend,"Stop"..index,0,0,0,0,12)
+ row.BackgroundTransparency=0
+ row.BackgroundColor3=theme.Soft
+ row.TextXAlignment=Enum.TextXAlignment.Center
+ rounded(row,6)
+ legendRows[index]=row
+end
+
 local mapBack = Instance.new("TextButton")
 mapBack.Name = "BackToOffers"
 mapBack.Text = "Kembali ke pesanan"
 mapBack.ZIndex = 13
 mapBack.Parent = mapView
 theme.ToolbarButton(mapBack)
-bind(mapToggle.Activated, function() expandedMap = true render() end)
+bind(mapToggle.Activated, function()
+ expandedMap=true
+ stopLegend.CanvasPosition=Vector2.zero
+ render()
+end)
 bind(mapBack.Activated, function() expandedMap = false render() end)
 
 local drawKey
@@ -455,7 +478,25 @@ render=function()
   mapBack.Size = UDim2.fromOffset(bodyWidth, 44)
   diagram.Parent = mapView
   diagram.Position = UDim2.fromOffset(0, 25)
-  diagram.Size = UDim2.fromOffset(bodyWidth, math.max(1, mapHeight - 75))
+  local diagramHeight=math.max(1,mapHeight-75)
+  local legendWidth=offer.isBatch and math.min(174,math.floor(bodyWidth*.44)) or 0
+  local diagramWidth=bodyWidth-(legendWidth>0 and legendWidth+8 or 0)
+  diagram.Size=UDim2.fromOffset(diagramWidth,diagramHeight)
+  stopLegend.Visible=offer.isBatch==true
+  if stopLegend.Visible then
+   local rowHeight=diagramHeight<90 and 23 or 30
+   stopLegend.Position=UDim2.fromOffset(diagramWidth+8,25)
+   stopLegend.Size=UDim2.fromOffset(legendWidth,diagramHeight)
+   stopLegend.CanvasSize=UDim2.fromOffset(0,#legendRows*rowHeight)
+   for index,row in ipairs(legendRows) do
+    local id=offer.batchDestinations[index]
+    row.Position=UDim2.fromOffset(0,(index-1)*rowHeight)
+    row.Size=UDim2.new(1,-4,0,rowHeight-1)
+    row.TextSize=rowHeight==23 and 10 or 12
+    row.Text=string.format("%d. %s\n%s · %d stud",index,config.Routes[id].Name,
+     offer.packageTypes[index],math.round(route.legDistances[index]))
+   end
+  end
  else
   diagram.Parent = panel
  end
