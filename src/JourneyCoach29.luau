@@ -27,7 +27,7 @@ function M.Get(s,c)
  end
  if s.status~='Carrying'then return nil end
  local m=s.movement or {}
- if m.resting then return hint('rest','Stamina dan genggaman pulih lebih cepat. Lompat untuk berdiri.')end
+ if m.resting then return hint('rest','Stamina dan genggaman pulih lebih cepat. Pilih Berdiri untuk lanjut.')end
  if c.hazard=='puddle'then return hint('puddle','Ada genangan di depan. Lewati sisi kering agar paket tidak terlepas.',true,true)end
  if c.hazard=='barrier'then return hint('barrier','Penghalang bergerak di depan. Tunggu celah sebelum lewat.',true,true)end
  if m.grip and m.grip<=25 then return hint('grip','Genggaman menipis. Hentikan sprint; bangku membantu pemulihan.',true)end

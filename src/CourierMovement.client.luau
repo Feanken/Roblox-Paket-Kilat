@@ -60,7 +60,56 @@ end
 local stamina,staminaTrack,staminaFill=meter("Stamina",3,Color3.fromRGB(102,211,184))
 local grip,gripTrack,gripFill=meter("Grip",29,Color3.fromRGB(255,207,91))
 Theme.Movement(hud,b)
-bind(b.Activated,function()send(not wants)end)
+
+local restMarker=Instance.new("BillboardGui")
+restMarker.Name="NearbyRestStop"
+restMarker.Size=UDim2.fromOffset(146,32)
+restMarker.StudsOffsetWorldSpace=Vector3.new(0,3,0)
+restMarker.MaxDistance=65
+restMarker.AlwaysOnTop=true
+restMarker.Enabled=false
+restMarker.Parent=p.PlayerGui
+local restText=Instance.new("TextLabel")
+restText.Size=UDim2.fromScale(1,1)
+restText.Font=Enum.Font.GothamBold
+restText.TextSize=12
+restText.TextColor3=Theme.Cream
+restText.BackgroundColor3=Theme.Ink
+restText.BorderSizePixel=0
+restText.Parent=restMarker
+Instance.new("UICorner",restText).CornerRadius=UDim.new(0,8)
+
+local function updateRestMarker(shouldShow,root)
+ restMarker.Enabled=false
+ if not shouldShow or not root then return end
+ local world=workspace:FindFirstChild("PaketKilat")
+ local map=world and world:FindFirstChild("Map")
+ local folder=map and map:FindFirstChild("RestStops27")
+ if not folder then return end
+ local nearest,distance,activation=nil,38,0
+ for _,seat in ipairs(folder:GetChildren()) do
+  local prompt=seat:IsA("Seat") and seat:FindFirstChildOfClass("ProximityPrompt")
+  if prompt and prompt.Enabled and not seat.Occupant then
+   local gap=(seat.Position-root.Position).Magnitude
+   if gap<distance then nearest,distance,activation=seat,gap,prompt.MaxActivationDistance end
+  end
+ end
+ if nearest and distance>activation then
+  restMarker.Adornee=nearest
+  restText.Text=string.format("Bangku · %d stud",math.ceil(distance))
+  restMarker.Enabled=true
+ end
+end
+
+bind(b.Activated,function()
+ if not b.Visible then return end
+ local hum=p.Character and p.Character:FindFirstChildOfClass("Humanoid")
+ if hum and hum.Sit then
+  if state.movement and state.movement.resting then hum.Sit=false end
+  return
+ end
+ send(not wants)
+end)
 CAS:BindAction("PKSprint",function(_,input)
  if UIS:GetFocusedTextBox()then return Enum.ContextActionResult.Pass end
  if input==Enum.UserInputState.Begin then send(true)elseif input==Enum.UserInputState.End or input==Enum.UserInputState.Cancel then send(false)end
@@ -80,9 +129,12 @@ local function render()
  local gallery=ui:FindFirstChild("GalleryReader")
  local blocked=ui:GetAttribute("OrderOptionsOpen") or (gallery and gallery.Visible) or ui:GetAttribute("AudioOpen33")==true or mobilePanel or not m or not m.available or not alive or ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')==true or (celebration and celebration.Visible)
  if (blocked or seated or m and m.exhausted) and wants then send(false)end
- b.Visible=not blocked and not seated
+ local carrying=state.status=="Carrying"
+ local resting=seated and m and m.resting
+ b.Visible=not blocked and (not seated or resting)
+ updateRestMarker(not blocked and not seated and (m.stamina<=40 or carrying and m.grip<=35),
+  hum and hum.Parent:FindFirstChild("HumanoidRootPart"))
  if mobile then
-  local carrying=state.status=="Carrying"
   b.Parent=ui b.Size=UDim2.fromOffset(100,44)b.Position=UDim2.new(1,-270,1,-56)
   local hudWidth = carrying and math.max(118, math.min(Theme.MobileCardWidth(ui), ui.AbsoluteSize.X - 138)) or 118
   local meterWidth = carrying and math.floor((hudWidth - 24) / 2) or 102
@@ -111,7 +163,7 @@ local function render()
  if not m then return end
  hud:SetAttribute('Resting27',m.resting==true)
  if m.resting and not wasResting then
-  ui:SetAttribute('MobileNoticeText18','Pulih lebih cepat; waktu tetap jalan. Lompat untuk berdiri.')
+  ui:SetAttribute('MobileNoticeText18','Pulih lebih cepat; waktu tetap berjalan.')
   ui:SetAttribute('MobileNoticeUntil18',os.clock()+3)
  end
  wasResting=m.resting==true
@@ -122,7 +174,7 @@ local function render()
   ui:SetAttribute('MobileNoticeText18','Genggaman menipis. Lepas sprint agar pulih.')
   ui:SetAttribute('MobileNoticeUntil18',os.clock()+3)
  end
- b.Text=m.exhausted and "Istirahat" or wants and "Sprint: ON" or UIS.TouchEnabled and "Sprint" or "Sprint [Shift]"
+ b.Text=resting and "Berdiri" or m.exhausted and "Pulihkan stamina" or wants and "Sprint: ON" or UIS.TouchEnabled and "Sprint" or "Sprint [Shift]"
  b.TextSize=UIS.TouchEnabled and 12 or 10
  stamina.Text=string.format("STAMINA %d%s",m.stamina,m.exhausted and " · pulihkan dulu"or "")
  grip.Text=state.status=="Carrying"and string.format("GENGGAMAN %d · %s",m.grip,state.packageType=="Rapuh"and "RAPUH"or "paket biasa")or "GENGGAMAN · pulih"
@@ -133,8 +185,9 @@ local function render()
    or string.format("LEPAS SPRINT · paket terlepas %.1f dtk", m.dropInSeconds)
  end
  if m.resting then
-  stamina.Text=mobile and('Istirahat '..m.stamina)or('ISTIRAHAT · stamina '..m.stamina)
-  grip.Text=mobile and('Pegang '..m.grip)or('GENGGAMAN '..m.grip..' · lompat untuk berdiri')
+  local fullyRested=m.stamina==100 and (not carrying or m.grip==100)
+  stamina.Text=fullyRested and "Pulih penuh" or mobile and ("Istirahat "..m.stamina) or ("ISTIRAHAT · stamina "..m.stamina)
+  grip.Text=mobile and ("Pegang "..m.grip) or ("GENGGAMAN "..m.grip.." · waktu kirim berjalan")
  end
    local targetStaminaScale = math.clamp(m.stamina/100, 0, 1)
   if math.abs(lastStaminaTarget - targetStaminaScale) > 0.005 then
@@ -183,6 +236,6 @@ bind(RunService.Heartbeat,function(dt)
   dustTimer = 0
  end
 end)
-bind(script.Destroying,function()intent:FireServer(false)for _,c in ipairs(connections)do c:Disconnect()end CAS:UnbindAction("PKSprint")b:Destroy()hud:Destroy()end)
+bind(script.Destroying,function()intent:FireServer(false)for _,c in ipairs(connections)do c:Disconnect()end CAS:UnbindAction("PKSprint")b:Destroy()hud:Destroy()restMarker:Destroy()end)
 task.delay(.9,function()if script.Parent then shared.Remotes.ActionRequest:FireServer("Sync")end end)
 

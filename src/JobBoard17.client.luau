@@ -234,13 +234,19 @@ stopLegend.ZIndex=12
 stopLegend.Visible=false
 stopLegend.Parent=mapView
 local legendRows={}
+local focusedLeg=0
 for index=1,3 do
- local row=text(stopLegend,"Stop"..index,0,0,0,0,12)
- row.BackgroundTransparency=0
- row.BackgroundColor3=theme.Soft
- row.TextXAlignment=Enum.TextXAlignment.Center
- rounded(row,6)
+ local row=Instance.new("TextButton")
+ row.Name="Stop"..index
+ row.TextWrapped=true
+ row.ZIndex=13
+ row.Parent=stopLegend
+ theme.ToolbarButton(row)
  legendRows[index]=row
+ bind(row.Activated,function()
+  focusedLeg=focusedLeg==index and 0 or index
+  render()
+ end)
 end
 
 local mapBack = Instance.new("TextButton")
@@ -249,8 +255,17 @@ mapBack.Text = "Kembali ke pesanan"
 mapBack.ZIndex = 13
 mapBack.Parent = mapView
 theme.ToolbarButton(mapBack)
+local cycleLeg=mapBack:Clone()
+cycleLeg.Name="CycleLeg"
+cycleLeg.Visible=false
+cycleLeg.Parent=mapView
+bind(cycleLeg.Activated,function()
+ focusedLeg=(focusedLeg+1)%(#legendRows+1)
+ render()
+end)
 bind(mapToggle.Activated, function()
  expandedMap=true
+ focusedLeg=0
  stopLegend.CanvasPosition=Vector2.zero
  render()
 end)
@@ -258,7 +273,7 @@ bind(mapBack.Activated, function() expandedMap = false render() end)
 
 local drawKey
 local function draw(offer,w,h)
- local key=(offer and offer.id or '')..':'..w..':'..h..':'..tostring(expandedMap)
+ local key=(offer and offer.id or '')..':'..w..':'..h..':'..tostring(expandedMap)..":"..focusedLeg
  if key==drawKey then return end drawKey=key
  for _,v in diagram:GetChildren()do if v:IsA('GuiObject')then v:Destroy()end end
  local route=offer and preview.OfferRoute(routes,offer)
@@ -268,13 +283,21 @@ local function draw(offer,w,h)
   a,b=project(a),project(b)local d=b-a
   local f=Instance.new('Frame')f.AnchorPoint=Vector2.new(.5,.5)f.Position=UDim2.fromOffset((a.X+b.X)/2,(a.Y+b.Y)/2)
   f.Size=UDim2.fromOffset(d.Magnitude,thickness)f.Rotation=math.deg(math.atan2(d.Y,d.X))f.BackgroundColor3=color f.BorderSizePixel=0 f.ZIndex=z f.Parent=diagram
+  return f
  end
  if expandedMap then
   for _,path in pairs(routes) do
    for i=1,#path-1 do line(path[i],path[i+1],theme.Line,2,12) end
   end
  end
- for i=1,#route.points-1 do line(route.points[i],route.points[i+1],theme.Ink,3,13)end
+ local focus=expandedMap and route.legs and route.legs[focusedLeg]
+ local routeColor=focus and Color3.fromRGB(156,172,161) or theme.Ink
+ for i=1,#route.points-1 do line(route.points[i],route.points[i+1],routeColor,3,13) end
+ if focus then
+  for i=1,#focus-1 do
+   line(focus[i],focus[i+1],theme.Ink,4,14).Name="FocusedLeg"
+  end
+ end
  local markers={{point=route.points[1],text='D'}}
  if offer.isBatch then for i,id in ipairs(offer.batchDestinations)do local path=routes[id]table.insert(markers,{point=path[#path],text=tostring(i)})end
  else table.insert(markers,{point=route.points[#route.points],text='T'})end
@@ -282,7 +305,7 @@ local function draw(offer,w,h)
   local point=mark.point
   local p=project(point)local dot=Instance.new('TextLabel')dot.Name=i==1 and 'Depot28'or 'Target28'
   dot.AnchorPoint=Vector2.new(.5,.5)dot.Position=UDim2.fromOffset(p.X,p.Y)dot.Size=UDim2.fromOffset(14,14)dot.Text=mark.text
-  dot.BackgroundColor3=i==1 and theme.Ink or theme.Gold dot.TextColor3=i==1 and theme.Cream or theme.Ink dot.Font=Enum.Font.GothamBold dot.TextSize=9 dot.BorderSizePixel=0 dot.ZIndex=14 dot.Parent=diagram rounded(dot,7)
+  dot.BackgroundColor3=i==1 and theme.Ink or theme.Gold dot.TextColor3=i==1 and theme.Cream or theme.Ink dot.Font=Enum.Font.GothamBold dot.TextSize=9 dot.BorderSizePixel=0 dot.ZIndex=15 dot.Parent=diagram rounded(dot,7)
  end
 end
 bind(accept.Activated,function()
@@ -475,7 +498,16 @@ render=function()
   mapCaption.Text = offer.isBatch and ("D Depot → 1 → 2 → 3 · " .. distance)
    or ("D Depot → T " .. destination.Text .. " · " .. distance)
   mapBack.Position = UDim2.new(0, 0, 1, -44)
-  mapBack.Size = UDim2.fromOffset(bodyWidth, 44)
+  local splitWidth=math.floor((bodyWidth-8)/2)
+  mapBack.Size = UDim2.fromOffset(offer.isBatch and splitWidth or bodyWidth,44)
+  mapBack.Text=offer.isBatch and "Kembali" or "Kembali ke pesanan"
+  cycleLeg.Visible=offer.isBatch==true
+  cycleLeg.Position=UDim2.new(0,splitWidth+8,1,-44)
+  cycleLeg.Size=UDim2.fromOffset(bodyWidth-splitWidth-8,44)
+  cycleLeg.Text=focusedLeg==#legendRows and "Semua ruas" or string.format("Sorot ruas %d",focusedLeg+1)
+  if offer.isBatch and focusedLeg>0 then
+   mapCaption.Text=string.format("Ruas %d · %d stud",focusedLeg,math.round(route.legDistances[focusedLeg]))
+  end
   diagram.Parent = mapView
   diagram.Position = UDim2.fromOffset(0, 25)
   local diagramHeight=math.max(1,mapHeight-75)
@@ -493,6 +525,7 @@ render=function()
     row.Position=UDim2.fromOffset(0,(index-1)*rowHeight)
     row.Size=UDim2.new(1,-4,0,rowHeight-1)
     row.TextSize=rowHeight==23 and 10 or 12
+    theme.Action(row,true,index~=focusedLeg)
     row.Text=string.format("%d. %s\n%s · %d stud",index,config.Routes[id].Name,
      offer.packageTypes[index],math.round(route.legDistances[index]))
    end
