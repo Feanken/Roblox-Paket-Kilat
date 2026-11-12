@@ -154,6 +154,8 @@ end
 local panel=Instance.new('Frame')panel.Name='Preview28'panel.BackgroundColor3=theme.Soft panel.BorderSizePixel=0 panel.ZIndex=11 panel.Parent=offers rounded(panel,12)
 local destination=text(panel,'Destination',12,7,330,22,15)
 local meta=text(panel,'RouteInfo',12,31,330,18,11)meta.TextColor3=theme.Muted meta.Font=Enum.Font.GothamMedium
+meta.TextWrapped=false
+meta.TextTruncate=Enum.TextTruncate.AtEnd
 local conditions=text(panel,'Conditions',12,54,190,52,11)conditions.Font=Enum.Font.GothamMedium conditions.TextYAlignment=Enum.TextYAlignment.Top
 local reward=text(panel,'Reward',12,106,330,24,10)
 local diagram=Instance.new('Frame')diagram.Name='RouteMap28'diagram.BackgroundColor3=theme.Cream diagram.BorderSizePixel=0 diagram.ClipsDescendants=true diagram.ZIndex=12 diagram.Parent=panel rounded(diagram,8)
@@ -320,7 +322,11 @@ render=function()
  local route=offer and preview.OfferRoute(routes,offer)
  destination.Text=offer and(offer.isBatch and offer.name or offer.destinationName)or 'Pilih pekerjaan'
  local distance=route and(string.format('%d stud',math.floor(route.distance+.5)))or 'Jalur belum tersedia'
- meta.Text=offer and(offer.packageType..' · '..distance..(preview.Recommendation(state.career,offer) and ' · mingguan' or ''))or ''
+ local bestTime=offer and not offer.isBatch and state.bestTimes
+  and state.bestTimes[offer.destinationId.."|"..offer.packageType]
+ local routeNote=bestTime and string.format(" · Rekor %.1f dtk",bestTime)
+  or preview.Recommendation(state.career,offer) and " · mingguan" or ""
+ meta.Text=offer and (offer.packageType.." · "..distance..routeNote) or ""
  if storyTab and offer then
   meta.Text = offer.cargo .. " · " .. offer.packageType .. " · " .. distance
  end

@@ -15,7 +15,8 @@ function E.Init(config,data) C,Data=config,data end
 function E.Join(player)
  local profile=Data:Get(player.UserId)
  if not profile then return false end
- E.sessions[player.UserId]={profile=profile,history={},creditedOrders={},nextOrderIndex=1,offerRevision=1,challenge=Challenges.New(),gearTuning=Tuning.Get(),qualityRun=Rating.New(),ratingTuning=Tuning.Get()}
+ local firstOrderIndex=profile.deliveryCount%#C.OrderSchedule+1
+ E.sessions[player.UserId]={profile=profile,history={},creditedOrders={},nextOrderIndex=firstOrderIndex,offerRevision=1,challenge=Challenges.New(),gearTuning=Tuning.Get(),qualityRun=Rating.New(),ratingTuning=Tuning.Get()}
  return true
 end
 function E.Has(player) return E.sessions[player.UserId]~=nil and Data:Ready(player.UserId) end

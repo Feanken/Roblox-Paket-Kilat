@@ -3,7 +3,8 @@ local M={}
 function M.Build(config,index,revision,tuning,expressUnlocked)
  local scheduled=config.OrderSchedule[index]
  local offers={
-  {id=revision..':regular',name='Reguler',DestinationId=scheduled.DestinationId,PackageType='Biasa',JobBonus=0,description='Pilihan rute berikutnya.'},
+  {id=revision..':regular',name='Reguler',DestinationId=scheduled.DestinationId,PackageType=scheduled.PackageType,JobBonus=0,
+   description=scheduled.PackageType=="Rapuh" and "Paket warga rapuh. Jaga genggaman saat sprint." or "Paket warga. Ikuti penanda ke titik serah."},
   {id=revision..':fragile',name='Rapuh · Pusat Kota',DestinationId='CBD01',PackageType='Rapuh',JobBonus=math.floor(tuning.JobFragileBonus),description='Antar paket rapuh ke lobi Menara Kilat.'},
   {id=revision..':long',name='Lintas Kanal',DestinationId='BQ10',PackageType='Biasa',JobBonus=math.floor(tuning.JobLongBonus),description='Seberangi kanal, lalu cari Kantor Arsitek.'},
  }
