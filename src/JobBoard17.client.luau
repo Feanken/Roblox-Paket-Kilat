@@ -3,6 +3,7 @@ local player=game.Players.LocalPlayer
 local shared=game.ReplicatedStorage:WaitForChild('PaketKilat')local theme=require(shared.Shared.UITheme12)
 local config=require(shared.Shared.Config)local routes=require(shared.Shared.SafeRoutes08)
 local preview=require(shared.Shared:WaitForChild('JobPreview28'))
+local storyCatalog=require(shared.Shared:WaitForChild("CourierStory"))
 local root=player:WaitForChild('PlayerGui'):WaitForChild('PaketKilatUI'):WaitForChild('Root')
 local state,pendingUntil,noticeUntil,notice={},0,0,''
 local connections={}local function bind(signal,fn)local c=signal:Connect(fn)table.insert(connections,c)end
@@ -26,6 +27,7 @@ offers.ZIndex = 11
 offers.Parent = board
 local narrow = false
 local expandedMap = false
+local expandedChapters = false
 local CAREER_TAB, STORY_TAB = 3, 4
 local tab=0 local selectedIds={}local tabs={}local render
 for i,label in {'Biasa','Kontrak','Borongan','Karier','Cerita'}do
@@ -74,6 +76,53 @@ end)
 storyComplete.TextYAlignment = Enum.TextYAlignment.Top
 storyComplete.Visible = false
 
+local chapterToggle=weeklyButton:Clone()
+chapterToggle.Name="OpenChapters"
+chapterToggle.Text="Daftar bab"
+chapterToggle.Visible=false
+chapterToggle.Parent=offers
+
+local chapterView=Instance.new("Frame")
+chapterView.Name="ChapterList"
+chapterView.BackgroundTransparency=1
+chapterView.Visible=false
+chapterView.ZIndex=11
+chapterView.Parent=board
+local chapterRows=Instance.new("ScrollingFrame")
+chapterRows.Name="Chapters"
+chapterRows.BackgroundTransparency=1
+chapterRows.BorderSizePixel=0
+chapterRows.ScrollBarThickness=4
+chapterRows.ScrollingDirection=Enum.ScrollingDirection.Y
+chapterRows.Size=UDim2.new(1,0,1,-50)
+chapterRows.CanvasSize=UDim2.fromOffset(0,storyCatalog.Count*42)
+chapterRows.ZIndex=11
+chapterRows.Parent=chapterView
+local chapterLabels={}
+for i=1,storyCatalog.Count do
+ local label=text(chapterRows,"Chapter"..i,0,(i-1)*42,0,38,13)
+ label.Size=UDim2.new(1,-8,0,38)
+ label.BackgroundTransparency=0
+ label.TextXAlignment=Enum.TextXAlignment.Center
+ rounded(label,8)
+ chapterLabels[i]=label
+end
+local chapterBack=weeklyButton:Clone()
+chapterBack.Name="BackToStory"
+chapterBack.Text="Kembali ke cerita"
+chapterBack.Position=UDim2.new(0,0,1,-44)
+chapterBack.Size=UDim2.new(1,0,0,44)
+chapterBack.Parent=chapterView
+bind(chapterToggle.Activated,function()
+ expandedChapters=true
+ chapterRows.CanvasPosition=Vector2.zero
+ render()
+end)
+bind(chapterBack.Activated,function()
+ expandedChapters=false
+ render()
+end)
+
 local function offerAt(i, category)
  category = category or tab
  if category == STORY_TAB then return i == 1 and state.story and state.story.offer or nil end
@@ -111,7 +160,7 @@ end
 local function scrollToPreview()
  if not narrow then return end
  local maxScroll = math.max(0, offers.CanvasSize.Y.Offset - offers.AbsoluteWindowSize.Y)
- offers.CanvasPosition = Vector2.new(0, math.min(rowCount() * 64, maxScroll))
+ offers.CanvasPosition = Vector2.new(0, math.min(rowCount()*64+(tab==STORY_TAB and 52 or 0),maxScroll))
 end
 
 for i = 1, 3 do
@@ -249,9 +298,9 @@ render=function()
  offers.Size = UDim2.fromOffset(bodyWidth, contentHeight)
  local storyTab = tab == STORY_TAB
  local rowHeight = rowCount() * 64
- local offerPanelY = narrow and rowHeight or 0
+ local offerPanelY = narrow and (rowHeight+(storyTab and 52 or 0)) or 0
  local finished = storyTab and state.story and state.story.completed == state.story.total
- offers.CanvasSize = UDim2.fromOffset(0, finished and 126 or math.max(rowHeight, offerPanelY + 184))
+ offers.CanvasSize = UDim2.fromOffset(0, finished and 176 or math.max(rowHeight, offerPanelY + 184))
  weeklyButton.Visible = finished == true
  weeklyButton.Position = UDim2.fromOffset(0, 76)
  weeklyButton.Size = UDim2.fromOffset(math.min(bodyWidth - 8, 220), 44)
@@ -259,6 +308,9 @@ render=function()
  storyComplete.Visible = finished == true
  storyComplete.Size = UDim2.fromOffset(bodyWidth - 8, 74)
  panel.Visible = not finished
+ chapterToggle.Visible=storyTab and state.story~=nil
+ chapterToggle.Position=UDim2.fromOffset(0,finished and 126 or 62)
+ chapterToggle.Size=UDim2.fromOffset(math.min(left,220),44)
  career.Position = UDim2.fromOffset(16, contentY)
  career.Size = UDim2.fromOffset(width - 32, contentHeight)
  career.Visible = tab == 3
@@ -332,13 +384,14 @@ render=function()
  end
  conditions.Text=offer and preview.Conditions(offer)or ''
  if offer and offer.careBonus then
-  conditions.Text = string.format("Bonus +%d · kondisi akhir ≥%d · tanpa Pulihkan", offer.careBonus, offer.careCondition)
+  conditions.Text = string.format("%s\nKondisi ≥%d · tanpa Pulihkan", offer.description, offer.careCondition)
  end
  if offer and offer.isBatch then local stops={}for i,id in ipairs(offer.batchDestinations)do stops[i]=i..'. '..config.Routes[id].Name..(offer.packageTypes[i]=='Rapuh'and ' · rapuh'or '')end conditions.Text=table.concat(stops,'\n')end
  if not offer then
   reward.Text = ""
  elseif offer.storyChapter then
   reward.Text = string.format("Dasar + cerita: %d koin", config.BaseReward + offer.storyBonus)
+  if offer.careBonus then reward.Text ..= string.format("\nBonus jaga paket +%d",offer.careBonus) end
  elseif offer.isBatch then
   reward.Text = string.format("%d koin per kiriman\nBonus akhir maks. +%d", config.BaseReward, offer.jobBonus)
  elseif not offer.contract and offer.jobBonus == 0 then
@@ -365,10 +418,24 @@ render=function()
   end
  end
  local showMap = expandedMap and tab ~= 3 and route ~= nil
- title.Text = showMap and "Peta rute" or "Pesanan"
- info.Visible = not showMap
- for _, button in ipairs(tabs) do button.Visible = not showMap end
- offers.Visible = tab ~= 3 and not showMap
+ local showChapters=expandedChapters and storyTab and state.story~=nil
+ title.Text = showChapters and "Bab cerita" or showMap and "Peta rute" or "Pesanan"
+ info.Visible = not showMap and not showChapters
+ for _, button in ipairs(tabs) do button.Visible = info.Visible end
+ offers.Visible = tab ~= 3 and info.Visible
+ chapterView.Visible=showChapters
+ if showChapters then
+  chapterView.Position=UDim2.fromOffset(12,50)
+  chapterView.Size=UDim2.fromOffset(bodyWidth,math.max(1,height-60))
+  for index,label in ipairs(chapterLabels) do
+   local completed=index<=state.story.completed
+   local current=index==state.story.completed+1
+   local status=completed and "Selesai" or current and "Bab aktif" or "Terkunci"
+   label.Text=string.format("%d. %s · %s",index,storyCatalog.Chapter(index).title,status)
+   label.BackgroundColor3=current and theme.Gold or theme.Soft
+   label.TextColor3=(completed or current) and theme.Ink or theme.Muted
+  end
+ end
  mapView.Visible = showMap
  mapToggle.Visible = route ~= nil
  local mapButtonWidth = 90
@@ -431,6 +498,7 @@ bind(root:GetAttributeChangedSignal("JobBoardOpen17"), function()
  else
   offers.CanvasPosition = Vector2.zero
   expandedMap = false
+  expandedChapters = false
   if returnTab then tab, returnTab = returnTab, nil end
  end
  render()
