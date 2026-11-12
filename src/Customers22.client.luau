@@ -118,7 +118,10 @@ end
 local state={}local seenOrders={}local orderQueue={}
 local function blockedUI()
  local toast=ui:FindFirstChild('DeliveryCelebration')
- return ui.Shop.Visible or ui:GetAttribute('JobBoardOpen17')or ui:GetAttribute('MobileMenuOpen18')or ui:GetAttribute('MobileTargetOpen18')or(toast and toast.Visible)
+ local gallery=ui:FindFirstChild("GalleryReader")
+ return ui.Shop.Visible or ui:GetAttribute("JobBoardOpen17") or ui:GetAttribute("MobileMenuOpen18")
+  or ui:GetAttribute("MobileTargetOpen18") or ui:GetAttribute("AudioOpen33") or ui:GetAttribute("OrderOptionsOpen")
+  or (gallery and gallery.Visible) or (toast and toast.Visible)
 end
 local function say(c,id,line)
  local contact = Story.Contact(id)

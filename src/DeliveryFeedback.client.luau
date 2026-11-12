@@ -186,10 +186,15 @@ local function refresh()
  local mobile = Theme.IsMobile(ui)
  local resultWidth = math.min(342, math.max(220, width - 20))
  local offer = currentRelay()
- local interrupted = state.lastResult and state.lastResult.batchInterrupted
- local hasNote = offer or interrupted
+ local result = state.lastResult
+ local interrupted = result and result.batchInterrupted
+ local chapter = result and result.storyChapter and Story.Chapter(result.storyChapter)
+ local contact = chapter and Story.Contact(result.destinationId)
+ local receipt = chapter and string.format("%s — %s", contact and contact.name or result.destinationName, chapter.receipt)
+ local hasNote = receipt or offer or interrupted
  local compact = height < 280
- local buttonY = compact and (hasNote and 154 or 134) or (hasNote and 198 or 174)
+ local buttonY = compact and (receipt and 161 or hasNote and 154 or 134)
+  or (receipt and 207 or hasNote and 198 or 174)
  toast.Size = UDim2.fromOffset(resultWidth, buttonY + 52)
  title.Position = UDim2.fromOffset(12, compact and 6 or 12)
  stars.Position = UDim2.fromOffset(12, compact and 25 or 32)
@@ -202,8 +207,10 @@ local function refresh()
  detail.Size = UDim2.new(1,-24,0,compact and 26 or 30)
  streak.Position = UDim2.fromOffset(12, compact and 115 or 145)
  streak.Size = UDim2.new(1,-24,0,compact and 18 or 20)
- nextStep.Position = UDim2.fromOffset(12, compact and 133 or 168)
- nextStep.Size = UDim2.new(1,-24,0,compact and 19 or 24)
+ local noteY = compact and 133 or 168
+ nextStep.Position = UDim2.fromOffset(12,noteY)
+ nextStep.Size = UDim2.new(1,-24,0,buttonY-noteY-1)
+ nextStep.TextSize = receipt and (compact and 10 or 12) or 11
  nextStep.Visible = hasNote and true or false
  local buttonWidth = (resultWidth - (offer and 40 or 32)) / (offer and 3 or 2)
  for index, button in ipairs({careerButton, depotButton, relayButton}) do
@@ -213,7 +220,7 @@ local function refresh()
  careerButton.Text = state.lastResult and state.lastResult.storyChapter and "Cerita" or "Karier"
  relayButton.Visible = offer ~= nil
  relayButton.Text = offer and nearRelay(offer) and "Ambil titipan" or "Ke titipan"
- nextStep.Text = offer and ("Titipan ke " .. offer.destinationName)
+ nextStep.Text = receipt or offer and ("Titipan ke " .. offer.destinationName)
   or interrupted and "Alamat berikutnya belum tersedia." or ""
  handoff.Size = UDim2.fromOffset(math.min(294, width - 24), 52)
  handoff.Position = UDim2.new(.5, 0, 1, mobile and -76 or -142)
@@ -296,7 +303,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
     spawnDeliveryConfetti()
     return
    end
-   expires = os.clock() + 5
+   expires = os.clock() + (result.storyChapter and 8 or 5)
    title.Text=result.newRecord and "REKOR BARU!"or result.rating and result.rating.stars==3 and "KIRIMAN SEMPURNA!"or "PENGANTARAN BERHASIL"
    countFrom=os.clock()countTotal=result.total reward.Text='+0 KOIN'
    local rating=result.rating
