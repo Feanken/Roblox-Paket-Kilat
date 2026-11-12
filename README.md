@@ -18,8 +18,9 @@ Paket Kilat adalah game kurir di Roblox. Ambil pesanan di depot, pilih jalur mel
 | Lepas paket | **Q** | **Lepas** |
 | Pulihkan paket ke depot | **R** | **Pulihkan** |
 | Tampilkan atau sembunyikan panduan rute | **G** | **Menu → Rute** |
+| Buka peta dengan posisi pemain dan tujuan | **K** atau **Peta** | **Menu → Peta** |
 | Buka toko perlengkapan | **B** | **Menu → Toko** |
-| Akhiri pesanan aktif | **X** | **Menu → Akhiri rute** |
+| Akhiri pesanan aktif | **X** | **Menu → Akhiri** |
 | Baca panel pameran setelah cerita selesai | **F** di dekat panel | **Baca panel** |
 
 Mengambil ulang paket yang jatuh menghindari penalti pemulihan. **Pulihkan** memindahkan paket ke petak depot, mengurangi kondisi, dan menggugurkan kelayakan rekor. Saat paket masih bisa diambil, aksi pemulihan meminta konfirmasi. Mengakhiri pesanan juga meminta konfirmasi. Koin dari kiriman yang sudah diselesaikan tetap tersimpan dalam profil yang aktif.

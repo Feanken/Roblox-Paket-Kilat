@@ -231,7 +231,7 @@ local function refresh()
  impact.Size=UDim2.fromOffset(math.min(310,width-32),36)
  local boardOpen=ui:GetAttribute('JobBoardOpen17')==true
  local gallery=ui:FindFirstChild("GalleryReader")
- local shopOpen=ui.Shop.Visible or boardOpen or ui:GetAttribute('AudioOpen33')==true or (gallery and gallery.Visible)
+ local shopOpen=ui:GetAttribute("LiveRouteMapOpen") or ui.Shop.Visible or boardOpen or ui:GetAttribute('AudioOpen33')==true or (gallery and gallery.Visible)
  toast.Visible=os.clock()<expires and not shopOpen and state.status=="Idle"
  local noticeActive = os.clock() < noticeExpires
  local mobileOverlay = mobile and (ui.Guide.Visible or ui:GetAttribute("MobileMenuOpen18") or ui:GetAttribute("MobileTargetOpen18"))

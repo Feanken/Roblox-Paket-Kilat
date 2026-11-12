@@ -35,7 +35,12 @@ local function render()
   if state.stampNavigation and stamp and not(state.routeBonus and state.routeBonus.visited[stamp])then target,kind=route:GetAttribute('GuidedStampPosition26'),'cap'end
  elseif state.status=='Dropped'and not state.outOfBounds then local p=ownPackage()target,kind=p and p.Position or state.packagePosition,state.atRecovery and 'pemulihan' or 'paket'end
  if not target then ui:SetAttribute('NavigationMode19',state.status=='Dropped'and 'recover'or 'hidden')ui:SetAttribute('NavigationDistance19',nil)card.Title.Text=state.status=='Dropped'and 'Pulihkan paket'or 'PAKET KILAT'return end
- local distance=(root.Position-target).Magnitude local ready=distance<=(kind=='cap'and state.routeBonus.radius or config.ActionDistance)
+ local distance=(root.Position-target).Magnitude
+ local ready=distance<=(kind=='cap'and state.routeBonus.radius or config.ActionDistance)
+ if kind=="tujuan" then
+  local primary=ui.Actions.Primary
+  ready=ready and primary:GetAttribute("Action")=="Deliver" and primary:GetAttribute("ActionEnabled")==true
+ end
  local directionTarget=target local remaining=flat(target-root.Position).Magnitude local mode='direct'
  if not ready and kind~='paket' and kind~='titipan'and route and(route:GetAttribute('VisibleDots')or 0)>0 then
   local selected,index=nil,0

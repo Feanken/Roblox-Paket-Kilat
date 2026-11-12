@@ -95,7 +95,7 @@ end
 local function canOpenCancel()
  local gallery=ui:FindFirstChild("GalleryReader")
  return state.profileReady==true and state.orderId~=nil and (state.status=="Carrying" or state.status=="Dropped")
-  and not shopOpen and not ui:GetAttribute("JobBoardOpen17") and not ui:GetAttribute("AudioOpen33")
+  and not shopOpen and not ui:GetAttribute("LiveRouteMapOpen") and not ui:GetAttribute("JobBoardOpen17") and not ui:GetAttribute("AudioOpen33")
   and not (gallery and gallery.Visible)
 end
 cancelToggle.Activated:Connect(function()
@@ -261,9 +261,9 @@ local function render()
  local available=canOpenCancel()
  if cancelOrderId and not available then setCancelOpen(false) end
  cancelToggle.Visible=available and not cancelOverlay.Visible and (not mobile or ui:GetAttribute("MobileMenuOpen18")==true)
- cancelToggle.Position=mobile and UDim2.new(1,-120,0,162) or UDim2.new(1,-190,0,(ui.AbsoluteSize.Y<500 and 12 or 20)+50)
- cancelToggle.Size=UDim2.fromOffset(mobile and 96 or 84,44)
- cancelToggle.Text=mobile and "Akhiri rute" or "Akhiri [X]"
+ cancelToggle.Position=mobile and UDim2.new(1,-88,0,162) or UDim2.new(1,-190,0,(ui.AbsoluteSize.Y<500 and 12 or 20)+50)
+ cancelToggle.Size=UDim2.fromOffset(mobile and 64 or 84,44)
+ cancelToggle.Text=mobile and "Akhiri" or "Akhiri [X]"
  if cancelOverlay.Visible then
   cancelPanel.Size=UDim2.fromOffset(math.min(360,w-24),156)
   local consequence=state.batch and "Koin dari kiriman yang sudah sampai tetap tersimpan."
@@ -282,7 +282,7 @@ local function render()
  guide.FPS.Visible=guideManual or perfShowing
  guide.Hint.Size=UDim2.new(1,(guideManual or perfShowing) and -124 or -70,1,-12)
  guide.Size=UDim2.fromOffset(math.min(C.Onboarding.Width,math.max(260,w-290)),C.Onboarding.Height)
- guide.Visible=not cancelOverlay.Visible and not ui:GetAttribute("AudioOpen33")and not(Theme.IsMobile(ui)and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")))and not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not Theme.IsMobile(ui)and not guideDismissed and onboarding.stage~="Complete")
+ guide.Visible=not ui:GetAttribute("LiveRouteMapOpen") and not cancelOverlay.Visible and not ui:GetAttribute("AudioOpen33")and not(Theme.IsMobile(ui)and(ui:GetAttribute("MobileMenuOpen18")or ui:GetAttribute("MobileTargetOpen18")))and not ui:GetAttribute("JobBoardOpen17")and not shopOpen and synced and state.profileReady==true and (perfShowing or guideManual or not Theme.IsMobile(ui)and not guideDismissed and onboarding.stage~="Complete")
  local guideStage=state.status=="Dropped" and "Dropped" or onboarding.stage
  guide.Hint.Text=perfShowing and (ui:GetAttribute("PerfText") or "Mengukur FPS...") or (C.Onboarding[guideStage] or C.Onboarding.FindDepot)
  if relay and not perfShowing then guide.Hint.Text='Ada titipan di rumah ini. Ambil untuk lanjut, atau Lewati untuk kembali ke depot.' end
@@ -480,7 +480,7 @@ local function render()
 		or (state.status=="Dropped"and not state.outOfBounds and(dropped and dropped.Position or state.packagePosition))
   or (state.status=="Carrying"and(stampPosition or state.destinationPosition))
 	label.Enabled=synced and state.profileReady==true and markerTarget~=nil
-		and not cancelOverlay.Visible and not shopOpen and not state.outOfBounds
+		and not ui:GetAttribute("LiveRouteMapOpen") and not cancelOverlay.Visible and not shopOpen and not state.outOfBounds
 		and not ui:GetAttribute("JobBoardOpen17") and not ui:GetAttribute("AudioOpen33")
 		and (state.status~="Idle" or not near(idleTarget))
  local showPoint=false
@@ -532,7 +532,7 @@ local function render()
  end
 end
 local function activate(b)
-	if not cancelOverlay.Visible and not shopOpen and not ui:GetAttribute("AudioOpen33") and state.profileReady and b:GetAttribute("ActionEnabled") then
+	if not ui:GetAttribute("LiveRouteMapOpen") and not cancelOverlay.Visible and not shopOpen and not ui:GetAttribute("AudioOpen33") and state.profileReady and b:GetAttribute("ActionEnabled") then
 		local action=b:GetAttribute("Action")
   if action=="Recover" and not state.outOfBounds then
    if os.clock()>=confirmRecoveryUntil then
@@ -566,7 +566,7 @@ ui.ShopToggle.Activated:Connect(function()ui:SetAttribute("MobileMenuOpen18",fal
 shop.Close.Activated:Connect(function() shopOpen=false render() end)
 CAS:BindAction("PKShop",function(_,input)
  if UIS:GetFocusedTextBox()then return Enum.ContextActionResult.Pass end
- if input==Enum.UserInputState.Begin and not cancelOverlay.Visible then shopOpen=not shopOpen render() end
+ if input==Enum.UserInputState.Begin and not cancelOverlay.Visible and not ui:GetAttribute("LiveRouteMapOpen") then shopOpen=not shopOpen render() end
  return Enum.ContextActionResult.Sink
 end,false,Enum.KeyCode.B)
 CAS:BindAction("PKCancelOrder",function(_,input)
