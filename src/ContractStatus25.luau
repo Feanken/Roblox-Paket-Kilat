@@ -4,7 +4,8 @@ local function finite(n)return type(n)=='number'and n==n and math.abs(n)<math.hu
 function M.Get(c,s)
  if not c then return nil end
  local function result(code,eligible,lost,reason,short)
-  return {code=code,eligible=eligible,irreversible=lost,reason=reason,short=short}
+  return {code=code,eligible=eligible,irreversible=lost,reason=reason,short=short,
+   timeLimit=c.kind=="priority" and finite(c.seconds) and c.seconds or nil}
  end
  if (c.kind~='priority'and c.kind~='perfect'and c.kind~='explore')or not finite(c.condition)or not finite(c.reward)
   or c.reward<0 or(c.kind=='priority'and not finite(c.seconds))or(c.kind=='explore'and not finite(c.stamps))then
@@ -19,8 +20,11 @@ function M.Get(c,s)
  if c.kind=='explore'and s.stamps<c.stamps then
   return result('stamps',false,false,'Cap belum cukup',string.format('Cap %d/%d · bonus +%d',s.stamps,c.stamps,c.reward))
  end
- local short=c.kind=='priority'and string.format('%s %ds · +%d',c.express and 'Ekspres' or 'Prioritas',math.max(0,math.ceil(c.seconds-s.duration)),c.reward)
+ local remaining=c.kind=="priority" and math.max(0,math.ceil(c.seconds-s.duration)) or nil
+ local short=remaining and string.format('Sisa %d dtk · +%d',remaining,c.reward)
   or c.kind=='perfect'and string.format('Mulus %d · +%d',c.condition,c.reward)or 'Cap lengkap · antar paket'
- return result('ready',true,false,'Syarat terpenuhi',short)
+ local status=result('ready',true,false,'Syarat terpenuhi',short)
+ status.remainingSeconds=remaining
+ return status
 end
 return M

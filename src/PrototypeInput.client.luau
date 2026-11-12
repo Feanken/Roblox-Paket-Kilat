@@ -387,9 +387,11 @@ local function render()
  local contractStatus
  if state.status=='Carrying'and state.contract then
   contractStatus=ContractStatus.Get(state.contract,{condition=condition,duration=math.max(0,workspace:GetServerTimeNow()-(state.startedAt or 0)),recoveryCount=state.recoveryCount or 0,stamps=state.routeBonus and state.routeBonus.count or 0})
-  if Theme.IsMobile(ui)and contractStatus then
-   card.ConditionText.Text=string.format('%d/100 · %s',condition,contractStatus.short)card.ConditionText.TextSize=9
-   card.ConditionText.TextColor3=contractStatus.irreversible and Color3.fromRGB(177,85,48)or Theme.Ink
+  if contractStatus then
+   card.ConditionText.Text=string.format("%d/100 · %s",condition,contractStatus.short)
+   local remaining=contractStatus.remainingSeconds
+   local urgent=contractStatus.irreversible or (remaining and remaining<=10)
+   card.ConditionText.TextColor3=urgent and Color3.fromRGB(177,85,48) or Theme.Ink
   end
  end
  if Theme.IsMobile(ui) and state.batch and state.status=="Carrying" then
@@ -414,7 +416,7 @@ local function render()
   card.Hint.Text=bonus.."\n"..(nextStop and ("Berikut: "..nextStop.name) or "Kiriman terakhir")
  elseif contractStatus then
   card.Hint.Text=contractStatus.irreversible and ('KONTRAK GUGUR · '..contractStatus.reason..'\nPengantaran tetap dibayar. Lanjutkan ke tujuan.')
-   or string.format('KONTRAK · bonus +%d saat diantar\n%s',state.contract.reward,contractStatus.short)
+   or string.format("Bonus kontrak +%d koin\nKondisi minimal %d · tanpa Pulihkan",state.contract.reward,state.contract.condition)
 
 	elseif relay then card.Hint.Text='Pelanggan punya titipan ke rumah lain. Opsional: satu perjalanan lagi, tanpa kembali ke depot.'
  elseif state.status == "Carrying" and storyChapter then

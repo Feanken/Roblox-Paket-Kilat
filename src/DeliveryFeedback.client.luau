@@ -361,6 +361,8 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
    end
    if result.weeklyProgress and not result.storyChapter then
     streak.Text = string.format("Target mingguan · %d/3 selesai", result.weeklyProgress)
+   elseif result.contractStatus and result.contractStatus.timeLimit then
+    streak.Text = string.format("Waktu %.1f dtk · target ≤%d dtk",result.duration,result.contractStatus.timeLimit)
    end
    detail.TextWrapped=true
    detail.TextSize=11

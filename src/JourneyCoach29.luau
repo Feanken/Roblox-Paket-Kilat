@@ -42,6 +42,10 @@ function M.Get(s,c)
   else text='Cari POS BONUS di jalan. Cap diambil otomatis saat dilewati.'end
   return hint('stamp:'..(b.count or 0),text,false,true)
  end
+ if status and status.remainingSeconds and status.remainingSeconds<=10 then
+  local action=c.nearDestination and "Pilih Antar paket sekarang." or "Ikuti penanda ke titik serah."
+  return hint("deadline",string.format("Sisa %d dtk untuk bonus. %s",status.remainingSeconds,action),true,true)
+ end
  if c.nearDestination then return hint('deliver','Sudah di titik serah. Pilih Antar paket untuk menyelesaikan pesanan.')end
  if contract and contract.kind=='explore'then return hint('stampsReady','Cap lengkap! Lanjut ke rumah tujuan, lalu pilih Antar paket.',false,true)end
  if s.batch then return hint('batch',string.format('Borongan %d/%d. %s',s.batch.index,s.batch.total,s.packageType=='Rapuh'and 'Paket rapuh; batasi sprint.'or 'Ikuti TUJUAN; kiriman berikutnya sudah di tas.'))end
