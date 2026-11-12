@@ -101,6 +101,12 @@ end
 cancelToggle.Activated:Connect(function()
  if canOpenCancel() then setCancelOpen(true) end
 end)
+ui:GetAttributeChangedSignal("OpenOrderOptionsRequest"):Connect(function()
+ local orderId=ui:GetAttribute("OpenOrderOptionsRequest")
+ if not orderId then return end
+ ui:SetAttribute("OpenOrderOptionsRequest",nil)
+ if orderId==state.orderId and canOpenCancel() then setCancelOpen(true) end
+end)
 keepOrder.Activated:Connect(function() setCancelOpen(false) end)
 confirmCancel.Activated:Connect(function()
  if not cancelOrderId or cancelOrderId~=state.orderId or os.clock()<cancelPendingUntil then return end
@@ -386,7 +392,11 @@ local function render()
    card.ConditionText.TextColor3=contractStatus.irreversible and Color3.fromRGB(177,85,48)or Theme.Ink
   end
  end
- if Theme.IsMobile(ui)and state.batch and state.status~='Idle'then card.ConditionText.Text=string.format('%s · %d/100 · sisa %d',state.packageType,condition,state.batch.remaining)end
+ if Theme.IsMobile(ui) and state.batch and state.status=="Carrying" then
+  local batch=state.batch
+  local bonus=batch.bonusEligible and string.format("+%d maks.",batch.potentialBonus) or "Bonus gugur"
+  card.ConditionText.Text=string.format("%s · %d/100 · %s",state.packageType,condition,bonus)
+ end
  local storyChapter = state.storyChapter and Story.Chapter(state.storyChapter)
  if storyChapter and state.status == "Carrying" then
   card.ConditionText.Text = string.format("%s · %d/100 · Bab %d", state.packageType, condition, state.storyChapter)
@@ -397,9 +407,11 @@ local function render()
   end
  end
  if os.clock()<feedbackUntil then card.Hint.Text=feedback
- elseif state.batch then
-  local b=state.batch local next=b.stops[b.index+1]
-  card.Hint.Text=string.format('BORONGAN %d/%d · finish %s\n%s',b.index,b.total,b.bonusEligible and('maks. +'..b.potentialBonus)or 'gugur: dipulihkan',next and('Berikut: '..next.name)or 'Kiriman terakhir · selesaikan rute')
+ elseif state.batch and state.status=="Carrying" then
+  local b=state.batch
+  local nextStop=b.stops[b.index+1]
+  local bonus=b.bonusEligible and string.format("Bonus akhir maks. +%d koin",b.potentialBonus) or "Bonus akhir gugur karena Pulihkan"
+  card.Hint.Text=bonus.."\n"..(nextStop and ("Berikut: "..nextStop.name) or "Kiriman terakhir")
  elseif contractStatus then
   card.Hint.Text=contractStatus.irreversible and ('KONTRAK GUGUR · '..contractStatus.reason..'\nPengantaran tetap dibayar. Lanjutkan ke tujuan.')
    or string.format('KONTRAK · bonus +%d saat diantar\n%s',state.contract.reward,contractStatus.short)

@@ -234,8 +234,15 @@ local function refresh()
  toast.Visible=os.clock()<expires and not shopOpen and state.status=="Idle"
  local noticeActive = os.clock() < noticeExpires
  local mobileOverlay = mobile and (ui.Guide.Visible or ui:GetAttribute("MobileMenuOpen18") or ui:GetAttribute("MobileTargetOpen18"))
- handoff.Visible = os.clock() < handoffExpires and state.batch ~= nil and state.orderId == handoffOrder
+ local batch=state.batch
+ handoff.Visible = os.clock() < handoffExpires and batch ~= nil and state.orderId == handoffOrder
   and state.status == "Carrying" and not toast.Visible and not shopOpen and not noticeActive and not mobileOverlay
+  and not ui:GetAttribute("OrderOptionsOpen")
+ if handoff.Visible then
+  local bonus=batch.bonusEligible and string.format("bonus maks. +%d",batch.potentialBonus) or "bonus gugur"
+  handoffReward.Text=string.format("+%d koin · %s",state.lastResult.total,bonus)
+  handoffNext.Text=string.format("%d/%d · %s",batch.index,batch.total,state.destinationName)
+ end
  stopBatch.Active = handoff.Visible
  stopBatch.AutoButtonColor = handoff.Visible
  ui.TopCard.Visible=not toast.Visible and not shopOpen
@@ -296,9 +303,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
     and result.batchIndex < result.batchTotal then
     expires = 0
     handoffOrder = snapshot.orderId
-    handoffReward.Text = string.format("Kiriman %d/%d · +%d koin", result.batchIndex, result.batchTotal, result.total)
-    handoffNext.Text = snapshot.destinationName or "Lanjut ke tujuan berikut"
-    handoffExpires = os.clock() + 5
+    handoffExpires = os.clock() + 7
     refresh()
     spawnDeliveryConfetti()
     return
@@ -369,7 +374,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
 end)
 connect(stopBatch.Activated, function()
  if handoff.Visible and state.batch and state.orderId == handoffOrder then
-  remote.ActionRequest:FireServer("CancelBatch", handoffOrder)
+  ui:SetAttribute("OpenOrderOptionsRequest",handoffOrder)
  end
 end)
 local function dismissResult()
