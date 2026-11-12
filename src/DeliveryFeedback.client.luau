@@ -153,7 +153,7 @@ handoffNext.TextColor3 = Theme.Ink
 
 local stopBatch = Instance.new("TextButton")
 stopBatch.Name = "StopBatch31"
-stopBatch.Text = "Akhiri"
+stopBatch.Text = "Akhiri…"
 stopBatch.Position = UDim2.new(1, -80, 0, 4)
 stopBatch.Size = UDim2.fromOffset(76, 44)
 stopBatch.ZIndex = 22
@@ -161,6 +161,7 @@ stopBatch.Parent = handoff
 Theme.ToolbarButton(stopBatch)
 local expires, noticeExpires, handoffExpires = 0, 0, 0
 local handoffOrder
+local handoffPausedAt
 local countFrom,countTotal=0,0
 local tween
 local function ownPackage()
@@ -235,9 +236,19 @@ local function refresh()
  local noticeActive = os.clock() < noticeExpires
  local mobileOverlay = mobile and (ui.Guide.Visible or ui:GetAttribute("MobileMenuOpen18") or ui:GetAttribute("MobileTargetOpen18"))
  local batch=state.batch
- handoff.Visible = os.clock() < handoffExpires and batch ~= nil and state.orderId == handoffOrder
-  and state.status == "Carrying" and not toast.Visible and not shopOpen and not noticeActive and not mobileOverlay
-  and not ui:GetAttribute("OrderOptionsOpen")
+ local now=os.clock()
+ local sameHandoff=batch~=nil and state.orderId==handoffOrder and state.status=="Carrying"
+ local orderDialogOpen=ui:GetAttribute("OrderOptionsOpen")==true
+ if not sameHandoff or handoffExpires==0 then
+  handoffPausedAt=nil
+ elseif orderDialogOpen then
+  if not handoffPausedAt and now<handoffExpires then handoffPausedAt=now end
+ elseif handoffPausedAt then
+  handoffExpires+=now-handoffPausedAt
+  handoffPausedAt=nil
+ end
+ handoff.Visible = now<handoffExpires and sameHandoff
+  and not toast.Visible and not shopOpen and not noticeActive and not mobileOverlay and not orderDialogOpen
  if handoff.Visible then
   local bonus=batch.bonusEligible and string.format("bonus maks. +%d",batch.potentialBonus) or "bonus gugur"
   handoffReward.Text=string.format("+%d koin · %s",state.lastResult.total,bonus)
@@ -299,6 +310,7 @@ connect(remote.StateChanged.OnClientEvent,function(snapshot,code)
   if key~=shownOrder then
    shownOrder = key
    noticeExpires, handoffExpires = 0, 0
+   handoffPausedAt=nil
    if result.isBatch and snapshot.batch and snapshot.status == "Carrying" and snapshot.orderId
     and result.batchIndex < result.batchTotal then
     expires = 0
